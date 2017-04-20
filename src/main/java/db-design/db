@@ -1,0 +1,120 @@
+1.create database cxh
+2.Agent //代理商
+  id bigint
+  name varchar(20)
+  userid varchar(255) //从微信服务器获取
+  mobile varchar(15(国际号码要加区号))
+  IDCard varchar(18)
+  #IDCardExpireDate Date
+  BusinessLicenseImg varchar(255)
+  BusinessLicenseExpireDate Date
+  #money  int // 以此来判断是否审核通过
+
+
+
+3.ProxyAddress //代理地区
+  id bigint
+  agent_id bigint
+  province(省) varchar(9) 最大的为新疆
+  city  市 varchar(9)
+  county 县 varchar(9)
+
+
+4.Recharge //充值
+  id bigint
+  agent_id bigint
+  amount int(float时如何处理)
+  createTime Date
+  status varchar(20) 成功/失败
+
+
+5.FeeDeduction //扣费
+  id bigint
+  agent_id bigint
+  amount int
+  createTime Date
+  status varchar(20) 成功/失败
+
+
+6.AuxiliaryInformation (辅助信息，从微信官方获取)
+  id bigint
+  access_token varchar(255)
+  CorpID varchar(255)
+  Secret varchar(255)
+
+7.Message //消息
+  id bigint
+  proxyAddress_id
+  content text //里面要填写 agentid,指明对应的应用是哪一个
+  createTime Date
+
+8.MessageRepeat  //重发消息的配置
+  id bigint
+  interval int
+  totalTimes int
+  updateTime Date
+
+9.AgentMessage  //代理商 信息的中间表
+  id bigint
+  agent_id bigint
+  message_id bigint
+  times int  //第几次
+  isRead boolean
+  isVisited boolean
+  readTime Date
+  visitTime Date
+
+10.CustomerService //客服人员的管理
+   id bigint
+   name varchar(20)
+   province varchar(9) //负责的省
+
+
+11.Problem  //反馈问题
+  id bigint
+  customerService_id bigint
+  title varchar(255)
+  desc  text
+  createTime Date
+  updateTime Date
+
+12.refund //退费记录
+   id bigint
+   agent_id bigint
+   manager_id bigint //谁来退费
+   amount int
+   status varchar(20) 成功/失败/待退费
+
+13.Manager  //管理员
+   id bigint
+   name varchar(255)
+   password varchar(255)
+   roleType varchar(255) //超级管理员/充值员/信息编辑者
+   createTime Date
+   updateTime Date
+
+
+14.News //新闻
+   id bigint
+   title varchar(255)
+   img varchar(255)  //信息列表时展示
+   description varchar(255)
+   content text  //富文本编辑器编辑
+   createTime Date
+   updateTime Date
+
+15.Member  //实际用户
+   id bigint
+   name varchar(20)
+   mobile varchar(11)
+   type varchar(255)  //车险类型
+   province(省) varchar(9) 最大的为新疆
+   city  市 varchar(9)
+   county 县 varchar(9)
+   createTime Date
+
+
+
+//  https://modao.cc/app/x0Ilw2m518O6hFiEIcbQnxA1aI4CnhA  对得
+//  https://modao.cc/app/x0Ilw2m518O6hFiEIcbQnxA1aI4CnhA
+

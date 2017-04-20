@@ -1,0 +1,74 @@
+package com.aifeng.mgr.admin.service.impl;
+
+import java.util.List;
+import java.util.Map;
+
+import com.aifeng.mgr.admin.model.Admin;
+import com.aifeng.mgr.admin.service.IAdminService;
+import com.aifeng.util.Pager;
+import com.aifeng.core.service.impl.BaseService;
+import com.aifeng.util.Md5;
+import com.aifeng.util.PropUtil;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+@Service("adminService")
+public class AdminService extends BaseService<Admin> implements IAdminService {
+
+	@Override
+	public Admin findByAccount(String account) {
+		// TODO Auto-generated method stub
+		List<Admin> list = (List<Admin>) this.findByHql("from Admin where account = '" + account + "'", null);
+
+		if (list != null && list.size() > 0) {
+			return list.get(0);
+		}
+		return null;
+	}
+
+	@Transactional(readOnly=false)
+	public List<Map<String, Object>> getPermissions(String userCode) {
+		StringBuffer sb = new StringBuffer(
+				"SELECT tmur.role_code,tmr.name AS role_name, tmm.id AS menu_id, tmm.name AS menu_name, tma.id as user_id,action_val, menu_code, pid, url, weight,icon FROM tb_mgr_user_role tmur left join tb_mgr_admin tma on (tma.code = tmur.user_code)");
+		sb.append(" LEFT JOIN  tb_mgr_role tmr ON (tmur.`role_code` = tmr.code) ");
+		sb.append(" RIGHT JOIN tb_mgr_role_menu tmrm ON (tmur.`role_code` = tmrm.`role_code`)  ");
+		sb.append(" LEFT JOIN tb_mgr_menu tmm ON(tmm.code = tmrm.`menu_code`) ");
+		sb.append(" WHERE tmur.user_code = '" + userCode + "'");
+		sb.append(" ORDER BY tmm.code, weight ");
+		return (List<Map<String, Object>>) this.findBySql(sb.toString());
+	}
+
+	@Override
+	public Pager getList(Pager page) {
+		// TODO Auto-generated method stub
+		return this.findPageByHql("from Admin ", page, null);
+	}
+
+	@Override
+	@Transactional(readOnly = false)
+	public boolean initPwd(int id) {
+		// TODO Auto-generated method stub
+		Admin admin = this.findById(id);
+		if (admin != null) {
+			admin.setPwd(Md5.getMd5(PropUtil.getString("user.initPwd") + admin.getAccount()));
+			this.update(admin);
+			return true;
+		}
+
+		return false;
+	}
+
+	public List<Map<String, Object>> getRoleList(int userId) {
+		StringBuffer sb = new StringBuffer(
+				" SELECT tmr.id AS role_id, tmr.code AS role_code, tmr.name AS role_name,  ");
+		sb.append(
+				" (SELECT IFNULL(count(tmur.id), 0) FROM tb_mgr_user_role tmur LEFT JOIN tb_mgr_admin tma ON tma.code = tmur.user_code WHERE tma.id = " + userId);
+		sb.append(" AND tmr.code = tmur.role_code) AS 'set' ");
+		sb.append(" FROM tb_mgr_role tmr  ");
+		return (List<Map<String, Object>>) this.findBySql(sb.toString());
+
+	}
+	
+
+	
+}

@@ -1,0 +1,56 @@
+group 'com.aifeng'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'war'
+
+sourceCompatibility = 1.5
+
+repositories {
+    mavenCentral()
+    maven {
+        url="http://maven.aliyun.com/nexus/content/groups/public"
+    }
+}
+
+ext {
+    springVersion = '4.3.7.RELEASE'
+    log4jVersion = '2.8.1'
+    mybatisVersion = '3.4.4'
+    mybatisSpringVersion = '1.3.1'
+    springDataVersion = '1.11.1.RELEASE'
+}
+
+dependencies {
+    /* testCompile 'junit:junit:4.12'
+    compile "org.springframework:spring-core:$springVersion"
+    compile "org.springframework:spring-context-support:$springVersion"
+    compile "org.springframework:spring-jdbc:$springVersion"
+    compile "org.springframework:spring-tx:$springVersion"
+    compile "org.springframework:spring-oxm:$springVersion"
+    compile "org.springframework:spring-web:$springVersion"
+    compile "org.springframework:spring-webmvc:$springVersion"
+    compile "org.springframework:spring-test:$springVersion"
+
+    compile "org.mybatis:mybatis:$mybatisVersion"
+    compile "org.mybatis:mybatis-spring:$mybatisSpringVersion"
+
+    compile "javax:javaee-api:7.0"
+
+    compile "mysql:mysql-connector-java:6.0.5"
+    compile "commons-dbcp:commons-dbcp:1.4"
+
+    compile "jstl:jstl:1.2"
+
+    compile "org.apache.logging.log4j:log4j-api:$log4jVersion"
+    compile "org.apache.logging.log4j:log4j-core:$log4jVersion"
+
+    compile "org.slf4j:slf4j-log4j12:1.7.24"
+    compile "com.alibaba:fastjson:1.2.21"
+
+    compile "org.codehaus.jackson:jackson-mapper-asl:1.9.13"
+    compile "commons-fileupload:commons-fileupload:1.3.1"
+
+    compile "commons-io:commons-io:2.4"
+    compile "commons-codec:commons-codec:1.9"*/
+}
