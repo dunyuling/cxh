@@ -1,5 +1,7 @@
 package com.aifeng.mgr.admin.ctl;
 
+import java.net.ServerSocket;
+import java.nio.channels.ServerSocketChannel;
 import java.util.List;
 import java.util.Map;
 
@@ -86,6 +88,7 @@ public class LoginCtl extends BaseCtl {
 
     @RequestMapping("logout")
     public String login(ModelMap mm) {
+        this.set(Constants.SESSION_USER, null);   // 用户信息
         return "redirect:/";
     }
 }

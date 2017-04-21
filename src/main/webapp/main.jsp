@@ -7,10 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="renderer" content="webkit" />
 
-    <title>恒之源礼品管理系统 Bate1.0 - 主页</title>
+    <title>车险汇管理系统 - 主页</title>
 
-    <meta name="keywords" content="恒之源礼品管理系统 Bate1.0" />
-    <meta name="description" content="恒之源礼品管理系统 Bate1.0" />
+    <%--<meta name="keywords" content="恒之源礼品管理系统 Bate1.0" />
+    <meta name="description" content="恒之源礼品管理系统 Bate1.0" />--%>
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html" />
     <![endif]-->

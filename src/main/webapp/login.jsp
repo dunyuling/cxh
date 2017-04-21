@@ -9,9 +9,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-    <title>礼品管理系统 Bate1.0 - 登录</title>
-    <meta name="keywords" content="计分系统 Bate1.0">
-    <meta name="description" content="计分系统 Bate1.0">
+    <title>车险汇管理系统 - 登录</title>
+    <%--<meta name="keywords" content="计分系统 Bate1.0">
+    <meta name="description" content="计分系统 Bate1.0">--%>
 
     <link rel="shortcut icon" href="favicon.ico">
     <link href="res/css/bootstrap.min.css" rel="stylesheet">
@@ -36,7 +36,7 @@
             <h1 class="logo-name">G+</h1>
 
         </div>
-        <h3>欢迎登陆恒之源礼品管理系统</h3>
+        <h3>欢迎登陆车险汇管理系统</h3>
 
         <form class="m-t" role="form" action="mgr/login.cs">
             <div class="form-group">

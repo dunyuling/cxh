@@ -62,13 +62,22 @@ public class AdminService extends BaseService<Admin> implements IAdminService {
 		StringBuffer sb = new StringBuffer(
 				" SELECT tmr.id AS role_id, tmr.code AS role_code, tmr.name AS role_name,  ");
 		sb.append(
-				" (SELECT IFNULL(count(tmur.id), 0) FROM tb_mgr_user_role tmur LEFT JOIN tb_mgr_admin tma ON tma.code = tmur.user_code WHERE tma.id = " + userId);
+				" (SELECT IFNULL(count(tmur.id), 0) FROM tb_mgr_user_role tmur LEFT JOIN tb_mgr_admin tma " +
+						"ON tma.code = tmur.user_code WHERE tma.id = " + userId);
 		sb.append(" AND tmr.code = tmur.role_code) AS 'set' ");
 		sb.append(" FROM tb_mgr_role tmr  ");
 		return (List<Map<String, Object>>) this.findBySql(sb.toString());
 
 	}
-	
 
-	
+
+/*
+	SELECT tmur.role_code,tmr.name AS role_name, tmm.id AS menu_id, tmm.name AS menu_name, tma.id as user_id,action_val, menu_code, pid, url, weight,icon
+		FROM tb_mgr_user_role tmur
+		left join tb_mgr_admin tma on (tma.code = tmur.user_code)
+		LEFT JOIN  tb_mgr_role tmr ON (tmur.`role_code` = tmr.code)
+		RIGHT JOIN tb_mgr_role_menu tmrm ON (tmur.`role_code` = tmrm.`role_code`)
+		LEFT JOIN tb_mgr_menu tmm ON(tmm.code = tmrm.`menu_code`)
+		WHERE tmur.user_code = '001' ORDER BY tmm.code, weight
+	*/
 }

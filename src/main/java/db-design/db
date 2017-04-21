@@ -1,24 +1,36 @@
-1.create database cxh
-2.Agent //代理商
+create database cxh
+1.Agent //代理商
   id bigint
   name varchar(20)
   userid varchar(255) //从微信服务器获取
   mobile varchar(15(国际号码要加区号))
   IDCard varchar(18)
+  IDCardImg varchar(255)
   #IDCardExpireDate Date
+  corpName
   BusinessLicenseImg varchar(255)
   BusinessLicenseExpireDate Date
   #money  int // 以此来判断是否审核通过
 
 
-
-3.ProxyAddress //代理地区
+2.ProxyAddress //代理地区
   id bigint
   agent_id bigint
-  province(省) varchar(9) 最大的为新疆
-  city  市 varchar(9)
-  county 县 varchar(9)
+  af_id bigint
+  crateTime Date
+  active boolean //代理关系是否依旧活跃
 
+
+2.Adreess //行政划分，以县为单位
+ id bigint
+ province(省) varchar(9) 最大的为新疆
+ city  市 varchar(9)
+ county 县 varchar(9)
+
+3.AddressFee //地区代理费用,每次发送要扣除的费用
+  id bigint
+  address_id bigint
+  int money
 
 4.Recharge //充值
   id bigint
@@ -59,8 +71,8 @@
   agent_id bigint
   message_id bigint
   times int  //第几次
-  isRead boolean
-  isVisited boolean
+  read boolean
+  visit boolean
   readTime Date
   visitTime Date
 
@@ -81,7 +93,7 @@
 12.refund //退费记录
    id bigint
    agent_id bigint
-   manager_id bigint //谁来退费
+   admin_id bigint //谁来退费
    amount int
    status varchar(20) 成功/失败/待退费
 
@@ -98,7 +110,7 @@
    id bigint
    title varchar(255)
    img varchar(255)  //信息列表时展示
-   description varchar(255)
+   desc varchar(255)
    content text  //富文本编辑器编辑
    createTime Date
    updateTime Date
@@ -108,10 +120,9 @@
    name varchar(20)
    mobile varchar(11)
    type varchar(255)  //车险类型
-   province(省) varchar(9) 最大的为新疆
-   city  市 varchar(9)
-   county 县 varchar(9)
+   address_id bigint
    createTime Date
+   updateTime Date
 
 
 
