@@ -71,8 +71,7 @@ public class PermissionTag extends TagSupport{
 				break;
 			}
 		}
-		
-		
+
 		return (actionVal & action) > 0 ? true : false;
 	}
 	

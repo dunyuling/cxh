@@ -5,6 +5,7 @@ package com.aifeng.constants;
  */
 public class test {
     public static void main(String[] args) {
-        System.out.println((int)(59/10));
+//        System.out.println((int)(59/10));
+        System.out.println(1 & 2);
     }
 }

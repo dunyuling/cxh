@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.Date;
 
 /**
  * Created by pro on 17-4-21.
@@ -20,9 +21,24 @@ public class Address {
 
     private String city;
 
-    private String county;
+    private String area;
+
+    private Date createDate;
 
     private boolean active; //当前地区是否依旧活跃
+
+    public Address() {
+        this.active = true;
+        this.createDate = new Date();
+    }
+
+    public Address(String area, String city, String province) {
+        this.active = true;
+        this.area = area;
+        this.city = city;
+        this.province = province;
+        this.createDate = new Date();
+    }
 
     public long getId() {
         return id;
@@ -48,12 +64,20 @@ public class Address {
         this.city = city;
     }
 
-    public String getCounty() {
-        return county;
+    public String getArea() {
+        return area;
     }
 
-    public void setCounty(String county) {
-        this.county = county;
+    public void setArea(String area) {
+        this.area = area;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
     public boolean isActive() {

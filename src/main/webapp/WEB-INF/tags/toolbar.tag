@@ -49,22 +49,24 @@
 			url:'transfer.cs?action=view&id=' + data.id,
 			title:'查看' + "${title}",
 			width:'${width}',
-			height:'${height}',
+			height:'${height}'
 		});
 	}
 	
 	// 新增事件
 	function add(){
+//	    alert("add");
 		$.openDlg({
 			url:'transfer.cs?action=add',
 			title:'新增'+ "${title}",
 			width:'${width}',
-			height:'${height}',
+			height:'${height}'
 		});
 	}
 	
 	// 删除事件
 	function del(){
+	    alert("del")
 		var ids = [];
 		var param_id  = '';
 		
@@ -73,11 +75,11 @@
 			param_id += this.id + ',';
         	});
 		
-		
 		if(param_id.length == 0) return;
-		
-		param_id = param_id.substr(0, param_id.length - 1);
-		
+
+        param_id = param_id.substr(0, param_id.length - 1);
+        alert("param_id: " + param_id);
+
 // 		if(ids.length == 0){
 // 			return;
 // 		}
@@ -115,7 +117,7 @@
 			url:'transfer.cs?action=edit&id=' + data.id,
 			title:'编辑' + "${title}",
 			width:'${width}',
-			height:'${height}',
+			height:'${height}'
 		});
 	}
 	

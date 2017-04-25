@@ -1,0 +1,45 @@
+.new_body {width:100%; padding:66px 0 30px 0;}
+.new_title {width:1200px; margin:auto; height:22px; -moz-user-select: none; -webkit-user-select:none; -ms-user-select:none; -khtml-user-select: none; user-select: none; margin-bottom:40px}
+.new_title p {display:block; font-size:22px; line-height:22px; color:#ffb000; padding-left:10px;  cursor: pointer; border-left:#ffb000 solid 6px;}
+.new_main {width:1200px; min-height:800px; margin:auto}
+
+.new_lists {width:1200px; height:175px; padding:15px 0; border-bottom:#e0e0e0 solid 1px; overflow:hidden}
+.new_list_img {width:258px; height:175px; float:left }
+.new_list_img a {display:block; width:258px; height:175px} 
+
+.new_list_text {float:left; width:860px; margin-left:25px}
+.new_list_text_p1 {width:860px;font-size:14px; color:#999; line-height:180%; padding-top:3px}
+.new_list_text_p2 a {width:860px; font-size:18px; display:block; color:#333; line-height:180%; padding-top:12px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;-webkit-transition: all 0.2s; -moz-transition: all 0.2s; -o-transition: all 0.2s; transition: all 0.2s;}
+.new_list_text_p2 a:hover {color:#ff9c00}
+.new_list_text_p3 {width:860px; height:42px; font-size:12px; color:#999; line-height:180%; padding-top:18px; display:-webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden;}
+.new_list_text_p4 a { font-size:12px; color:#ffb000; line-height:180%; padding-top:20px}
+.new_list_text_p4 a:hover { color:#ff9c00}
+
+.new2_main {width:1200px; margin:auto; min-height:800px}
+.new2_title_main { width:1200px; border-bottom:#e0e0e0 solid 1px}
+.new2_title {width:1100px; font-size:22px; line-height:180%; color:#333; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; letter-spacing:1px}
+.new2_time {font-size:14px; color:#999; line-height:180%; padding-top:12px; padding-bottom:10px}
+.new2_main p { width:1200px; overflow:hidden; font-size:14px; line-height:180%; color:#333; margin:16px 0;}
+.new2_main p img { max-width:100%}
+/*面包屑导航*/
+.breadcrumb_main {width:1200px; margin:auto; }
+.breadcrumb_main ul {overflow:hidden;padding:22px 0;}
+.breadcrumb_main ul li {float:left; font-size:12px; line-height:22px; margin-right:4px}
+.breadcrumb_my {color:#999}
+.breadcrumb_my a {color:#999}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

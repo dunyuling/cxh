@@ -3,15 +3,15 @@
 <%@taglib prefix="p" uri="http://www.test.com/jsp/permission" %>
 <!doctype html>
 <head>
-	<%@ include file="../../common/head.jsp"%>
+	<%@ include file="/common/head.jsp"%>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-	<link rel="stylesheet" href="../res/js/plugins/ztree/demo.css" type="text/css">
-	<link rel="stylesheet" href="../res/js/plugins/ztree/metroStyle/metroStyle.css" type="text/css">
-	<script type="text/javascript" src="../res/js/plugins/ztree/jquery.ztree.core.js"></script>
-	<script type="text/javascript" src="../res/js/plugins/ztree/jquery.ztree.excheck.js"></script>
-	<script type="text/javascript" src="../res/js/plugins/ztree/jquery.ztree.exedit.js"></script>
+	<link rel="stylesheet" href="/res/js/plugins/ztree/demo.css" type="text/css">
+	<link rel="stylesheet" href="/res/js/plugins/ztree/metroStyle/metroStyle.css" type="text/css">
+	<script type="text/javascript" src="/res/js/plugins/ztree/jquery.ztree.core.js"></script>
+	<script type="text/javascript" src="/res/js/plugins/ztree/jquery.ztree.excheck.js"></script>
+	<script type="text/javascript" src="/res/js/plugins/ztree/jquery.ztree.exedit.js"></script>
 <script type="text/javascript">
     	
     	function test(value,row,index){

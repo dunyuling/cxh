@@ -4,14 +4,14 @@
 <html>
 
 <head>
-	<%@ include file="../../common/head.jsp"%>
+	<%@ include file="/common/head.jsp"%>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-	<link href="../res/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet" />
-    <script src="../res/js/plugins/bootstrap-table/bootstrap-table.js" type="text/javascript"></script>
-    <script src="../res/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js" type="text/javascript"></script>
-    <script src="../res/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js" type="text/javascript"></script>
+	<link href="/res/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet" />
+    <script src="/res/js/plugins/bootstrap-table/bootstrap-table.js" type="text/javascript"></script>
+    <script src="/res/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js" type="text/javascript"></script>
+    <script src="/res/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js" type="text/javascript"></script>
     <script>
     	
     	function test(value,row,index){

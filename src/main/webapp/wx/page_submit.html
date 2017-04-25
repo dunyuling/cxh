@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="format-detection" content="telephone=no" />
+	<title>车险汇</title>
+	<link rel="stylesheet" type="text/css" href="css/base.css">
+	<link rel="stylesheet" type="text/css" href="css/submit.css">
+	<link rel="stylesheet" type="text/css" href="css/LArea.css">
+</head>
+<body>
+<div class="page_header">
+	<div class="sub1"><a href="#1"><i><img src="img/header_icon.png"></i><p>返回</p></a></div>
+	<div class="sub2">完善资料</div>
+	<div class="sub3"></div>
+</div>
+
+<div class="submit_main">
+	<ul>
+		<li class="su_input"><p>手机号</p><input name="" type="text" placeholder="国际手机号码请加区号"></li>
+		<li class="su_input"><p>姓名</p><input name="" type="text" placeholder=""></li>
+		<li class="su_input content-block"><p>地区</p><input name="" id="demo2" readonly type="text" placeholder="省/市/县（区）"></li>
+	</ul>
+</div>
+<div class="su_details_button"><a href="#">提交</a></div>
+<script src="js/LAreaData1.js"></script>
+<script src="js/LAreaData2.js"></script>
+<script src="js/LArea.js"></script>
+<script>
+var area1 = new LArea();
+area1.value=[1,13,3];//控制初始位置，注意：该方法并不会影响到input的value
+var area2 = new LArea();
+area2.init({
+		'trigger': '#demo2',
+		'valueTo': '#value2',
+		'keys': {
+				id: 'value',
+				name: 'text'
+		},
+		'type': 2,
+		'data': [provs_data, citys_data, dists_data]
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+﻿html{-webkit-tap-highlight-color: transparent;overflow-x: hidden; height: 100%; min-width:6.4rem; font-size: 312.5%;background-color:#fff;}
+body{color:#eee;font-size:.28em;line-height:1.5;font-family:arial,Microsoft Yahei}
+body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0;padding:0;}
+table{border-collapse:collapse;border-spacing:0}
+img {vertical-align:middle; border:0}
+h1,h2,h3,h4,h5,h6{font-weight:normal;}
+ul,ol,li{list-style:none;}
+em,i{font-style:normal}
+img{border:none}
+input,img{vertical-align:middle}
+textarea:focus{outline:0}
+a{color:#6E7D8B;text-decoration:none;outline:0}
+a:active,a:hover,a.current{outline:0}
+
+input, button, select, textarea {font-family:inherit;font-size:inherit;line-height:1;letter-spacing: normal;word-spacing: normal;text-transform: none;text-indent:0;text-shadow: none; vertical-align:middle}
+button, input, optgroup, select, textarea {color:inherit;margin:0;-webkit-writing-mode: horizontal-tb;}
+button, html input[type=button], input[type=reset], input[type=submit] {-webkit-appearance:button;cursor:pointer}
+
+article, aside, footer, header, hgroup, main, nav, section {
+  display: block;
+}
+.page_header {width:100%; height:0.88rem; background-color:#1b1b20; display: -webkit-box;}
+.sub1 {width:1.1rem; height:0.88rm;}
+.sub2 {height:0.88rm; font-size:0.30rem; line-height:0.88rem; color:#fff; text-align:center;-webkit-box-flex: 1; letter-spacing:0.01rem}
+.sub3 {width:1.1rem;height:0.88rem;}
+.sub1 a {display:block; width:1.1rem; height:0.88rem; color:#fff; overflow:hidden}
+.sub1 i {display:inline-block; float:left; height:0.34rem; line-height:0.88rem; margin:0.27rem 0.08rem 0.27rem 0.2rem}
+.sub1 i img {display:block; height:100%}
+.sub1 p {display:inline-block; float:left; font-size:0.26rem; line-height:0.88rem; color:#fff}
+
+@media screen and (min-width:350px){
+	html{font-size:342%;}
+}
+@media screen and (min-width:410px){
+	html{font-size:400%;}
+}
+@media screen and (min-width:480px){
+	html{font-size:469%;}
+}
+@media screen and (min-width:640px){
+	html{font-size: 625%;}
+}

@@ -29,6 +29,7 @@ public interface IBaseService<T> {
 	public void deltetById(String... ids);
 
 	public T findById(int id);
+	public T findById(long id);
 
 	public T findById(String id);
 

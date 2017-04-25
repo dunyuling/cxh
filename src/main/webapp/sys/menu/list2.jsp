@@ -4,7 +4,7 @@
 <!doctype html>
 <head>
     <title></title>
-    <%@ include file="../../common/head.jsp"%>
+    <%@ include file="/common/head.jsp"%>
     
     <script type="text/javascript">
     

@@ -4,11 +4,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <%@ include file="../../common/head.jsp"%>
+    <%@ include file="/common/head.jsp"%>
     <!--引入CSS-->
-	<link rel="stylesheet" type="text/css" href="../res/webuploader/webuploader.css">
+	<link rel="stylesheet" type="text/css" href="/res/webuploader/webuploader.css">
 <!--引入JS-->
-	<script type="text/javascript" src="../res/webuploader/webuploader.js"></script>
+	<script type="text/javascript" src="/res/webuploader/webuploader.js"></script>
 	
 	<script type="text/javascript">
 		$(function(){
@@ -16,7 +16,7 @@
 			    // 选完文件后，是否自动上传。
 			    auto: true,
 			    // swf文件路径
-			    swf: '../res/webuploader' + '/js/Uploader.swf',
+			    swf: '/res/webuploader' + '/js/Uploader.swf',
 			    // 文件接收服务端。
 			    server: '<%=basePath%>file/uploadHeadImg.cs',
 			    // 选择文件的按钮。可选。

@@ -4,7 +4,7 @@
 <!doctype html>
 
 <head>
-	<%@ include file="../../common/head.jsp"%>
+	<%@ include file="/common/head.jsp"%>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -12,11 +12,11 @@
     <meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术" />
 
     <!-- Data Tables -->
-    <link href="../res/css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
-	<script src="../res/js/plugins/jeditable/jquery.jeditable.js" type="text/javascript"></script>
+    <link href="/res/css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
+	<script src="/res/js/plugins/jeditable/jquery.jeditable.js" type="text/javascript"></script>
 	<!-- Data Tables -->
-	<script src="../res/js/plugins/dataTables/jquery.dataTables.js" type="text/javascript"></script>
-	<script src="../res/js/plugins/dataTables/dataTables.bootstrap.js" type="text/javascript"></script>
+	<script src="/res/js/plugins/dataTables/jquery.dataTables.js" type="text/javascript"></script>
+	<script src="/res/js/plugins/dataTables/dataTables.bootstrap.js" type="text/javascript"></script>
 	
 </head>
 

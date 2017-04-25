@@ -61,6 +61,7 @@ public class BaseDao<T> implements IBaseDao<T> {
 
 	public T insert(T t) {
 		hibernateTemplate.save(t);
+//		System.out.println("insert ------------ " + t.getClass().getName());
 		return t;
 	}
 

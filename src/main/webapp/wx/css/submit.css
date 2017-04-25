@@ -1,0 +1,10 @@
+﻿.submit_main ul {}
+.su_input {width:100%; height:1rem; background-color:#fff; overflow:hidden; border-bottom:#ebebeb solid 1px}
+.su_input p {float:left; height:1rem; line-height:1rem; font-size:0.26rem; color:#333; margin-left:0.2rem; width:1rem}
+.su_input input {float:left; display:inline-block; width:70%; height:1rem; line-height:1rem; font-size:0.24rem; color:#333; border:none; outline: none; margin: 0 0.2rem 0 0.2rem;}
+
+.su_details_button {margin: 0.4rem 0.2rem;}
+.su_details_button a {display: inline-block; width:100%; height:0.88rem; background-color:#4a90e2; color:#fff; text-align:center; line-height: 0.88rem; font-size:0.28rem; -moz-border-radius:0.1rem; -webkit-border-radius:0.1rem; border-radius:0.1rem; letter-spacing:0.01rem;}
+
+
+

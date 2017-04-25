@@ -17,22 +17,21 @@ import org.springframework.stereotype.Component;
 @Component("entityInterceptor")
 public class EntityInterceptor extends EmptyInterceptor {
 
-	private static final long serialVersionUID = 7319416231145791577L;
-	
-	// 保存回调方法
-	@Override
-	public boolean onSave(Object entity, Serializable id, Object[] state, String[] propertyNames, Type[] types) {
-		if (entity instanceof BaseEntity) {
-			for (int i = 0; i < propertyNames.length; i++) {
-				if (BaseEntity.CREATE_DATE_PROPERTY_NAME.equals(propertyNames[i]) || BaseEntity.MODIFY_DATE_PROPERTY_NAME.equals(propertyNames[i])) {
-					state[i] = new Date();
-				}
-			}
-		}
-		else{
-			ReflectionUtil.invokeSetterMethod(entity, BaseEntity.CREATE_DATE_PROPERTY_NAME, new Date());
-		}
-		return true;
-	}
+    private static final long serialVersionUID = 7319416231145791577L;
+
+    // 保存回调方法
+    @Override
+    public boolean onSave(Object entity, Serializable id, Object[] state, String[] propertyNames, Type[] types) {
+        if (entity instanceof BaseEntity) {
+            for (int i = 0; i < propertyNames.length; i++) {
+                if (BaseEntity.CREATE_DATE_PROPERTY_NAME.equals(propertyNames[i]) || BaseEntity.MODIFY_DATE_PROPERTY_NAME.equals(propertyNames[i])) {
+                    state[i] = new Date();
+                }
+            }
+        } else {
+            ReflectionUtil.invokeSetterMethod(entity, BaseEntity.CREATE_DATE_PROPERTY_NAME, new Date());
+        }
+        return true;
+    }
 
 }

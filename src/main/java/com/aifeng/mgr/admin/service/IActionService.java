@@ -6,7 +6,7 @@ import java.util.Map;
 import com.aifeng.core.service.IBaseService;
 import com.aifeng.mgr.admin.model.Action;
 
-public interface IActionService  extends IBaseService<Action>{
+public interface IActionService extends IBaseService<Action>{
 
 	public List<Action> getActionByMenuCode(String menuCode);
 	

@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
-
     <display-name>Digital education management system</display-name>
     <context-param>
         <param-name>contextConfigLocation</param-name>
@@ -44,7 +42,7 @@
     </filter-mapping>
 
     <!-- 	<listener> -->
-    <!-- 		<listener-class>org.cs.core.util.DataSourceInitListener</listener-class> -->
+    <!-- 		<listener-class>com.aifeng.core.util.DataSourceInitListener</listener-class> -->
     <!-- 	</listener> -->
 
     <listener>
@@ -97,29 +95,22 @@
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
 
-    　
-    <jsp-config>
-        　　
-        <taglib>
-            　　
-            <taglib-uri>http://www.test.com/jsp/permission</taglib-uri>
-            　　
-            <taglib-location>/WEB-INF/tags/permission.tld</taglib-location>
-            　　
-        </taglib>
-        　　
-    </jsp-config>
+    　<jsp-config>
+    　　	<taglib>
+    　　		<taglib-uri>http://www.test.com/jsp/permission</taglib-uri>
+    　　		<taglib-location>/WEB-INF/tags/permission.tld</taglib-location>
+    　　	</taglib>
+    　　</jsp-config>
+
+    <error-page>
+        <error-code>404</error-code>
+        <location>/common/404.html</location>
+    </error-page>
 
     <error-page>
         <error-code>500</error-code>
         <location>/common/500.html</location>
     </error-page>
-
-    <error-page>
-        <error-code>504</error-code>
-        <location>/common/404.html</location>
-    </error-page>
-
 
     <welcome-file-list>
         <welcome-file>login.jsp</welcome-file>

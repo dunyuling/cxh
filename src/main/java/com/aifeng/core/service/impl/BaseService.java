@@ -99,6 +99,10 @@ public class BaseService<T> implements IBaseService<T> {
 		return baseDao.findById(id);
 	}
 
+	public T findById(long id) {
+		return baseDao.findById(id);
+	}
+
 	@Override
 	@Transactional(readOnly = false)
 	public T update(T t) {
