@@ -17,13 +17,22 @@ public class AuxiliaryInformation {
     @GeneratedValue
     private long id;
 
-    private String access_token; //过期后需要重新获取
+    private String access_token = ""; //过期后需要重新获取
 
-    private String CorpID;
+    private String corpID = "";
 
-    private String secret;
+    private String secret = "";
 
-    private Date updateTime;
+    private Date updateDate;
+
+    public AuxiliaryInformation() {}
+
+    public void config(String access_token,String CorpID,String secret) {
+        this.access_token = access_token;
+        this.corpID = CorpID;
+        this.secret = secret;
+        this.updateDate = new Date();
+    }
 
     public long getId() {
         return id;
@@ -42,11 +51,11 @@ public class AuxiliaryInformation {
     }
 
     public String getCorpID() {
-        return CorpID;
+        return corpID;
     }
 
     public void setCorpID(String corpID) {
-        CorpID = corpID;
+        this.corpID = corpID;
     }
 
     public String getSecret() {
@@ -57,11 +66,11 @@ public class AuxiliaryInformation {
         this.secret = secret;
     }
 
-    public Date getUpdateTime() {
-        return updateTime;
+    public Date getUpdateDate() {
+        return updateDate;
     }
 
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
     }
 }

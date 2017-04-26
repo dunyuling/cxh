@@ -107,7 +107,7 @@ public class AddressService extends BaseService<Address> implements IAddressServ
     }
 
     @Transactional
-    public void updateAddress(long id, String province,String city, String area, int amount) {
+    public void editAddress(long id, String province,String city, String area, int amount) {
         Address address = addressDao.findById(id);
         address.setProvince(province);
         address.setCity(city);

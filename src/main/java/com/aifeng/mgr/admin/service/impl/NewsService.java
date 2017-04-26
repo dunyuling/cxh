@@ -57,7 +57,7 @@ public class NewsService extends BaseService<News> implements INewsService {
     }
 
     @Transactional
-    public void updateNews(long id, String title, String desc ,String img,String content) {
+    public void editNews(long id, String title, String desc ,String img,String content) {
         News news = newsDao.findById(id);
         news.setTitle(title);
         news.setDescription(desc);

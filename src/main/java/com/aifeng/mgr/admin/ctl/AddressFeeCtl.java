@@ -76,7 +76,7 @@ public class AddressFeeCtl extends BaseCtl {
     @ResponseBody
     public String edit(long id ,String province, String city ,String area, int amount) {
         if (StringUtil.isNotBlank(province,city,area)) {
-            this.addressService.updateAddress(id,province,city,area,amount);
+            this.addressService.editAddress(id,province,city,area,amount);
         }
         return AJAX_SUCCESS;
     }

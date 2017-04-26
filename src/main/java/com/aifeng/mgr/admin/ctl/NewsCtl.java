@@ -76,7 +76,7 @@ public class NewsCtl extends BaseCtl {
     public String edit(HttpServletRequest request, long id ,String title, String description ,String remark) {
         try {
             String descPath = Util.editImg(request,ImgPath.newsDescPath);
-            newsService.updateNews(id,title,description,descPath,remark);
+            newsService.editNews(id,title,description,descPath,remark);
         } catch (Exception e) {
             e.printStackTrace();
         }
