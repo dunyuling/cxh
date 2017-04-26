@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 
 <!doctype html>
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,12 +12,12 @@
     <div class="wrapper wrapper-content">
         <div class="row">
             <div class="col-sm-12">
-            	 <cs:form_validate formId="addDicForm"/>
-                  <form class="form-horizontal" action="add.cs" id="addDicForm" method="POST">
+            	 <cs:form_validate formId="addAddressForm"/>
+                  <form class="form-horizontal" action="add.cs" id="addAddressForm" method="POST">
                      <div class="form-group">
                           <label class="col-sm-3 control-label">省：</label>
                           <div class="col-sm-6">
-                              <input id="province" name="province"  class="form-control" validate="{required:true}" validateMessage="{required:'请输入省'}" >
+                              <input id="province" name="province" class="form-control" validate="{required:true}" validateMessage="{required:'请输入省'}" >
                           </div>
                       </div>
                       <div class="form-group">
@@ -41,12 +40,6 @@
                               <input id="amount" name="amount" class="form-control" validate="{required:true}" validateMessage="{required:'请输入费用'}" >
                           </div>
                       </div>
-<!--                       <div class="form-group"> -->
-<!--                           <label class="col-sm-3 control-label">：</label> -->
-<!--                           <div class="col-sm-6"> -->
-<!--                               <input id="weight" name="weight"  class="form-control" > -->
-<!--                           </div> -->
-<!--                       </div> -->
                       <div class="form-group">
                                 <div class="col-sm-4 col-sm-offset-3 pull-left">
                                     <button class="btn btn-default btn-dlg-close">取消</button>
@@ -56,11 +49,6 @@
                   </form>
             </div>
         </div>
-
     </div>
-
-
 </body>
-
 </html>
-

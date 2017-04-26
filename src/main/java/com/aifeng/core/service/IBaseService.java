@@ -25,8 +25,9 @@ public interface IBaseService<T> {
 	public void deleteById(String id);
 	
 	public void deleteById(int id);
-	
-	public void deltetById(String... ids);
+	public void deleteById(long id);
+
+	public void deleteByIds(String... ids);
 
 	public T findById(int id);
 	public T findById(long id);

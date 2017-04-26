@@ -2,7 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%-- <%@ include file="../../common/head.jsp"%> --%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ attribute name="name" type="java.lang.String" required="true" %>
 <%@ attribute name="type" type="java.lang.Integer" required="true" %>
 <%@ attribute name="desc" type="java.lang.String" required="false" %>
@@ -19,8 +18,9 @@
 		<img alt="" style="height:100px; width:100px; cursor: pointer;"   
 			<%if(null != url && !"".equals(url)){ %>
 				src = "${url}"
-			<%} %>
-			
+			<%}else{ %>
+			    src = "/res/img/a1.jpg"
+			<%}%>
 			<%if(!"view".equals(action)){ %>
 				class="show-img"
 			<%}else{ %>
@@ -41,4 +41,3 @@
          <div class="upload-box upload-file" style="display: none;" fileType="${type }"></div>
 <%} %>
 <jsp:doBody/>
-

@@ -1,18 +1,15 @@
 package com.aifeng.util;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.URL;
-import java.net.URLConnection;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
+import org.apache.commons.lang.RandomStringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.io.*;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * 
@@ -25,6 +22,9 @@ public class FileUtil {
 	static Logger log = Logger.getLogger(FileUtil.class);
 
 	private final static int BUFFER = 8192;
+	
+	private final static String basePath = PropUtil.getString("file.path");
+	
 	
 	/**
 	 * 获取 webroot 路径
@@ -79,6 +79,101 @@ public class FileUtil {
 	}
 	
 	
+	/**
+	 * 根绝类型获取文件路径
+	 * @Title: getFilePath 
+	 * @Description: TODO
+	 * @param type
+	 * @return
+	 * @return: String
+	 */
+	public static String getFilePath(int type){
+		String filePath = "";
+		switch(type){
+		case 100:
+			filePath = "pic";
+		case 101: // 营业执照图片
+			filePath = "license";
+		case 102: // 机构租赁合同
+			filePath = "leaseContract";
+			break;
+		case 104: // 业务人员与讲师合影
+			filePath = "staffLecturerPic";
+			break;
+		case 105: // 业务人员与法人合影
+			filePath = "staffCorpPic";
+			break;
+		case 106: // 业务人员与教室合影
+			filePath = "staffClassroomPic";
+			break;
+		case 107: // 业务人员与教室合影
+			filePath = "staffCorpLogoPic";
+			break;
+			
+		case 200:  // 通用
+			filePath = "commonFile";
+			break;
+		case 201:  // 银行流水
+			filePath = "bankStatement";
+			break;
+		case 202: // 资产负债表
+			filePath = "balanceSheet";
+			break;
+		case 203: // 随机往期50名学员就业城市分布比例
+			filePath = "employmentCityRate";
+			break;
+		case 204: // 随机往期50名学员就业薪资比例
+			filePath = "employmentSalaryRate";
+			break;
+		case 205: // 尽调报告
+			filePath = "report";
+			break;
+		default:
+			filePath = "other";
+		}
+		
+		return "/" + filePath + "/";
+	}
+	
+	private static String scaleSuffix = "_360.jpg";
+	/**
+	 * 上传 保存图片并保存缩略图
+	 * @throws IOException 
+	 */
+	/**
+	 * 返回第一个路径为原图， 第二个路径为缩略图
+	 * @Title: uploadImageAndScale 
+	 * @Description: TODO
+	 * @param filePath
+	 * @param fileImg
+	 * @return
+	 * @throws IOException
+	 * @return: String[]
+	 */
+	public static String[] uploadImageAndScale(String filePath, MultipartFile fileImg) throws IOException{
+		String path = filePath +DateUtil.formatTime(new Date());
+		String strDir = basePath+path;
+		FileUtil.makeDir(strDir);
+		String fileName = System.currentTimeMillis()+RandomStringUtils.randomNumeric(4);
+		String imgSuffix = "."+FileUtil.getSuffix(fileImg);
+		File file =  new File(strDir, fileName+imgSuffix);
+		FileUtil.inputStreamToFile(fileImg.getInputStream(), file);
+		String newFilePath = fileName+imgSuffix;
+		String thumbPath = fileName+scaleSuffix;
+		ImageUtils.scaleNormal(strDir+"/" + newFilePath,strDir+"/" + thumbPath, 360, 360);
+		return new String[]{path + "/" + newFilePath, path + "/" +  thumbPath};
+	}
+	
+	public static String uploadFile(String filePath, MultipartFile fileImg) throws IOException{
+		String path = filePath +DateUtil.formatTime(new Date());
+		String strDir = basePath+path;
+		FileUtil.makeDir(strDir);
+		String fileName = System.currentTimeMillis()+RandomStringUtils.randomNumeric(4);
+		String imgSuffix = "."+FileUtil.getSuffix(fileImg);
+		File file =  new File(strDir, fileName+imgSuffix);
+			FileUtil.inputStreamToFile(fileImg.getInputStream(), file);
+			return path + "/" + fileName+imgSuffix;
+	}
 	
 	
 	/**
@@ -271,32 +366,49 @@ public class FileUtil {
 		}
 		return true;
 	}
-	
-	/**
-	 * 将Date类型的日期转换为系统参数定义的格式的字符串
-	 * 
-	 * @Title: format
-	 * @Description: TODO
-	 * @param aTs_Datetime
-	 * @param as_Pattern
-	 * @return
-	 * @return: String
-	 */
-	public static String format(Date aTs_Datetime, DateStyle as_Pattern) {
-		if (aTs_Datetime == null || as_Pattern == null)
-			return null;
 
-		SimpleDateFormat dateFromat = new SimpleDateFormat();
-		dateFromat.applyPattern(as_Pattern.getValue());
-
-		return dateFromat.format(aTs_Datetime);
-	}
+	public static void rewrite(File file, String data) {  
+        BufferedWriter bw = null;  
+        try {  
+            bw = new BufferedWriter(new FileWriter(file));  
+            bw.write(data);  
+        } catch (IOException e) {  
+            e.printStackTrace();  
+        } finally {          
+            if(bw != null) {  
+               try {   
+                   bw.close();  
+               } catch(IOException e) {  
+                   e.printStackTrace();  
+               }  
+            }              
+        }  
+    }  
+    public static List<String> readList(File file) {  
+        BufferedReader br = null;  
+        List<String> data = new ArrayList<String>();  
+        try {  
+            br = new BufferedReader(new FileReader(file));  
+            for(String str = null; (str = br.readLine()) != null; ) {  
+                data.add(str);  
+            }  
+        } catch (IOException e) {  
+            e.printStackTrace();  
+        } finally {  
+            if(br != null) {  
+               try {   
+                   br.close();  
+               } catch(IOException e) {  
+                   e.printStackTrace();  
+               }  
+            }  
+        }  
+        return data;  
+    }  
 	
-	public static String formatYeayMonth(Date aTs_Datetime) {
-		return format(aTs_Datetime, DateStyle.YYYY_MM);
-	}
 	
 	
 	
 
 }
+

@@ -46,4 +46,9 @@ public class AddressFeeService extends BaseService<AddressFee> implements IAddre
         addressFee.setAmount(amount);
         addressFeeDao.insert(addressFee);
     }
+
+    @Transactional
+    public void delByAddressId(long address_id) {
+        addressFeeDao.deleteByWhere("address_id = " + address_id);
+    }
 }

@@ -6,7 +6,7 @@ import java.util.Date;
 /**
  * Created by pro on 17-4-21.
  */
-@Table
+@Table(name="news")
 @Entity
 public class News {
 
@@ -15,11 +15,15 @@ public class News {
     private long id;
     private String title;
     private String img;   //信息列表时展示
-    private String desc;
+    private String description;
     @Column(columnDefinition = "text")
     private String content;//富文本编辑器编辑
-    private Date createTime;
-    private Date updateTime;
+    private Date createDate;
+    private Date updateDate;
+
+    public News() {
+        this.createDate = new Date();
+    }
 
     public long getId() {
         return id;
@@ -45,12 +49,12 @@ public class News {
         this.img = img;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getContent() {
@@ -61,19 +65,19 @@ public class News {
         this.content = content;
     }
 
-    public Date getCreateTime() {
-        return createTime;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
-    public Date getUpdateTime() {
-        return updateTime;
+    public Date getUpdateDate() {
+        return updateDate;
     }
 
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
     }
 }

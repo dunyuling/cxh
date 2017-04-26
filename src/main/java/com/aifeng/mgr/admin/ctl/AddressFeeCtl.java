@@ -103,27 +103,4 @@ public class AddressFeeCtl extends BaseCtl {
 
         return AJAX_SUCCESS;
     }
-
-    /*@RequestMapping("/list")
-    public String index(@RequestParam(value = "page", defaultValue = "0") int page,
-                        HttpServletRequest request, Model model) {
-//        Map<String, Object> addressList = addressService.getAll(page);
-//        model.addAllAttributes(addressList);
-
-        long total = addressService.getTotal();
-        long mod = total % 10;
-        long divide = total / 10;
-        long totalPage = mod == 0 ? divide : (divide + 1);
-
-        List<Address> addresses = addressService.getByPage(page);
-        model.addAttribute("total", total);
-        model.addAttribute("totalPage", totalPage);
-        model.addAttribute("addresses", addresses);
-
-        Admin user = (Admin) this.get(Constants.SESSION_USER);
-        List<Map<String, Object>> permissions = this.adminService.getPermissions(user.getCode());
-        model.addAttribute(Constants.SESSION_PERMISSIONS, permissions);
-
-        return "address";
-    }*/
 }

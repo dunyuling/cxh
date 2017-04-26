@@ -1,5 +1,7 @@
 <%@ tag pageEncoding="utf-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%--<script type="text/javascript" src="/res/js/plugins/webuploader/webuploader.fis.js"></script>--%>
+<%--<script type="text/javascript" src="/res/js/plugins/webuploader/Uploader.swf"></script>--%>
 
 <% 
 	String path2 = request.getContextPath(); 
@@ -31,8 +33,8 @@
         
         $('.upload-img').each(function(){
         	var _fileType = parseInt($(this).attr('fileType'));
-        	var _url = '<%=basePath2 %>/file/uploadPic.cs';	
-        	$(this).InitUploader({ sendurl: _url, swf: '../res/js/plugins/webuploader/uploader.swf', thumbnail: true, fileType: _fileType });
+        	var _url = '<%=basePath2 %>file/uploadPic.cs';
+        	$(this).InitUploader({ sendurl: _url, swf: '/res/js/plugins/webuploader/Uploader.swf', thumbnail: true, fileType: _fileType });
         	$(this).parent().children('.show-img').click(function(){
             	$(this).parent().children('.upload-img').children().find('input').click();
             });
@@ -40,8 +42,8 @@
         
         $('.upload-file').each(function(){
         	var _fileType = parseInt($(this).attr('fileType'));
-        	var _url = '<%=basePath2 %>/file/uploadFile.cs';	
-        	$(this).InitUploader({ sendurl: _url, swf: '../res/js/plugins/webuploader/uploader.swf', thumbnail: true, fileType: _fileType });
+        	var _url = '<%=basePath2 %>file/uploadFile.cs';
+        	$(this).InitUploader({ sendurl: _url, swf: "/res/js/plugins/webuploader/Uploader.swf", thumbnail: true, fileType: _fileType });
         	var _obj = $(this);
         	$(this).parent().find('.show-file').click(function(){
 //         	$(this).find('.show-file').click(function(){

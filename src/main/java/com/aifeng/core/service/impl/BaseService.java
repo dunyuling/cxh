@@ -73,8 +73,15 @@ public class BaseService<T> implements IBaseService<T> {
 	}
 
 	@Override
+	public void deleteById(long id) {
+		// TODO Auto-generated method stub
+		String where = " and id = " +id;
+		baseDao.deleteByWhere(where);
+	}
+
+	@Override
 	@Transactional(readOnly = false)
-	public void deltetById(String...ids){
+	public void deleteByIds(String...ids){
 		StringBuffer sb = new StringBuffer();
 		for(String id : ids){
 			id = "'" + id + "',";

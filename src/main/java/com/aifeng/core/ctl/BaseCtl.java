@@ -88,7 +88,33 @@ public class BaseCtl {
     }
 	
 	/**
-	 * 
+	 * 从json 串获取对象
+	 *
+	 * @Title: getBeanFromJson
+	 * @Description: TODO
+	 * @param jsonStr
+	 * @param typeReference
+	 * @return
+	 * @return: T
+	 */
+	protected <T> T getBeanFromJson(String jsonStr, TypeReference<T> typeReference) {
+
+		if (StringUtil.isNotBlank(jsonStr)) {
+			try {
+				return new ObjectMapper().readValue(jsonStr, typeReference);
+			} catch (JsonParseException e) {
+				e.printStackTrace();
+			} catch (JsonMappingException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return null;
+	}
+
+	/**
+	 *
 	 * @Title: getBeanFromJson
 	 * @Description: TODO
 	 * @param jsonStr
@@ -107,32 +133,6 @@ public class BaseCtl {
 					objectMapper.setDeserializationConfig(cfg);
 				}
 				return objectMapper.readValue(jsonStr, clazz);
-			} catch (JsonParseException e) {
-				e.printStackTrace();
-			} catch (JsonMappingException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		return null;
-	}
-
-	/**
-	 * 从json 串获取对象
-	 * 
-	 * @Title: getBeanFromJson
-	 * @Description: TODO
-	 * @param jsonStr
-	 * @param typeReference
-	 * @return
-	 * @return: T
-	 */
-	protected <T> T getBeanFromJson(String jsonStr, TypeReference<T> typeReference) {
-
-		if (StringUtil.isNotBlank(jsonStr)) {
-			try {
-				return new ObjectMapper().readValue(jsonStr, typeReference);
 			} catch (JsonParseException e) {
 				e.printStackTrace();
 			} catch (JsonMappingException e) {

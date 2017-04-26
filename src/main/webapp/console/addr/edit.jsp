@@ -13,8 +13,8 @@
     <div class="wrapper wrapper-content">
         <div class="row">
             <div class="col-sm-12">
-            	 <cs:form_validate formId="addDicForm"/>
-                  <form class="form-horizontal" action="edit.cs" id="addDicForm" method="POST">
+            	 <cs:form_validate formId="editAddressForm"/>
+                  <form class="form-horizontal" action="edit.cs" id="editAddressForm" method="POST">
                      <div class="form-group">
                           <label class="col-sm-3 control-label">省：</label>
                           <div class="col-sm-6">
@@ -52,11 +52,6 @@
                   </form>
             </div>
         </div>
-
     </div>
-
-
 </body>
-
 </html>
-

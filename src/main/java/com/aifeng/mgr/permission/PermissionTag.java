@@ -57,8 +57,6 @@ public class PermissionTag extends TagSupport{
 		}
 	}
 	
-	
-	
 	// 验证是否有权限
 	private boolean hasPermission(){
 		HttpSession session = pageContext. getSession();

@@ -10,19 +10,13 @@
     <script src="/res/js/plugins/bootstrap-table/bootstrap-table.js"></script>
     <script src="/res/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
     <script src="/res/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
-
-
-
-
 </head>
 
 <body class="gray-bg">
 <div class="wrapper wrapper-content animated fadeInRight">
-    <!--           <div class="ibox " style=""> -->
-    <!--               <div class="ibox-content"> -->
     <div class="row row-lg">
         <div class="col-sm-12">
-            <cs:toolbar title="数据字典" tableId="tab_addr" width="768px" height="420px" menuCode="21" hdMenu="1"></cs:toolbar>
+            <cs:toolbar title="地区费用管理" tableId="tab_addr" width="768px" height="420px" menuCode="21" hdMenu="1"></cs:toolbar>
             <table id="tab_addr"
                    data-toggle="table"
                    data-url="/addr/list2.cs"
@@ -51,8 +45,6 @@
             </table>
         </div>
     </div>
-    <!--               </div> -->
-    <!--           </div> -->
 </div>
 </body>
 </html>
