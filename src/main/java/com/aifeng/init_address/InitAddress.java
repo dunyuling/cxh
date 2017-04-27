@@ -20,9 +20,9 @@ public class InitAddress {
 //        System.out.println("areasMap size: " + areasMap.size());
 
 
-        /*List<AdminRanking> areaList = getAR("areas.json");
+        List<AdminRanking> areaList = getAR("areas.json");
         List<AdminRanking> cityList = getAR("cites.json");
-        List<AdminRanking> provinceList = getAR("provinces.json");*/
+        List<AdminRanking> provinceList = getAR("provinces.json");
 
         ClassPathXmlApplicationContext classPathXmlApplicationContext = new ClassPathXmlApplicationContext(new String[]{
                 "druid.xml",
@@ -31,9 +31,11 @@ public class InitAddress {
                 "spring-redis.xml"
 
         });
-//        AddressService addressService = classPathXmlApplicationContext.getBean(AddressService.class);
-//        addressService.init(areaList, cityList, provinceList);
+        AddressService addressService = classPathXmlApplicationContext.getBean(AddressService.class);
+        addressService.init(areaList, cityList, provinceList);
     }
+    //620200         　嘉峪关市
+
 
 
     static String basePath = "src/main/java/com/aifeng/init_address/";
