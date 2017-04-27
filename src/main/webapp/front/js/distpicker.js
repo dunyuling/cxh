@@ -198,7 +198,7 @@
     placeholder: true,
     province: '—— 省 ——',
     city: '—— 市 ——',
-    district: '—— 区 ——'
+    district: '—— 县/区 ——'
   };
 
   Distpicker.setDefaults = function (options) {

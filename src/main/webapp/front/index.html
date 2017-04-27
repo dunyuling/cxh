@@ -9,7 +9,12 @@
 <script type="text/javascript" src="/front/js/banner.roll.js"></script>
 <script type="text/javascript" src="/front/js/distpicker.data.js"></script>
 <script type="text/javascript" src="/front/js/distpicker.js"></script>
-
+<!--<script>
+	function b() {
+	    alert("bb")
+	}
+	b();
+</script>-->
 </head>
 <body>
 <div class="index_body">
@@ -46,29 +51,37 @@
 					<form class="form-inline">
 						<div data-toggle="distpicker" class="form-control-main">
 							<div class="form-group">
-								<select class="form-control"></select>
+								<select class="form-control" id="province"></select>
 							</div>
 							<div class="form-group">
-								<select class="form-control" id="city1"></select>
+								<select class="form-control" id="city"></select>
 							</div>
 							<div class="form-group">
-								<select class="form-control" id="district1"></select>
+								<select class="form-control" id="area"></select>
 							</div>
 						</div>
 					</form>
 				</div>
-				<div class="index_txt_right_in"><span>姓名</span><input name="" type="text"></div>
-				<div class="index_txt_right_in"><span>手机号码</span><input name="" type="text"></div>
+				<div class="index_txt_right_in"><span>姓名</span><input id="name" type="text"></div>
+				<div class="index_txt_right_in"><span>手机号码</span><input id="mobile"></div>
 				<div class="index_txt_right_in">
 					<span>车险类型</span>
 						<div class="trading2_main_input">
-							<select id="edu12" name="edu12" class="trading2_main_input2">
+							<select id="insurance" name="insurance" class="trading2_main_input2">
 								<option value="0">交强险</option>
-								<option value="1">商业险</option>
+								<option value="1">机动车辆损失险</option>
+								<option value="2">第三者责任险</option>
+								<option value="3">盗抢险</option>
+								<option value="4">车上人员责任险</option>
+								<option value="5">车身划痕损失险</option>
+								<option value="6">玻璃单独破碎险</option>
+								<option value="7">自燃损失险</option>
+								<option value="8">发动机特别损失险</option>
+								<option value="9">不计免赔率特约损失险</option>
 							</select>
 						</div>
 				</div>
-				<div class="index_txt_right_but"><a href="#1">提交订单</a></div>
+				<div class="index_txt_right_but"><input type="button" id="submit" value="提交订单" /></div>
 			</div>
 		</div>
 	</div>
@@ -84,8 +97,49 @@
 			$('#dowebok').responsiveSlides({
 				pager: true,
 				nav: true,
-				namespace: 'centered-btns',
+				namespace: 'centered-btns'
 			});
+
+
+			$("#submit").click(function() {
+                var province = $("#province option:selected").text();
+                var city = $("#city option:selected").text();
+                var area = $("#area option:selected").text();
+                var name = $("#name").val();
+                var mobile = $("#mobile").val();
+                var insurance = $("#insurance option:selected").val();
+
+                if(province == '—— 省 ——') {
+                    alert("请选择正确的省份");
+                    return;
+				}
+                if(city == '—— 市 ——') {
+                    alert("请选择正确的市");
+                    return;
+                }
+                if(area == '—— 县/区 ——') {
+                    alert("请选择正确的县/区");
+                    return;
+                }
+
+                var reg = /^1[0-9]{10}$/; //验证规则
+                var flag = reg.test(mobile); //true
+				if(!flag) {
+					alert("请填写正确的手机号码 " + mobile);
+					return;
+                }
+
+                $.post( "/front/register_member.cs",
+					{ province: province,city:city,area:area,name:name,mobile:mobile,index:insurance})
+                    .done(function( data ) {
+                        alert(data );
+                    });
+				//13569874561
+
+                /*alert("province: " + province + " \t city: " + city + "\t area: " + area +
+                    "\t name: " + name + " \t mobile: " + mobile + " \t in: " + insurance
+                );*/
+            });
 		});
 		</script>
 	</div>
@@ -194,13 +248,13 @@
 					<p class="cxjs_txt_main_p">在保险条款中，对自燃的解释是指在没有外界火源的情况下，由于本车电器、线路、供油系统、供气系统等被保险机动车自身原因发生故障或货物自身原因起火燃烧。</p>
 				</div>
 			</div>
-			<div id="companyList8" class="hid tabjiehuan">
+			<div id="companyList9" class="hid tabjiehuan">
 				<div class="cxjs_txt_main">
 					<div class="cxjs_txt_main_tit">发动机特别损失险</div>
 					<p class="cxjs_txt_main_p">本来艳阳高照，忽然之间又大雨瓢泼了，积水较深。一不小心，熄火了。一会儿爱车就变成潜水艇了，发动机进水没商量。因为暴雨带来的维修和更换部件，都可以走车损险，但发动机进水除外。</p>
 				</div>
 			</div>
-			<div id="companyList8" class="hid tabjiehuan">
+			<div id="companyList10" class="hid tabjiehuan">
 				<div class="cxjs_txt_main">
 					<div class="cxjs_txt_main_tit">不计免赔率特约损失险</div>
 					<p class="cxjs_txt_main_p">为您提供出险后的全额赔偿保障。包括车损、三者、车上人员、盗抢都相应的免赔金额，增加不计免赔险后，最高免赔金额可以达到20%，最大程度的降低您的意外开支。</p>
