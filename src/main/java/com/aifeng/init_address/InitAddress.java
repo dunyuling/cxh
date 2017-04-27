@@ -34,8 +34,6 @@ public class InitAddress {
         AddressService addressService = classPathXmlApplicationContext.getBean(AddressService.class);
         addressService.init(areaList, cityList, provinceList);
     }
-    //620200         　嘉峪关市
-
 
 
     static String basePath = "src/main/java/com/aifeng/init_address/";
