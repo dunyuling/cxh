@@ -33,3 +33,11 @@ public class Init {
         System.out.println("08d879276ccfab2e74eadf6e4a5f4515".length());*/
     }
 }
+
+/*
+ * TODO  初始化运营数据
+ * 1. 后台帐号
+ * 2. 省市区，三份要统一
+ * 3. 辅助数据，企业号 CorpId,secret
+ *
+ */

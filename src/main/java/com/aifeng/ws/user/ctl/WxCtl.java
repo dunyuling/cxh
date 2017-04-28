@@ -1,16 +1,21 @@
 package com.aifeng.ws.user.ctl;
 
+import com.aifeng.constants.Constants;
+import com.aifeng.mgr.admin.model.AuxiliaryInformation;
+import com.aifeng.mgr.admin.service.impl.AuxiliaryInformationService;
 import com.aifeng.ws.wx.UserResponse;
-import org.apache.commons.collections.map.MultiValueMap;
-import org.springframework.http.*;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 /**
  * Created by pro on 17-4-27.
@@ -19,34 +24,74 @@ import java.util.Map;
 @Controller
 public class WxCtl {
 
-    private static String getUserId = "https://qyapi.weixin.qq.com/cgi-bin/user/getuserinfo";
-
-    private static String access_token = "mZHPbLKL5lO6gSF5m4qWFJ44NqPWRkZStQV2IuYYloHtODJJIvvB12B0HgjgFz6e";
+    @Autowired
+    private AuxiliaryInformationService auxiliaryInformationService;
 
     @RequestMapping("get_code")
     public String getCode(HttpServletRequest request) {
-        String code = request.getParameter("code");
         RestTemplate restTemplate = new RestTemplate();
 
-        String userUrl = getUserId + "?access_token=" + access_token + "&code=" + code;
-//        System.out.println("userUrl: " + userUrl);
-//        ResponseEntity<UserResponse> response = restTemplate.getForEntity(userUrl, UserResponse.class);
+        AuxiliaryInformation ai = auxiliaryInformationService.getOrMockFirst();
+        String access_token = ai.getAccess_token();
+        if (access_token.isEmpty() || expire(System.currentTimeMillis(), ai.getUpdateDate().getTime())) {
+            ResponseEntity<UserResponse> atResponse = restTemplate.getForEntity(loadAccessTokenUrl(ai.getCorpID(),ai.getSecret()),UserResponse.class);
+            System.out.println("===" + atResponse);
+            access_token = atResponse.getBody().getAccess_token();
+        }
 
-//        Map<String, String> map = new HashMap<>();
-//        map.put("access_token", access_token);
-//        map.put("code", code);
-        ResponseEntity<String> response = restTemplate.getForEntity(userUrl,String.class);
+        String user_id = "";
+        String code = request.getParameter("code");
+        String codeStr = restTemplate.getForEntity(loadUserIdUrl(access_token,code), String.class).getBody();
+        codeStr = codeStr.replace("UserId","user_id").replace("DeviceId","device_id");
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            UserResponse userResponse = mapper.readValue(codeStr, UserResponse.class);
+            user_id = userResponse.getUser_id();
+            System.out.println("---");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-//        MultiValueMap multiValueMap = new MultiValueMap();
-//        multiValueMap.put("access_token", access_token);
-//        multiValueMap.put("code", code);
-//        HttpEntity<String> entity = new HttpEntity<>("parameters", headers);
-//        ResponseEntity<String> response = restTemplate.exchange(userUrl, HttpMethod.GET, entity, String.class);
-
+        ResponseEntity<String> stringResponseEntity = restTemplate.getForEntity(loadSecondAuthUrl(access_token,user_id),String.class);
         System.out.println("===");
         return "success";
+    }
+
+    private String loadAccessTokenUrl(String corpid, String corpsecret) {
+        String pre = "https://qyapi.weixin.qq.com/cgi-bin/gettoken?";
+        return pre + "corpid=" + corpid + "&corpsecret=" + corpsecret;
+    }
+
+    private String loadCodeUrl(String appid) {
+        String redirectUrl = Constants.host + "/wx/get_code.cs";
+        try {
+            redirectUrl = URLEncoder.encode(redirectUrl, "utf-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        String pre = "https://open.weixin.qq.com/connect/oauth2/authorize?";
+        return pre + "appid=" + appid +
+                "&redirect_uri=" + redirectUrl +
+                "&response_type=code" +
+                "&scope=snsapi_base" +
+                "&agentid=0" +
+                "&state=123346" +
+                "#wechat_redirect";
+    }
+
+    private String loadUserIdUrl(String access_token, String code) {
+        String pre = "https://qyapi.weixin.qq.com/cgi-bin/user/getuserinfo?";
+        return pre + "access_token=" + access_token + "&code=" + code;
+    }
+
+    private String loadSecondAuthUrl(String access_token,String userid) {
+        String pre = "https://qyapi.weixin.qq.com/cgi-bin/user/authsucc?";
+        return pre + "access_token=" + access_token + "&userid=" + userid;
+    }
+
+    private boolean expire(long time1, long time2) {
+        return time1 - time2 > 6900 * 1000; //为保证方便，有效期缩小五分钟
     }
 }
 //code kGtu29uT87ZGFI0kR3MIAHvsysyGD6W5C-bS9p_SlTc

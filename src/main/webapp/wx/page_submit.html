@@ -7,9 +7,9 @@
 	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
 	<meta name="format-detection" content="telephone=no" />
 	<title>车险汇</title>
-	<link rel="stylesheet" type="text/css" href="/wx/css/base.css">
-	<link rel="stylesheet" type="text/css" href="/wx/css/submit.css">
-	<link rel="stylesheet" type="text/css" href="/wx/css/LArea.css">
+	<link rel="stylesheet" type="text/css" href="css/base.css">
+	<link rel="stylesheet" type="text/css" href="css/submit.css">
+	<link rel="stylesheet" type="text/css" href="css/LArea.css">
 </head>
 <body>
 <div class="page_header">
@@ -19,28 +19,112 @@
 </div>
 <div class="submit_main">
 	<ul>
-		<li class="su_input"><p>手机号</p><input name="" type="text" placeholder="国际手机号码请加区号"></li>
 		<li class="su_input"><p>姓名</p><input name="" type="text" placeholder=""></li>
+		<li class="su_input"><p>手机号</p><input name="" type="text" placeholder="国际手机号码请加区号"></li>
 		<li class="su_input content-block"><p>地区</p><input name="" id="city" readonly type="text" placeholder="省/市/县（区）"></li>
+		<li class="su_input"><p>身份证</p><input name="" type="text" placeholder=""></li>
 	</ul>
 </div>
-<div class="su_details_button"><a href="#" id="submit">提交</a></div>
-<script src="/wx/js/jquery-1.11.3.min.js"></script>
-<script src="/wx/js/Popt.js"></script>
-<script src="/wx/js/cityJson.js"></script>
-<script src="/wx/js/citySet.js"></script>
+<div class="submit_main2">
+	<div class="shangchuan_img ">
+		<p>营业执照</p>
+		<div class="z_photo">
+			<div class="shangchuan_but z_file">
+				<input type="file" name="file" id="file" value="" accept="image/*" multiple onchange="imgChange('z_photo','z_file');" />
+			</div>
+		</div>
+		<!--遮罩层-->
+	<div class="z_mask">
+	<!--弹出框-->
+		<div class="z_alert">
+			<p style="width:100%; height:2.2rem; border-bottom: 1px solid #ddd;">确定要删除这张图片吗？</p>
+			<p style=" width:100%; height:0.8rem">
+				<span class="z_cancel">取消</span>
+				<span class="z_sure">确定</span>
+			</p>
+		</div>
+	</div>
+		
+	</div>
+	<li class="su_input2"><p>营业执照失效日期</p><div class="input"><input name="" type="text" placeholder="例：20170101"></div></li>
+</div>
+
+<script type="text/javascript">
+		//px转换为rem
+		(function(doc, win) {
+				var docEl = doc.documentElement,
+						resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+						recalc = function() {
+								var clientWidth = docEl.clientWidth;
+								if (!clientWidth) return;
+								if (clientWidth >= 640) {
+										docEl.style.fontSize = '100px';
+								} else {
+										docEl.style.fontSize = 100 * (clientWidth / 640) + 'px';
+								}
+						};
+
+				if (!doc.addEventListener) return;
+				win.addEventListener(resizeEvt, recalc, false);
+				doc.addEventListener('DOMContentLoaded', recalc, false);
+		})(document, window);
+
+		function imgChange(obj1, obj2) {
+				//获取点击的文本框
+				var file = document.getElementById("file");
+				//存放图片的父级元素
+				var imgContainer = document.getElementsByClassName(obj1)[0];
+				//获取的图片文件
+				var fileList = file.files;
+				//文本框的父级元素
+				var input = document.getElementsByClassName(obj2)[0];
+				var imgArr = [];
+				//遍历获取到得图片文件
+				for (var i = 0; i < fileList.length; i++) {
+						var imgUrl = window.URL.createObjectURL(file.files[i]);
+						imgArr.push(imgUrl);
+						var img = document.createElement("img");
+						img.setAttribute("src", imgArr[i]);
+						var imgAdd = document.createElement("div");
+						imgAdd.setAttribute("class", "z_addImg");
+						imgAdd.appendChild(img);
+						imgContainer.appendChild(imgAdd);
+				};
+				imgRemove();
+		};
+
+		function imgRemove() {
+				var imgList = document.getElementsByClassName("z_addImg");
+				var mask = document.getElementsByClassName("z_mask")[0];
+				var cancel = document.getElementsByClassName("z_cancel")[0];
+				var sure = document.getElementsByClassName("z_sure")[0];
+				for (var j = 0; j < imgList.length; j++) {
+						imgList[j].index = j;
+						imgList[j].onclick = function() {
+								var t = this;
+								mask.style.display = "block";
+								cancel.onclick = function() {
+										mask.style.display = "none";
+								};
+								sure.onclick = function() {
+										mask.style.display = "none";
+										t.style.display = "none";
+								};
+
+						}
+				};
+		};
+</script>
+
+
+<div class="su_details_button"><a href="#">提交</a></div>
+<script src="js/jquery-1.11.3.min.js"></script>
+<script src="js/Popt.js"></script>
+<script src="js/cityJson.js"></script>
+<script src="js/citySet.js"></script>
 <script type="text/javascript">
 $("#city").click(function (e) {
 	SelCity(this,e);
-});
-$(function() {
-	$("#submit").click(function() {
-		$.post("https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx6b9738b957e2c065&redirect_uri=http%3A%2F%2F192.168.50.108%3A8080%2Fwx%2Fget_code.cs&response_type=code&scope=snsapi_base&agentid=0&state=123346#wechat_redirect").done(function(data) {
-		    alert(data);
-		});
-
-//		$.post("/wx/get_code.cs");
-	});
 });
 
 </script>

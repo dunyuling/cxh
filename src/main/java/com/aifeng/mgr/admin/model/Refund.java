@@ -10,9 +10,10 @@ import javax.persistence.Table;
 /**
  * Created by pro on 17-4-21.
  */
-@Table
+@Table(name="refund")
 @Entity
-public class refund {
+public class Refund
+{
 
     @Id
     @GeneratedValue

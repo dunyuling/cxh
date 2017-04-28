@@ -6,7 +6,7 @@ import java.util.Date;
 /**
  * Created by pro on 17-4-21.
  */
-@Table
+@Table(name="problem")
 @Entity
 public class Problem {
 
@@ -19,7 +19,7 @@ public class Problem {
     private String title;
 
     @Column(columnDefinition = "text")
-    private String desc;
+    private String description;
 
     private Date createTime;
 
@@ -49,12 +49,12 @@ public class Problem {
         this.title = title;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Date getCreateTime() {

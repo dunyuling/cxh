@@ -23,8 +23,6 @@ public class Agent {
     private String mobile;
     @Column(columnDefinition="varchar(18)")
     private String IDCard;
-    @Column(columnDefinition="varchar(255)")
-    private String IDCardImg;
     @Column(columnDefinition="varchar(32)")
     private String corpName;
     @Column(columnDefinition="varchar(255)")
@@ -71,14 +69,6 @@ public class Agent {
 
     public void setIDCard(String IDCard) {
         this.IDCard = IDCard;
-    }
-
-    public String getIDCardImg() {
-        return IDCardImg;
-    }
-
-    public void setIDCardImg(String IDCardImg) {
-        this.IDCardImg = IDCardImg;
     }
 
     public String getCorpName() {

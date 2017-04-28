@@ -9,14 +9,14 @@ import java.util.Date;
 /**
  * Created by pro on 17-4-21.
  */
-@Table
+@Table(name="message_repeat")
 @Entity
 public class MessageRepeat {
 
     @Id
     @GeneratedValue
     private long id;
-    private int interval;
+    private int gap;
     private int totalTimes;
     private Date updateTime;
 
@@ -28,12 +28,12 @@ public class MessageRepeat {
         this.id = id;
     }
 
-    public int getInterval() {
-        return interval;
+    public int getGap() {
+        return gap;
     }
 
-    public void setInterval(int interval) {
-        this.interval = interval;
+    public void setGap(int gap) {
+        this.gap = gap;
     }
 
     public int getTotalTimes() {

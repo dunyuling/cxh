@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <title>车险汇</title>
-<link rel="stylesheet" href="/front/css/css.css">
-<link rel="stylesheet" href="/front/css/index.css">
-<script type="text/javascript" src="/front/js/jquery-1.8.3.min.js"></script>
-<script type="text/javascript" src="/front/js/banner.roll.js"></script>
-<script type="text/javascript" src="/front/js/distpicker.data.js"></script>
-<script type="text/javascript" src="/front/js/distpicker.js"></script>
+<link rel="stylesheet" href="css/css.css">
+<link rel="stylesheet" href="css/index.css">
+<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="js/banner.roll.js"></script>
+<script type="text/javascript" src="js/distpicker.data.js"></script>
+<script type="text/javascript" src="js/distpicker.js"></script>
 </head>
 <body>
 <div class="index_body">
@@ -16,15 +16,15 @@
 	<div class="index_nav_body">
 		<div class="index_nav_main">
 			<div class="index_nav_box1">
-				<div class="index_nav_box1_icon"><p class="nav_icon"><img src="/front/img/icon_01.png"></p><p>chexianhui@163.com</p></div>
-				<div class="index_nav_box1_icon"><p class="nav_icon"><img src="/front/img/icon_02.png"></p><p>133-3385-0551</p></div>
-				<div class="index_nav_box1_icon2"><p class="nav_icon"><img src="/front/img/icon_03.png"></p><p>周一至周五  09:00-18:00</p></div>
+				<div class="index_nav_box1_icon"><p class="nav_icon"><img src="img/icon_01.png"></p><p>chexianhui@163.com</p></div>
+				<div class="index_nav_box1_icon"><p class="nav_icon"><img src="img/icon_02.png"></p><p>133-3385-0551</p></div>
+				<div class="index_nav_box1_icon2"><p class="nav_icon"><img src="img/icon_03.png"></p><p>周一至周五  09:00-18:00</p></div>
 			</div>
 			<div class="index_nav_box2">
-				<div class="index_logo"><a href="index.html"><img src="/front/img/logo_03.png"></a></div>
+				<div class="index_logo"><a href="index.html"><img src="img/logo_03.png"></a></div>
 				<ul>
 					<li><a href="index.html" class="nav_txtss now">首页</a></li>
-					<li><a href="/front/get_news.cs" class="nav_txtss">新闻动态</a></li>
+					<li><a href="/cxh/front/get_news.cs" class="nav_txtss">新闻动态</a></li>
 					<li><a href="about.html" class="nav_txtss">关于我们</a></li>
 				</ul>
 			</div>
@@ -34,7 +34,7 @@
 	<div class="index_txt_body">
 		<div class="index_txt_main">
 			<div class="index_txt_left">
-				<div class="index_txt_left_img"><img src="/front/img/banner_txt.png"></div>
+				<div class="index_txt_left_img"><img src="img/banner_txt.png"></div>
 				<div class="index_txt_left_button"><a href="about.html">了解详情</a></div>
 			</div>
 			
@@ -82,7 +82,7 @@
 	<!--banner-->
 	<div class="wrap banner_roll">
 		<ul class="rslides" id="dowebok">
-			<li><a target="_blank" class="banner_roll_img" style="background:url(/front/img/banner1.jpg) no-repeat center center"></a></li>
+			<li><a target="_blank" class="banner_roll_img" style="background:url(img/banner1.jpg) no-repeat center center"></a></li>
 			<li><a target="_blank" class="banner_roll_img" style="background:url(img/banner2.jpg) no-repeat center center"></a></li>
 			<li><a target="_blank" class="banner_roll_img" style="background:url(img/banner3.jpg) no-repeat center center"></a></li>
 		</ul>
@@ -123,7 +123,7 @@
 					return;
                 }
 
-                $.post( "/front/register_member.cs",
+                $.post( "/cxh/front/register_member.cs",
 					{ province: province,city:city,area:area,name:name,mobile:mobile,index:insurance})
                     .done(function( data ) {
                         alert(data );

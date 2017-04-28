@@ -19,7 +19,7 @@ public class AgentMessage {
     private long agent_id;
     private long message_id;
     private int times;
-    private boolean read;
+    private boolean readed;
     private boolean visit;
     private Date readTime;
     private Date visitTime;
@@ -56,12 +56,12 @@ public class AgentMessage {
         this.times = times;
     }
 
-    public boolean isRead() {
-        return read;
+    public boolean isReaded() {
+        return readed;
     }
 
-    public void setRead(boolean read) {
-        this.read = read;
+    public void setReaded(boolean readed) {
+        this.readed = readed;
     }
 
     public boolean isVisit() {
