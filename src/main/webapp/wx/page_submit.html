@@ -7,9 +7,9 @@
 	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
 	<meta name="format-detection" content="telephone=no" />
 	<title>车险汇</title>
-	<link rel="stylesheet" type="text/css" href="css/base.css">
-	<link rel="stylesheet" type="text/css" href="css/submit.css">
-	<link rel="stylesheet" type="text/css" href="css/LArea.css">
+	<link rel="stylesheet" type="text/css" href="/wx/css/base.css">
+	<link rel="stylesheet" type="text/css" href="/wx/css/submit.css">
+	<link rel="stylesheet" type="text/css" href="/wx/css/LArea.css">
 </head>
 <body>
 <div class="page_header">
@@ -17,32 +17,32 @@
 	<div class="sub2">完善资料</div>
 	<div class="sub3"></div>
 </div>
-
 <div class="submit_main">
 	<ul>
 		<li class="su_input"><p>手机号</p><input name="" type="text" placeholder="国际手机号码请加区号"></li>
 		<li class="su_input"><p>姓名</p><input name="" type="text" placeholder=""></li>
-		<li class="su_input content-block"><p>地区</p><input name="" id="demo2" readonly type="text" placeholder="省/市/县（区）"></li>
+		<li class="su_input content-block"><p>地区</p><input name="" id="city" readonly type="text" placeholder="省/市/县（区）"></li>
 	</ul>
 </div>
-<div class="su_details_button"><a href="#">提交</a></div>
-<script src="js/LAreaData1.js"></script>
-<script src="js/LAreaData2.js"></script>
-<script src="js/LArea.js"></script>
-<script>
-var area1 = new LArea();
-area1.value=[1,13,3];//控制初始位置，注意：该方法并不会影响到input的value
-var area2 = new LArea();
-area2.init({
-		'trigger': '#demo2',
-		'valueTo': '#value2',
-		'keys': {
-				id: 'value',
-				name: 'text'
-		},
-		'type': 2,
-		'data': [provs_data, citys_data, dists_data]
+<div class="su_details_button"><a href="#" id="submit">提交</a></div>
+<script src="/wx/js/jquery-1.11.3.min.js"></script>
+<script src="/wx/js/Popt.js"></script>
+<script src="/wx/js/cityJson.js"></script>
+<script src="/wx/js/citySet.js"></script>
+<script type="text/javascript">
+$("#city").click(function (e) {
+	SelCity(this,e);
 });
+$(function() {
+	$("#submit").click(function() {
+		$.post("https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx6b9738b957e2c065&redirect_uri=http%3A%2F%2F192.168.50.108%3A8080%2Fwx%2Fget_code.cs&response_type=code&scope=snsapi_base&agentid=0&state=123346#wechat_redirect").done(function(data) {
+		    alert(data);
+		});
+
+//		$.post("/wx/get_code.cs");
+	});
+});
+
 </script>
 </body>
 </html>

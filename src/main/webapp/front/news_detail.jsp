@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
@@ -22,7 +24,7 @@
 				<div class="index_logo"><a href="index.html"><img src="img/logo_03.png"></a></div>
 				<ul>
 					<li><a href="index.html" class="nav_txtss">首页</a></li>
-					<li><a href="new.html" class="nav_txtss now">新闻动态</a></li>
+					<li><a href="/front/get_news.cs" class="nav_txtss now">新闻动态</a></li>
 					<li><a href="about.html" class="nav_txtss">关于我们</a></li>
 				</ul>
 			</div>
@@ -34,7 +36,7 @@
 	<ul>
 		<li class="breadcrumb_my"><a href="index.html">首页</a></li>
 		<li class="breadcrumb_my">></li>
-		<li class="breadcrumb_my"><a href="new.html">新闻动态</a></li>
+		<li class="breadcrumb_my"><a href="/front/get_news.cs">新闻动态</a></li>
 		<li class="breadcrumb_my">></li>
 		<li>详情</li>
 	</ul>
@@ -42,13 +44,14 @@
 <!--新闻详情-->
 <div class="new2_main">
 	<div class="new2_title_main">
-		<div class="new2_title">汽车品牌4S模式将成历史 不得强行搭售车险代办上牌</div>
-		<div class="new2_time">2017-01-12 16:00</div>
+		<div class="new2_title">${news.title}</div>
+		<div class="new2_time">
+			<fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${news.createDate}" />
+		</div>
 	</div>
-	<p>曾作为汽车流通领域“基本法”的《汽车品牌销售管理办法》将告别历史舞台。昨日，商务部网站公布《汽车销售管理办法》(以下简称“新办法”)，对汽车销售主体、销售行为、市场秩序、监管和法律责任进行说明，并于2017年7月1日起正式实施。</p>
-	<p><img src="img/new2.jpg"></p>
-	<p>曾作为汽车流通领域“基本法”的《汽车品牌销售管理办法》将告别历史舞台。昨日，商务部网站公布《汽车销售管理办法》(以下简称“新办法”)，对汽车销售主体、销售行为、市场秩序、监管和法律责任进行说明，并于2017年7月1日起正式实施。</p>
-	<p><img src="img/new2.jpg"></p>
+	<%-- <p><img src="${news.img}"/></p> --%>
+	<p>${news.description}</p>
+	<p>${news.content}</p>
 </div>
 <!--页尾-->
 <div class="public_bottom">

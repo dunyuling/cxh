@@ -73,4 +73,9 @@ public class NewsService extends BaseService<News> implements INewsService {
     public void delNews(long id) {
         newsDao.deleteByWhere(" where id = " + id);
     }
+
+    @Transactional
+    public News getOne(long id) {
+        return newsDao.findById(id);
+    }
 }

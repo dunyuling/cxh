@@ -6,5 +6,13 @@
 .su_details_button {margin: 0.4rem 0.2rem;}
 .su_details_button a {display: inline-block; width:100%; height:0.88rem; background-color:#4a90e2; color:#fff; text-align:center; line-height: 0.88rem; font-size:0.28rem; -moz-border-radius:0.1rem; -webkit-border-radius:0.1rem; border-radius:0.1rem; letter-spacing:0.01rem;}
 
-
+._citys { width: 100%; background-color:#cccccc; position: absolute; top:4rem; min-height:4rem}
+._citys span {color: #56b4f8; height:0.3rem; width:0.3rem; line-height:0.3rem; text-align:center; border-radius: 3px; position: absolute; right:0.1rem; top:0.15rem; border: 1px solid #56b4f8; cursor: pointer; }
+._citys0 { width: 100%; height:0.6rem; display: inline-block; border-bottom: 2px solid #56b4f8; padding: 0; margin: 0; overflow:hidden}
+._citys0 li { float:left; height:0.6rem; line-height:0.6rem; font-size:0.24rem; color: #888; width:1.2rem; text-align: center; cursor: pointer; }
+.citySel { background-color: #56b4f8; color: #fff !important; }
+._citys1 { width: 100%; display: inline-block; padding: 10px 0; }
+._citys1 a { width: 32%; height:0.6rem; display: inline-block; background-color: #f5f5f5; color: #666; margin-left:1%; margin-top:0.1rem; line-height: 0.6rem; text-align: center; cursor: pointer; font-size: 13px; overflow: hidden; }
+._citys1 a:hover { color: #fff; background-color: #56b4f8; }
+.AreaS { background-color: #56b4f8 !important; color: #fff !important; }
 
