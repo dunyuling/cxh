@@ -5,6 +5,7 @@ import com.aifeng.init_address.AdminRanking;
 import com.aifeng.mgr.admin.dao.impl.AddressDao;
 import com.aifeng.mgr.admin.model.Address;
 import com.aifeng.mgr.admin.model.AddressFee;
+import com.aifeng.mgr.admin.model.ProxyAddress;
 import com.aifeng.mgr.admin.service.IAddressService;
 import com.aifeng.util.Pager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,11 +28,13 @@ public class AddressService extends BaseService<Address> implements IAddressServ
 
     private final
     AddressFeeService addressFeeService;
+    private final ProxyAddressService proxyAddressService;
 
     @Autowired
-    public AddressService(AddressDao addressDao, AddressFeeService addressFeeService) {
+    public AddressService(AddressDao addressDao, AddressFeeService addressFeeService, ProxyAddressService proxyAddressService) {
         this.addressDao = addressDao;
         this.addressFeeService = addressFeeService;
+        this.proxyAddressService = proxyAddressService;
     }
 
     @Transactional
@@ -81,7 +84,7 @@ public class AddressService extends BaseService<Address> implements IAddressServ
         long total = addressDao.countAll();
         long mod = total % pageSize;
         long divide = total / pageSize;
-        return (int)(mod == 0 ? divide : (divide + 1));
+        return (int) (mod == 0 ? divide : (divide + 1));
     }
 
     @Transactional
@@ -91,23 +94,23 @@ public class AddressService extends BaseService<Address> implements IAddressServ
     }
 
     @Transactional
-    public List<Map<String,Object>> getByPage(int page,int size) {
-        return addressDao.getAddressFee(page,size);
+    public List<Map<String, Object>> getByPage(int page, int size) {
+        return addressDao.getAddressFee(page, size);
     }
 
     @Transactional
-    public void saveAddress(String province,String city ,String area, int amount) {
+    public void saveAddress(String province, String city, String area, int amount) {
         Address address = new Address();
         address.setProvince(province);
         address.setCity(city);
         address.setArea(area);
         address = addressDao.insert(address);
 
-        addressFeeService.saveAddressFee(address.getId(),amount);
+        addressFeeService.saveAddressFee(address.getId(), amount);
     }
 
     @Transactional
-    public void editAddress(long id, String province,String city, String area, int amount) {
+    public void editAddress(long id, String province, String city, String area, int amount) {
         Address address = addressDao.findById(id);
         address.setProvince(province);
         address.setCity(city);
@@ -128,7 +131,20 @@ public class AddressService extends BaseService<Address> implements IAddressServ
     }
 
     @Transactional
-    public long getAddressId(String province,String city,String area) {
-        return addressDao.getAddressId(province,city,area);
+    public long getAddressId(String province, String city, String area) {
+        return addressDao.getAddressId(province, city, area);
+    }
+
+    @Transactional
+    public Address getOne(long id) {
+        return this.addressDao.findById(id);
+    }
+
+    @Transactional
+    public Address getAddressByProxyAddressId(long proxyAddressId) {
+        ProxyAddress proxyAddress = proxyAddressService.getOne(proxyAddressId);
+        long af_id = proxyAddress.getAf_id();
+        long address_id = addressFeeService.getOne(af_id).getAddress_id();
+        return this.addressDao.findById(address_id);
     }
 }

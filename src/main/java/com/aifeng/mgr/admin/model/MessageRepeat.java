@@ -16,8 +16,8 @@ public class MessageRepeat {
     @Id
     @GeneratedValue
     private long id;
-    private int gap;
-    private int totalTimes;
+    private int gap; //以秒为单位
+    private int totalTimes;//总次数
     private Date updateTime;
 
     public long getId() {

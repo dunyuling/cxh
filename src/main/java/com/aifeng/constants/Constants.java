@@ -16,4 +16,7 @@ public interface Constants {
     String secondAuth = "https://qyapi.weixin.qq.com/cgi-bin/user/authsucc?access_token=SWO6gqpSbkuu1KAuSOE6F4ddLQVqQzYXW0yI8yc1L5tZZEPwn4T5za1THuhe6ed8&userid=lhg0";
     String host = "http://192.168.50.168:8080/";
 
+    int message_repeat_gap = 3600; //一个小时
+    int message_repeat_total_times = 10;
+
 }

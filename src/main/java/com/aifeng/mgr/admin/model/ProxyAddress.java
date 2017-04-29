@@ -1,9 +1,8 @@
 package com.aifeng.mgr.admin.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.aifeng.constants.ProxyStatus;
+
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -21,9 +20,18 @@ public class ProxyAddress {
 
     private long af_id;
 
-    private Date createTime;
+    @Enumerated(EnumType.STRING)
+    private ProxyStatus proxyStatus;
 
-    private boolean active; // 通过此表可以查询代理历史的变迁
+    private String denyReason;
+
+    private Date createDate;
+
+    private Date updateDate;
+
+    public ProxyAddress() {
+        this.createDate = new Date();
+    }
 
     public long getId() {
         return id;
@@ -49,19 +57,35 @@ public class ProxyAddress {
         this.af_id = af_id;
     }
 
-    public Date getCreateTime() {
-        return createTime;
+    public ProxyStatus getProxyStatus() {
+        return proxyStatus;
     }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setProxyStatus(ProxyStatus proxyStatus) {
+        this.proxyStatus = proxyStatus;
     }
 
-    public boolean isActive() {
-        return active;
+    public String getDenyReason() {
+        return denyReason;
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
+    public void setDenyReason(String denyReason) {
+        this.denyReason = denyReason;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    public Date getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
     }
 }

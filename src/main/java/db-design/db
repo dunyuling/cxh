@@ -71,7 +71,7 @@ create database cxh
   agent_id bigint
   message_id bigint
   times int  //第几次
-  read boolean
+  readed boolean
   visit boolean
   readTime Date
   visitTime Date

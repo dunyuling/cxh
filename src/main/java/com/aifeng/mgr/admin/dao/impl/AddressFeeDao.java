@@ -28,4 +28,12 @@ public class AddressFeeDao extends BaseDao<AddressFee> implements IAddressFeeDao
         String sql = "from AddressFee where address_id =:address_id";
         return this.findOneByHql(sql,params);
     }
+
+    public AddressFee getBy(long address_id) {
+//        String str = "select * from address_fee where address_id = " + address_id;
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("address_id", address_id);
+        String sql = "from AddressFee where address_id =:address_id";
+        return this.findOneByHql(sql,params);
+    }
 }

@@ -39,5 +39,5 @@ public class Init {
  * 1. 后台帐号
  * 2. 省市区，三份要统一
  * 3. 辅助数据，企业号 CorpId,secret
- *
+ * 4. 重发消息的配置
  */

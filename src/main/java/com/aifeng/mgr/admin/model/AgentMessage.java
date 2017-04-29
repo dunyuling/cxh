@@ -21,8 +21,9 @@ public class AgentMessage {
     private int times;
     private boolean readed;
     private boolean visit;
-    private Date readTime;
-    private Date visitTime;
+    private Date readDate;
+    private Date visitDate;
+    private Date updateDate;
 
     public long getId() {
         return id;
@@ -72,19 +73,27 @@ public class AgentMessage {
         this.visit = visit;
     }
 
-    public Date getReadTime() {
-        return readTime;
+    public Date getReadDate() {
+        return readDate;
     }
 
-    public void setReadTime(Date readTime) {
-        this.readTime = readTime;
+    public void setReadDate(Date readDate) {
+        this.readDate = readDate;
     }
 
-    public Date getVisitTime() {
-        return visitTime;
+    public Date getVisitDate() {
+        return visitDate;
     }
 
-    public void setVisitTime(Date visitTime) {
-        this.visitTime = visitTime;
+    public void setVisitDate(Date visitDate) {
+        this.visitDate = visitDate;
+    }
+
+    public Date getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
     }
 }

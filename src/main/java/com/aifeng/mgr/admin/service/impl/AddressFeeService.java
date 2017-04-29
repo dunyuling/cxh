@@ -31,6 +31,11 @@ public class AddressFeeService extends BaseService<AddressFee> implements IAddre
     }
 
     @Transactional
+    public AddressFee getOne(long id) {
+        return addressFeeDao.findById(id);
+    }
+
+    @Transactional
     public void saveAddressFee(long address_id,int amount) {
         AddressFee addressFee = null;
         try {

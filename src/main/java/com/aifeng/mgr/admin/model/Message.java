@@ -18,7 +18,16 @@ public class Message {
     private long id;
     private long proxyAddress_id;
     private String content;
-    private Date createTime;
+    private Date createDate;
+
+    public Message() {
+        this.createDate = new Date();
+    }
+
+    public Message(long proxyAddress_id, String content) {
+        this.proxyAddress_id = proxyAddress_id;
+        this.content = content;
+    }
 
     public long getId() {
         return id;
@@ -44,11 +53,11 @@ public class Message {
         this.content = content;
     }
 
-    public Date getCreateTime() {
-        return createTime;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 }
