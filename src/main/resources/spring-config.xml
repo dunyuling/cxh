@@ -73,6 +73,6 @@
 		<!-- 当Spring容器启动完成后执行下面的这个Bean -->
 	<bean class="com.aifeng.core.util.DataSourceInitListener" />
 	
-
+	<bean id="restTemplate" class="org.springframework.web.client.RestTemplate" />
 
 </beans>

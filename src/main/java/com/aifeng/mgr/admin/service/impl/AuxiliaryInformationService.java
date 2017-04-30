@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
+
 /**
  * Created by pro on 17-4-26.
  */
@@ -28,9 +30,16 @@ public class AuxiliaryInformationService extends BaseService<AuxiliaryInformatio
     }
 
     @Transactional
-    public void edit(String access_token,String CorpID,String secret) {
+    public void edit(String access_token, String CorpID, String secret) {
         AuxiliaryInformation auxiliaryInformation = auxiliaryInformationDao.getFirst();
-        auxiliaryInformation.config(access_token,CorpID,secret);
+        auxiliaryInformation.config(access_token, CorpID, secret);
         auxiliaryInformationDao.update(auxiliaryInformation);
+    }
+
+    @Transactional
+    public void updateAccessToken(AuxiliaryInformation ai, String access_token) {
+        ai.setAccess_token(access_token);
+        ai.setUpdateDate(new Date());
+        this.auxiliaryInformationDao.insert(ai);
     }
 }

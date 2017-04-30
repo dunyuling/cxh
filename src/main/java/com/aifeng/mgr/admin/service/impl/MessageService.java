@@ -2,14 +2,14 @@ package com.aifeng.mgr.admin.service.impl;
 
 import com.aifeng.core.service.impl.BaseService;
 import com.aifeng.mgr.admin.dao.impl.MessageDao;
-import com.aifeng.mgr.admin.model.Address;
-import com.aifeng.mgr.admin.model.Agent;
-import com.aifeng.mgr.admin.model.Message;
-import com.aifeng.mgr.admin.model.ProxyAddress;
+import com.aifeng.mgr.admin.model.*;
 import com.aifeng.mgr.admin.service.IMessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Date;
+import java.util.List;
 
 /**
  * Created by pro on 17-4-28.
@@ -21,13 +21,15 @@ public class MessageService extends BaseService<Message> implements IMessageServ
     private final AddressService addressService;
     private final AgentMessageService agentMessageService;
     private final AgentService agentService;
+    private final MessageRepeatService messageRepeatService;
 
     @Autowired
-    public MessageService(MessageDao messageDao, AddressService addressService, AgentMessageService agentMessageService, AgentService agentService) {
+    public MessageService(MessageDao messageDao, AddressService addressService, AgentMessageService agentMessageService, AgentService agentService, MessageRepeatService messageRepeatService) {
         this.messageDao = messageDao;
         this.addressService = addressService;
         this.agentMessageService = agentMessageService;
         this.agentService = agentService;
+        this.messageRepeatService = messageRepeatService;
     }
 
     @Transactional
@@ -49,5 +51,17 @@ public class MessageService extends BaseService<Message> implements IMessageServ
 
         Agent agent = agentService.getAgentByProxyAddressId(proxyAddressId);
         agentMessageService.save(message, agent);
+    }
+
+
+    //TODO 此处添加定时器,定时器的间隔要从数据库读取
+    @Transactional
+    public void getAllNeedRepeat() {
+        List<AgentMessage> agentMessageList = agentMessageService.getAllNeedRepeat();
+        for (AgentMessage agentMessage : agentMessageList) {
+            Message message = findById(agentMessage.getMessage_id());
+            Agent agent = agentService.findById(agentMessage.getAgent_id());
+            agentMessageService.execSendMsg(agentMessage, message, agent);
+        }
     }
 }

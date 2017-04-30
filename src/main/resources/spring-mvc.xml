@@ -24,7 +24,7 @@
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
-            <bean id="authCheckInteceptor" class="com.aifeng.ws.interceptor.AuthCheckInterceptor"></bean>
+            <bean id="authCheckInterceptor" class="com.aifeng.ws.interceptor.AuthCheckInterceptor"></bean>
         </mvc:interceptor>
     </mvc:interceptors>
 
@@ -62,6 +62,4 @@
             </props>
         </property>
     </bean>
-
-    <bean id="restTemplate" class="org.springframework.web.client.RestTemplate"/>
 </beans>

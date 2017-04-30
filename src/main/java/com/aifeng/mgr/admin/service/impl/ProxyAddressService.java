@@ -5,6 +5,7 @@ import com.aifeng.core.service.IBaseService;
 import com.aifeng.core.service.impl.BaseService;
 import com.aifeng.mgr.admin.dao.impl.ProxyAddressDao;
 import com.aifeng.mgr.admin.model.ProxyAddress;
+import com.aifeng.mgr.admin.service.IProxyAddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,25 +16,18 @@ import java.util.Date;
  * Created by pro on 17-4-28.
  */
 @Service
-public class ProxyAddressService extends BaseService<ProxyAddress> implements IBaseService<ProxyAddress> {
+public class ProxyAddressService extends BaseService<ProxyAddress> implements IProxyAddressService {
 
     private final ProxyAddressDao proxyAddressDao;
-    private final MessageService messageService;
 
     @Autowired
-    public ProxyAddressService(ProxyAddressDao proxyAddressDao, MessageService messageService) {
+    public ProxyAddressService(ProxyAddressDao proxyAddressDao) {
         this.proxyAddressDao = proxyAddressDao;
-        this.messageService = messageService;
     }
 
     @Transactional
-    public boolean checkOthersProxied(long af_id) {
-        return proxyAddressDao.getByAfId(af_id) == null;
-    }
-
-    @Transactional
-    public boolean checkSelfProxied(long agent_id, long af_id) {
-        return proxyAddressDao.getByAgentIdAndAfId(agent_id, af_id) == null;
+    public boolean checkProxied(long af_id) {
+        return proxyAddressDao.getByAgentIdAndAfId(af_id) != null;
     }
 
     @Transactional
@@ -42,6 +36,7 @@ public class ProxyAddressService extends BaseService<ProxyAddress> implements IB
         proxyAddress.setAgent_id(agent_id);
         proxyAddress.setAf_id(af_id);
         proxyAddress.setCreateDate(new Date());
+        proxyAddress.setProxyStatus(ProxyStatus.APPLYING); //TODO 基于后台手动授权
         this.proxyAddressDao.insert(proxyAddress);
     }
 

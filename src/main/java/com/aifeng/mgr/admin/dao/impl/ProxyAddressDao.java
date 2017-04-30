@@ -15,21 +15,12 @@ import java.util.Map;
 @Repository
 public class ProxyAddressDao extends BaseDao<ProxyAddress> implements IProxyAddressDao {
 
-    public ProxyAddress getByAgentIdAndAfId(long agent_id, long af_id) {
+    public ProxyAddress getByAgentIdAndAfId(long af_id) {
         Map<String, Object> map = new HashMap<>();
-        map.put("agent_id", agent_id);
         map.put("af_id", af_id);
         map.put("proxyStatus1", ProxyStatus.AUTHORED);
         map.put("proxyStatus2", ProxyStatus.APPLYING);
-        String sql = "from ProxyAddress where agent_id =:agent_id and af_id =:af_id and (proxyStatus =:proxyStatus1 or proxyStatus =:proxyStatus2)";
-        return this.findOneByHql(sql, map);
-    }
-
-    public ProxyAddress getByAfId(long af_id) {
-        Map<String, Object> map = new HashMap<>();
-        map.put("af_id", af_id);
-        map.put("proxyStatus", ProxyStatus.AUTHORED);
-        String sql = "from ProxyAddress where af_id =:af_id and proxyStatus =:proxyStatus";
+        String sql = "from ProxyAddress where af_id =:af_id and (proxyStatus =:proxyStatus1 or proxyStatus =:proxyStatus2)";
         return this.findOneByHql(sql, map);
     }
 }

@@ -41,4 +41,5 @@ public class Init {
  * 3. 辅助数据，企业号 CorpId,secret
  * 4. 重发消息的配置
  * 5. 货币结算单位是分
+ * 6.AddressFee
  */

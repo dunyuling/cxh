@@ -12,7 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.concurrent.SynchronousQueue;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class AgentService extends BaseService<Agent> implements IAgentService {
@@ -31,33 +32,35 @@ public class AgentService extends BaseService<Agent> implements IAgentService {
     }
 
     @Transactional
-    public synchronized String saveAgent(String name, String mobile, String IDCard, String corpName, String licenceImg, String expireDate, String addr) {
-        String result = "代理已成功添加，请等待后台认证";
+    public synchronized Map<String, Object> saveAgent(String name, String mobile, String IDCard, String corpName, String licenceImg, String expireDate, String addr, String user_id) {
+        Map<String, Object> map = new HashMap<>();
+        boolean success = false;
+        String result = "代理已成功添加，请等待运营认证";
         Agent agent = agentDao.getAgentByIDCard(IDCard);
         if (agent == null) {
+            agent = new Agent();
             agent.setName(name);
             agent.setMobile(mobile);
             agent.setIDCard(IDCard);
             agent.setCorpName(corpName);
             agent.setBusinessLicenseImg(licenceImg);
             agent.setBusinessLicenseExpireDate(DateUtil.parseDate(DateStyle.YYYYMMDD, expireDate));
+            agent.setUserid(user_id);
             agent = agentDao.insert(agent);
 
             AddressFee addressFee = addressFeeService.getAddressFee(getAddressId(addr));
             proxyAddressService.save(agent.getId(), addressFee.getId());
+            success = true;
         } else {
             long af_id = addressFeeService.getAddressFee(getAddressId(addr)).getId();
-            boolean otherAdded = proxyAddressService.checkOthersProxied(af_id);
-            if (otherAdded) {
-                result = "其它代理商已经代理过该地区";
-            } else {
-                boolean selfAdded = proxyAddressService.checkSelfProxied(agent.getId(), af_id);
-                if (selfAdded) {
-                    result = "您正在代理该地区或已提交代理该地区的申请";
-                }
+            boolean proxied = proxyAddressService.checkProxied(af_id);
+            if (proxied) {
+                result = "您或其它代理商已经申请过代理该地区";
             }
         }
-        return result;
+        map.put("result", result);
+        map.put("success", success);
+        return map;
     }
 
     @Transactional

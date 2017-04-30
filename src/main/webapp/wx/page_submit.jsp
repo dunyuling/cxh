@@ -1,9 +1,10 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!doctype html>
-<html>
+<html manifest="manifest.appcache">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
-    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-capable" content="no"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
     <meta name="format-detection" content="telephone=no"/>
     <title>车险汇</title>
@@ -20,10 +21,14 @@
 </div>
 <div class="submit_main">
     <ul>
+        <input type="hidden" id="access_token" value="${access_token}"/>
+        <input type="hidden" id="user_id" value="${user_id}"/>
         <li class="su_input"><p>姓名</p><input id="name" name="name" type="text" value="lhg" placeholder="" required></li>
-        <li class="su_input"><p>手机号</p><input id="mobile" name="mobile" type="text" placeholder="国际手机号码请加区号" value="13265498732" required>
+        <li class="su_input"><p>手机号</p><input id="mobile" name="mobile" type="text" placeholder="国际手机号码请加区号"
+                                              value="13265498732" required>
         </li>
-        <li class="su_input"><p>身份证</p><input id="IDCard" name="IDCard" type="text" placeholder="" required value="123456789654321"></li>
+        <li class="su_input"><p>身份证</p><input id="IDCard" name="IDCard" type="text" placeholder="" required
+                                              value="123456789654321"></li>
         <li class="su_input content-block"><p>地区</p><input name="addr" id="addr" readonly type="text"
                                                            placeholder="省/市/县（区）"></li>
     </ul>
@@ -54,7 +59,8 @@
 
     </div>
     <li class="su_input2"><p>营业执照失效日期</p>
-        <div class="input"><input id="expireDate" name="expireDate" type="text" value="20180503" placeholder="例：20170101" required></div>
+        <div class="input"><input id="expireDate" name="expireDate" type="text" value="20180503"
+                                  placeholder="例：20170101" required></div>
     </li>
 </div>
 
@@ -145,6 +151,8 @@
         var corpName = $("#corpName").val();
         var file = $("#img").val();
         var expireDate = $("#expireDate").val();
+        var access_token = $("#access_token").val();
+        var user_id = $("#user_id").val();
 
         if (name == "") {
             alert("姓名必须填写");
@@ -202,6 +210,8 @@
         formData.append("addr", addr);
         formData.append("corpName", corpName);
         formData.append("expireDate", expireDate);
+        formData.append("access_token", access_token);
+        formData.append("user_id", user_id);
         $.ajax({
             url: '/wx/agent_info.cs',
             type: 'POST',
@@ -211,8 +221,13 @@
             processData: false,
             contentType: false
         }).done(function (res) {
+            alert(res);
+            window.self.close();
         }).fail(function (res) {
         });
+
+//        alert("document.close()"); //TODO 关不掉当前页面
+//        document.close();
     });
 </script>
 </body>
