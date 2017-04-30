@@ -14,6 +14,7 @@ public interface Constants {
     String getCode = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx6b9738b957e2c065&redirect_uri=http%3A%2F%2F192.168.50.108%3A8080%2Fwx%2Fget_code.cs&response_type=code&scope=snsapi_base&agentid=0&state=123346#wechat_redirect";
     String getUserId = "https://qyapi.weixin.qq.com/cgi-bin/user/getuserinfo?access_token=SWO6gqpSbkuu1KAuSOE6F4ddLQVqQzYXW0yI8yc1L5tZZEPwn4T5za1THuhe6ed8&code=riRg8WQotd1bIq1cbqqmfdCuhVsn5RO7J9EoZjVUdt4";
     String secondAuth = "https://qyapi.weixin.qq.com/cgi-bin/user/authsucc?access_token=SWO6gqpSbkuu1KAuSOE6F4ddLQVqQzYXW0yI8yc1L5tZZEPwn4T5za1THuhe6ed8&userid=lhg0";
+    String sendMeg = "https://qyapi.weixin.qq.com/cgi-bin/message/send";
     String host = "http://192.168.50.168:8080/";
 
     int message_repeat_gap = 3600; //一个小时

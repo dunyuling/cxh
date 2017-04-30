@@ -39,7 +39,5 @@ public class UserRoleService extends BaseService<UserRole> implements IUserRoleS
 			return true;
 		}
 		return false;
-		
 	}
-	
 }

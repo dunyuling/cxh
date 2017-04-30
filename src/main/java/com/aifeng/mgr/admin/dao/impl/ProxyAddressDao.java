@@ -6,7 +6,6 @@ import com.aifeng.mgr.admin.dao.IProxyAddressDao;
 import com.aifeng.mgr.admin.model.ProxyAddress;
 import org.springframework.stereotype.Repository;
 
-import java.lang.reflect.Proxy;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,8 +19,8 @@ public class ProxyAddressDao extends BaseDao<ProxyAddress> implements IProxyAddr
         Map<String, Object> map = new HashMap<>();
         map.put("agent_id", agent_id);
         map.put("af_id", af_id);
-        map.put("proxyStatus1", ProxyStatus.Authored);
-        map.put("proxyStatus2", ProxyStatus.Applying);
+        map.put("proxyStatus1", ProxyStatus.AUTHORED);
+        map.put("proxyStatus2", ProxyStatus.APPLYING);
         String sql = "from ProxyAddress where agent_id =:agent_id and af_id =:af_id and (proxyStatus =:proxyStatus1 or proxyStatus =:proxyStatus2)";
         return this.findOneByHql(sql, map);
     }
@@ -29,7 +28,7 @@ public class ProxyAddressDao extends BaseDao<ProxyAddress> implements IProxyAddr
     public ProxyAddress getByAfId(long af_id) {
         Map<String, Object> map = new HashMap<>();
         map.put("af_id", af_id);
-        map.put("proxyStatus", ProxyStatus.Authored);
+        map.put("proxyStatus", ProxyStatus.AUTHORED);
         String sql = "from ProxyAddress where af_id =:af_id and proxyStatus =:proxyStatus";
         return this.findOneByHql(sql, map);
     }

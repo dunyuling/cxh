@@ -25,7 +25,7 @@ public class Refund
 
     private int amount;
 
-    private Status status;
+    private Status status; //暂未用到
 
     public long getId() {
         return id;

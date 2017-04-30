@@ -53,21 +53,15 @@ public class ProxyAddressService extends BaseService<ProxyAddress> implements IB
     @Transactional
     public void author(long id) {
         ProxyAddress proxyAddress = proxyAddressDao.findById(id);
-        proxyAddress.setProxyStatus(ProxyStatus.Authored);
+        proxyAddress.setProxyStatus(ProxyStatus.AUTHORED);
         proxyAddressDao.insert(proxyAddress);
-
-        //TODO 给用户发送一条消息
-
     }
 
     @Transactional
     public void refuse(long id, String reason) {
         ProxyAddress proxyAddress = proxyAddressDao.findById(id);
-        proxyAddress.setProxyStatus(ProxyStatus.Refused);
+        proxyAddress.setProxyStatus(ProxyStatus.REFUSED);
         proxyAddress.setDenyReason(reason);
         proxyAddressDao.insert(proxyAddress);
-
-        //TODO 给用户发送一条信息
-
     }
 }

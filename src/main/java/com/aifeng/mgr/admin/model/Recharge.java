@@ -21,6 +21,8 @@ public class Recharge {
 
     private long agent_id;
 
+    private long admin_id;
+
     private int amount;
 
     private Date createTime;
@@ -41,6 +43,14 @@ public class Recharge {
 
     public void setAgent_id(long agent_id) {
         this.agent_id = agent_id;
+    }
+
+    public long getAdmin_id() {
+        return admin_id;
+    }
+
+    public void setAdmin_id(long admin_id) {
+        this.admin_id = admin_id;
     }
 
     public int getAmount() {
