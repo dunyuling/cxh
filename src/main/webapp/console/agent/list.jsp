@@ -14,14 +14,13 @@
 
 <body class="gray-bg">
 <div class="wrapper wrapper-content animated fadeInRight">
-    <!--           <div class="ibox " style=""> -->
-    <!--               <div class="ibox-content"> -->
     <div class="row row-lg">
         <div class="col-sm-12">
-            <cs:toolbar title="新闻管理" tableId="tab_news" width="100%" height="100%" menuCode="21" hdMenu="1"></cs:toolbar>
-            <table id="tab_news"
+            <cs:toolbar title="代理商管理" tableId="tab_agent" width="768px" height="420px" menuCode="21"
+                        hdMenu="3"></cs:toolbar>
+            <table id="tab_agent"
                    data-toggle="table"
-                   data-url="/news/list2.cs"
+                   data-url="/agent/list2.cs"
                    data-method="get"
                    data-click-to-select="true"
                    data-pagination="true"
@@ -38,16 +37,18 @@
                 <tr>
                     <th data-checkbox="true" data-click-to-select="true"></th>
                     <th data-field="id" data-visible="false"></th>
-                    <th data-field="img" data-formatter="imageFormatter">缩略图</th>
-                    <th data-field="title">标题</th>
-                    <th data-field="description">描述</th>
+                    <th data-field="name">名字</th>
+                    <th data-field="userid">userid</th>
+                    <th data-field="mobile">电话</th>
+                    <th data-field="IDCard">身份证号</th>
+                    <th data-field="corpName">公司名称</th>
+                    <th data-field="licenseImg" data-formatter="imageFormatter">营业执照</th>
+                    <th data-field="expireDate">营业执照过期时间</th>
                 </tr>
                 </thead>
             </table>
         </div>
     </div>
-    <!--               </div> -->
-    <!--           </div> -->
 </div>
 </body>
 </html>

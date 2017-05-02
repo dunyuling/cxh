@@ -26,8 +26,12 @@ public class Agent {
     @Column(columnDefinition="varchar(32)")
     private String corpName;
     @Column(columnDefinition="varchar(255)")
-    private String BusinessLicenseImg;
-    private Date BusinessLicenseExpireDate;
+//    private String BusinessLicenseImg;
+//    private Date BusinessLicenseExpireDate;
+
+    private String licenseImg;
+    private Date expireDate;
+
     @Column(name="money")
     private int money;//账户余额
 
@@ -79,7 +83,7 @@ public class Agent {
         this.corpName = corpName;
     }
 
-    public String getBusinessLicenseImg() {
+    /*public String getBusinessLicenseImg() {
         return BusinessLicenseImg;
     }
 
@@ -93,6 +97,22 @@ public class Agent {
 
     public void setBusinessLicenseExpireDate(Date businessLicenseExpireDate) {
         BusinessLicenseExpireDate = businessLicenseExpireDate;
+    }*/
+
+    public String getLicenseImg() {
+        return licenseImg;
+    }
+
+    public void setLicenseImg(String licenseImg) {
+        this.licenseImg = licenseImg;
+    }
+
+    public Date getExpireDate() {
+        return expireDate;
+    }
+
+    public void setExpireDate(Date expireDate) {
+        this.expireDate = expireDate;
     }
 
     public int getMoney() {

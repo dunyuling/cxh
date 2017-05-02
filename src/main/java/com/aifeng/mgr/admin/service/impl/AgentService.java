@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -43,8 +44,8 @@ public class AgentService extends BaseService<Agent> implements IAgentService {
             agent.setMobile(mobile);
             agent.setIDCard(IDCard);
             agent.setCorpName(corpName);
-            agent.setBusinessLicenseImg(licenceImg);
-            agent.setBusinessLicenseExpireDate(DateUtil.parseDate(DateStyle.YYYYMMDD, expireDate));
+            agent.setLicenseImg(licenceImg);
+            agent.setExpireDate(DateUtil.parseDate(DateStyle.YYYYMMDD, expireDate));
             agent.setUserid(user_id);
             agent = agentDao.insert(agent);
 
@@ -74,5 +75,37 @@ public class AgentService extends BaseService<Agent> implements IAgentService {
         ProxyAddress proxyAddress = proxyAddressService.getOne(proxyAddressId);
         long agent_id = proxyAddress.getAgent_id();
         return this.agentDao.findById(agent_id);
+    }
+
+
+    @Transactional
+    public List<Map<String, Object>> getPagerAgent(int page, int size) {
+        return agentDao.getAgent(page, size);
+    }
+
+    @Transactional
+    public long getTotal() {
+        return agentDao.countAll();
+    }
+
+    @Transactional
+    public void editAgent(long id, String name, String IDCard, String corpName, String licenceImg, String expireDate) {
+        //mobile 不能修改，在企业号后台已经通过短信方式验证
+        //user_id 也不能修改
+        Agent agent = agentDao.findById(id);
+        agent.setName(name);
+        agent.setIDCard(IDCard);
+        agent.setCorpName(corpName);
+        if (licenceImg != null && !licenceImg.isEmpty()) {
+            agent.setLicenseImg(licenceImg);
+        }
+        agent.setExpireDate(DateUtil.parseDate(DateStyle.YYYYMMDD, expireDate));
+        agentDao.update(agent);
+    }
+
+    @Transactional
+    public void delAgent(long id) {
+        Agent agent = agentDao.findById(id);
+        agentDao.delete(agent);
     }
 }
