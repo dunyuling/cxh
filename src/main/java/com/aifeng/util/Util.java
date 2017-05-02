@@ -1,5 +1,6 @@
 package com.aifeng.util;
 
+import com.aifeng.constants.Constants;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -7,6 +8,8 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.*;
 
 /**
@@ -220,4 +223,46 @@ public class Util {
         return null;
     }
 
+
+    public static String loadAccessTokenUrl(String corpid, String corpsecret) {
+        String pre = "https://qyapi.weixin.qq.com/cgi-bin/gettoken?";
+        return pre + "corpid=" + corpid + "&corpsecret=" + corpsecret;
+    }
+
+    public static String loadCodeUrl(String appid) {
+        String redirectUrl = Constants.host + "/wx/get_code.cs";
+        try {
+            redirectUrl = URLEncoder.encode(redirectUrl, "utf-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        String pre = "https://open.weixin.qq.com/connect/oauth2/authorize?";
+        return pre + "appid=" + appid +
+                "&redirect_uri=" + redirectUrl +
+                "&response_type=code" +
+                "&scope=snsapi_base" +
+                "&agentid=0" +
+                "&state=123346" +
+                "#wechat_redirect";
+    }
+
+    public static String loadUserIdUrl(String access_token, String code) {
+        String pre = "https://qyapi.weixin.qq.com/cgi-bin/user/getuserinfo?";
+        return pre + "access_token=" + access_token + "&code=" + code;
+    }
+
+    public static String loadSecondAuthUrl(String access_token, String userid) {
+        String pre = "https://qyapi.weixin.qq.com/cgi-bin/user/authsucc?";
+        return pre + "access_token=" + access_token + "&userid=" + userid;
+    }
+
+    public static String loadSendMsgUrl(String access_token) {
+        String pre = "https://qyapi.weixin.qq.com/cgi-bin/message/send?";
+        return pre + "access_token=" + access_token;
+    }
+
+    public static boolean expire(long time1, long time2) {
+        return time1 - time2 > 6900 * 1000; //为保证方便，有效期缩小五分钟
+    }
 }

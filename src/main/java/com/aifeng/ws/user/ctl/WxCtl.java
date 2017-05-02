@@ -59,7 +59,7 @@ public class WxCtl {
             if ((boolean) map.get("success")) {
                 String access_token = request.getParameter("access_token");
 
-                restTemplate.getForEntity(loadSecondAuthUrl(access_token, user_id), String.class);
+                restTemplate.getForEntity(Util.loadSecondAuthUrl(access_token, user_id), String.class);
             }
             result = (String) map.get("result");
         } catch (Exception e) {
@@ -70,18 +70,20 @@ public class WxCtl {
 
     @RequestMapping("get_code")
     public String getCode(HttpServletRequest request, Model model) {
-        AuxiliaryInformation ai = auxiliaryInformationService.getOrMockFirst();
+        /*AuxiliaryInformation ai = auxiliaryInformationService.getOrMockFirst();
         String access_token = ai.getAccess_token();
         if (access_token.isEmpty() || expire(System.currentTimeMillis(), ai.getUpdateDate().getTime())) {
             ResponseEntity<UserResponse> atResponse = restTemplate.getForEntity(loadAccessTokenUrl(ai.getCorpID(), ai.getSecret()), UserResponse.class);
             System.out.println("===" + atResponse);
             access_token = atResponse.getBody().getAccess_token();
             auxiliaryInformationService.updateAccessToken(ai, access_token);
-        }
+        }*/
+
+        String access_token = auxiliaryInformationService.getAccessToken();
 
         String user_id = "";
         String code = request.getParameter("code");
-        String codeStr = restTemplate.getForEntity(loadUserIdUrl(access_token, code), String.class).getBody();
+        String codeStr = restTemplate.getForEntity(Util.loadUserIdUrl(access_token, code), String.class).getBody();
         codeStr = codeStr.replace("UserId", "user_id").replace("DeviceId", "device_id");
         ObjectMapper mapper = new ObjectMapper();
         try {
@@ -100,40 +102,5 @@ public class WxCtl {
         return "/wx/page_submit";
     }
 
-    private String loadAccessTokenUrl(String corpid, String corpsecret) {
-        String pre = "https://qyapi.weixin.qq.com/cgi-bin/gettoken?";
-        return pre + "corpid=" + corpid + "&corpsecret=" + corpsecret;
-    }
 
-    private String loadCodeUrl(String appid) {
-        String redirectUrl = Constants.host + "/wx/get_code.cs";
-        try {
-            redirectUrl = URLEncoder.encode(redirectUrl, "utf-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-
-        String pre = "https://open.weixin.qq.com/connect/oauth2/authorize?";
-        return pre + "appid=" + appid +
-                "&redirect_uri=" + redirectUrl +
-                "&response_type=code" +
-                "&scope=snsapi_base" +
-                "&agentid=0" +
-                "&state=123346" +
-                "#wechat_redirect";
-    }
-
-    private String loadUserIdUrl(String access_token, String code) {
-        String pre = "https://qyapi.weixin.qq.com/cgi-bin/user/getuserinfo?";
-        return pre + "access_token=" + access_token + "&code=" + code;
-    }
-
-    private String loadSecondAuthUrl(String access_token, String userid) {
-        String pre = "https://qyapi.weixin.qq.com/cgi-bin/user/authsucc?";
-        return pre + "access_token=" + access_token + "&userid=" + userid;
-    }
-
-    private boolean expire(long time1, long time2) {
-        return time1 - time2 > 6900 * 1000; //为保证方便，有效期缩小五分钟
-    }
 }
