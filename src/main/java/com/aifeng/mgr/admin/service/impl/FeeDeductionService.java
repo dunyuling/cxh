@@ -1,9 +1,7 @@
 package com.aifeng.mgr.admin.service.impl;
 
-import com.aifeng.constants.LogType;
 import com.aifeng.core.service.impl.BaseService;
 import com.aifeng.mgr.admin.dao.impl.FeeDeductionDao;
-import com.aifeng.mgr.admin.model.Agent;
 import com.aifeng.mgr.admin.model.FeeDeduction;
 import com.aifeng.mgr.admin.service.IFeeDeductionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +15,11 @@ import org.springframework.transaction.annotation.Transactional;
 public class FeeDeductionService extends BaseService<FeeDeduction> implements IFeeDeductionService {
 
     private final FeeDeductionDao feeDeductionDao;
-    private final SystemLogService systemLogService;
     private final AgentService agentService;
 
     @Autowired
-    public FeeDeductionService(FeeDeductionDao feeDeductionDao, SystemLogService systemLogService, AgentService agentService) {
+    public FeeDeductionService(FeeDeductionDao feeDeductionDao, AgentService agentService) {
         this.feeDeductionDao = feeDeductionDao;
-        this.systemLogService = systemLogService;
         this.agentService = agentService;
     }
 
