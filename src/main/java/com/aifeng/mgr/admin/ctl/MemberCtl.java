@@ -68,9 +68,9 @@ public class MemberCtl extends BaseCtl {
 
     @RequestMapping(value = "audit", method = RequestMethod.POST)
     @ResponseBody
-    public String audit(long id, String type, String denyReason) {
+    public String audit(long id, String status, String denyReason) {
         try {
-            memberService.audit(id, type, denyReason);
+            memberService.audit(id, status, denyReason);
         } catch (Exception e) {
             e.printStackTrace();
         }

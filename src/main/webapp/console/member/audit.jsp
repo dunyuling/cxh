@@ -20,21 +20,21 @@
                     <div class="col-sm-6">
                         <input type="hidden" id="id" name="id" value="${temp.id}"/>
                         <input id="name" name="name" value="${temp.name}" class="form-control"
-                               validate="{required:true}" validateMessage="{required:'请输入名字'}" readonly>
+                              readonly validate="{required:true}" validateMessage="{required:'请输入名字'}" readonly>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-3 control-label">省：</label>
                     <div class="col-sm-6">
                         <input id="province" name="province" value="${temp.province}" class="form-control"
-                               validate="{required:true}" validateMessage="{required:'请输入省'}">
+                               readonly validate="{required:true}" validateMessage="{required:'请输入省'}">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-3 control-label">市：</label>
                     <div class="col-sm-6">
                         <input id="city" name="city" value="${temp.city}" class="form-control"
-                               validate="{required:true}" validateMessage="{required:'请输入市'}">
+                               readonly validate="{required:true}" validateMessage="{required:'请输入市'}">
                     </div>
                 </div>
                 <div class="form-group">
@@ -46,11 +46,11 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="col-sm-3 control-label">审核类型：</label>
+                    <label class="col-sm-3 control-label">状态：</label>
                     <div class="col-sm-7">
-                        <select id="proxyStatus" name="proxyStatus" class="form-control" name="religionType">
-                            <option value="AUTHORED">授权</option>
-                            <option value="REFUSED">拒绝</option>
+                        <select id="status" name="status" class="form-control" name="religionType">
+                            <option value="SUCCESS">成功</option>
+                            <option value="FAILURE">失败</option>
                         </select>
                     </div>
                 </div>
@@ -80,9 +80,9 @@
         }
     });
 
-    $("#proxyStatus").change(function () {
-        var ps = $("#proxyStatus").find("option:selected").text();
-        if (ps == "授权") {
+    $("#status").change(function () {
+        var ps = $("#status").find("option:selected").text();
+        if (ps == "成功") {
             $("#denyReason").hide();
         } else {
             $("#denyReason").show();

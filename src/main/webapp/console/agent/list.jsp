@@ -20,7 +20,7 @@
                         hdMenu="3"></cs:toolbar>
             <table id="tab_agent"
                    data-toggle="table"
-                   data-url="/cxh/agent/list2.cs"
+                   data-url="/agent/list2.cs"
                    data-method="get"
                    data-click-to-select="true"
                    data-pagination="true"
