@@ -43,3 +43,10 @@ public class ProxyAddressDao extends BaseDao<ProxyAddress> implements IProxyAddr
         return this.findBySql(sql).get(0);
     }
 }
+
+/*
+select pa.id, ag.name,  a.province ,a.city, a.area,pa.proxyStatus from proxy_address pa
+        left join address_fee af on pa.af_id = af.id
+        left join address a on af.address_id = a.id
+        left join agent ag on pa.agent_id = ag.id
+        */

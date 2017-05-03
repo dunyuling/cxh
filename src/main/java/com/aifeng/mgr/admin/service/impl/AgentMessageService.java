@@ -45,10 +45,12 @@ public class AgentMessageService extends BaseService<AgentMessage> implements IA
     public void save(Message message, Agent agent) {
         AgentMessage agentMessage = new AgentMessage();
         agentMessage.setAgent_id(message.getId());
+        agentMessage.setTimes(1);
+        agentMessage.setUpdateDate(new Date());
         agentMessage.setMessage_id(agent.getId());
         this.agentMessageDao.insert(agentMessage);
 
-        execSendMsg(agentMessage, message, agent);
+//        execSendMsg(agentMessage, message, agent);
     }
 
     @Transactional

@@ -36,6 +36,11 @@ public class ProxyAddressService extends BaseService<ProxyAddress> implements IP
     }
 
     @Transactional
+    public ProxyAddress getProxyByAfId(long af_id) {
+        return proxyAddressDao.getByAgentIdAndAfId(af_id);
+    }
+
+    @Transactional
     public void save(long agent_id, long af_id) {
         ProxyAddress proxyAddress = new ProxyAddress();
         proxyAddress.setAgent_id(agent_id);

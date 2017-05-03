@@ -27,7 +27,7 @@
             </cs:toolbar>
             <table id="tab_proxyaddress"
                    data-toggle="table"
-                   data-url="/pa/list2.cs"
+                   data-url="/cxh/pa/list2.cs"
                    data-method="get"
                    data-click-to-select="true"
                    data-pagination="true"

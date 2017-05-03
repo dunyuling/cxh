@@ -21,7 +21,7 @@
             <cs:toolbar title="新闻管理" tableId="tab_news" width="100%" height="100%" menuCode="21" hdMenu="1"></cs:toolbar>
             <table id="tab_news"
                    data-toggle="table"
-                   data-url="/news/list2.cs"
+                   data-url="/cxh/news/list2.cs"
                    data-method="get"
                    data-click-to-select="true"
                    data-pagination="true"

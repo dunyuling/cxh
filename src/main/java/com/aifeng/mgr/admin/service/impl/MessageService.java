@@ -2,7 +2,6 @@ package com.aifeng.mgr.admin.service.impl;
 
 import com.aifeng.core.service.impl.BaseService;
 import com.aifeng.mgr.admin.dao.impl.MessageDao;
-import com.aifeng.mgr.admin.model.Address;
 import com.aifeng.mgr.admin.model.Agent;
 import com.aifeng.mgr.admin.model.AgentMessage;
 import com.aifeng.mgr.admin.model.Message;
@@ -10,7 +9,6 @@ import com.aifeng.mgr.admin.service.IMessageService;
 import com.aifeng.util.Util;
 import com.aifeng.ws.wx.RequestBody;
 import com.aifeng.ws.wx.ResponseType;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -46,28 +44,6 @@ public class MessageService extends BaseService<Message> implements IMessageServ
         this.auxiliaryInformationService = auxiliaryInformationService;
     }
 
-    @Transactional
-    public void sendAuthorMsg(long proxyAddressId) {
-        Address address = addressService.getAddressByProxyAddressId(proxyAddressId);
-        String content = "您已成功代理 " + address.getProvince() + " " + address.getCity() + " " + address.getArea();
-        Message message = this.messageDao.insert(new Message(proxyAddressId, content));
-
-        Agent agent = agentService.getAgentByProxyAddressId(proxyAddressId);
-        agentMessageService.save(message, agent);
-    }
-
-    @Transactional
-    public void sendRefuseMsg(long proxyAddressId, String denyReason) {
-        Address address = addressService.getAddressByProxyAddressId(proxyAddressId);
-        String content = "您申请的对 " + address.getProvince() + " " + address.getCity() + " " + address.getArea() +
-                " 已经被拒绝，原因为 " + denyReason;
-        Message message = this.messageDao.insert(new Message(proxyAddressId, content));
-
-        Agent agent = agentService.getAgentByProxyAddressId(proxyAddressId);
-        agentMessageService.save(message, agent);
-    }
-
-
     //TODO 此处添加定时器,定时器的间隔要从数据库读取
     @Transactional
     public void getAllNeedRepeat() {
@@ -75,7 +51,8 @@ public class MessageService extends BaseService<Message> implements IMessageServ
         for (AgentMessage agentMessage : agentMessageList) {
             Message message = findById(agentMessage.getMessage_id());
             Agent agent = agentService.findById(agentMessage.getAgent_id());
-            agentMessageService.execSendMsg(agentMessage, message, agent);
+//            agentMessageService.execSendMsg(agentMessage, message, agent);
+            sendMsg(agent.getUserid(), message.getContent());
         }
     }
 
@@ -96,5 +73,11 @@ public class MessageService extends BaseService<Message> implements IMessageServ
         System.out.println(response.getBody().getErrmsg());
     }
 
-
+    @Transactional
+    public Message save(String content, long proxyAddress_id) {
+        Message message = new Message();
+        message.setContent(content);
+        message.setProxyAddress_id(proxyAddress_id);
+        return messageDao.insert(message);
+    }
 }

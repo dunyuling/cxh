@@ -20,4 +20,6 @@ public interface Constants {
     int message_repeat_gap = 3600; //一个小时
     int message_repeat_total_times = 10;
 
+    String wxMsgTitle = "南阳三六零度 车险询价";
+
 }

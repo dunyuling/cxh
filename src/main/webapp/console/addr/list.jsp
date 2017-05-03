@@ -19,7 +19,7 @@
             <cs:toolbar title="地区费用管理" tableId="tab_addr" width="768px" height="420px" menuCode="21" hdMenu="1"></cs:toolbar>
             <table id="tab_addr"
                    data-toggle="table"
-                   data-url="/addr/list2.cs"
+                   data-url="/cxh/addr/list2.cs"
                    data-method="get"
                    data-click-to-select="true"
                    data-pagination="true"
