@@ -44,10 +44,10 @@ public class AgentMessageService extends BaseService<AgentMessage> implements IA
     @Transactional
     public void save(Message message, Agent agent) {
         AgentMessage agentMessage = new AgentMessage();
-        agentMessage.setAgent_id(message.getId());
+        agentMessage.setAgent_id(agent.getId());
         agentMessage.setTimes(1);
         agentMessage.setUpdateDate(new Date());
-        agentMessage.setMessage_id(agent.getId());
+        agentMessage.setMessage_id(message.getId());
         this.agentMessageDao.insert(agentMessage);
 
 //        execSendMsg(agentMessage, message, agent);
@@ -82,5 +82,15 @@ public class AgentMessageService extends BaseService<AgentMessage> implements IA
     public List<AgentMessage> getAllNeedRepeat() {
         MessageRepeat messageRepeat = messageRepeatService.getOrMockFirst();
         return this.agentMessageDao.getAllNeedRepeat(messageRepeat.getTotalTimes());
+    }
+
+    @Transactional
+    public List<Map<String, Object>> getPagerAm(int page, int size) {
+        return agentMessageDao.getAm(page, size);
+    }
+
+    @Transactional
+    public long getTotal() {
+        return agentMessageDao.countAll();
     }
 }

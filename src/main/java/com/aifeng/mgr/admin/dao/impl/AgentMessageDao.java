@@ -3,7 +3,6 @@ package com.aifeng.mgr.admin.dao.impl;
 import com.aifeng.core.dao.impl.BaseDao;
 import com.aifeng.mgr.admin.dao.IAgentMessageDao;
 import com.aifeng.mgr.admin.model.AgentMessage;
-import com.aifeng.mgr.admin.model.MessageRepeat;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
@@ -22,4 +21,16 @@ public class AgentMessageDao extends BaseDao<AgentMessage> implements IAgentMess
         String sql = "from AgentMessage where times <:totalTimes";
         return (List<AgentMessage>) this.findByHql(sql, params);
     }
+
+    public List<Map<String, Object>> getAm(int page, int pageSize) {
+        String str = "select am.id,a.name,m.content,am.times,am.readed,am.readDate from agent_message am " +
+                "left join agent a on am.agent_id = a.id " +
+                "left join message m on am.message_id = m.id " +
+                "limit " + pageSize + " offset " + (page - 1) * pageSize + ";";
+        return this.findBySql(str);
+    }
 }
+
+//    select am.id,a.name,m.content,am.times,am.readed,am.readDate from agent_message am
+//        left join agent a on am.agent_id = a.id
+//        left join message m on am.message_id = m.id
