@@ -56,9 +56,9 @@ public class ProxyAddressCtl extends BaseCtl {
 
     @RequestMapping(value = "audit", method = RequestMethod.POST)
     @ResponseBody
-    public String audit(long id, String proxyStatus, String denyReason) {
+    public String audit(long id, String province, String city, String area, String proxyStatus, String denyReason) {
         try {
-            proxyAddressService.auditProxyAddress(id, proxyStatus, denyReason);
+            proxyAddressService.auditProxyAddress(id, province, city, area, proxyStatus, denyReason);
         } catch (Exception e) {
             e.printStackTrace();
         }

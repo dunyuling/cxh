@@ -9,6 +9,7 @@ import com.aifeng.mgr.admin.model.ProxyAddress;
 import com.aifeng.mgr.admin.service.IAddressService;
 import com.aifeng.util.Pager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +21,7 @@ import java.util.Map;
  * Created by pro on 17-4-24.
  */
 @Service
+@Scope(value="singleton")
 public class AddressService extends BaseService<Address> implements IAddressService {
 
 

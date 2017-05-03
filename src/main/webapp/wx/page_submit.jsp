@@ -29,7 +29,7 @@
         </li>
         <li class="su_input"><p>身份证</p><input id="IDCard" name="IDCard" type="text" placeholder="" required
                                               value="123456789654321"></li>
-        <li class="su_input content-block"><p>地区</p><input name="addr" id="addr" readonly type="text"
+        <li class="su_input content-block"><p>代理地区</p><input name="addr" id="addr" readonly type="text"
                                                            placeholder="省/市/县（区）"></li>
     </ul>
 </div>

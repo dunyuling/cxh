@@ -2,10 +2,13 @@ package com.aifeng.mgr.admin.service.impl;
 
 import com.aifeng.constants.ProxyStatus;
 import com.aifeng.core.service.impl.BaseService;
+import com.aifeng.core.util.SpringUtil;
 import com.aifeng.mgr.admin.dao.impl.ProxyAddressDao;
+import com.aifeng.mgr.admin.model.Agent;
 import com.aifeng.mgr.admin.model.ProxyAddress;
 import com.aifeng.mgr.admin.service.IProxyAddressService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +20,7 @@ import java.util.Map;
  * Created by pro on 17-4-28.
  */
 @Service
+@Scope
 public class ProxyAddressService extends BaseService<ProxyAddress> implements IProxyAddressService {
 
     private final ProxyAddressDao proxyAddressDao;
@@ -62,12 +66,28 @@ public class ProxyAddressService extends BaseService<ProxyAddress> implements IP
     }
 
     @Transactional
-    public void auditProxyAddress(long id, String proxyStatus, String denyReason) {
+    public void auditProxyAddress(long id, String province, String city, String area, String proxyStatus, String denyReason) {
+        ProxyStatus status = ProxyStatus.valueOf(proxyStatus);
         ProxyAddress proxyAddress = proxyAddressDao.findById(id);
-        proxyAddress.setProxyStatus(ProxyStatus.valueOf(proxyStatus));
+        proxyAddress.setProxyStatus(status);
         proxyAddress.setDenyReason(denyReason);
         proxyAddress.setUpdateDate(new Date());
         proxyAddressDao.update(proxyAddress);
+
+        AgentService agentService = SpringUtil.getBean("agentService");
+        MessageService messageService = SpringUtil.getBean("messageService");
+
+        String content = "您代理 " + province + " " + city + " " + area + " ";
+        Agent agent = agentService.findById(proxyAddress.getAgent_id());
+        switch (status) {
+            case AUTHORED:
+                content = "恭喜" + content + "成功";
+                break;
+            case REFUSED:
+                content = "抱歉" + content + "失败，原因是:" + denyReason;
+                break;
+        }
+        messageService.sendMsg(agent.getUserid(), content);
     }
 
     @Transactional

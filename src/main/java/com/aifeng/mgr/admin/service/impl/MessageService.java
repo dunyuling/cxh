@@ -80,16 +80,15 @@ public class MessageService extends BaseService<Message> implements IMessageServ
     }
 
     @Transactional
-    public void sendMsg() {
+    public void sendMsg(String toUser, String content) {
         RequestBody requestBody = new RequestBody();
-        requestBody.setTouser("lhg0");
+        requestBody.setTouser(toUser);
         requestBody.setMsgtype("text");
         requestBody.setAgentid(0);
 
         Map<String, Object> map = new HashMap<>();
-        map.put("content", "a");
+        map.put("content", content);
         requestBody.setText(map);
-//        requestBody.setText1("aa");
         requestBody.setSafe(0);
 
         String access_token = auxiliaryInformationService.getAccessToken();

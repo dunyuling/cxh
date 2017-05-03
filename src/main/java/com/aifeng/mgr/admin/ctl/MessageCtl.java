@@ -18,6 +18,6 @@ public class MessageCtl {
 
     @RequestMapping("send")
     public void sendMsg() {
-        messageService.sendMsg();
+        messageService.sendMsg("lhg0","a");
     }
 }
