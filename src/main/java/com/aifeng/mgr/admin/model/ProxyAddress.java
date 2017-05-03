@@ -1,6 +1,6 @@
 package com.aifeng.mgr.admin.model;
 
-import com.aifeng.constants.ProxyStatus;
+import com.aifeng.mgr.admin.constants.ProxyStatus;
 
 import javax.persistence.*;
 import java.util.Date;

@@ -1,6 +1,6 @@
 package com.aifeng.mgr.admin.dao.impl;
 
-import com.aifeng.constants.ProxyStatus;
+import com.aifeng.mgr.admin.constants.ProxyStatus;
 import com.aifeng.core.dao.impl.BaseDao;
 import com.aifeng.mgr.admin.dao.IProxyAddressDao;
 import com.aifeng.mgr.admin.model.ProxyAddress;

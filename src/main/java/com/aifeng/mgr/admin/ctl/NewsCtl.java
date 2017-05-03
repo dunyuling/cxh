@@ -1,6 +1,6 @@
 package com.aifeng.mgr.admin.ctl;
 
-import com.aifeng.constants.ImgPath;
+import com.aifeng.mgr.admin.constants.ImgPath;
 import com.aifeng.core.ctl.BaseCtl;
 import com.aifeng.mgr.admin.model.News;
 import com.aifeng.mgr.admin.service.impl.NewsService;

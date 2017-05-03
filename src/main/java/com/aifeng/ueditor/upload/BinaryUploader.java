@@ -1,7 +1,7 @@
 package com.aifeng.ueditor.upload;
 
 import com.aifeng.constants.Constants;
-import com.aifeng.constants.ImgPath;
+import com.aifeng.mgr.admin.constants.ImgPath;
 import com.aifeng.ueditor.PathFormat;
 import com.aifeng.ueditor.define.AppInfo;
 import com.aifeng.ueditor.define.BaseState;

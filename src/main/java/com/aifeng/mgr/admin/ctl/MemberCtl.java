@@ -1,11 +1,8 @@
 package com.aifeng.mgr.admin.ctl;
 
-import com.aifeng.mgr.admin.constants.ImgPath;
 import com.aifeng.core.ctl.BaseCtl;
-import com.aifeng.mgr.admin.model.Agent;
-import com.aifeng.mgr.admin.service.impl.AgentService;
+import com.aifeng.mgr.admin.service.impl.MemberService;
 import com.aifeng.util.StringUtil;
-import com.aifeng.util.Util;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -22,26 +18,26 @@ import java.util.Map;
  * Created by pro on 17-5-2.
  */
 @Controller
-@RequestMapping("/agent")
-public class AgentCtl extends BaseCtl {
+@RequestMapping("/member")
+public class MemberCtl extends BaseCtl {
 
-    private final AgentService agentService;
+    private final MemberService memberService;
 
     @Autowired
-    public AgentCtl(AgentService agentService) {
-        this.agentService = agentService;
+    public MemberCtl(MemberService memberService) {
+        this.memberService = memberService;
     }
 
     @RequestMapping("list")
     public String list() {
-        return "console/agent/list";
+        return "console/member/list";
     }
 
     @RequestMapping(value = "/list2", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
     @ResponseBody
     public String list2(int page, int pageSize) {
-        List<Map<String,Object>> list = agentService.getPagerAgent(page, pageSize);
-        long total = agentService.getTotal();
+        List<Map<String, Object>> list = memberService.getPageMember(page, pageSize);
+        long total = memberService.getTotal();
         JSONObject json = new JSONObject();
         json.put("rows", list);
         json.put("total", total);
@@ -50,20 +46,31 @@ public class AgentCtl extends BaseCtl {
 
     @RequestMapping("transfer")
     public String transfer(String id, String action, ModelMap mm) {
-        Agent agent;
+        Map<String, Object> temp;
         if (StringUtil.isNotBlank(id)) {
-            agent = this.agentService.findById(Long.valueOf(id.trim()));
-            mm.put("agent", agent);
+            temp = this.memberService.getSingleMember(Long.valueOf(id.trim()));
+            mm.put("temp", temp);
         }
-        return "console/agent/" + action;
+        return "console/member/" + action;
     }
 
-    @RequestMapping(value = "edit", method = RequestMethod.POST)
+    //不提供修改功能，后台可以删除，会员重新注册
+    /*@RequestMapping(value = "edit", method = RequestMethod.POST)
     @ResponseBody
-    public String edit(HttpServletRequest request, long id, String name, String IDCard, String corpName, String expireDate) {
+    public String edit(long id, String name, String mobile, String type, String province, String city, String area) {
         try {
-            String licenceImg = Util.editImg(request, ImgPath.wxAgentBusinessCardPath);
-            agentService.editAgent(id, name, IDCard, corpName, licenceImg, expireDate);
+            memberService.edit(id, name, mobile, type, province, city, area);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return AJAX_SUCCESS;
+    }*/
+
+    @RequestMapping(value = "audit", method = RequestMethod.POST)
+    @ResponseBody
+    public String audit(long id, String type, String denyReason) {
+        try {
+            memberService.audit(id, type, denyReason);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -79,18 +86,16 @@ public class AgentCtl extends BaseCtl {
                 for (String id_ : ids) {
                     long l_id = Long.parseLong(id_);
                     if (l_id != 0) {
-                        this.agentService.delAgent(l_id);
+                        this.memberService.delMember(l_id);
                     }
                 }
             } else {
                 long l_id = Long.parseLong(id);
                 if (l_id != 0) {
-                    this.agentService.delAgent(l_id);
+                    this.memberService.delMember(l_id);
                 }
             }
         }
-
         return AJAX_SUCCESS;
     }
-
 }

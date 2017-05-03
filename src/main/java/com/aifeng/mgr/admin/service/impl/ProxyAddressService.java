@@ -1,6 +1,6 @@
 package com.aifeng.mgr.admin.service.impl;
 
-import com.aifeng.constants.ProxyStatus;
+import com.aifeng.mgr.admin.constants.ProxyStatus;
 import com.aifeng.core.service.impl.BaseService;
 import com.aifeng.core.util.SpringUtil;
 import com.aifeng.mgr.admin.dao.impl.ProxyAddressDao;

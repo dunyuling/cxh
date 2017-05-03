@@ -1,15 +1,12 @@
 package com.aifeng.ws.user.ctl;
 
-import com.aifeng.constants.Constants;
-import com.aifeng.constants.ImgPath;
-import com.aifeng.mgr.admin.model.AuxiliaryInformation;
+import com.aifeng.mgr.admin.constants.ImgPath;
 import com.aifeng.mgr.admin.service.impl.AgentService;
 import com.aifeng.mgr.admin.service.impl.AuxiliaryInformationService;
 import com.aifeng.util.Util;
 import com.aifeng.ws.wx.UserResponse;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,8 +15,6 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.Map;
 
 /**

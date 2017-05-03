@@ -1,4 +1,4 @@
-package com.aifeng.constants;
+package com.aifeng.mgr.admin.constants;
 
 /**
  * Created by pro on 17-4-29.

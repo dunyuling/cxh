@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by pro on 17-4-27.
@@ -54,7 +56,7 @@ public class MemberService extends BaseService<Member> implements IMemberService
     }
 
     @Transactional
-    public void audit(long member_id, String province, String city, String area, String status, String denyReason) {
+    public void audit(long member_id, String status, String denyReason) {
         Member member = findById(member_id);
         Status status1 = Status.valueOf(status);
         member.setStatus(status1);
@@ -64,13 +66,12 @@ public class MemberService extends BaseService<Member> implements IMemberService
         member.setUpdateDate(new Date());
 
         if (status1 == Status.SUCCESS) {
-            long address_id = addressService.getAddressId(province, city, area);
-            toSendWxMsg(address_id, member);
+            toSendWxMsg(member);
         }
     }
 
     @Transactional
-    private void toSendWxMsg(long address_id, Member member) {
+    private void toSendWxMsg(Member member) {
         AddressService addressService = SpringUtil.getBean("addressService");
         AddressFeeService addressFeeService = SpringUtil.getBean("addressFeeService");
         ProxyAddressService proxyAddressService = SpringUtil.getBean("proxyAddressService");
@@ -78,8 +79,8 @@ public class MemberService extends BaseService<Member> implements IMemberService
         MessageService messageService = SpringUtil.getBean("messageService");
         AgentMessageService agentMessageService = SpringUtil.getBean("agentMessageService");
 
-        Address address = addressService.findById(address_id);
-        long af_id = addressFeeService.getAddressFee(address_id).getId();
+        Address address = addressService.findById(member.getAddress_id());
+        long af_id = addressFeeService.getAddressFee(member.getAddress_id()).getId();
         ProxyAddress proxyAddress = proxyAddressService.getProxyByAfId(af_id);
         if (proxyAddress != null) {
             long agent_id = proxyAddress.getAgent_id();
@@ -105,5 +106,38 @@ public class MemberService extends BaseService<Member> implements IMemberService
     @Transactional
     private void toSendMsg() {
 
+    }
+
+    @Transactional
+    public List<Map<String, Object>> getPageMember(int page, int size) {
+        return memberDao.getMember(page, size);
+    }
+
+    @Transactional
+    public Map<String, Object> getSingleMember(long id) {
+        return memberDao.getSingleProxyAddress(id);
+    }
+
+    @Transactional
+    public long getTotal() {
+        return memberDao.countAll();
+    }
+
+    /*@Transactional
+    public void edit(long id, String name, String mobile, String type, String province, String city, String area) {
+        long addressId = addressService.getAddressId(province, city, area);
+        Member member = findById(id);
+        member.setName(name);
+        member.setMobile(mobile);
+        member.setType(InsuranceType.valueOf(type));
+        member.setAddress_id(addressId);
+        member.setUpdateDate(new Date());
+        memberDao.insert(member);
+    }*/
+
+    @Transactional
+    public void delMember(long id) {
+        Member member = memberDao.findById(id);
+        memberDao.delete(member);
     }
 }

@@ -2,7 +2,7 @@ package com.aifeng.mgr.upload;
 
 
 import com.aifeng.constants.Constants;
-import com.aifeng.constants.ImgPath;
+import com.aifeng.mgr.admin.constants.ImgPath;
 import com.aifeng.core.ctl.BaseCtl;
 import com.aifeng.util.FileUtil;
 import com.aifeng.util.PropUtil;

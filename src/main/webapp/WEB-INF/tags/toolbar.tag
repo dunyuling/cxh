@@ -138,4 +138,21 @@
             alert("只有申请中的代理才需要审核！")
         }
     }
+
+    function audit1() {
+        var data = getSelectedRow("${tableId}");
+        if (null == data) {
+            return;
+        }
+        if (data.status == 'WAITING') {
+            $.openDlg({
+                url: 'transfer.cs?action=audit&id=' + data.id,
+                title: '审核' + "${title}",
+                width: '${width}',
+                height: '${height}'
+            });
+        } else {
+            alert("只有等待中的会员才需要审核！")
+        }
+    }
 </script>
