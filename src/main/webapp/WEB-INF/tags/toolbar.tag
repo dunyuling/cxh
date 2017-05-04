@@ -155,4 +155,29 @@
             alert("只有等待中的会员才需要审核！")
         }
     }
+
+    function recharge() {
+        alert("recharge");
+        var data = getSelectedRow("${tableId}");
+        if (null == data) return;
+        $.openDlg({
+            url: 'transfer.cs?action=recharge&id=' + data.id,
+            title: '充值' + "${title}",
+            width: '${width}',
+            height: '${height}'
+        });
+    }
+
+    function refund() {
+        alert("refund");
+        var data = getSelectedRow("${tableId}");
+        if (null == data) return;
+
+        $.openDlg({
+            url: 'transfer.cs?action=refund&id=' + data.id,
+            title: '退费' + "${title}",
+            width: '${width}',
+            height: '${height}'
+        });
+    }
 </script>

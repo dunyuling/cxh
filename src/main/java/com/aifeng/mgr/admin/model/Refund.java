@@ -1,19 +1,17 @@
 package com.aifeng.mgr.admin.model;
 
-import com.aifeng.mgr.admin.constants.Status;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.Date;
 
 /**
  * Created by pro on 17-4-21.
  */
-@Table(name="refund")
+@Table(name = "refund")
 @Entity
-public class Refund
-{
+public class Refund {
 
     @Id
     @GeneratedValue
@@ -25,7 +23,11 @@ public class Refund
 
     private int amount;
 
-    private Status status; //暂未用到
+    private Date createDate;
+
+    public Refund() {
+        this.createDate = new Date();
+    }
 
     public long getId() {
         return id;
@@ -59,11 +61,11 @@ public class Refund
         this.amount = amount;
     }
 
-    public Status getStatus() {
-        return status;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setStatus(Status status) {
-        this.status = status;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 }

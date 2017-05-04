@@ -1,9 +1,13 @@
 package com.aifeng.mgr.admin.ctl;
 
-import com.aifeng.mgr.admin.constants.ImgPath;
+import com.aifeng.constants.Constants;
 import com.aifeng.core.ctl.BaseCtl;
+import com.aifeng.mgr.admin.constants.ImgPath;
+import com.aifeng.mgr.admin.model.Admin;
 import com.aifeng.mgr.admin.model.Agent;
 import com.aifeng.mgr.admin.service.impl.AgentService;
+import com.aifeng.mgr.admin.service.impl.RechargeService;
+import com.aifeng.mgr.admin.service.impl.RefundService;
 import com.aifeng.util.StringUtil;
 import com.aifeng.util.Util;
 import com.alibaba.fastjson.JSONObject;
@@ -26,10 +30,14 @@ import java.util.Map;
 public class AgentCtl extends BaseCtl {
 
     private final AgentService agentService;
+    private final RechargeService rechargeService;
+    private final RefundService refundService;
 
     @Autowired
-    public AgentCtl(AgentService agentService) {
+    public AgentCtl(AgentService agentService, RechargeService rechargeService, RefundService refundService) {
         this.agentService = agentService;
+        this.rechargeService = rechargeService;
+        this.refundService = refundService;
     }
 
     @RequestMapping("list")
@@ -40,7 +48,7 @@ public class AgentCtl extends BaseCtl {
     @RequestMapping(value = "/list2", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
     @ResponseBody
     public String list2(int page, int pageSize) {
-        List<Map<String,Object>> list = agentService.getPagerAgent(page, pageSize);
+        List<Map<String, Object>> list = agentService.getPagerAgent(page, pageSize);
         long total = agentService.getTotal();
         JSONObject json = new JSONObject();
         json.put("rows", list);
@@ -90,6 +98,30 @@ public class AgentCtl extends BaseCtl {
             }
         }
 
+        return AJAX_SUCCESS;
+    }
+
+    @RequestMapping("recharge")
+    @ResponseBody
+    public String recharge(long id, int amount) {
+        try {
+            long operate_id = ((Admin) get(Constants.SESSION_USER)).getId();
+            rechargeService.save(operate_id, id, amount);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return AJAX_SUCCESS;
+    }
+
+    @RequestMapping("refund")
+    @ResponseBody
+    public String refund(long id, int amount) {
+        try {
+            long operate_id = ((Admin) get(Constants.SESSION_USER)).getId();
+            refundService.save(operate_id, id, amount);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return AJAX_SUCCESS;
     }
 

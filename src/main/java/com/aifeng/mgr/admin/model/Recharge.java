@@ -25,9 +25,11 @@ public class Recharge {
 
     private int amount;
 
-    private Date createTime;
+    private Date createDate;
 
-    private Status status;
+    public Recharge() {
+        this.createDate = new Date();
+    }
 
     public long getId() {
         return id;
@@ -61,19 +63,11 @@ public class Recharge {
         this.amount = amount;
     }
 
-    public Date getCreateTime() {
-        return createTime;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 }
