@@ -48,7 +48,7 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label">状态：</label>
                     <div class="col-sm-7">
-                        <select id="status" name="status" class="form-control" name="religionType">
+                        <select id="status" name="status" class="form-control">
                             <option value="SUCCESS">成功</option>
                             <option value="FAILURE">失败</option>
                         </select>

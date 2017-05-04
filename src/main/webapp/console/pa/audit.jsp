@@ -48,7 +48,7 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label">审核类型：</label>
                     <div class="col-sm-7">
-                        <select id="proxyStatus" name="proxyStatus" class="form-control" name="religionType">
+                        <select id="proxyStatus" name="proxyStatus" class="form-control">
                             <option value="AUTHORED">授权</option>
                             <option value="REFUSED">拒绝</option>
                         </select>

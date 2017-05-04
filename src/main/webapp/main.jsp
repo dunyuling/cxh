@@ -38,10 +38,10 @@
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <span class="clear">
                                <span class="block m-t-xs"><strong class="font-bold">${user.name}</strong></span>
-                                <span class="text-muted text-xs block">${roleName} <b class="caret"></b></span>
+                                <span class="text-muted text-xs block">${roleName} <%--<b class="caret"></b>--%></span>
                                 </span>
                             </a>
-                            <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                            <%--<ul class="dropdown-menu animated fadeInRight m-t-xs">
                                 <li><a class="J_menuItem" href="form_avatar.html">修改头像</a>
                                 </li>
                                 <li><a class="J_menuItem" href="profile.html">个人资料</a>
@@ -53,7 +53,7 @@
                                 <li class="divider"></li>
                                 <li><a href="mgr/logout.cs">安全退出</a>
                                 </li>
-                            </ul>
+                            </ul>--%>
                         </div>
                         <div class="logo-element">H+
                         </div>
