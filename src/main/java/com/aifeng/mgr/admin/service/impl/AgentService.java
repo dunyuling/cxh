@@ -80,7 +80,7 @@ public class AgentService extends BaseService<Agent> implements IAgentService {
 
     @Transactional
     public List<Map<String, Object>> getPagerAgent(int page, int size) {
-        return agentDao.getAgent(page, size);
+        return agentDao.getAgents(page, size);
     }
 
     @Transactional

@@ -15,7 +15,7 @@ import java.util.Map;
 @Repository
 public class AgentDao extends BaseDao<Agent> implements IAgentDao {
 
-    public List<Map<String,Object>> getAgent(int page, int pageSize) {
+    public List<Map<String,Object>> getAgents(int page, int pageSize) {
         String str = "select a.id,a.name,a.userid,a.mobile,a.IDCard,a.corpName,a.licenseImg,a.expireDate,a.money from agent a " +
                 "limit " + pageSize + " offset " + (page - 1) * pageSize + ";";
         return this.findBySql(str);
