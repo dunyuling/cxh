@@ -80,4 +80,14 @@ public class MessageService extends BaseService<Message> implements IMessageServ
         message.setProxyAddress_id(proxyAddress_id);
         return messageDao.insert(message);
     }
+
+    @Transactional
+    public List<Map<String, Object>> getPagerMsg(int page, int size) {
+        return messageDao.getMessage(page, size);
+    }
+
+    @Transactional
+    public long getTotal() {
+        return messageDao.countAll();
+    }
 }
