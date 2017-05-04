@@ -1,7 +1,5 @@
 package com.aifeng.mgr.admin.model;
 
-import com.aifeng.mgr.admin.constants.Status;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -21,11 +19,15 @@ public class FeeDeduction {
 
     private long agent_id;
 
+    private long message_id;
+
     private int amount;
 
-    private Date createTime;
+    private Date createDate;
 
-    private Status status;
+    public FeeDeduction() {
+        this.createDate = new Date();
+    }
 
     public long getId() {
         return id;
@@ -43,6 +45,14 @@ public class FeeDeduction {
         this.agent_id = agent_id;
     }
 
+    public long getMessage_id() {
+        return message_id;
+    }
+
+    public void setMessage_id(long message_id) {
+        this.message_id = message_id;
+    }
+
     public int getAmount() {
         return amount;
     }
@@ -51,19 +61,11 @@ public class FeeDeduction {
         this.amount = amount;
     }
 
-    public Date getCreateTime() {
-        return createTime;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 }

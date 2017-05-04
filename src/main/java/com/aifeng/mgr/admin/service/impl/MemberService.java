@@ -80,7 +80,9 @@ public class MemberService extends BaseService<Member> implements IMemberService
         AgentMessageService agentMessageService = SpringUtil.getBean("agentMessageService");
 
         Address address = addressService.findById(member.getAddress_id());
-        long af_id = addressFeeService.getAddressFee(member.getAddress_id()).getId();
+        AddressFee addressFee = addressFeeService.getAddressFee(member.getAddress_id());
+        long af_id = addressFee.getId();
+        int amount = addressFee.getAmount();
         ProxyAddress proxyAddress = proxyAddressService.getProxyByAfId(af_id);
         if (proxyAddress != null) {
             long agent_id = proxyAddress.getAgent_id();
@@ -94,12 +96,12 @@ public class MemberService extends BaseService<Member> implements IMemberService
                     "\n咨询类型: " + "车险询价" +
                     "\n您处理该信息后，请点击:http://www.baidu.com";
 
-            messageService.sendMsg(agent.getUserid(), content);
-
             //基本信息
             Message message = messageService.save(content, proxyAddress.getId());
             //做为重发凭证
             agentMessageService.save(message, agent);
+
+            messageService.sendMsg(agent, message, amount, true);
         }
     }
 

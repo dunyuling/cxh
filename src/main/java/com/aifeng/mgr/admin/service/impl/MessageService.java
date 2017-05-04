@@ -26,22 +26,22 @@ import java.util.Map;
 public class MessageService extends BaseService<Message> implements IMessageService {
 
     private final MessageDao messageDao;
-    private final AddressService addressService;
     private final AgentMessageService agentMessageService;
     private final AgentService agentService;
     private final MessageRepeatService messageRepeatService;
     private final RestTemplate restTemplate;
     private final AuxiliaryInformationService auxiliaryInformationService;
+    private final FeeDeductionService feeDeductionService;
 
     @Autowired
-    public MessageService(MessageDao messageDao, AddressService addressService, AgentMessageService agentMessageService, AgentService agentService, MessageRepeatService messageRepeatService, RestTemplate restTemplate, AuxiliaryInformationService auxiliaryInformationService) {
+    public MessageService(MessageDao messageDao, AgentMessageService agentMessageService, AgentService agentService, MessageRepeatService messageRepeatService, RestTemplate restTemplate, AuxiliaryInformationService auxiliaryInformationService, FeeDeductionService feeDeductionService) {
         this.messageDao = messageDao;
-        this.addressService = addressService;
         this.agentMessageService = agentMessageService;
         this.agentService = agentService;
         this.messageRepeatService = messageRepeatService;
         this.restTemplate = restTemplate;
         this.auxiliaryInformationService = auxiliaryInformationService;
+        this.feeDeductionService = feeDeductionService;
     }
 
     //TODO 此处添加定时器,定时器的间隔要从数据库读取
@@ -51,11 +51,32 @@ public class MessageService extends BaseService<Message> implements IMessageServ
         for (AgentMessage agentMessage : agentMessageList) {
             Message message = findById(agentMessage.getMessage_id());
             Agent agent = agentService.findById(agentMessage.getAgent_id());
-//            agentMessageService.execSendMsg(agentMessage, message, agent);
-            sendMsg(agent.getUserid(), message.getContent());
+            sendMsg(agent, message, 0, false);
         }
     }
 
+    @Transactional
+    public void sendMsg(Agent agent, Message message, int amount, boolean charge) {
+        RequestBody requestBody = new RequestBody();
+        requestBody.setTouser(agent.getUserid());
+        requestBody.setMsgtype("text");
+        requestBody.setAgentid(0);
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("content", message.getContent());
+        requestBody.setText(map);
+        requestBody.setSafe(0);
+
+        String access_token = auxiliaryInformationService.getAccessToken();
+        ResponseEntity<ResponseType> response = restTemplate.postForEntity(Util.loadSendMsgUrl(access_token), requestBody, ResponseType.class);
+        System.out.println(response.getBody().getErrmsg());
+
+        if (charge && amount != 0) {
+            feeDeductionService.save(agent.getId(), message.getId(), amount);
+        }
+    }
+
+    //不计费
     @Transactional
     public void sendMsg(String toUser, String content) {
         RequestBody requestBody = new RequestBody();
