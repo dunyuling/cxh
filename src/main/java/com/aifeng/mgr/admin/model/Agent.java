@@ -15,7 +15,7 @@ public class Agent {
     @GeneratedValue
     @Column(name = "id")
     private long id;
-    @Column(unique=true, columnDefinition="varchar(32)")
+    @Column(/*unique=true,*/ columnDefinition="varchar(32)")
     private String name;
     @Column(unique=true, columnDefinition="varchar(32)")
     private String userid;

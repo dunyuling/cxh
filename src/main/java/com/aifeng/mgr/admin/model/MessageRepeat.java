@@ -16,7 +16,6 @@ public class MessageRepeat {
     @Id
     @GeneratedValue
     private long id;
-    private int amount; //每次扣费多少
     private int gap; //以秒为单位
     private int totalTimes;//总次数
     private Date updateTime;
@@ -27,14 +26,6 @@ public class MessageRepeat {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public int getAmount() {
-        return amount;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
     }
 
     public int getGap() {

@@ -16,52 +16,16 @@
 <div class="page_header">
     <div class="sub1"><a href="#1"><i><img src="img/header_icon.png"></i>
         <p>返回</p></a></div>
-    <div class="sub2">完善资料</div>
+    <div class="sub2">添加代理地区</div>
     <div class="sub3"></div>
 </div>
 <div class="submit_main">
     <ul>
         <input type="hidden" id="access_token" value="${access_token}"/>
         <input type="hidden" id="user_id" value="${user_id}"/>
-        <li class="su_input"><p>姓名</p><input id="name" name="name" type="text" placeholder="" required></li>
-        <li class="su_input"><p>手机号</p><input id="mobile" name="mobile" type="text" placeholder="国际手机号码请加区号"
-                                              required>
-        </li>
-        <li class="su_input"><p>身份证</p><input id="IDCard" name="IDCard" type="text" placeholder="" required
-                                              ></li>
         <li class="su_input content-block"><p>代理地区</p><input name="addr" id="addr" readonly type="text"
-                                                           placeholder="省/市/县（区）"></li>
+                                                             placeholder="省/市/县（区）"></li>
     </ul>
-</div>
-<div class="submit_main2">
-    <li class="su_input2"><p>公司名称</p>
-        <div class="input"><input id="corpName" name="corp_name" type="text" placeholder="" required></div>
-    </li>
-    <div class="shangchuan_img ">
-        <p>营业执照</p>
-        <div class="z_photo">
-            <div class="shangchuan_but z_file">
-                <input type="file" name="img" id="img" value="" accept="image/*"
-                       onchange="imgChange(this, 'z_photo','z_file');"/>
-            </div>
-        </div>
-        <!--遮罩层-->
-        <div class="z_mask">
-            <!--弹出框-->
-            <div class="z_alert">
-                <p style="width:100%; height:2.2rem; border-bottom: 1px solid #ddd;">确定要删除这张图片吗？</p>
-                <p style=" width:100%; height:0.8rem">
-                    <span class="z_cancel">取消</span>
-                    <span class="z_sure">确定</span>
-                </p>
-            </div>
-        </div>
-
-    </div>
-    <li class="su_input2"><p>营业执照失效日期</p>
-        <div class="input"><input id="expireDate" name="expireDate" type="text"
-                                  placeholder="例：20170101" required></div>
-    </li>
 </div>
 
 <script type="text/javascript">

@@ -31,9 +31,8 @@ public class MessageRepeatService extends BaseService<MessageRepeat> implements 
     }
 
     @Transactional
-    public void edit(int amount, int gap, int totalTimes) {
+    public void edit(int gap, int totalTimes) {
         MessageRepeat messageRepeat = messageRepeatDao.getFirst();
-        messageRepeat.setAmount(amount);
         messageRepeat.setGap(gap);
         messageRepeat.setTotalTimes(totalTimes);
         messageRepeat.setUpdateTime(new Date());

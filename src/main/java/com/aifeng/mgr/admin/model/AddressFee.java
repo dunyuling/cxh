@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.Date;
 
 /**
  * Created by pro on 17-4-21.
@@ -19,6 +20,8 @@ public class AddressFee {
     private long address_id;
 
     private int amount;
+
+    private Date createDate;
 
     public long getId() {
         return id;
@@ -44,4 +47,11 @@ public class AddressFee {
         this.amount = amount;
     }
 
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
 }

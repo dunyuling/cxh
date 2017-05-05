@@ -24,7 +24,8 @@
 				<div class="index_logo"><a href="index.html"><img src="img/logo_03.png"></a></div>
 				<ul>
 					<li><a href="index.html" class="nav_txtss now">首页</a></li>
-					<li><a href="/cxh/front/get_news.cs" class="nav_txtss">新闻动态</a></li>
+					<!--<li><a href="/cxh/front/get_news.cs" class="nav_txtss">新闻动态</a></li>-->
+					<li><a href="/front/get_news.cs" class="nav_txtss">新闻动态</a></li>
 					<li><a href="about.html" class="nav_txtss">关于我们</a></li>
 				</ul>
 			</div>
@@ -123,7 +124,8 @@
 					return;
                 }
 
-                $.post( "/cxh/front/register_member.cs",
+//                $.post( "/cxh/front/register_member.cs",
+                $.post( "/front/register_member.cs",
 					{ province: province,city:city,area:area,name:name,mobile:mobile,index:insurance})
                     .done(function( data ) {
                         alert(data );

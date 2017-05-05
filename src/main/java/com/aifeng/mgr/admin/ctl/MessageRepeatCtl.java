@@ -31,9 +31,9 @@ public class MessageRepeatCtl extends BaseCtl {
 
     @RequestMapping("edit")
     @ResponseBody
-    public String edit(int amount, int gap, int totalTimes) {
+    public String edit(int gap, int totalTimes) {
         try {
-            messageRepeatService.edit(amount, gap, totalTimes);
+            messageRepeatService.edit(gap, totalTimes);
         } catch (Exception e) {
             e.printStackTrace();
         }

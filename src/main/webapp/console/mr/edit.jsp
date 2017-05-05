@@ -16,13 +16,6 @@
             <cs:form_validate formId="editMRForm"/>
             <form class="form-horizontal" action="edit.cs" id="editMRForm" method="POST">
                 <div class="form-group">
-                    <label class="col-sm-3 control-label">每次扣费：</label>
-                    <div class="col-sm-6">
-                        <input id="amount" name="amount" value="${mr.amount}" class="form-control"
-                               validate="{required:true}" validateMessage="{required:'请输入每次扣费量（单位角）'}">单位角
-                    </div>
-                </div>
-                <div class="form-group">
                     <label class="col-sm-3 control-label">重发间隔：</label>
                     <div class="col-sm-6">
                         <input id="gap" name="gap" value="${mr.gap}" class="form-control"

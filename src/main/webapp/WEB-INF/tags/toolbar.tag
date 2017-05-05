@@ -157,7 +157,7 @@
     }
 
     function recharge() {
-        alert("recharge");
+//        alert("recharge");
         var data = getSelectedRow("${tableId}");
         if (null == data) return;
         $.openDlg({
@@ -169,7 +169,7 @@
     }
 
     function refund() {
-        alert("refund");
+//        alert("refund");
         var data = getSelectedRow("${tableId}");
         if (null == data) return;
 

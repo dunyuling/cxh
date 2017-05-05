@@ -71,28 +71,30 @@ public class ProxyAddressService extends BaseService<ProxyAddress> implements IP
     }
 
     @Transactional
-    public void auditProxyAddress(long id, String province, String city, String area, String proxyStatus, String denyReason) {
-        ProxyStatus status = ProxyStatus.valueOf(proxyStatus);
+    public synchronized void auditProxyAddress(long id, String province, String city, String area, String proxyStatus, String denyReason) {
         ProxyAddress proxyAddress = proxyAddressDao.findById(id);
-        proxyAddress.setProxyStatus(status);
-        proxyAddress.setDenyReason(denyReason);
-        proxyAddress.setUpdateDate(new Date());
-        proxyAddressDao.update(proxyAddress);
+        if (proxyAddress.getProxyStatus() == ProxyStatus.APPLYING) {
+            ProxyStatus status = ProxyStatus.valueOf(proxyStatus);
+            proxyAddress.setProxyStatus(status);
+            proxyAddress.setDenyReason(denyReason);
+            proxyAddress.setUpdateDate(new Date());
+            proxyAddressDao.update(proxyAddress);
 
-        AgentService agentService = SpringUtil.getBean("agentService");
-        MessageService messageService = SpringUtil.getBean("messageService");
+            AgentService agentService = SpringUtil.getBean("agentService");
+            MessageService messageService = SpringUtil.getBean("messageService");
 
-        String content = "您代理 " + province + " " + city + " " + area + " ";
-        Agent agent = agentService.findById(proxyAddress.getAgent_id());
-        switch (status) {
-            case AUTHORED:
-                content = "恭喜" + content + "成功";
-                break;
-            case REFUSED:
-                content = "抱歉" + content + "失败，原因是:" + denyReason;
-                break;
+            String content = "您代理 " + province + " " + city + " " + area + " ";
+            Agent agent = agentService.findById(proxyAddress.getAgent_id());
+            switch (status) {
+                case AUTHORED:
+                    content = "恭喜" + content + "成功";
+                    break;
+                case REFUSED:
+                    content = "抱歉" + content + "失败，原因是:" + denyReason;
+                    break;
+            }
+            messageService.sendMsg(agent.getUserid(), content);
         }
-        messageService.sendMsg(agent.getUserid(), content);
     }
 
     @Transactional

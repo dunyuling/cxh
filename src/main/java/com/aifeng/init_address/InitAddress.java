@@ -1,5 +1,7 @@
 package com.aifeng.init_address;
 
+import com.aifeng.mgr.admin.model.Address;
+import com.aifeng.mgr.admin.service.impl.AddressFeeService;
 import com.aifeng.mgr.admin.service.impl.AddressService;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -20,9 +22,9 @@ public class InitAddress {
 //        System.out.println("areasMap size: " + areasMap.size());
 
 
-        List<AdminRanking> areaList = getAR("areas.json");
-        List<AdminRanking> cityList = getAR("cites.json");
-        List<AdminRanking> provinceList = getAR("provinces.json");
+//        List<AdminRanking> areaList = getAR("areas.json");
+//        List<AdminRanking> cityList = getAR("cites.json");
+//        List<AdminRanking> provinceList = getAR("provinces.json");
 
         ClassPathXmlApplicationContext classPathXmlApplicationContext = new ClassPathXmlApplicationContext(new String[]{
                 "druid.xml",
@@ -32,7 +34,12 @@ public class InitAddress {
 
         });
         AddressService addressService = classPathXmlApplicationContext.getBean(AddressService.class);
-        addressService.init(areaList, cityList, provinceList);
+        AddressFeeService addressFeeService = classPathXmlApplicationContext.getBean(AddressFeeService.class);
+        for (Address address : addressService.getAll()) {
+            addressFeeService.saveAddressFee(address.getId(),10);
+        }
+
+//        addressService.init(areaList, cityList, provinceList);
     }
 
 

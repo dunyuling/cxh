@@ -9,7 +9,7 @@ import java.util.Date;
 /**
  * Created by pro on 17-4-21.
  */
-@Table(name="agent_message")
+@Table(name = "agent_message")
 @Entity
 public class AgentMessage {
 
@@ -18,6 +18,7 @@ public class AgentMessage {
     private long id;
     private long agent_id;
     private long message_id;
+    private long member_id;
     private int times;
     private boolean readed;
     private boolean visit;
@@ -47,6 +48,14 @@ public class AgentMessage {
 
     public void setMessage_id(long message_id) {
         this.message_id = message_id;
+    }
+
+    public long getMember_id() {
+        return member_id;
+    }
+
+    public void setMember_id(long member_id) {
+        this.member_id = member_id;
     }
 
     public int getTimes() {

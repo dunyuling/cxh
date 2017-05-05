@@ -2,10 +2,7 @@ package com.aifeng.mgr.admin.service.impl;
 
 import com.aifeng.core.service.impl.BaseService;
 import com.aifeng.mgr.admin.dao.impl.AgentMessageDao;
-import com.aifeng.mgr.admin.model.Agent;
-import com.aifeng.mgr.admin.model.AgentMessage;
-import com.aifeng.mgr.admin.model.Message;
-import com.aifeng.mgr.admin.model.MessageRepeat;
+import com.aifeng.mgr.admin.model.*;
 import com.aifeng.mgr.admin.service.IAgentMessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,8 +28,9 @@ public class AgentMessageService extends BaseService<AgentMessage> implements IA
     }
 
     @Transactional
-    public void save(Message message, Agent agent) {
+    public void save(Member member, Message message, Agent agent) {
         AgentMessage agentMessage = new AgentMessage();
+        agentMessage.setMessage_id(member.getId());
         agentMessage.setAgent_id(agent.getId());
         agentMessage.setTimes(1);
         agentMessage.setUpdateDate(new Date());

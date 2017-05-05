@@ -24,7 +24,8 @@
 				<div class="index_logo"><a href="index.html"><img src="img/logo_03.png"></a></div>
 				<ul>
 					<li><a href="index.html" class="nav_txtss">首页</a></li>
-					<li><a href="/cxh/front/get_news.cs" class="nav_txtss now">新闻动态</a></li>
+					<%--<li><a href="/cxh/front/get_news.cs" class="nav_txtss now">新闻动态</a></li>--%>
+					<li><a href="/front/get_news.cs" class="nav_txtss now">新闻动态</a></li>
 					<li><a href="about.html" class="nav_txtss">关于我们</a></li>
 				</ul>
 			</div>
@@ -36,7 +37,8 @@
 	<ul>
 		<li class="breadcrumb_my"><a href="index.html">首页</a></li>
 		<li class="breadcrumb_my">></li>
-		<li class="breadcrumb_my"><a href="/cxh/front/get_news.cs">新闻动态</a></li>
+		<%--<li class="breadcrumb_my"><a href="/cxh/front/get_news.cs">新闻动态</a></li>--%>
+		<li class="breadcrumb_my"><a href="/front/get_news.cs">新闻动态</a></li>
 		<li class="breadcrumb_my">></li>
 		<li>详情</li>
 	</ul>

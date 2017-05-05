@@ -99,7 +99,7 @@ public class MemberService extends BaseService<Member> implements IMemberService
             //基本信息
             Message message = messageService.save(content, proxyAddress.getId());
             //做为重发凭证
-            agentMessageService.save(message, agent);
+            agentMessageService.save(member, message, agent);
 
             messageService.sendMsg(agent, message, amount, true);
         }
@@ -141,5 +141,20 @@ public class MemberService extends BaseService<Member> implements IMemberService
     public void delMember(long id) {
         Member member = memberDao.findById(id);
         memberDao.delete(member);
+    }
+
+    @Transactional
+    public List<Map<String, Object>> getTotalFromWx(String user_id) {
+        return memberDao.getTotal(user_id);
+    }
+
+    @Transactional
+    public List<Map<String, Object>> getTodayFromWx() {
+        return null;
+    }
+
+    @Transactional
+    public List<Map<String, Object>> getTodayFromWx(boolean visit) {
+        return null;
     }
 }

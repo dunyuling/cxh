@@ -65,6 +65,22 @@ public class AgentService extends BaseService<Agent> implements IAgentService {
     }
 
     @Transactional
+    public synchronized String reAdd(String userid, String addr) {
+        String result = "代理已成功添加，请等待运营认证";
+
+        AddressFee addressFee = addressFeeService.getAddressFee(getAddressId(addr));
+        long af_id = addressFee.getId();
+        boolean proxied = proxyAddressService.checkProxied(af_id);
+        if (proxied) {
+            result = "您或其它代理商已经申请过代理该地区";
+        } else {
+            Agent agent = agentDao.getAgentByUserId(userid);
+            proxyAddressService.save(agent.getId(), addressFee.getId());
+        }
+        return result;
+    }
+
+    @Transactional
     private long getAddressId(String addr) {
         String arr[] = addr.split("-");
         return addressService.getAddressId(arr[0], arr[1], arr[2]);
@@ -107,5 +123,10 @@ public class AgentService extends BaseService<Agent> implements IAgentService {
     public void delAgent(long id) {
         Agent agent = agentDao.findById(id);
         agentDao.delete(agent);
+    }
+
+    @Transactional
+    public Agent getAgentByUserid(String userid) {
+        return agentDao.getAgentByUserId(userid);
     }
 }

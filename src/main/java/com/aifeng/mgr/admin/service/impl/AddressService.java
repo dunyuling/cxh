@@ -149,4 +149,9 @@ public class AddressService extends BaseService<Address> implements IAddressServ
         long address_id = addressFeeService.getOne(af_id).getAddress_id();
         return this.addressDao.findById(address_id);
     }
+
+    @Transactional
+    public List<Address> getAll() {
+        return addressDao.getAllAddress();
+    }
 }
