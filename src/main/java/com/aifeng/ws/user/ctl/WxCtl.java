@@ -7,6 +7,7 @@ import com.aifeng.mgr.admin.service.impl.AuxiliaryInformationService;
 import com.aifeng.mgr.admin.service.impl.MemberService;
 import com.aifeng.util.Util;
 import com.aifeng.ws.wx.UserResponse;
+import org.apache.commons.collections.map.HashedMap;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -69,7 +70,7 @@ public class WxCtl {
 
     @RequestMapping("to_submit")
     public String toSubmit(HttpServletRequest request, Model model) {
-        model.addAttribute(getCode(request, model));
+        model.addAllAttributes(getCode(request, model));
         return "/wx/page_submit";
     }
 
@@ -106,47 +107,50 @@ public class WxCtl {
 
     @RequestMapping(value = "manage", produces = "text/plain;charset=utf-8;")
     public String manage(HttpServletRequest request, Model model) {
-        model.addAttribute(getCode(request, model));
+        model.addAllAttributes(getCode(request, model));
         return "/wx/index";
     }
 
     @RequestMapping(value = "get_balance", produces = "text/plain;charset=utf-8;")
-    @ResponseBody
     public String getBalance(HttpServletRequest request, Model model) {
         Map<String, String> map = getCode(request, model);
-        model.addAttribute(map);
-        Agent agent = agentService.getAgentByUserid(map.get("userid"));
-        return agent.getMoney() + "";
+        Agent agent = agentService.getAgentByUserid(map.get("user_id"));
+        model.addAttribute("money", agent.getMoney());
+//        model.addAttribute("money", 1000);
+        return "/wx/balance";
     }
 
     @RequestMapping(value = "total", produces = "text/plain;charset=utf-8;")
     public String total(HttpServletRequest request, Model model) {
         String userid = request.getParameter("userid");
-
+        model.addAllAttributes(memberService.getTotalFromWx(userid));
         return "/wx/total";
     }
 
     @RequestMapping(value = "today", produces = "text/plain;charset=utf-8;")
-    public String today() {
-
+    public String today(HttpServletRequest request, Model model) {
+        String userid = request.getParameter("userid");
+        model.addAllAttributes(memberService.getTodayFromWx(userid));
         return "/wx/today";
     }
 
     @RequestMapping(value = "today_visit", produces = "text/plain;charset=utf-8;")
-    public String todayVisit() {
-
+    public String todayVisit(HttpServletRequest request, Model model) {
+        String userid = request.getParameter("userid");
+        model.addAllAttributes(memberService.getTodayFromWx(userid, true));
         return "/wx/today_visit";
     }
 
     @RequestMapping(value = "today_not_visit", produces = "text/plain;charset=utf-8;")
-    public String todayNotVisit() {
-
-        return "/wx/today_visit";
+    public String todayNotVisit(HttpServletRequest request, Model model) {
+        String userid = request.getParameter("userid");
+        model.addAllAttributes(memberService.getTodayFromWx(userid, false));
+        return "/wx/today_not_visit";
     }
 
     @RequestMapping(value = "to_re_add", produces = "text/plain;charset=utf-8;")
     public String toReAdd(HttpServletRequest request, Model model) {
-        model.addAttribute(getCode(request, model));
+        model.addAllAttributes(getCode(request, model));
         return "/wx/proxy_address_add";
     }
 

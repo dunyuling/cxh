@@ -31,7 +31,12 @@ public class AgentDao extends BaseDao<Agent> implements IAgentDao {
     public Agent getAgentByUserId(String userid) {
         Map<String, Object> map = new HashMap<>();
         map.put("userid", userid);
-        String sql = "from Agent where userid =:userid";
+        String sql = " from Agent where userid =:userid";
         return this.findOneByHql(sql, map);
     }
+
+    /*public Map<String,Object> getAgentByUserId2(String user_id) {
+        String sql = "select id,name from agent where userid = '" + user_id + "'";
+        return this.findBySql(sql).get(0);
+    }*/
 }

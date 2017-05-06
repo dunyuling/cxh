@@ -31,7 +31,7 @@ public class MemberDao extends BaseDao<Member> implements IMemberDao {
         String sql = "select m.id, m.name,m.mobile,m.createDate from agent_message am " +
                 "left join member m on am.member_id = m.id " +
                 "left join agent ag on am.agent_id = ag.id " +
-                "where ag.user_id = " + user_id;
+                "where ag.userid = '" + user_id + "'";
         return this.findBySql(sql);
     }
 
@@ -39,7 +39,8 @@ public class MemberDao extends BaseDao<Member> implements IMemberDao {
         String sql = "select m.id, m.name,m.mobile,m.createDate from agent_message am " +
                 "left join member m on am.member_id = m.id " +
                 "left join agent ag on am.agent_id = ag.id " +
-                "where ag.user_id = " + user_id;
+                "where ag.userid = '" + user_id +
+                "' and date_format(am.updateDate,'%Y-%m-%d') = curdate()";
         return this.findBySql(sql);
     }
 
@@ -47,8 +48,8 @@ public class MemberDao extends BaseDao<Member> implements IMemberDao {
         String sql = "select m.id, m.name,m.mobile,m.createDate from agent_message am " +
                 "left join member m on am.member_id = m.id " +
                 "left join agent ag on am.agent_id = ag.id " +
-                "where am.visit is " + visit + " and ag.user_id = " + user_id
-                ;
+                "where am.visit is " + visit + " and ag.userid = '" + user_id +
+                "' and date_format(am.updateDate,'%Y-%m-%d') = curdate()";
         return this.findBySql(sql);
     }
 }

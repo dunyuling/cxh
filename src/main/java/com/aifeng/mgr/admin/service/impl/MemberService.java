@@ -83,25 +83,27 @@ public class MemberService extends BaseService<Member> implements IMemberService
         AddressFee addressFee = addressFeeService.getAddressFee(member.getAddress_id());
         long af_id = addressFee.getId();
         int amount = addressFee.getAmount();
-        ProxyAddress proxyAddress = proxyAddressService.getProxyByAfId(af_id);
+        ProxyAddress proxyAddress = proxyAddressService.getAuthoredProxyByAfId(af_id);
         if (proxyAddress != null) {
             long agent_id = proxyAddress.getAgent_id();
             Agent agent = agentService.findById(agent_id);
 
-            String content = Constants.wxMsgTitle +
-                    "\n\n时间: " + DateUtils.formatDate(new Date(), "yyyy-MM-dd HH:mm") +
-                    "\n姓名: " + member.getName() + "" +
-                    "\n电话: " + member.getMobile() +
-                    "\n地区: " + address.getProvince() + " " + address.getCity() + " " + address.getArea() +
-                    "\n咨询类型: " + "车险询价" +
-                    "\n您处理该信息后，请点击:http://www.baidu.com";
+            if (agent.getMoney() > addressFee.getAmount()) {
+                String content = Constants.wxMsgTitle +
+                        "\n\n时间: " + DateUtils.formatDate(new Date(), "yyyy-MM-dd HH:mm") +
+                        "\n姓名: " + member.getName() + "" +
+                        "\n电话: " + member.getMobile() +
+                        "\n地区: " + address.getProvince() + " " + address.getCity() + " " + address.getArea() +
+                        "\n咨询类型: " + "车险询价" +
+                        "\n您处理该信息后，请点击:http://www.baidu.com";
 
-            //基本信息
-            Message message = messageService.save(content, proxyAddress.getId());
-            //做为重发凭证
-            agentMessageService.save(member, message, agent);
+                //基本信息
+                Message message = messageService.save(content, proxyAddress.getId());
+                //做为重发凭证
+                agentMessageService.save(member, message, agent);
 
-            messageService.sendMsg(agent, message, amount, true);
+                messageService.sendMsg(agent, message, amount, true);
+            }
         }
     }
 
@@ -149,12 +151,12 @@ public class MemberService extends BaseService<Member> implements IMemberService
     }
 
     @Transactional
-    public List<Map<String, Object>> getTodayFromWx() {
-        return null;
+    public List<Map<String, Object>> getTodayFromWx(String user_id) {
+        return memberDao.getToday(user_id);
     }
 
     @Transactional
-    public List<Map<String, Object>> getTodayFromWx(boolean visit) {
-        return null;
+    public List<Map<String, Object>> getTodayFromWx(String user_id, boolean visit) {
+        return memberDao.getToday(user_id, visit);
     }
 }

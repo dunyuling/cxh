@@ -1,7 +1,7 @@
 package com.aifeng.mgr.admin.dao.impl;
 
-import com.aifeng.mgr.admin.constants.ProxyStatus;
 import com.aifeng.core.dao.impl.BaseDao;
+import com.aifeng.mgr.admin.constants.ProxyStatus;
 import com.aifeng.mgr.admin.dao.IProxyAddressDao;
 import com.aifeng.mgr.admin.model.ProxyAddress;
 import org.springframework.stereotype.Repository;
@@ -15,6 +15,14 @@ import java.util.Map;
  */
 @Repository
 public class ProxyAddressDao extends BaseDao<ProxyAddress> implements IProxyAddressDao {
+
+    public ProxyAddress getAuthoredByAgentIdAndAfId(long af_id) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("af_id", af_id);
+        params.put("proxyStatus1", ProxyStatus.AUTHORED);
+        String sql = "from ProxyAddress where af_id =:af_id and proxyStatus =:proxyStatus1";
+        return this.findOneByHql(sql, params);
+    }
 
     public ProxyAddress getByAgentIdAndAfId(long af_id) {
         Map<String, Object> params = new HashMap<>();

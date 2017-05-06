@@ -13,7 +13,7 @@
 </head>
 <body>
 <div class="page_header">
-	<div class="sub1"><a href="page01.html"><i><img src="img/header_icon.png"></i><p>返回</p></a></div>
+	<div class="sub1"><a href="/wx/manage.cs"><i><img src="img/header_icon.png"></i><p>返回</p></a></div>
 	<div class="sub2">今日已回访</div>
 	<div class="sub3"></div>
 </div>

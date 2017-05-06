@@ -27,9 +27,9 @@
                 <p>今日咨询记录</p></a></div>
         </div>
         <div class="page01_listss">
-            <div class="page01_list01"><a href="/wx/today_visit.cs?userid=${userid}"><span class="icon03"></span>
+            <div class="page01_list01"><a href="/wx/today_not_visit.cs?userid=${userid}"><span class="icon03"></span>
                 <p>今日未回访</p></a></div>
-            <div class="page01_list02"><a href="/wx/today_not_visit.cs?userid=${userid}"><span class="icon04"></span>
+            <div class="page01_list02"><a href="/wx/today_visit.cs?userid=${userid}"><span class="icon04"></span>
                 <p>今日已回访</p></a></div>
         </div>
     </div>
