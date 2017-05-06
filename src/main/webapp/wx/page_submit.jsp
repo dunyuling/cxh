@@ -145,7 +145,6 @@
 
     $("#submit").click(function () {
 //        alert($("#submit_enable").val());
-        $("#submit_enable").val(false);
         if ($("#submit_enable").val() == 'true') {
             var name = $("#name").val();
             var mobile = $("#mobile").val();
@@ -206,6 +205,7 @@
                 return;
             }
 
+            $("#submit_enable").val(false);
             var formData = new FormData();
             formData.append('file', $('#img')[0].files[0]);
             formData.append("IDCard", IDCard);
@@ -225,10 +225,11 @@
                 processData: false,
                 contentType: false
             }).done(function (res) {
-//            alert(res);
-                $("#submit").attr("disabled", disabled);
+                alert(res);
+                $("#submit_enable").val(true);
                 window.self.close();
             }).fail(function (res) {
+                $("#submit_enable").val(true);
             });
 
 //        alert("document.close()"); //TODO 关不掉当前页面

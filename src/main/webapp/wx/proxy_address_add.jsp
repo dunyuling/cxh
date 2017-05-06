@@ -96,7 +96,7 @@
     }
 </script>
 
-
+<input type="hidden" id="submit_enable" value="true"/>
 <div class="su_details_button"><a href="#" id="submit">提交</a></div>
 <script src="js/jquery-1.11.3.min.js"></script>
 <script src="js/Popt.js"></script>
@@ -107,94 +107,33 @@
         SelCity(this, e);
     });
 
-
     $("#submit").click(function () {
-        var name = $("#name").val();
-        var mobile = $("#mobile").val();
-        var IDCard = $("#IDCard").val();
-        var addr = $("#addr").val();
-        //TODO 选择到 县/区
-        var corpName = $("#corpName").val();
-        var file = $("#img").val();
-        var expireDate = $("#expireDate").val();
-        var access_token = $("#access_token").val();
-        var user_id = $("#user_id").val();
+        if ($("#submit_enable").val() == 'true') {
+            var addr = $("#addr").val();
+            var user_id = $("#user_id").val();
 
-        if (name == "") {
-            alert("姓名必须填写");
-            return;
+            if (addr == '') {
+                alert("地址必须选择");
+                return;
+            }
+
+            disable();
+            $.post('/wx/agent_add.cs',{'addr': addr, 'user_id': user_id},function (res) {
+                active();
+                alert(res);
+            });
         }
-
-        var reg = /^1[0-9]{10}$/; //验证规则
-        var flag = reg.test(mobile); //true
-        if (!flag) {
-            alert("手机号必须正确填写");
-            return;
-        }
-
-        reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
-        flag = reg.test(IDCard);
-        if (!flag) {
-            alert("身份证号码必须正确填写");
-            return;
-        }
-
-        if (addr == '') {
-            alert("地址必须选择");
-            return;
-        }
-
-        if (corpName == '') {
-            alert("公司名称必须填写");
-            return;
-        }
-
-        if (file == '') {
-            alert("营业执照必须选择");
-            return;
-        }
-
-        var el = expireDate.length;
-        if (el != 8) {
-            alert("过期时间格式错误，请重新填写");
-            return;
-        }
-
-        var year = expireDate.substring(0, 4);
-        var month = expireDate.substring(4, 6);
-        var day = expireDate.substring(6, 8);
-        if (new Date(year, month, day) < new Date()) {
-            alert("营业执照已经过期，请重新申请");
-            return;
-        }
-
-        var formData = new FormData();
-        formData.append('file', $('#img')[0].files[0]);
-        formData.append("IDCard", IDCard);
-        formData.append('name', name);
-        formData.append("mobile", mobile);
-        formData.append("addr", addr);
-        formData.append("corpName", corpName);
-        formData.append("expireDate", expireDate);
-        formData.append("access_token", access_token);
-        formData.append("user_id", user_id);
-        $.ajax({
-            url: '/wx/agent_info.cs',
-            type: 'POST',
-            cache: false,
-            data: formData,
-            enctype: 'multipart/form-data',
-            processData: false,
-            contentType: false
-        }).done(function (res) {
-            alert(res);
-            window.self.close();
-        }).fail(function (res) {
-        });
-
 //        alert("document.close()"); //TODO 关不掉当前页面
 //        document.close();
     });
+
+    function active() {
+        $("#submit_enable").val(true);
+    }
+
+    function disable() {
+        $("#submit_enable").val(false);
+    }
 </script>
 </body>
 </html>

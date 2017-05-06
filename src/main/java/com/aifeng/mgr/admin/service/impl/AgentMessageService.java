@@ -55,11 +55,11 @@ public class AgentMessageService extends BaseService<AgentMessage> implements IA
     }
 
     @Transactional
-    public void read(long member_id) {
+    public void visit(long member_id) {
         AgentMessage agentMessage = agentMessageDao.findByMemberId(member_id);
-        if (!agentMessage.isReaded()) {
-            agentMessage.setReaded(true);
-            agentMessage.setReadDate(new Date());
+        if (!agentMessage.isVisit()) {
+            agentMessage.setVisit(true);
+            agentMessage.setVisitDate(new Date());
             agentMessageDao.update(agentMessage);
         }
     }

@@ -20,9 +20,7 @@ public class AgentMessage {
     private long message_id;
     private long member_id;
     private int times;
-    private boolean readed;
     private boolean visit;
-    private Date readDate;
     private Date visitDate;
     private Date updateDate;
 
@@ -66,28 +64,12 @@ public class AgentMessage {
         this.times = times;
     }
 
-    public boolean isReaded() {
-        return readed;
-    }
-
-    public void setReaded(boolean readed) {
-        this.readed = readed;
-    }
-
     public boolean isVisit() {
         return visit;
     }
 
     public void setVisit(boolean visit) {
         this.visit = visit;
-    }
-
-    public Date getReadDate() {
-        return readDate;
-    }
-
-    public void setReadDate(Date readDate) {
-        this.readDate = readDate;
     }
 
     public Date getVisitDate() {

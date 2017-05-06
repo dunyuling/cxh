@@ -2,6 +2,8 @@ package com.aifeng.ws.user.ctl;
 
 import com.aifeng.mgr.admin.constants.ImgPath;
 import com.aifeng.mgr.admin.model.Agent;
+import com.aifeng.mgr.admin.model.AgentMessage;
+import com.aifeng.mgr.admin.service.impl.AgentMessageService;
 import com.aifeng.mgr.admin.service.impl.AgentService;
 import com.aifeng.mgr.admin.service.impl.AuxiliaryInformationService;
 import com.aifeng.mgr.admin.service.impl.MemberService;
@@ -10,6 +12,7 @@ import com.aifeng.ws.wx.UserResponse;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -33,13 +36,15 @@ public class WxCtl {
     AgentService agentService;
     private final RestTemplate restTemplate;
     private final MemberService memberService;
+    private final AgentMessageService agentMessageService;
 
     @Autowired
-    public WxCtl(AgentService agentService, AuxiliaryInformationService auxiliaryInformationService, RestTemplate restTemplate, MemberService memberService) {
+    public WxCtl(AgentService agentService, AuxiliaryInformationService auxiliaryInformationService, RestTemplate restTemplate, MemberService memberService, AgentMessageService agentMessageService) {
         this.agentService = agentService;
         this.auxiliaryInformationService = auxiliaryInformationService;
         this.restTemplate = restTemplate;
         this.memberService = memberService;
+        this.agentMessageService = agentMessageService;
     }
 
     @RequestMapping(value = "agent_info", produces = "text/plain;charset=utf-8;")
@@ -108,9 +113,28 @@ public class WxCtl {
     @RequestMapping("detail")
     public String detail(HttpServletRequest request, Model model) {
         long id = Long.parseLong(request.getParameter("id"));
+        String user_id = request.getParameter("userid");
+        String path = request.getParameter("path");
         model.addAllAttributes(memberService.getDetailFromWx(id));
+        model.addAttribute("path", path);
+        model.addAttribute("user_id", user_id);
         return "/wx/page_details";
     }
+
+    @RequestMapping("visit")
+    @ResponseBody
+    public String visit(HttpServletRequest request, Model model) {
+        String result = "success";
+        try {
+            long member_id = Long.parseLong(request.getParameter("id"));
+            agentMessageService.visit(member_id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            result = "failure";
+        }
+        return result;
+    }
+
 
     @RequestMapping(value = "manage", produces = "text/plain;charset=utf-8;")
     public String manage(HttpServletRequest request, Model model) {
@@ -165,6 +189,7 @@ public class WxCtl {
         model.addAttribute("user_id", user_id);
         return "/wx/today_not_visit";
     }
+
 
     @RequestMapping(value = "get_balance", produces = "text/plain;charset=utf-8;")
     public String getBalance(HttpServletRequest request, Model model) {

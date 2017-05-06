@@ -22,7 +22,7 @@
     <div class="page01_main">
         <div class="page01_listss">
             <div class="page01_list01"><a href="/wx/total.cs?userid=${user_id}"><span class="icon01"></span>
-                <p>全部咨询记录 a_${user_id}_a</p></a></div>
+                <p>全部咨询记录</p></a></div>
             <div class="page01_list02"><a href="/wx/today.cs?userid=${user_id}"><span class="icon02"></span>
                 <p>今日咨询记录</p></a></div>
         </div>

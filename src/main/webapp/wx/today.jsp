@@ -23,7 +23,7 @@
 	<div class="page02_list_main">
 		<div class="page02_lists">
 			<c:forEach items="${list}" var="obj">
-				<a href="#1" class="zhuangtai">
+				<a href="/wx/detail.cs?path=today&id=${obj.id}&userid=${user_id}" class="zhuangtai">
 					<c:if test="${obj.visit}">
 						<div class="zhuangtai_ok">已回访</div>
 					</c:if>

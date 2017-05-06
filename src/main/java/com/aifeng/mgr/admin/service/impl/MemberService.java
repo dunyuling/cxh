@@ -179,7 +179,6 @@ public class MemberService extends BaseService<Member> implements IMemberService
 
     @Transactional
     public Map<String, Object> getDetailFromWx(long id) {
-        agentMessageService.read(id);
         return memberDao.getDetail(id);
     }
 }

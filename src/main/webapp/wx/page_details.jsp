@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!doctype html>
 <html>
@@ -10,10 +11,11 @@
     <title>车险汇</title>
     <link rel="stylesheet" type="text/css" href="css/base.css">
     <link rel="stylesheet" type="text/css" href="css/page01.css">
+    <script type="text/javascript" src="js/jquery.1.7.2.min.js"></script>
 </head>
 <body>
 <div class="page_header">
-    <div class="sub1"><a href="/wx/manage.cs"><i><img src="img/header_icon.png"></i>
+    <div class="sub1"><a href="/wx/${path}.cs?userid=${user_id}"><i><img src="img/header_icon.png"></i>
         <p>返回</p></a></div>
     <div class="sub2">详情</div>
     <div class="sub3"></div>
@@ -21,15 +23,34 @@
 
 <div class="page_details_main">
     <ul>
-        <li><p>姓名：张三</p></li>
-        <li><p style="color:#4a90e2">电话：13823564556</p></li>
-        <li><p>ID：686868</p></li>
-        <li><p>时间：2017-03-03</p></li>
+        <li><p>姓名：${name}</p></li>
+        <li><p style="color:#4a90e2">电话：${mobile}</p></li>
+        <%--<li><p>ID：686868</p></li>--%>
+        <li><p>时间：${createDate}</p></li>
         <li><p>需求：购买保险</p></li>
-        <li><p>地区：郑州市二七区</p></li>
+        <li><p>地区：${province}-${city}-${area}</p></li>
     </ul>
-    <div class="page_details_button"><a href="#">确认回访</a></div>
-    <div class="page_details_button2"><a>已回访</a></div>
+    <c:if test="${!visit}">
+        <div id="to_visit_div">
+            <div class="page_details_button"><a href="#" id="to_visit">确认回访</a></div>
+        </div>
+    </c:if>
+    <c:if test="${visit}">
+        <div class="page_details_button2"><a>已回访</a></div>
+    </c:if>
+    <input type="hidden" value="${id}" id="id"/>
+
+    <script type="text/javascript">
+        $("#to_visit").click(function () {
+            var id = $("#id").val();
+            $.get("/wx/visit.cs?id=" + id, function (data) {
+                if (data == 'success') {
+                    $("#to_visit_div").html('<div class="page_details_button2"><a>已回访</a></div>');
+                }
+            })
+
+        });
+    </script>
 </div>
 </body>
 </html>
