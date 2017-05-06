@@ -27,21 +27,21 @@
                     <label class="col-sm-3 control-label">省：</label>
                     <div class="col-sm-6">
                         <input id="province" name="province" value="${temp.province}" class="form-control"
-                               validate="{required:true}" validateMessage="{required:'请输入省'}">
+                               readonly validate="{required:true}" validateMessage="{required:'请输入省'}">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-3 control-label">市：</label>
                     <div class="col-sm-6">
                         <input id="city" name="city" value="${temp.city}" class="form-control"
-                               validate="{required:true}" validateMessage="{required:'请输入市'}">
+                               readonly validate="{required:true}" validateMessage="{required:'请输入市'}">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-3 control-label">县/区：</label>
                     <div class="col-sm-6">
                         <input id="area" name="area" value="${temp.area}" class="form-control"
-                               validate="{required:true}" validateMessage="{required:'请输入县/区'}">
+                               readonly validate="{required:true}" validateMessage="{required:'请输入县/区'}">
                     </div>
                 </div>
 

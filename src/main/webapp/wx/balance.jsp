@@ -15,8 +15,8 @@
 <body>
 <div>
     <div class="page_header">
-        <div class="sub1"><a href="#1" id="back"><i><img src="img/header_icon.png"></i>
-            <p>返回</p></a></div>
+        <%--<div class="sub1"><a href="#1" id="back"><i><img src="img/header_icon.png"></i>
+            <p>返回</p></a></div>--%>
         <div class="sub2">余额</div>
         <div class="sub3"></div>
     </div>

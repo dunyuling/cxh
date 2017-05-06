@@ -37,7 +37,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script>
 
     function imageFormatter(value) {
-        return '<img src="'+value+'" width="40px" height="40px" />';
+        return '<a href="' + value + '"target="_blank" ><img src="'+value+'" width="40px" height="40px" /></a>';
     }
 </script>
 

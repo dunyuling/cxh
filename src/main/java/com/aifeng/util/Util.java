@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -264,5 +265,15 @@ public class Util {
 
     public static boolean expire(long time1, long time2) {
         return time1 - time2 > 6900 * 1000; //为保证方便，有效期缩小五分钟
+    }
+
+    public static String date2String(Date date, String style) {
+        SimpleDateFormat sdf = new SimpleDateFormat(style);
+        //TimeZone gmt = TimeZone.getTimeZone("GMT+08:00");
+        //sdf.setTimeZone(gmt);
+        if (date != null) {
+            return sdf.format(date);
+        }
+        return null;
     }
 }

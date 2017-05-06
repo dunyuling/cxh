@@ -8,6 +8,7 @@ import com.aifeng.mgr.admin.constants.Status;
 import com.aifeng.mgr.admin.dao.impl.MemberDao;
 import com.aifeng.mgr.admin.model.*;
 import com.aifeng.mgr.admin.service.IMemberService;
+import com.aifeng.util.Util;
 import org.apache.http.client.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,7 +48,7 @@ public class MemberService extends BaseService<Member> implements IMemberService
                 member.setType(InsuranceType.getTypeByIndex(index));
                 member.setAddress_id(address_id);
                 memberDao.insert(member);
-                msg = "注册成功";
+                msg = "订单提交成功";
 
 
             }
@@ -92,7 +93,7 @@ public class MemberService extends BaseService<Member> implements IMemberService
 
             if (agent.getMoney() > addressFee.getAmount()) {
                 String content = Constants.wxMsgTitle +
-                        "\n\n时间: " + DateUtils.formatDate(new Date(), "yyyy-MM-dd HH:mm") +
+                        "\n\n时间: " + Util.date2String(new Date(), "yyyy-MM-dd HH:mm") +
                         "\n姓名: " + member.getName() + "" +
                         "\n电话: " + member.getMobile() +
                         "\n地区: " + address.getProvince() + " " + address.getCity() + " " + address.getArea() +

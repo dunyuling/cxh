@@ -35,7 +35,7 @@
                       </div>
                       
                      <div class="form-group">
-                          <label class="col-sm-3 control-label">每次费用(单位角)：</label>
+                          <label class="col-sm-3 control-label">每次费用(单位元)：</label>
                           <div class="col-sm-6">
                               <input id="amount" name="amount" class="form-control" validate="{required:true}" validateMessage="{required:'请输入费用'}" >
                           </div>

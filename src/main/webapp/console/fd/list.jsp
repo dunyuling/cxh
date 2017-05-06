@@ -42,7 +42,7 @@
                     <th data-field="id" data-visible="false"></th>
                     <th data-field="name">代理商</th>
                     <th data-field="content">消息</th>
-                    <th data-field="amount">金额</th>
+                    <th data-field="amount">金额(元)</th>
                 </tr>
                 </thead>
             </table>

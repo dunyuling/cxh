@@ -1,11 +1,15 @@
 package com.aifeng.ws.wx;
 
+import com.aifeng.util.DateUtil;
+import com.aifeng.util.Util;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.http.client.utils.DateUtils;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,6 +25,13 @@ public class Test {
     private static String url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxd3c4992eaa887396&redirect_uri=http%3A%2F%2F192.168.50.108%3A8080%2Fmobile%2Fad.json&response_type=code&scope=snsapi_base&state=123456789#wechat_redirect";
 
     public static void main(String[] args) {
+
+        String str = DateUtils.formatDate(new Date(), "yyyy-MM-dd HH:mm");
+        System.out.println("str: " + str + " \t " + new Date());
+        System.out.println(Util.date2String(new Date(), "yyyy-MM-dd HH:mm"));
+    }
+
+    public static void send1() {
         try {
             RestTemplate restTemplate = new RestTemplate();
             restTemplate.getMessageConverters().add(new StringHttpMessageConverter());

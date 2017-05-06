@@ -85,7 +85,7 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label">性别：</label>
                     <div class="col-sm-7">
-                        <input type="text" id="sex_" value="${!temp.sex ? 0 : 1}"/>
+                        <input type="hidden" id="sex_" value="${!temp.sex ? 0 : 1}"/>
                         <select id="sex" name="sex" class="form-control">
                             <option value="0">男</option>
                             <option value="1">女</option>

@@ -39,7 +39,7 @@
                     <th data-field="province">省</th>
                     <th data-field="city">市</th>
                     <th data-field="area">县/区</th>
-                    <th data-field="amount">费用</th>
+                    <th data-field="amount">费用(元)</th>
                 </tr>
                 </thead>
             </table>
