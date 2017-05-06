@@ -25,11 +25,13 @@ public class MemberService extends BaseService<Member> implements IMemberService
 
     private final MemberDao memberDao;
     private final AddressService addressService;
+    private final AgentMessageService agentMessageService;
 
     @Autowired
-    public MemberService(MemberDao memberDao, AddressService addressService) {
+    public MemberService(MemberDao memberDao, AddressService addressService, AgentMessageService agentMessageService) {
         this.memberDao = memberDao;
         this.addressService = addressService;
+        this.agentMessageService = agentMessageService;
     }
 
     @Transactional
@@ -95,7 +97,7 @@ public class MemberService extends BaseService<Member> implements IMemberService
                         "\n电话: " + member.getMobile() +
                         "\n地区: " + address.getProvince() + " " + address.getCity() + " " + address.getArea() +
                         "\n咨询类型: " + "车险询价" +
-                        "\n您处理该信息后，请点击:http://www.baidu.com";
+                        "\n您处理该信息后，请点击:" + Constants.host + "wx/detail.cs?id=" + member.getId();
 
                 //基本信息
                 Message message = messageService.save(content, proxyAddress.getId());
@@ -151,12 +153,33 @@ public class MemberService extends BaseService<Member> implements IMemberService
     }
 
     @Transactional
+    public int getTotalCountFromWx(String user_id) {
+        return memberDao.getTotalCount(user_id);
+    }
+
+    @Transactional
     public List<Map<String, Object>> getTodayFromWx(String user_id) {
         return memberDao.getToday(user_id);
     }
 
     @Transactional
+    public int getTodayCountFromWx(String user_id) {
+        return memberDao.getTodayCount(user_id);
+    }
+
+    @Transactional
     public List<Map<String, Object>> getTodayFromWx(String user_id, boolean visit) {
         return memberDao.getToday(user_id, visit);
+    }
+
+    @Transactional
+    public int getTodayCountFromWx(String user_id, boolean visit) {
+        return memberDao.getTodayCount(user_id, visit);
+    }
+
+    @Transactional
+    public Map<String, Object> getDetailFromWx(long id) {
+        agentMessageService.read(id);
+        return memberDao.getDetail(id);
     }
 }

@@ -7,7 +7,6 @@ import com.aifeng.mgr.admin.service.impl.AuxiliaryInformationService;
 import com.aifeng.mgr.admin.service.impl.MemberService;
 import com.aifeng.util.Util;
 import com.aifeng.ws.wx.UserResponse;
-import org.apache.commons.collections.map.HashedMap;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +18,7 @@ import org.springframework.web.client.RestTemplate;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -105,10 +105,65 @@ public class WxCtl {
         return map;
     }
 
+    @RequestMapping("detail")
+    public String detail(HttpServletRequest request, Model model) {
+        long id = Long.parseLong(request.getParameter("id"));
+        model.addAllAttributes(memberService.getDetailFromWx(id));
+        return "/wx/page_details";
+    }
+
     @RequestMapping(value = "manage", produces = "text/plain;charset=utf-8;")
     public String manage(HttpServletRequest request, Model model) {
-        model.addAllAttributes(getCode(request, model));
+        Map<String, String> map = getCode(request, model);
+        model.addAllAttributes(map);
+        String user_id = request.getParameter("userid");
+        if (user_id != null && !user_id.isEmpty()) model.addAttribute("user_id", user_id);
         return "/wx/index";
+    }
+
+
+    @RequestMapping(value = "total", produces = "text/plain;charset=utf-8;")
+    public String total(HttpServletRequest request, Model model) {
+        String user_id = request.getParameter("userid");
+        int count = memberService.getTotalCountFromWx(user_id);
+        List<Map<String, Object>> mapList = memberService.getTotalFromWx(user_id);
+        model.addAttribute("list", mapList);
+        model.addAttribute("count", count);
+        model.addAttribute("user_id", user_id);
+        return "/wx/total";
+    }
+
+    @RequestMapping(value = "today", produces = "text/plain;charset=utf-8;")
+    public String today(HttpServletRequest request, Model model) {
+        String user_id = request.getParameter("userid");
+        int count = memberService.getTodayCountFromWx(user_id);
+        List<Map<String, Object>> mapList = memberService.getTodayFromWx(user_id);
+        model.addAttribute("list", mapList);
+        model.addAttribute("count", count);
+        model.addAttribute("user_id", user_id);
+        return "/wx/today";
+    }
+
+    @RequestMapping(value = "today_visit", produces = "text/plain;charset=utf-8;")
+    public String todayVisit(HttpServletRequest request, Model model) {
+        String user_id = request.getParameter("userid");
+        int count = memberService.getTodayCountFromWx(user_id, true);
+        List<Map<String, Object>> mapList = memberService.getTodayFromWx(user_id, true);
+        model.addAttribute("list", mapList);
+        model.addAttribute("count", count);
+        model.addAttribute("user_id", user_id);
+        return "/wx/today_visit";
+    }
+
+    @RequestMapping(value = "today_not_visit", produces = "text/plain;charset=utf-8;")
+    public String todayNotVisit(HttpServletRequest request, Model model) {
+        String user_id = request.getParameter("userid");
+        int count = memberService.getTodayCountFromWx(user_id, false);
+        List<Map<String, Object>> mapList = memberService.getTodayFromWx(user_id, false);
+        model.addAttribute("list", mapList);
+        model.addAttribute("count", count);
+        model.addAttribute("user_id", user_id);
+        return "/wx/today_not_visit";
     }
 
     @RequestMapping(value = "get_balance", produces = "text/plain;charset=utf-8;")
@@ -118,34 +173,6 @@ public class WxCtl {
         model.addAttribute("money", agent.getMoney());
 //        model.addAttribute("money", 1000);
         return "/wx/balance";
-    }
-
-    @RequestMapping(value = "total", produces = "text/plain;charset=utf-8;")
-    public String total(HttpServletRequest request, Model model) {
-        String userid = request.getParameter("userid");
-        model.addAllAttributes(memberService.getTotalFromWx(userid));
-        return "/wx/total";
-    }
-
-    @RequestMapping(value = "today", produces = "text/plain;charset=utf-8;")
-    public String today(HttpServletRequest request, Model model) {
-        String userid = request.getParameter("userid");
-        model.addAllAttributes(memberService.getTodayFromWx(userid));
-        return "/wx/today";
-    }
-
-    @RequestMapping(value = "today_visit", produces = "text/plain;charset=utf-8;")
-    public String todayVisit(HttpServletRequest request, Model model) {
-        String userid = request.getParameter("userid");
-        model.addAllAttributes(memberService.getTodayFromWx(userid, true));
-        return "/wx/today_visit";
-    }
-
-    @RequestMapping(value = "today_not_visit", produces = "text/plain;charset=utf-8;")
-    public String todayNotVisit(HttpServletRequest request, Model model) {
-        String userid = request.getParameter("userid");
-        model.addAllAttributes(memberService.getTodayFromWx(userid, false));
-        return "/wx/today_not_visit";
     }
 
     @RequestMapping(value = "to_re_add", produces = "text/plain;charset=utf-8;")

@@ -28,15 +28,23 @@ public class MemberDao extends BaseDao<Member> implements IMemberDao {
     }
 
     public List<Map<String, Object>> getTotal(String user_id) {
-        String sql = "select m.id, m.name,m.mobile,m.createDate from agent_message am " +
+        String sql = "select m.id, m.name,m.mobile,m.createDate,am.visit from agent_message am " +
                 "left join member m on am.member_id = m.id " +
                 "left join agent ag on am.agent_id = ag.id " +
                 "where ag.userid = '" + user_id + "'";
         return this.findBySql(sql);
     }
 
+    public int getTotalCount(String user_id) {
+        String sql = "select count(m.id) as count from agent_message am " +
+                "left join member m on am.member_id = m.id " +
+                "left join agent ag on am.agent_id = ag.id " +
+                "where ag.userid = '" + user_id + "'";
+        return Integer.parseInt(this.findBySql(sql).get(0).get("count").toString());
+    }
+
     public List<Map<String, Object>> getToday(String user_id) {
-        String sql = "select m.id, m.name,m.mobile,m.createDate from agent_message am " +
+        String sql = "select m.id, m.name,m.mobile,m.createDate,am.visit from agent_message am " +
                 "left join member m on am.member_id = m.id " +
                 "left join agent ag on am.agent_id = ag.id " +
                 "where ag.userid = '" + user_id +
@@ -44,12 +52,39 @@ public class MemberDao extends BaseDao<Member> implements IMemberDao {
         return this.findBySql(sql);
     }
 
+    public int getTodayCount(String user_id) {
+        String sql = "select count(m.id) as count from agent_message am " +
+                "left join member m on am.member_id = m.id " +
+                "left join agent ag on am.agent_id = ag.id " +
+                "where ag.userid = '" + user_id +
+                "' and date_format(am.updateDate,'%Y-%m-%d') = curdate()";
+        return Integer.parseInt(this.findBySql(sql).get(0).get("count").toString());
+    }
+
     public List<Map<String, Object>> getToday(String user_id, boolean visit) {
-        String sql = "select m.id, m.name,m.mobile,m.createDate from agent_message am " +
+        String sql = "select m.id, m.name,m.mobile,m.createDate,am.visit from agent_message am " +
                 "left join member m on am.member_id = m.id " +
                 "left join agent ag on am.agent_id = ag.id " +
                 "where am.visit is " + visit + " and ag.userid = '" + user_id +
                 "' and date_format(am.updateDate,'%Y-%m-%d') = curdate()";
         return this.findBySql(sql);
+    }
+
+    public int getTodayCount(String user_id, boolean visit) {
+        String sql = "select count(m.id) as count from agent_message am " +
+                "left join member m on am.member_id = m.id " +
+                "left join agent ag on am.agent_id = ag.id " +
+                "where am.visit is " + visit + " and ag.userid = '" + user_id +
+                "' and date_format(am.updateDate,'%Y-%m-%d') = curdate()";
+
+        return Integer.parseInt(this.findBySql(sql).get(0).get("count").toString());
+    }
+
+    public Map<String, Object> getDetail(long member_id) {
+        String sql = "select m.id, m.name,m.mobile,m.createDate,am.visit from agent_message am " +
+                "left join member m on am.member_id = m.id " +
+                "left join agent ag on am.agent_id = ag.id " +
+                "where m.id = '" + member_id + "'";
+        return this.findBySql(sql).get(0);
     }
 }

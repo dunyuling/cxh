@@ -3,8 +3,10 @@ package com.aifeng.mgr.admin.dao.impl;
 import com.aifeng.core.dao.impl.BaseDao;
 import com.aifeng.mgr.admin.dao.IAgentMessageDao;
 import com.aifeng.mgr.admin.model.AgentMessage;
+import org.apache.commons.collections.map.HashedMap;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +30,13 @@ public class AgentMessageDao extends BaseDao<AgentMessage> implements IAgentMess
                 "left join message m on am.message_id = m.id " +
                 "limit " + pageSize + " offset " + (page - 1) * pageSize + ";";
         return this.findBySql(str);
+    }
+
+    public AgentMessage findByMemberId(long member_id) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("member_id", member_id);
+        String sql = "from AgentMessage where member_id=:member_id";
+        return this.findOneByHql(sql, params);
     }
 }
 

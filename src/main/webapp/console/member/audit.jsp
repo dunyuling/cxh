@@ -41,7 +41,7 @@
                     <label class="col-sm-3 control-label">县/区：</label>
                     <div class="col-sm-6">
                         <input id="area" name="area" value="${temp.area}" class="form-control"
-                               validate="{required:true}" validateMessage="{required:'请输入县/区'}">
+                               readonly validate="{required:true}" validateMessage="{required:'请输入县/区'}">
                     </div>
                 </div>
 
@@ -50,7 +50,7 @@
                     <div class="col-sm-7">
                         <select id="status" name="status" class="form-control">
                             <option value="SUCCESS">成功</option>
-                            <option value="FAILURE">失败</option>
+                            <%--<option value="FAILURE">失败</option>--%>
                         </select>
                     </div>
                 </div>

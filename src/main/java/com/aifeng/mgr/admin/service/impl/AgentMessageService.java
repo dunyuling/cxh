@@ -30,7 +30,7 @@ public class AgentMessageService extends BaseService<AgentMessage> implements IA
     @Transactional
     public void save(Member member, Message message, Agent agent) {
         AgentMessage agentMessage = new AgentMessage();
-        agentMessage.setMessage_id(member.getId());
+        agentMessage.setMember_id(member.getId());
         agentMessage.setAgent_id(agent.getId());
         agentMessage.setTimes(1);
         agentMessage.setUpdateDate(new Date());
@@ -52,5 +52,15 @@ public class AgentMessageService extends BaseService<AgentMessage> implements IA
     @Transactional
     public long getTotal() {
         return agentMessageDao.countAll();
+    }
+
+    @Transactional
+    public void read(long member_id) {
+        AgentMessage agentMessage = agentMessageDao.findByMemberId(member_id);
+        if (!agentMessage.isReaded()) {
+            agentMessage.setReaded(true);
+            agentMessage.setReadDate(new Date());
+            agentMessageDao.update(agentMessage);
+        }
     }
 }

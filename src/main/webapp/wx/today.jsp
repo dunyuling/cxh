@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!doctype html>
 <html>
@@ -13,57 +14,29 @@
 </head>
 <body>
 <div class="page_header">
-	<div class="sub1"><a href="/wx/manage.cs"><i><img src="img/header_icon.png"></i><p>返回</p></a></div>
+	<div class="sub1"><a href="/wx/manage.cs?userid=${user_id}"><i><img src="img/header_icon.png"></i><p>返回</p></a></div>
 	<div class="sub2">今日咨询记录</div>
 	<div class="sub3"></div>
 </div>
 <div class="page02_main">
-	<div class="jilu_main">365条信息</div>
+	<div class="jilu_main">${count}条信息</div>
 	<div class="page02_list_main">
 		<div class="page02_lists">
-			<a href="#1" class="zhuangtai">
-			<div class="zhuangtai_ok">已回访</div>
-			<div class="lists_p1">姓名：张三</div>
-			<p>电话：13838383826</p>
-			<p>需求：购买保险</p>
-			<p>时间：2017-03-30 16:32</p>
-			</a>
-		</div>
-		<div class="page02_lists">
-			<a href="#1" class="zhuangtai">
-			<div class="zhuangtai_ok">已回访</div>
-			<div class="lists_p1">姓名：张三</div>
-			<p>电话：13838383826</p>
-			<p>需求：购买保险</p>
-			<p>时间：2017-03-30 16:32</p>
-			</a>
-		</div>
-		<div class="page02_lists">
-			<a href="#1" class="zhuangtai">
-			<div class="zhuangtai_no">未回访</div>
-			<div class="lists_p1">姓名：张三</div>
-			<p>电话：13838383826</p>
-			<p>需求：购买保险</p>
-			<p>时间：2017-03-30 16:32</p>
-			</a>
-		</div>
-		<div class="page02_lists">
-			<a href="#1" class="zhuangtai">
-			<div class="zhuangtai_ok">已回访</div>
-			<div class="lists_p1">姓名：张三</div>
-			<p>电话：13838383826</p>
-			<p>需求：购买保险</p>
-			<p>时间：2017-03-30 16:32</p>
-			</a>
-		</div>
-		<div class="page02_lists">
-			<a href="#1" class="zhuangtai">
-			<div class="zhuangtai_ok">已回访</div>
-			<div class="lists_p1">姓名：张三</div>
-			<p>电话：13838383826</p>
-			<p>需求：购买保险</p>
-			<p>时间：2017-03-30 16:32</p>
-			</a>
+			<c:forEach items="${list}" var="obj">
+				<a href="#1" class="zhuangtai">
+					<c:if test="${obj.visit}">
+						<div class="zhuangtai_ok">已回访</div>
+					</c:if>
+					<c:if test="${!obj.visit}">
+						<div class="zhuangtai_no">未回访</div>
+					</c:if>
+
+					<div class="lists_p1">姓名：${obj.name}</div>
+					<p>电话：${obj.mobile}</p>
+					<p>需求：购买保险</p>
+					<p>时间：${obj.createDate}</p>
+				</a>
+			</c:forEach>
 		</div>
 	</div>
 </div>
