@@ -8,6 +8,7 @@ import com.aifeng.mgr.admin.constants.Status;
 import com.aifeng.mgr.admin.dao.impl.MemberDao;
 import com.aifeng.mgr.admin.model.*;
 import com.aifeng.mgr.admin.service.IMemberService;
+import com.aifeng.util.AliSMSUtil;
 import com.aifeng.util.Util;
 import org.apache.http.client.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,13 +93,17 @@ public class MemberService extends BaseService<Member> implements IMemberService
             Agent agent = agentService.findById(agent_id);
 
             if (agent.getMoney() > addressFee.getAmount()) {
+
+                String zone = address.getProvince() + " " + address.getCity() + " " + address.getArea();
                 String content = Constants.wxMsgTitle +
                         "\n\n时间: " + Util.date2String(new Date(), "yyyy-MM-dd HH:mm") +
                         "\n姓名: " + member.getName() + "" +
                         "\n电话: " + member.getMobile() +
-                        "\n地区: " + address.getProvince() + " " + address.getCity() + " " + address.getArea() +
+                        "\n地区: " + zone +
                         "\n咨询类型: " + "车险询价" +
+//                        "\n备注:第" + 1 + "次提醒" +
                         "\n您处理该信息后，请点击:" + Constants.host + "wx/detail.cs?id=" + member.getId();
+                AliSMSUtil.send(agent.getName(), zone, member.getName(), member.getMobile(), agent.getMobile());
 
                 //基本信息
                 Message message = messageService.save(content, proxyAddress.getId());

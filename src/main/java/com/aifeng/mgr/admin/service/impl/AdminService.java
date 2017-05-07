@@ -167,7 +167,7 @@ public class AdminService extends BaseService<Admin> implements IAdminService {
     @Transactional
     private String generateCode() {
         long total = getTotal() + 1;
-        return total < 10 ? "0000" + total : "000" + total;
+        return total < 10 ? "00000" + total : "0000" + total;
     }
 
     @Transactional

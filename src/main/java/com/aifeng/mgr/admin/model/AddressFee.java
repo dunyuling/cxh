@@ -9,7 +9,7 @@ import java.util.Date;
 /**
  * Created by pro on 17-4-21.
  */
-@Table(name="address_fee")
+@Table(name = "address_fee")
 @Entity
 public class AddressFee {
 
@@ -22,6 +22,10 @@ public class AddressFee {
     private int amount;
 
     private Date createDate;
+
+    public AddressFee() {
+        this.createDate = new Date();
+    }
 
     public long getId() {
         return id;

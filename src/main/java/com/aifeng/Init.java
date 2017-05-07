@@ -25,9 +25,9 @@ public class Init {
 
         AdminService adminService = classPathXmlApplicationContext.getBean(AdminService.class);
         Admin admin = new Admin();
-        admin.setAccount("admin2");
-        admin.setPwd(Md5.getMd5("admin2" + "123456"));
-        admin.setCode("000002");
+        admin.setAccount("admin");
+        admin.setPwd(Md5.getMd5("admin" + "123456"));
+        admin.setCode("000001");
         adminService.add(admin);
         /*System.out.println(Md5.getMd5("admin" + "123456"));
         System.out.println("08d879276ccfab2e74eadf6e4a5f4515".length());*/
@@ -40,6 +40,6 @@ public class Init {
  * 2. 省市区，三份要统一
  * 3. 辅助数据，企业号 CorpId,secret
  * 4. 重发消息的配置
- * 5. 货币结算单位是分
+ * 5. 货币结算单位是元
  * 6.AddressFee
  */
