@@ -25,7 +25,7 @@ public class LoginCtl extends BaseCtl {
 
     private Logger log = Logger.getLogger(LoginCtl.class);
 
-    private static String LOGIN = "redirect:/";
+//    private static String LOGIN = "redirect:/mgr/login.cs";
     private static String LOGIN_SUCCESS = "redirect:/mgr/main.cs";
 
     @Autowired
@@ -40,19 +40,24 @@ public class LoginCtl extends BaseCtl {
         return "index";
     }
 
+    @RequestMapping("toLogin")
+    public String toLogin() {
+        return "login";
+    }
+
     @RequestMapping("login")
     public String login(String account, String pwd, String code, ModelMap mm) {
         System.out.println("login ------------------------");
         if (StringUtil.isBlank(account, pwd)) {
             log.error("登录信息错误");
-            return LOGIN;
+            return "login";
         }
 
         Admin user = this.adminService.findByAccount(account);
 
 		if(user == null){
             log.error("账户信息不存在");
-			return  LOGIN;
+            return "login";
 		}
 
         if (user.getPwd().equals(Md5.getMd5(pwd.trim() + account.trim()))) {
@@ -60,7 +65,7 @@ public class LoginCtl extends BaseCtl {
             return LOGIN_SUCCESS;
         } else {
             log.error("密码错误");
-            return LOGIN;
+            return "login";
         }
     }
 
@@ -89,6 +94,6 @@ public class LoginCtl extends BaseCtl {
     @RequestMapping("logout")
     public String login(ModelMap mm) {
         this.set(Constants.SESSION_USER, null);   // 用户信息
-        return "redirect:/";
+        return "redirect:/mgr/login.cs";
     }
 }

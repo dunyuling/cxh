@@ -14,11 +14,11 @@
     <meta name="description" content="计分系统 Bate1.0">--%>
 
     <link rel="shortcut icon" href="favicon.ico">
-    <link href="res/css/bootstrap.min.css" rel="stylesheet">
-    <link href="res/css/font-awesome.css" rel="stylesheet">
+    <link href="/res/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/res/css/font-awesome.css" rel="stylesheet">
 
-    <link href="res/css/animate.css" rel="stylesheet">
-    <link href="res/css/style.css" rel="stylesheet">
+    <link href="/res/css/animate.css" rel="stylesheet">
+    <link href="/res/css/style.css" rel="stylesheet">
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html"/>
     <![endif]-->
@@ -38,7 +38,7 @@
         </div>
         <h3>欢迎登陆车险汇管理系统</h3>
 
-        <form class="m-t" role="form" action="mgr/login.cs">
+        <form class="m-t" role="form" action="/mgr/login.cs">
             <div class="form-group">
                 <input type="text" class="form-control" name="account" placeholder="用户名" required="">
             </div>
@@ -56,8 +56,8 @@
 </div>
 
 <!-- 全局js -->
-<script src="res/js/jquery.min.js"></script>
-<script src="res/js/bootstrap.min.js"></script>
+<script src="/res/js/jquery.min.js"></script>
+<script src="/res/js/bootstrap.min.js"></script>
 
 <!--统计代码，可删除-->
 </body>
