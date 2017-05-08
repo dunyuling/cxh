@@ -34,7 +34,7 @@ public class ProxyAddressDao extends BaseDao<ProxyAddress> implements IProxyAddr
     }
 
     public List<Map<String, Object>> getProxyAddress(int page, int pageSize) {
-        String sql = "select pa.id, ag.name,  a.province ,a.city, a.area,pa.proxyStatus from proxy_address pa " +
+        String sql = "select pa.id, ag.name,  a.province ,a.city, a.area,pa.proxyStatus,pa.createDate,pa.updateDate from proxy_address pa " +
                 "left join address_fee af on pa.af_id = af.id " +
                 "left join address a on af.address_id = a.id " +
                 "left join agent ag on pa.agent_id = ag.id " +

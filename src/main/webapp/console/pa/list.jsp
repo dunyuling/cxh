@@ -49,6 +49,8 @@
                     <th data-field="city">市</th>
                     <th data-field="area">区</th>
                     <th data-field="proxyStatus" data-formatter="translateStatus">审核状态</th>
+                    <th data-field="createDate" data-formatter="dateFormatter">申请时间</th>
+                    <th data-field="updateDate" data-formatter="dateFormatter">审核时间</th>
                 </tr>
                 </thead>
             </table>
