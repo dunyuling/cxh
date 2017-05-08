@@ -1,0 +1,18 @@
+<taglib>
+    <tlib-version>1.0</tlib-version>
+    <jsp-version>2.0</jsp-version>
+    <short-name>Example TLD</short-name>
+    <tag>
+        <name>enum</name>
+        <tag-class>com.aifeng.util.EnumTag</tag-class>
+        <body-content>scriptless</body-content>
+        <attribute>
+            <name>type</name>
+            <type>com.aifeng.mgr.admin.constants.InsuranceType</type>
+        </attribute>
+        <attribute>
+            <name>status</name>
+            <type>com.aifeng.mgr.admin.constants.Status</type>
+        </attribute>
+    </tag>
+</taglib>

@@ -95,12 +95,25 @@
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
 
-    　<jsp-config>
-    　　	<taglib>
-    　　		<taglib-uri>http://www.test.com/jsp/permission</taglib-uri>
-    　　		<taglib-location>/WEB-INF/tags/permission.tld</taglib-location>
-    　　	</taglib>
-    　　</jsp-config>
+    　
+    <jsp-config>
+        　　
+        <taglib>
+            　　
+            <taglib-uri>http://www.test.com/jsp/permission</taglib-uri>
+            　　
+            <taglib-location>/WEB-INF/tags/permission.tld</taglib-location>
+            　　
+        </taglib>
+        <taglib>
+            　　
+            <taglib-uri>http://www.test.com/jsp/type</taglib-uri>
+            　　
+            <taglib-location>/WEB-INF/tags/enum.tld</taglib-location>
+            　　
+        </taglib>
+        　　
+    </jsp-config>
 
     <error-page>
         <error-code>404</error-code>

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@taglib prefix="p" uri="http://www.test.com/jsp/permission" %>
+<%@taglib prefix="tp" uri="http://www.test.com/jsp/type" %>
+
 <!doctype html>
 <head>
     <%@ include file="/common/head.jsp" %>
@@ -17,8 +19,10 @@
     <div class="row row-lg">
         <div class="col-sm-12">
             <cs:toolbar title="会员管理" tableId="tab_member" width="768px" height="420px" menuCode="21" hdMenu="15">
-                <button class="btn btn-sm btn-info" type="button" onclick="audit1()"><i class="fa fa-info"></i>&nbsp;审核</button>
-                <button class="btn btn-sm btn-danger" type="button" onclick="del()"><i class="fa fa-minus"></i> 删除</button>
+                <button class="btn btn-sm btn-info" type="button" onclick="audit1()"><i class="fa fa-info"></i>&nbsp;审核
+                </button>
+                <button class="btn btn-sm btn-danger" type="button" onclick="del()"><i class="fa fa-minus"></i> 删除
+                </button>
             </cs:toolbar>
             <table id="tab_member"
                    data-toggle="table"
@@ -41,8 +45,8 @@
                     <th data-field="id" data-visible="false"></th>
                     <th data-field="name">名字</th>
                     <th data-field="mobile">电话</th>
-                    <th data-field="type">保险类型</th>
-                    <th data-field="status">状态</th>
+                    <th data-field="type" data-formatter="formatType">保险类型</th>
+                    <th data-field="status" data-formatter="formatStatus">状态</th>
                     <th data-field="province">省</th>
                     <th data-field="city">市</th>
                     <th data-field="area">县/区</th>
@@ -51,6 +55,47 @@
             </table>
         </div>
     </div>
+
+    <script type="text/javascript">
+        function formatType(type) {
+            switch (type) {
+                case "IT_0":
+                    return "交强险";
+                case "IT_1":
+                    return "机动车辆损失险";
+                case "IT_2":
+                    return "第三者责任险";
+                case "IT_3":
+                    return "盗抢险";
+                case "IT_4":
+                    return "车上人员责任险";
+                case "IT_5":
+                    return "车身划痕损失险";
+                case "IT_6":
+                    return "玻璃单独破碎险";
+                case "IT_7":
+                    return "自燃损失险";
+                case "IT_8":
+                    return "发动机特别损失险";
+                case "IT_9":
+                    return "不计免赔率特约损失险";
+            }
+        }
+
+        function formatStatus(status) {
+            switch (status) {
+                case "WAITING":
+                    return "等待中";
+                case "SUCCESS":
+                    return "成功";
+                case "FAILURE":
+                    return "失败";
+            }
+        }
+
+    </script>
+    <tp:enum type="IT_0"/><br/>
+    <tp:enum status="SUCCESS"/>
 </div>
 </body>
 </html>
