@@ -43,6 +43,7 @@
                     <th data-field="ag_name">代理商</th>
                     <th data-field="amount">金额(元)</th>
                     <th data-field="ad_name">操作人</th>
+                    <th data-field="createDate" data-formatter="dateFormatter">充值时间</th>
                 </tr>
                 </thead>
             </table>

@@ -44,7 +44,7 @@
                     <th data-field="content">内容</th>
                     <th data-field="times">已发次数</th>
                     <th data-field="visit">是否回访</th>
-                    <th data-field="visitDate">回访时间</th>
+                    <th data-field="visitDate" data-formatter="dateFormatter">回访时间</th>
                 </tr>
                 </thead>
             </table>
