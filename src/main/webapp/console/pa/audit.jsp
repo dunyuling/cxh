@@ -20,28 +20,62 @@
                     <div class="col-sm-6">
                         <input type="hidden" id="id" name="id" value="${temp.id}"/>
                         <input id="name" name="name" value="${temp.name}" class="form-control"
-                               validate="{required:true}" validateMessage="{required:'请输入名字'}" readonly>
+                               validate="{required:true}" readonly>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-3 control-label">省：</label>
                     <div class="col-sm-6">
                         <input id="province" name="province" value="${temp.province}" class="form-control"
-                               readonly validate="{required:true}" validateMessage="{required:'请输入省'}">
+                               readonly validate="{required:true}">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-3 control-label">市：</label>
                     <div class="col-sm-6">
                         <input id="city" name="city" value="${temp.city}" class="form-control"
-                               readonly validate="{required:true}" validateMessage="{required:'请输入市'}">
+                               readonly validate="{required:true}">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-3 control-label">县/区：</label>
                     <div class="col-sm-6">
                         <input id="area" name="area" value="${temp.area}" class="form-control"
-                               readonly validate="{required:true}" validateMessage="{required:'请输入县/区'}">
+                               readonly validate="{required:true}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">电话：</label>
+                    <div class="col-sm-6">
+                        <input id="mobile" name="mobile" value="${temp.mobile}" class="form-control"
+                               readonly validate="{required:true}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">身份证号：</label>
+                    <div class="col-sm-6">
+                        <input id="IDCard" name="IDCard" value="${temp.IDCard}" class="form-control"
+                               readonly validate="{required:true}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">公司名称：</label>
+                    <div class="col-sm-6">
+                        <input id="corpName" name="corpName" value="${temp.corpName}" class="form-control"
+                               readonly validate="{required:true}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">营业执照：</label>
+                    <div class="col-sm-6">
+                        <a href="${temp.licenseImg}" target="_blank"><img src="${temp.licenseImg}" width="40px"
+                                                                          height="40px"/></a>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">营业执照过期时间：</label>
+                    <div class="col-sm-6">
+                        <fmt:formatDate value="${temp.expireDate}" pattern="yyyy-MM-dd HH:mm"/>
                     </div>
                 </div>
 
