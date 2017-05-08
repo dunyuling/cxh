@@ -15,9 +15,11 @@ import java.util.Map;
 public class MemberDao extends BaseDao<Member> implements IMemberDao {
 
     public List<Map<String, Object>> getMember(int page, int pageSize) {
-        String str = "select m.id,m.name,m.mobile,m.type,m.status, a.province,a.city,a.area from member m " +
+        String str = "select m.id,m.name,m.mobile,m.type,m.status, a.province,a.city,a.area,m.createDate from member m " +
                 "left join address a on m.address_id = a.id " +
+                "order by m.createDate desc " +
                 "limit " + pageSize + " offset " + (page - 1) * pageSize + ";";
+        System.out.println("sql: " + str);
         return this.findBySql(str);
     }
 

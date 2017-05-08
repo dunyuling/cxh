@@ -50,6 +50,7 @@
                     <th data-field="province">省</th>
                     <th data-field="city">市</th>
                     <th data-field="area">县/区</th>
+                    <th data-field="createDate" data-formatter="dateFormatter">创建时间</th>
                 </tr>
                 </thead>
             </table>
@@ -94,8 +95,6 @@
         }
 
     </script>
-    <tp:enum type="IT_0"/><br/>
-    <tp:enum status="SUCCESS"/>
 </div>
 </body>
 </html>
