@@ -100,7 +100,7 @@ public class MemberService extends BaseService<Member> implements IMemberService
                         "\n姓名: " + member.getName() + "" +
                         "\n电话: " + member.getMobile() +
                         "\n地区: " + zone +
-                        "\n咨询类型: " + "车险询价" +
+                        "\n咨询类型: " + member.getType().getType() +
 //                        "\n备注:第" + 1 + "次提醒" +
                         "\n您处理该信息后，请点击:" + Constants.host + "wx/detail.cs?id=" + member.getId();
                 AliSMSUtil.send(agent.getName(), zone, member.getName(), member.getMobile(), agent.getMobile());

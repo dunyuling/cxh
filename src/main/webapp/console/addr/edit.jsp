@@ -53,7 +53,6 @@
                         <button class="btn btn-primary" id="submit" type="submit">提交</button>
                     </div>
                 </div>
-
             </form>
         </div>
     </div>
