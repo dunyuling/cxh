@@ -18,7 +18,7 @@
                       <div class="form-group">
                           <label class="col-sm-3 control-label">access_token：</label>
                           <div class="col-sm-6">
-                              <input id="access_token" name="access_token" value="${ai.access_token}"  class="form-control" validate="{required:true}" validateMessage="{required:'请输入access_token'}" >
+                              <input id="access_token" name="access_token" value="${ai.access_token}"  class="form-control" validate="{required:true}" validateMessage="{required:'请输入access_token'}" readonly >
                           </div>
                       </div>
                       <div class="form-group">

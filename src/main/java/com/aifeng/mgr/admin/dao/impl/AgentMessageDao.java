@@ -25,7 +25,7 @@ public class AgentMessageDao extends BaseDao<AgentMessage> implements IAgentMess
     }
 
     public List<Map<String, Object>> getAm(int page, int pageSize) {
-        String str = "select am.id,a.name,m.content,am.times,am.readed,am.readDate from agent_message am " +
+        String str = "select am.id,a.name,m.content,am.times,am.visit,am.visitDate from agent_message am " +
                 "left join agent a on am.agent_id = a.id " +
                 "left join message m on am.message_id = m.id " +
                 "limit " + pageSize + " offset " + (page - 1) * pageSize + ";";

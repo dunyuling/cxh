@@ -43,8 +43,8 @@
                     <th data-field="name">名字</th>
                     <th data-field="content">内容</th>
                     <th data-field="times">已发次数</th>
-                    <th data-field="readed">是否回访</th>
-                    <th data-field="readDate">回访是将</th>
+                    <th data-field="visit">是否回访</th>
+                    <th data-field="visitDate">回访时间</th>
                 </tr>
                 </thead>
             </table>

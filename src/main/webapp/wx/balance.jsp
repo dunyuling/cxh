@@ -13,21 +13,18 @@
     <%--<script type="text/javascript" src="js/jquery.1.7.2.min.js"/>--%>
 </head>
 <body>
-<div>
-    <div class="page_header">
-        <%--<div class="sub1"><a href="#1" id="back"><i><img src="img/header_icon.png"></i>
-            <p>返回</p></a></div>--%>
-        <div class="sub2">余额</div>
-        <div class="sub3"></div>
-    </div>
-    <div class="page01_list01"><span class="icon03"></span>
-        <p>${money}</p></div>
+<div class="page_header">
+    <div class="sub1"><a href="page01.html"><%--<i><img src="img/header_icon.png"></i>
+        <p>返回</p>--%></a></div>
+    <div class="sub2">我的余额</div>
+    <div class="sub3"></div>
 </div>
-<%--<script type="text/javascript">--%>
-<%--$("#back").click(function () {--%>
-<%--alert("ss");--%>
-<%--window.self.close();--%>
-<%--})--%>
-<%--</script>--%>
+
+<div class="page_details_main">
+    <ul>
+        <li><p style="float:left">当前余额：</p>
+            <p style="float:left; margin-left:0">${money}元</p></li>
+    </ul>
+</div>
 </body>
 </html>
