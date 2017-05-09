@@ -20,6 +20,7 @@ public class MessageDao extends BaseDao<Message> implements IMessageDao {
                 "left join address_fee af on pa.af_id = af.id " +
                 "left join agent ag on pa.agent_id = ag.id " +
                 "left join address a on af.address_id = a.id " +
+                "order by m.createDate desc " +
                 "limit " + pageSize + " offset " + (page - 1) * pageSize + ";";
         return this.findBySql(str);
     }

@@ -71,7 +71,7 @@ public class MessageService extends BaseService<Message> implements IMessageServ
         ResponseEntity<ResponseType> response = restTemplate.postForEntity(Util.loadSendMsgUrl(access_token), requestBody, ResponseType.class);
         System.out.println(response.getBody().getErrmsg());
 
-        if (charge && amount != 0) {
+        if (charge && amount > 0) {
             feeDeductionService.save(agent.getId(), message.getId(), amount);
         }
     }

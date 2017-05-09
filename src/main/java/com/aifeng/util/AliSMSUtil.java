@@ -19,7 +19,7 @@ public class AliSMSUtil {
     private static final String MNSEndpoint = "https://1093588017502147.mns.cn-hangzhou.aliyuncs.com/";
     private static final String Topic = "sms.topic-cn-hangzhou";
     private static final String SignName = "车险汇";
-    private static final String TemplateCode = "SMS_66105185";
+    private static final String TemplateCode = "SMS_65975238";
 
 
     public static void send(String name, String zone, String type, String member_name, String member_phone, String... receiverPhones) {

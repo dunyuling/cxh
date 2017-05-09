@@ -22,7 +22,7 @@
                         <input id="id" name="id" value="${agent.id }" class="form-control" type="hidden">
                         <input id="amount" name="amount" value="" class="form-control"
                                validate="{required:true}" validateMessage="{required:'请输入金额'}">
-                        单位分
+                        单位元
                     </div>
                 </div>
                 <div class="form-group">

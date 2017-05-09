@@ -17,6 +17,7 @@ public class AgentDao extends BaseDao<Agent> implements IAgentDao {
 
     public List<Map<String, Object>> getAgents(int page, int pageSize) {
         String str = "select a.id,a.name,a.userid,a.mobile,a.IDCard,a.corpName,a.licenseImg,a.expireDate,a.money from agent a " +
+                "order by a.id desc " +
                 "limit " + pageSize + " offset " + (page - 1) * pageSize + ";";
         return this.findBySql(str);
     }

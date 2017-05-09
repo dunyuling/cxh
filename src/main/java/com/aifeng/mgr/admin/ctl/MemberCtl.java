@@ -70,6 +70,7 @@ public class MemberCtl extends BaseCtl {
     @ResponseBody
     public String audit(long id, String status, String denyReason) {
         try {
+            System.out.println("---");
             memberService.audit(id, status, denyReason);
         } catch (Exception e) {
             e.printStackTrace();

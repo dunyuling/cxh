@@ -43,7 +43,7 @@
                     <th data-field="name">名字</th>
                     <th data-field="content">内容</th>
                     <th data-field="times">已发次数</th>
-                    <th data-field="visit">是否回访</th>
+                    <th data-field="visit" data-formatter="visitFormatter">是否回访</th>
                     <th data-field="visitDate" data-formatter="dateFormatter">回访时间</th>
                 </tr>
                 </thead>
@@ -67,6 +67,10 @@
             case 'REFUSED':
                 return "被拒绝";
         }
+    }
+
+    function visitFormatter(value) {
+        return value == false ? "未回访" : "已回访";
     }
 </script>
 
