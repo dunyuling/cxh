@@ -69,7 +69,7 @@
                             </a>
                             <ul class="nav nav-second-level">
                                 <c:forEach items="${permissions }" var="p2">
-                                    <c:if test="${p2.pid == p.menu_id}">
+                                    <c:if test="${p2.pid == p.menu_id && p2.display }">
                                         <li>
                                             <a class="J_menuItem" href="${p2.url}?menuCode=${p2.menu_code}"
                                                code="${p2.menu_code }">${p2.menu_name }</a>

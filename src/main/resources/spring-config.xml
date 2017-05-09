@@ -79,13 +79,6 @@
 	
 	<bean id="restTemplate" class="org.springframework.web.client.RestTemplate" />
 
-	<bean id="testDemoService" class="com.aifeng.TestDemoService"/>
-
-	<!--<util:properties id="applicationProps" location="application.properties"/>-->
-	<!--<context:property-placeholder properties-ref="applicationProps"/>-->
-	<!--<bean id="demoServiceXmlConfig" class="com.aifeng.DemoServiceXmlConfig"></bean>-->
-	<!--<task:scheduled-tasks>-->
-		<!--<task:scheduled ref="demoServiceXmlConfig" method="demoServiceMethod"-->
-						<!--cron="#{applicationProps['cron.expression']}"/>-->
-	<!--</task:scheduled-tasks>-->
+	<!-- 动态参数定时器示例入口 -->
+	<!--<bean id="testDemoService" class="com.aifeng.TestDemoService"/>-->
 </beans>
