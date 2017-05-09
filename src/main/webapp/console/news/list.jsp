@@ -41,6 +41,7 @@
                     <th data-field="img" data-formatter="imageFormatter">缩略图</th>
                     <th data-field="title">标题</th>
                     <th data-field="description">描述</th>
+                    <th data-field="createDate" data-formatter="dateFormatter">生成日期</th>
                 </tr>
                 </thead>
             </table>

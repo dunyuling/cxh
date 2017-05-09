@@ -46,8 +46,8 @@
         } else {
             var date = new Date(value);
             var year = date.getFullYear();
-            var month = date.getMonth();
-            var day = date.getDay();
+            var month = date.getMonth() + 1;
+            var day = date.getDate();
             var hour = date.getHours();
             var minute = date.getMinutes();
             return year + "-" + format(month) + "-" + format(day) + " " + format(hour) + ":" + format(minute);
