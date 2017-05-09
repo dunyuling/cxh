@@ -18,6 +18,7 @@ public class RefundDao extends BaseDao<Refund> implements IRefundDao {
         String str = "select ag.name as ag_name, r.amount,ad.name as ad_name,r.createDate from refund r " +
                 "left join tb_mgr_admin ad on ad.id = r.admin_id " +
                 "left join agent ag on ag.id = r.agent_id " +
+                "order by r.createDate desc " +
                 "limit " + pageSize + " offset " + (page - 1) * pageSize + ";";
         return this.findBySql(str);
     }

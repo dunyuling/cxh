@@ -12,6 +12,7 @@
     <link rel="stylesheet" type="text/css" href="css/base.css">
     <link rel="stylesheet" type="text/css" href="css/page01.css">
     <script type="text/javascript" src="js/jquery.1.7.2.min.js"></script>
+    <script type="text/javascript" src="../common/translateType.js"></script>
 </head>
 <body>
 <div class="page_header">
@@ -27,7 +28,7 @@
         <li><p style="color:#4a90e2">电话：${mobile}</p></li>
         <%--<li><p>ID：686868</p></li>--%>
         <li><p>时间：${createDate}</p></li>
-        <li><p>需求：购买保险</p></li>
+        <li><p id="need_${obj.id}">${obj.type}</p></li>
         <li><p>地区：${province}-${city}-${area}</p></li>
     </ul>
     <c:if test="${!visit}">

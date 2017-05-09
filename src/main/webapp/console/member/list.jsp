@@ -12,6 +12,7 @@
     <script src="/res/js/plugins/bootstrap-table/bootstrap-table.js"></script>
     <script src="/res/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
     <script src="/res/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+    <script src="/common/translateType.js"></script>
 </head>
 
 <body class="gray-bg">
@@ -58,7 +59,7 @@
     </div>
 
     <script type="text/javascript">
-        function formatType(type) {
+        /*function formatType(type) {
             switch (type) {
                 case "IT_0":
                     return "交强险";
@@ -81,7 +82,7 @@
                 case "IT_9":
                     return "不计免赔率特约损失险";
             }
-        }
+        }*/
 
         function formatStatus(status) {
             switch (status) {

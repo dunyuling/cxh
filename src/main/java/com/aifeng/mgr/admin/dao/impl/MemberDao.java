@@ -30,7 +30,7 @@ public class MemberDao extends BaseDao<Member> implements IMemberDao {
     }
 
     public List<Map<String, Object>> getTotal(String user_id) {
-        String sql = "select m.id, m.name,m.mobile,m.createDate,am.visit from agent_message am " +
+        String sql = "select m.id, m.name,m.mobile,m.createDate,m.type,am.visit from agent_message am " +
                 "left join member m on am.member_id = m.id " +
                 "left join agent ag on am.agent_id = ag.id " +
                 "where ag.userid = '" + user_id + "'";
@@ -46,7 +46,7 @@ public class MemberDao extends BaseDao<Member> implements IMemberDao {
     }
 
     public List<Map<String, Object>> getToday(String user_id) {
-        String sql = "select m.id, m.name,m.mobile,m.createDate,am.visit from agent_message am " +
+        String sql = "select m.id, m.name,m.mobile,m.type,m.createDate,am.visit from agent_message am " +
                 "left join member m on am.member_id = m.id " +
                 "left join agent ag on am.agent_id = ag.id " +
                 "where ag.userid = '" + user_id +
@@ -64,7 +64,7 @@ public class MemberDao extends BaseDao<Member> implements IMemberDao {
     }
 
     public List<Map<String, Object>> getToday(String user_id, boolean visit) {
-        String sql = "select m.id, m.name,m.mobile,m.createDate,am.visit from agent_message am " +
+        String sql = "select m.id, m.name,m.mobile,m.type, m.createDate,am.visit from agent_message am " +
                 "left join member m on am.member_id = m.id " +
                 "left join agent ag on am.agent_id = ag.id " +
                 "where am.visit is " + visit + " and ag.userid = '" + user_id +
@@ -83,7 +83,7 @@ public class MemberDao extends BaseDao<Member> implements IMemberDao {
     }
 
     public Map<String, Object> getDetail(long member_id) {
-        String sql = "select m.id, m.name,m.mobile,m.createDate,am.visit, addr.province,addr.city,addr.area from agent_message am " +
+        String sql = "select m.id, m.name,m.mobile,m.type, m.createDate,am.visit,m.type, addr.province,addr.city,addr.area from agent_message am " +
                 "left join member m on am.member_id = m.id " +
                 /*"left join agent ag on am.agent_id = ag.id " +*/
                 "left join proxy_address pa on pa.agent_id = am.agent_id " +

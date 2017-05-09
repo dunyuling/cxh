@@ -176,10 +176,11 @@
                 return;
             }
 
-            if (addr == '') {
-                alert("地址必须选择");
+            if (addr == '' || addr.split("-") != 3) {
+                alert("地址必须正确选择");
                 return;
             }
+
 
             if (corpName == '') {
                 alert("公司名称必须填写");

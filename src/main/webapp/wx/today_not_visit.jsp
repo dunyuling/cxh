@@ -11,6 +11,8 @@
     <title>车险汇</title>
     <link rel="stylesheet" type="text/css" href="css/base.css">
     <link rel="stylesheet" type="text/css" href="css/page01.css">
+    <script type="text/javascript" src="js/jquery.1.7.2.min.js"></script>
+    <script type="text/javascript" src="../common/translateType.js"></script>
 </head>
 <body>
 <div class="page_header">
@@ -23,19 +25,21 @@
     <div class="jilu_main">${count}条信息</div>
     <div class="page02_list_main">
         <c:forEach items="${list}" var="obj">
-            <a href="/wx/detail.cs?path=today_not_visit&id=${obj.id}&userid=${user_id}" class="zhuangtai">
-                <c:if test="${obj.visit}">
-                    <div class="zhuangtai_ok">已回访</div>
-                </c:if>
-                <c:if test="${!obj.visit}">
-                    <div class="zhuangtai_no">未回访</div>
-                </c:if>
+            <div class="page02_lists">
+                <a href="/wx/detail.cs?path=today_not_visit&id=${obj.id}&userid=${user_id}" class="zhuangtai">
+                    <c:if test="${obj.visit}">
+                        <div class="zhuangtai_ok">已回访</div>
+                    </c:if>
+                    <c:if test="${!obj.visit}">
+                        <div class="zhuangtai_no">未回访</div>
+                    </c:if>
 
-                <div class="lists_p1">姓名：${obj.name}</div>
-                <p>电话：${obj.mobile}</p>
-                <p>需求：购买保险</p>
-                <p>时间：${obj.createDate}</p>
-            </a>
+                    <div class="lists_p1">姓名：${obj.name}</div>
+                    <p>电话：${obj.mobile}</p>
+                    <p id="need_${obj.id}">${obj.type}</p>
+                    <p>时间：${obj.createDate}</p>
+                </a>
+            </div>
         </c:forEach>
     </div>
 </div>

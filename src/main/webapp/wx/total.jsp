@@ -20,6 +20,7 @@
     <script type="text/javascript" src="js/mobiscroll.js"></script>
     <script type="text/javascript" src="js/mobiscroll_003.js"></script>
     <script type="text/javascript" src="js/mobiscroll_005.js"></script>
+    <script type="text/javascript" src="../common/translateType.js"></script>
 </head>
 <body>
 <div class="page_header">
@@ -75,12 +76,13 @@
 
                     <div class="lists_p1">姓名：${obj.name}</div>
                     <p>电话：${obj.mobile}</p>
-                    <p>需求：购买保险</p>
+                    <p id="need_${obj.id}">${obj.type}</p>
                     <p>时间：${obj.createDate}</p>
                 </a>
             </div>
         </c:forEach>
     </div>
 </div>
+
 </body>
 </html>
