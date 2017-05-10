@@ -2,7 +2,6 @@ package com.aifeng.ws.user.ctl;
 
 import com.aifeng.mgr.admin.constants.ImgPath;
 import com.aifeng.mgr.admin.model.Agent;
-import com.aifeng.mgr.admin.model.AgentMessage;
 import com.aifeng.mgr.admin.service.impl.AgentMessageService;
 import com.aifeng.mgr.admin.service.impl.AgentService;
 import com.aifeng.mgr.admin.service.impl.AuxiliaryInformationService;
@@ -12,7 +11,6 @@ import com.aifeng.ws.wx.UserResponse;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -155,6 +153,18 @@ public class WxCtl {
         model.addAttribute("count", count);
         model.addAttribute("user_id", user_id);
         return "/wx/total";
+    }
+
+    @RequestMapping(value = "query", produces = "text/plain;charset=utf-8;")
+    public String query(HttpServletRequest request, Model model) {
+        String user_id = request.getParameter("userid");
+        String dateStr = request.getParameter("dateStr");
+        int count = memberService.getQueryCountFromWx(user_id, dateStr);
+        List<Map<String, Object>> mapList = memberService.getQueryFromWx(user_id, dateStr);
+        model.addAttribute("list", mapList);
+        model.addAttribute("count", count);
+        model.addAttribute("user_id", user_id);
+        return "/wx/query";
     }
 
     @RequestMapping(value = "today", produces = "text/plain;charset=utf-8;")

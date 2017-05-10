@@ -10,7 +10,6 @@ import com.aifeng.mgr.admin.model.*;
 import com.aifeng.mgr.admin.service.IMemberService;
 import com.aifeng.util.AliSMSUtil;
 import com.aifeng.util.Util;
-import org.apache.http.client.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -161,6 +160,16 @@ public class MemberService extends BaseService<Member> implements IMemberService
     @Transactional
     public int getTotalCountFromWx(String user_id) {
         return memberDao.getTotalCount(user_id);
+    }
+
+    @Transactional
+    public List<Map<String, Object>> getQueryFromWx(String user_id, String date) {
+        return memberDao.getQuery(user_id, date);
+    }
+
+    @Transactional
+    public int getQueryCountFromWx(String user_id, String dateStr) {
+        return memberDao.getQueryCount(user_id, dateStr);
     }
 
     @Transactional

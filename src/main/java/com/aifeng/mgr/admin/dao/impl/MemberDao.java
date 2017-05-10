@@ -45,6 +45,24 @@ public class MemberDao extends BaseDao<Member> implements IMemberDao {
         return Integer.parseInt(this.findBySql(sql).get(0).get("count").toString());
     }
 
+    public List<Map<String, Object>> getQuery(String user_id, String dateStr) {
+        String sql = "select m.id, m.name,m.mobile,m.createDate,m.type,am.visit from agent_message am " +
+                "left join member m on am.member_id = m.id " +
+                "left join agent ag on am.agent_id = ag.id " +
+                "where ag.userid = '" + user_id + "' " +
+                " and date_format(createDate,'%Y-%m-%d') = str_to_date('" + dateStr + "','%Y-%m-%d')";
+        return this.findBySql(sql);
+    }
+
+    public int getQueryCount(String user_id, String dateStr) {
+        String sql = "select count(m.id) as count from agent_message am " +
+                "left join member m on am.member_id = m.id " +
+                "left join agent ag on am.agent_id = ag.id " +
+                "where ag.userid = '" + user_id + "'" +
+                " and date_format(createDate,'%Y-%m-%d') = str_to_date('" + dateStr + "','%Y-%m-%d')";
+        return Integer.parseInt(this.findBySql(sql).get(0).get("count").toString());
+    }
+
     public List<Map<String, Object>> getToday(String user_id) {
         String sql = "select m.id, m.name,m.mobile,m.type,m.createDate,am.visit from agent_message am " +
                 "left join member m on am.member_id = m.id " +
