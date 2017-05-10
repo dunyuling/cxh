@@ -18,7 +18,7 @@
     <div class="sub2">完善资料</div>
     <div class="sub3"></div>
 </div>
-<div class="submit_main">
+<%--<div class="submit_main">
     <ul>
         <input type="hidden" id="access_token" value="${access_token}"/>
         <input type="hidden" id="user_id" value="${user_id}"/>
@@ -31,7 +31,7 @@
         <li class="su_input content-block"><p>代理地区</p><input name="addr" id="addr" readonly type="text"
                                                              placeholder="省/市/县（区）"></li>
     </ul>
-</div>
+</div>--%>
 <div class="submit_main2">
     <li class="su_input2"><p>公司名称</p>
         <div class="input"><input id="corpName" name="corp_name" type="text" placeholder="" required></div>
@@ -39,7 +39,7 @@
     <div class="shangchuan_img ">
         <p>营业执照</p>
         <div class="z_photo">
-            <div class="shangchuan_but z_file">
+            <div id="select_file" class="shangchuan_but z_file">
                 <input type="file" name="img" id="img" value="" accept="image/*"
                        onchange="imgChange(this, 'z_photo','z_file');"/>
             </div>
@@ -94,17 +94,38 @@
         //文本框的父级元素
         var input = document.getElementsByClassName(obj2)[0];
         var imgArr = [];
-        //遍历获取到得图片文件
-        for (var i = 0; i < fileList.length; i++) {
-            var imgUrl = window.URL.createObjectURL(file.files[i]);
-            imgArr.push(imgUrl);
-            var img = document.createElement("img");
-            img.setAttribute("src", imgArr[i]);
-            var imgAdd = document.createElement("div");
-            imgAdd.setAttribute("class", "z_addImg");
-            imgAdd.appendChild(img);
-            imgContainer.appendChild(imgAdd);
+
+
+        var imgList = document.getElementsByClassName("z_addImg");
+        var imgNum = 0;
+//        alert("a: " + imgList.length == undefined);
+        if (imgList.length != undefined) {
+            console.log("--- \t " + imgList.length);
+            for (var j = 0; j < imgList.length; j++) {
+                if($(imgList[j]).is(":visible")) {
+                    console.log("++++");
+                    imgNum++;
+                }
+            }
         }
+
+        //遍历获取到得图片文件
+        if (imgNum < 1) {
+//            alert(imgNum);
+            for (var i = 0; i < fileList.length; i++) {
+                var imgUrl = window.URL.createObjectURL(file.files[i]);
+                imgArr.push(imgUrl);
+                var img = document.createElement("img");
+                img.setAttribute("src", imgArr[i]);
+                var imgAdd = document.createElement("div");
+                imgAdd.setAttribute("class", "z_addImg");
+                imgAdd.appendChild(img);
+                imgContainer.appendChild(imgAdd);
+            }
+        } else {
+            alert("只能选择一张图片");
+        }
+
         imgRemove();
     }
 
