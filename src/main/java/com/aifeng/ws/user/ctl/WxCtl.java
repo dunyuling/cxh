@@ -73,8 +73,17 @@ public class WxCtl {
 
     @RequestMapping("to_submit")
     public String toSubmit(HttpServletRequest request, Model model) {
-        model.addAllAttributes(getCode(request, model));
-        return "/wx/page_submit";
+        Map<String, String> map = getCode(request, model);
+        String user_id = map.get("user_id");
+
+        Map<String, Object> temp = agentService.getAgentSubmitMsgFromWx(user_id);
+        if (temp == null) {
+            model.addAllAttributes(map);
+            return "/wx/page_submit";
+        } else {
+            model.addAttribute("temp", temp);
+            return "/wx/page_submitted";
+        }
     }
 
     public Map<String, String> getCode(HttpServletRequest request, Model model) {
@@ -230,3 +239,5 @@ public class WxCtl {
         return result;
     }
 }
+
+//https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx6b9738b957e2c065&redirect_uri=http://192.168.50.120:8080/wx/to_submit.cs&response_type=code&scope=snsapi_base&agentid=0&state=123346#wechat_redirect

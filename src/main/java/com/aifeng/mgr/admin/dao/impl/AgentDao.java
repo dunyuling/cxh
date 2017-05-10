@@ -36,6 +36,17 @@ public class AgentDao extends BaseDao<Agent> implements IAgentDao {
         return this.findOneByHql(sql, map);
     }
 
+    public Map<String, Object> getAgentSubmitMsgFromWx(String user_id) {
+        String sql = "select a.id,a.IDCard,a.mobile,a.corpName,a.name,date_format(a.expireDate,'%Y-%m-%d') as expireDate,a.licenseImg,addr.province,addr.city,addr.area from agent a " +
+                "left join proxy_address pa on a.id = pa.agent_id " +
+                "left join address_fee af on pa.af_id = af.id " +
+                "left join address addr on af.address_id = addr.id " +
+                "where a.userid = '" + user_id + "'";
+        System.out.println("sql: " + sql + " ==============");
+        List<Map<String, Object>> list = this.findBySql(sql);
+        return list.isEmpty() ? null : list.get(0);
+    }
+
     /*public Map<String,Object> getAgentByUserId2(String user_id) {
         String sql = "select id,name from agent where userid = '" + user_id + "'";
         return this.findBySql(sql).get(0);

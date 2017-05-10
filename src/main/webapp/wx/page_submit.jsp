@@ -14,8 +14,7 @@
 </head>
 <body>
 <div class="page_header">
-    <div class="sub1"><a href="#1"><i><img src="img/header_icon.png"></i>
-        <p>返回</p></a></div>
+    <div class="sub1"><a href="#1"></a></div>
     <div class="sub2">完善资料</div>
     <div class="sub3"></div>
 </div>
@@ -176,7 +175,7 @@
                 return;
             }
 
-            if (addr == '' || addr.split("-") != 3) {
+            if (addr == '' || addr.split("-").length != 3) {
                 alert("地址必须正确选择");
                 return;
             }
