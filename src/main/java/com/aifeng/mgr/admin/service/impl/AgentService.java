@@ -50,13 +50,20 @@ public class AgentService extends BaseService<Agent> implements IAgentService {
             agent = agentDao.insert(agent);
 
             AddressFee addressFee = addressFeeService.getAddressFee(getAddressId(addr));
-            proxyAddressService.save(agent.getId(), addressFee.getId());
-            success = true;
+            boolean proxied = proxyAddressService.checkProxied(addressFee.getId());
+            if (proxied) {
+                result = "您或其它代理商已经申请过代理该地区";
+            } else {
+                proxyAddressService.save(agent.getId(), addressFee.getId());
+                success = true;
+            }
         } else {
             long af_id = addressFeeService.getAddressFee(getAddressId(addr)).getId();
             boolean proxied = proxyAddressService.checkProxied(af_id);
             if (proxied) {
                 result = "您或其它代理商已经申请过代理该地区";
+            } else {
+                result = "身份证信息未正确填写";
             }
         }
         map.put("result", result);

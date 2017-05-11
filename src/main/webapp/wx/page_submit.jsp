@@ -18,7 +18,7 @@
     <div class="sub2">完善资料</div>
     <div class="sub3"></div>
 </div>
-<%--<div class="submit_main">
+<div class="submit_main">
     <ul>
         <input type="hidden" id="access_token" value="${access_token}"/>
         <input type="hidden" id="user_id" value="${user_id}"/>
@@ -31,7 +31,7 @@
         <li class="su_input content-block"><p>代理地区</p><input name="addr" id="addr" readonly type="text"
                                                              placeholder="省/市/县（区）"></li>
     </ul>
-</div>--%>
+</div>
 <div class="submit_main2">
     <li class="su_input2"><p>公司名称</p>
         <div class="input"><input id="corpName" name="corp_name" type="text" placeholder="" required></div>

@@ -3,6 +3,7 @@ package com.aifeng.ws.wx;
 import com.aifeng.util.DateUtil;
 import com.aifeng.util.Util;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.http.client.utils.DateUtils;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
@@ -26,9 +27,23 @@ public class Test {
 
     public static void main(String[] args) {
 
-        String str = DateUtils.formatDate(new Date(), "yyyy-MM-dd HH:mm");
-        System.out.println("str: " + str + " \t " + new Date());
-        System.out.println(Util.date2String(new Date(), "yyyy-MM-dd HH:mm"));
+//        String str = DateUtils.formatDate(new Date(), "yyyy-MM-dd HH:mm");
+//        System.out.println("str: " + str + " \t " + new Date());
+//        System.out.println(Util.date2String(new Date(), "yyyy-MM-dd HH:mm"));
+        String str = "a$a";
+        str = str.replaceAll("/\\*[\\s\\S]*?\\*/", "");
+        System.out.println("str: " + str);
+//        String generatedString = RandomStringUtils.randomAlphabetic(10);
+
+        String generatedString = RandomStringUtils.random(6, true, true);
+
+        System.out.println(generatedString.toLowerCase() + new Date().getTime());
+
+        String originalName = "lhg.png";
+        String suffix = originalName.substring(originalName.lastIndexOf("."), originalName.length());
+        String newName = Util.getRandomName(originalName) + suffix;
+        System.out.println(newName);
+
     }
 
     public static void send1() {

@@ -1,7 +1,7 @@
 package com.aifeng.util;
 
 import com.aifeng.constants.Constants;
-import org.springframework.util.MultiValueMap;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Date;
 
 /**
  * Created by pro on 17-3-14.
@@ -24,9 +24,8 @@ public class Util {
             file.mkdirs();
     }
 
-    static String key = "zhzj";
-
     public static String getSign(String timestamp, String platform, String v, String data) {
+        String key = "cxh";
         StringBuilder builder = new StringBuilder();
         builder.append(key);
         builder.append("timestamp").append(timestamp);
@@ -60,18 +59,17 @@ public class Util {
         mkDir(imgRealPathDir);
 
         MultipartFile multipartFile = multipartRequest.getFile(fileName);
-        String imgName = multipartFile.getOriginalFilename();
-        String fullPath = imgRealPathDir + File.separator + imgName;
+        String newName = getRandomName(multipartFile.getOriginalFilename());
 
-        System.out.println("logImageName：" + imgName);
+        String fullPath = imgRealPathDir + File.separator + newName;
+        System.out.println("logImageName：" + newName);
         File file = new File(fullPath);
         try {
             multipartFile.transferTo(file);
         } catch (IllegalStateException | IOException e) {
             e.printStackTrace();
         }
-        return realPath + File.separator + imgName;
-
+        return realPath + File.separator + newName;
     }
 
     public static String uploadImg(HttpServletRequest request, String realPath) {
@@ -80,83 +78,18 @@ public class Util {
         mkDir(imgRealPathDir);
 
         MultipartFile multipartFile = multipartRequest.getFile("img");
-        String imgName = multipartFile.getOriginalFilename();
-        String fullPath = imgRealPathDir + File.separator + imgName;
+        String newName = getRandomName(multipartFile.getOriginalFilename());
 
-        System.out.println("logImageName：" + imgName);
+        String fullPath = imgRealPathDir + File.separator + newName;
+        System.out.println("logImageName：" + newName);
         File file = new File(fullPath);
         try {
             multipartFile.transferTo(file);
         } catch (IllegalStateException | IOException e) {
             e.printStackTrace();
         }
-        return realPath + File.separator + imgName;
+        return realPath + File.separator + newName;
     }
-
-    public static String[] uploadImgs(HttpServletRequest request, String realPath) {
-        MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-        String imgRealPathDir = request.getSession().getServletContext().getRealPath(realPath);
-        mkDir(imgRealPathDir);
-        MultiValueMap<String, MultipartFile> multiValueMap = multipartRequest.getMultiFileMap();
-
-        String[] paths = null;
-        for (String key : multiValueMap.keySet()) {
-            if (key.equals("product_slide")) {
-                List<MultipartFile> multipartFiles = multiValueMap.get(key);
-                int i = 0;
-                paths = new String[multipartFiles.size()];
-                for (MultipartFile multipartFile : multipartFiles) {
-                    String imgName = multipartFile.getOriginalFilename();
-                    String fullPath = imgRealPathDir + File.separator + imgName;
-
-                    System.out.println("logImageName：" + imgName);
-                    File file = new File(fullPath);
-                    try {
-                        multipartFile.transferTo(file);
-                    } catch (IllegalStateException | IOException e) {
-                        e.printStackTrace();
-                    }
-                    paths[i++] = realPath + File.separator + imgName;
-                }
-            }
-        }
-        return paths;
-    }
-
-    public static String[] editImgs(HttpServletRequest request, String realPath) {
-        MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-        String imgRealPathDir = request.getSession().getServletContext().getRealPath(realPath);
-        mkDir(imgRealPathDir);
-        MultiValueMap<String, MultipartFile> multiValueMap = multipartRequest.getMultiFileMap();
-
-        String[] paths = null;
-        for (String key : multiValueMap.keySet()) {
-            if (key.equals("product_slide")) {
-                List<MultipartFile> multipartFiles = multiValueMap.get(key);
-                int i = 0;
-                paths = new String[multipartFiles.size()];
-                for (MultipartFile multipartFile : multipartFiles) {
-                    if (!multipartFile.isEmpty()) {
-                        String imgName = multipartFile.getOriginalFilename();
-                        String fullPath = imgRealPathDir + File.separator + imgName;
-
-                        System.out.println("logImageName：" + imgName);
-                        File file = new File(fullPath);
-                        try {
-                            multipartFile.transferTo(file);
-                        } catch (IllegalStateException | IOException e) {
-                            e.printStackTrace();
-                        }
-                        paths[i++] = realPath + File.separator + imgName;
-                    } else {
-                        paths[i++] = null;
-                    }
-                }
-            }
-        }
-        return paths;
-    }
-
 
     public static String editImg(HttpServletRequest request, String realPath) {
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
@@ -166,62 +99,31 @@ public class Util {
         String imgRelativePath = null;
         MultipartFile multipartFile = multipartRequest.getFile("img");
         if (multipartFile != null && !multipartFile.isEmpty()) {
-            String fullPath = imgRealPathDir + File.separator + multipartFile.getOriginalFilename();
+            String newName = getRandomName(multipartFile.getOriginalFilename());
 
+            String fullPath = imgRealPathDir + File.separator + newName;
             File file = new File(fullPath);
             try {
                 multipartFile.transferTo(file);
             } catch (IllegalStateException | IOException e) {
                 e.printStackTrace();
             }
-            imgRelativePath = realPath + File.separator + multipartFile.getOriginalFilename();
+            imgRelativePath = realPath + File.separator + newName;
         }
         return imgRelativePath;
     }
 
-    public static String editImg(HttpServletRequest request, String realPath, String fileName) {
-        MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-        String imgRealPathDir = request.getSession().getServletContext().getRealPath(realPath);
-        Util.mkDir(imgRealPathDir);
-
-        String imgRelativePath = null;
-        MultipartFile multipartFile = multipartRequest.getFile(fileName);
-        if (!multipartFile.isEmpty()) {
-            String fullPath = imgRealPathDir + File.separator + multipartFile.getOriginalFilename();
-
-            File file = new File(fullPath);
-            try {
-                multipartFile.transferTo(file);
-            } catch (IllegalStateException | IOException e) {
-                e.printStackTrace();
-            }
-            imgRelativePath = realPath + File.separator + multipartFile.getOriginalFilename();
-        }
-        return imgRelativePath;
-    }
-
-    //TODO 删除这次没被选中的
-    public Collection<Long> getToDelete(List<Long> old, List<Long> current) {
-        Collection<Long> max, min;
-
-        Collection<Long> toDel = new LinkedList<>();
-        Collection<Long> toAdd = new LinkedList<>();
-
-        if (old.size() > current.size()) {
-            max = old;
-            min = current;
+    public static String getRandomName(String originalName) {
+        String suffix = "";
+        if (originalName.contains(".")) {
+            suffix = originalName.substring(originalName.lastIndexOf("."), originalName.length());
         } else {
-            max = current;
-            min = old;
+            suffix = ".png";
         }
-
-        Map<Object, Long> map = new HashMap<>(max.size());
-        for (Object obj : max) {
-
-        }
+        String generatedString = RandomStringUtils.random(6, true, true).toLowerCase();
+        return generatedString + System.currentTimeMillis() + suffix;
 
 
-        return null;
     }
 
 
