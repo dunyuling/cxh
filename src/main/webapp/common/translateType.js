@@ -1,7 +1,9 @@
 $(document).ready(function () {
     $("p[id^=need_]").each(function () {
         var type = $(this).html();
+        // console.log("type1: " + type);
         type = formatType(type);
+        // console.log("type2: " +  type);
         $(this).html("需求：" + type);
     })
 });

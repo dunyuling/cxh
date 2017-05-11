@@ -112,8 +112,8 @@
             var addr = $("#addr").val();
             var user_id = $("#user_id").val();
 
-            if (addr == '') {
-                alert("地址必须选择");
+            if (addr == '' || addr.split("-").length != 3) {
+                alert("地址必须正确选择");
                 return;
             }
 

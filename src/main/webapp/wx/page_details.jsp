@@ -16,8 +16,12 @@
 </head>
 <body>
 <div class="page_header">
-    <div class="sub1"><a href="/wx/${path}.cs?userid=${user_id}"><i><img src="img/header_icon.png"></i>
-        <p>返回</p></a></div>
+    <div class="sub1">
+        <c:if test="${not empty path}">
+            <a href="/wx/${path}.cs?userid=${user_id}"><i><img src="img/header_icon.png"></i>
+                <p>返回</p></a>
+        </c:if>
+    </div>
     <div class="sub2">详情</div>
     <div class="sub3"></div>
 </div>
@@ -28,7 +32,7 @@
         <li><p style="color:#4a90e2">电话：${mobile}</p></li>
         <%--<li><p>ID：686868</p></li>--%>
         <li><p>时间：${createDate}</p></li>
-        <li><p id="need_${obj.id}">${obj.type}</p></li>
+        <li><p id="need_${id}">${type}</p></li>
         <li><p>地区：${province}-${city}-${area}</p></li>
     </ul>
     <c:if test="${!visit}">

@@ -26,6 +26,7 @@ public class AgentMessageDao extends BaseDao<AgentMessage> implements IAgentMess
         String str = "select am.id,a.name,m.content,am.times,am.visit,am.visitDate from agent_message am " +
                 "left join agent a on am.agent_id = a.id " +
                 "left join message m on am.message_id = m.id " +
+                "order by am.visitDate desc,am.updateDate desc " +
                 "limit " + pageSize + " offset " + (page - 1) * pageSize + ";";
         return this.findBySql(str);
     }

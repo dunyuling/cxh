@@ -122,7 +122,8 @@ public class WxCtl {
         long id = Long.parseLong(request.getParameter("id"));
         String user_id = request.getParameter("userid");
         String path = request.getParameter("path");
-        model.addAllAttributes(memberService.getDetailFromWx(id));
+        Map<String, Object> map = memberService.getDetailFromWx(id);
+        model.addAllAttributes(map);
         model.addAttribute("path", path);
         model.addAttribute("user_id", user_id);
         return "/wx/page_details";
