@@ -314,6 +314,9 @@ function getSelectedRow(table_id){
 	if(typeof(data) == 'undefined' || data.length < 1){
 		$.tips('未选中行');
 		return null;
+	} else if(data.length > 1) {
+        $.tips('只能选中一行');
+        return null;
 	}
 	return data[0];
 }
