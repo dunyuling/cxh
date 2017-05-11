@@ -40,19 +40,6 @@
 	<div class="new_title"><p>新闻动态</p></div>
 	<div class="new_main">
 		<c:forEach var="news" items="${newses}">
-			<%--<div class="new_lists">
-				<div class="new_list_img" style="background:url(${news.img}) no-repeat center center; background-size:cover">
-					<a href="/cxh/front/get_news_detail.cs?id=${news.id}"></a></div>
-				<div class="new_list_text">
-					<div class="new_list_text_p1">
-						<fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${news.createDate}" />
-					</div>
-					<div class="new_list_text_p2"><a href="/cxh/front/get_news_detail.cs?id=${news.id}">${news.title}</a></div>
-					<div class="new_list_text_p3">${news.description}</div>
-					<div class="new_list_text_p4"><a href="/cxh/front/get_news_detail.cs?id=${news.id}">查看全文 ></a></div>
-				</div>
-			</div>--%>
-
 			<div class="new_lists">
 				<div class="new_list_img" style="background:url(${news.img}) no-repeat center center; background-size:cover">
 					<a href="/front/get_news_detail.cs?id=${news.id}"></a></div>

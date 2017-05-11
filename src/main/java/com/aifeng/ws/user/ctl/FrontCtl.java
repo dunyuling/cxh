@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by pro on 17-4-27.
@@ -52,10 +53,10 @@ public class FrontCtl {
     }
 
     @RequestMapping("get_news")
-    public String getNews(@RequestParam(value="page",defaultValue = "0") int page, Model model) {
+    public String getNews(@RequestParam(value="page",defaultValue = "1") int page, Model model) {
         try {
             int pageSize = 10;//TODO 前台新闻分页
-            List<News> newses = newsService.getByPage(page,pageSize);
+            List<Map<String,Object>> newses = newsService.getByPage(page,pageSize);
             int totalPage = newsService.getTotalPage(pageSize);
             model.addAttribute("newses", newses);
             model.addAttribute("totalPage",totalPage);

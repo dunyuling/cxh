@@ -79,7 +79,7 @@ public class BinaryUploader {
             is.close();
 
             if (storageState.isSuccess()) {
-                storageState.putInfo("url", Constants.HTTP_IMG_PREFIX + ImgPath.newsContentPath + PathFormat.format(savePath));
+                storageState.putInfo("url", Constants.host + ImgPath.newsContentPath + PathFormat.format(savePath));
                 storageState.putInfo("type", suffix);
                 storageState.putInfo("original", originFileName + suffix);
             }

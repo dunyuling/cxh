@@ -4,13 +4,13 @@ import com.aifeng.core.service.impl.BaseService;
 import com.aifeng.mgr.admin.dao.impl.NewsDao;
 import com.aifeng.mgr.admin.model.News;
 import com.aifeng.mgr.admin.service.INewsService;
-import com.aifeng.util.Pager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by pro on 17-4-24.
@@ -35,17 +35,16 @@ public class NewsService extends BaseService<News> implements INewsService {
         long total = newsDao.countAll();
         long mod = total % pageSize;
         long divide = total / pageSize;
-        return (int)(mod == 0 ? divide : (divide + 1));
+        return (int) (mod == 0 ? divide : (divide + 1));
     }
 
     @Transactional
-    public List<News> getByPage(int page, int pageSize) {
-        Pager pager = new Pager(page,pageSize);
-        return newsDao.findAll(pager);
+    public List<Map<String, Object>> getByPage(int page, int pageSize) {
+        return newsDao.findAll(page, pageSize);
     }
 
     @Transactional
-    public void saveNews(String title, String desc ,String img,String content) {
+    public void saveNews(String title, String desc, String img, String content) {
         News news = new News();
         news.setTitle(title);
         news.setDescription(desc);
@@ -57,7 +56,7 @@ public class NewsService extends BaseService<News> implements INewsService {
     }
 
     @Transactional
-    public void editNews(long id, String title, String desc ,String img,String content) {
+    public void editNews(long id, String title, String desc, String img, String content) {
         News news = newsDao.findById(id);
         news.setTitle(title);
         news.setDescription(desc);

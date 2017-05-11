@@ -1,7 +1,7 @@
 package com.aifeng.mgr.admin.ctl;
 
-import com.aifeng.mgr.admin.constants.ImgPath;
 import com.aifeng.core.ctl.BaseCtl;
+import com.aifeng.mgr.admin.constants.ImgPath;
 import com.aifeng.mgr.admin.model.News;
 import com.aifeng.mgr.admin.service.impl.NewsService;
 import com.aifeng.util.StringUtil;
@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by pro on 17-4-26.
@@ -41,7 +42,7 @@ public class NewsCtl extends BaseCtl {
     @RequestMapping(value = "/list2", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
     @ResponseBody
     public String list2(int page, int pageSize) {
-        List<News> list = newsService.getByPage(page, pageSize);
+        List<Map<String, Object>> list = newsService.getByPage(page, pageSize);
         long total = newsService.getTotal();
         JSONObject json = new JSONObject();
         json.put("rows", list);
@@ -61,10 +62,10 @@ public class NewsCtl extends BaseCtl {
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
     @ResponseBody
-    public String add(HttpServletRequest request, String title, String description ,String remark) {
+    public String add(HttpServletRequest request, String title, String description, String remark) {
         try {
             String descPath = Util.uploadImg(request, ImgPath.newsDescPath);
-            newsService.saveNews(title,description,descPath,remark);
+            newsService.saveNews(title, description, descPath, remark);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -73,10 +74,10 @@ public class NewsCtl extends BaseCtl {
 
     @RequestMapping(value = "edit", method = RequestMethod.POST)
     @ResponseBody
-    public String edit(HttpServletRequest request, long id ,String title, String description ,String remark) {
+    public String edit(HttpServletRequest request, long id, String title, String description, String remark) {
         try {
-            String descPath = Util.editImg(request,ImgPath.newsDescPath);
-            newsService.editNews(id,title,description,descPath,remark);
+            String descPath = Util.editImg(request, ImgPath.newsDescPath);
+            newsService.editNews(id, title, description, descPath, remark);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -86,10 +87,10 @@ public class NewsCtl extends BaseCtl {
     @RequestMapping("del")
     @ResponseBody
     public String del(String id) {
-        if(StringUtil.isNotBlank(id)) {
-            if(id.contains(",")) {
+        if (StringUtil.isNotBlank(id)) {
+            if (id.contains(",")) {
                 String[] ids = id.split(",");
-                for(String id_ : ids) {
+                for (String id_ : ids) {
                     long l_id = Long.parseLong(id_);
                     if (l_id != 0) {
                         this.newsService.delNews(l_id);
