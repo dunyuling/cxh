@@ -572,11 +572,14 @@
                         event('onSelect', [that.val]);
 
                         //实际去执行查询
-                        var user_id = $("#user_id").val();
-                        var result = "user_id: " + user_id + " \t val: " + that.val;
-                        $.post("/wx/query.cs", {"userid": user_id, "dateStr": that.val}, function (data) {
-                            $("#content").html(data);
-                        });
+                        var which = $("#which").val();
+                        if (which == 'total') {
+                            var user_id = $("#user_id").val();
+                            var result = "user_id: " + user_id + " \t val: " + that.val;
+                            $.post("/wx/query.cs", {"userid": user_id, "dateStr": that.val}, function (data) {
+                                $("#content").html(data);
+                            });
+                        }
                     }
                 });
 

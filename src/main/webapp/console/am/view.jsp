@@ -18,16 +18,9 @@
     <!--               <div class="ibox-content"> -->
     <div class="row row-lg">
         <div class="col-sm-12">
-
-            <cs:toolbar title="代理商消息管理" tableId="tab_agentmessage" width="100%" height="100%" menuCode="221" hdMenu="7">
-                <button class="btn btn-sm btn-success" type="button" onclick="view()">
-                    <input type="hidden" id="title1" value="回访记录" />
-                    <i class="fa fa-plus"></i>&nbsp;查看回访记录
-                </button>
-            </cs:toolbar>
             <table id="tab_agentmessage"
                    data-toggle="table"
-                   data-url="/am/list2.cs"
+                   data-url="/am/view.cs?id=${id}"
                    data-method="get"
                    data-click-to-select="true"
                    data-pagination="true"
@@ -44,11 +37,11 @@
                 <tr>
                     <th data-checkbox="true" data-click-to-select="true"></th>
                     <th data-field="id" data-visible="false"></th>
-                    <th data-field="name">名字</th>
-                    <th data-field="content">内容</th>
-                    <th data-field="times">已发次数</th>
-                    <th data-field="visit" data-formatter="visitFormatter">是否回访</th>
-                    <th data-field="visitDate" data-formatter="dateFormatter">回访时间</th>
+                    <th data-field="times">回访次数</th>
+                    <th data-field="situation">回访标题</th>
+                    <th data-field="remark">回访备注</th>
+                    <th data-field="visitDate" data-formatter="dateFormatter">本次回访时间</th>
+                    <th data-field="nextVisitDate" data-formatter="dateFormatter">下次回访时间</th>
                 </tr>
                 </thead>
             </table>
@@ -58,24 +51,4 @@
     <!--           </div> -->
 </div>
 </body>
-
-<script>
-    function translateStatus(value) {
-        switch (value) {
-            case 'APPLYING':
-                return '申请中';
-            case 'AUTHORED':
-                return "已授权";
-            case 'EXPIRED':
-                return "已过期";
-            case 'REFUSED':
-                return "被拒绝";
-        }
-    }
-
-    function visitFormatter(value) {
-        return value == false ? "未回访" : "已回访";
-    }
-</script>
-
 </html>

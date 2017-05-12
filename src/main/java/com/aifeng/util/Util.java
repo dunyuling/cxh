@@ -10,6 +10,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -177,5 +179,16 @@ public class Util {
             return sdf.format(date);
         }
         return null;
+    }
+
+    public static Date str2Date(String str, String style) {
+        DateFormat dateFormat = new SimpleDateFormat(style);
+        Date date = null;
+        try {
+            date = dateFormat.parse(str);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return date;
     }
 }

@@ -35,14 +35,34 @@
         <li><p id="need_${id}">${type}</p></li>
         <li><p>地区：${province}-${city}-${area}</p></li>
     </ul>
+
+    <c:if test="${visit}">
+        <ul>
+            <li><p style="font-weight: bold;color: #06f;">反馈信息：已到访 </p></li>
+            <li><p>到访时间：${visitDate}</p></li>
+        </ul>
+    </c:if>
+
+    <c:forEach items="${visitRecords}" var="visitRecord">
+        <ul>
+            <li><p style="font-weight: bold;color: #06f;">回访记录：${visitRecord.times}</p></li>
+            <li><p>本次回访时间：${visitRecord.visitDate}</p></li>
+            <li><p>回访标题：${visitRecord.situation}</p></li>
+            <li><p>回访备注：${visitRecord.remark}</p></li>
+            <li><p>下次回访时间：${visitRecord.nextVisitDate}</p></li>
+        </ul>
+    </c:forEach>
+
     <c:if test="${!visit}">
         <div id="to_visit_div">
             <div class="page_details_button"><a href="#" id="to_visit">确认回访</a></div>
         </div>
     </c:if>
-    <c:if test="${visit}">
-        <div class="page_details_button2"><a>已回访</a></div>
+    <c:if test="${not empty user_id}">
+        <div class="page_details_button">
+            <a href="/wx/to_add_visit_record.cs?id=${id}&userid=${user_id}&path=${path}">填写回访备注</a></div>
     </c:if>
+
     <input type="hidden" value="${id}" id="id"/>
 
     <script type="text/javascript">
@@ -53,7 +73,6 @@
                     $("#to_visit_div").html('<div class="page_details_button2"><a>已回访</a></div>');
                 }
             })
-
         });
     </script>
 </div>

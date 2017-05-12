@@ -10,6 +10,9 @@ import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -30,19 +33,26 @@ public class Test {
 //        String str = DateUtils.formatDate(new Date(), "yyyy-MM-dd HH:mm");
 //        System.out.println("str: " + str + " \t " + new Date());
 //        System.out.println(Util.date2String(new Date(), "yyyy-MM-dd HH:mm"));
-        String str = "a$a";
-        str = str.replaceAll("/\\*[\\s\\S]*?\\*/", "");
-        System.out.println("str: " + str);
-//        String generatedString = RandomStringUtils.randomAlphabetic(10);
+//        String str = "a$a";
+//        str = str.replaceAll("/\\*[\\s\\S]*?\\*/", "");
+//        System.out.println("str: " + str);
+//        String generatedString = RandomStringUtils.random(6, true, true);
+//
+//        System.out.println(generatedString.toLowerCase() + new Date().getTime());
+//
+//        String originalName = "lhg.png";
+//        String suffix = originalName.substring(originalName.lastIndexOf("."), originalName.length());
+//        String newName = Util.getRandomName(originalName) + suffix;
+//        System.out.println(newName);
 
-        String generatedString = RandomStringUtils.random(6, true, true);
-
-        System.out.println(generatedString.toLowerCase() + new Date().getTime());
-
-        String originalName = "lhg.png";
-        String suffix = originalName.substring(originalName.lastIndexOf("."), originalName.length());
-        String newName = Util.getRandomName(originalName) + suffix;
-        System.out.println(newName);
+        String dateStr = "2017-09-08";
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date date = dateFormat.parse(dateStr);
+            System.out.println("date: " + date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
     }
 

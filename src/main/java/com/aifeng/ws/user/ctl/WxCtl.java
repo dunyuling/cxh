@@ -2,10 +2,7 @@ package com.aifeng.ws.user.ctl;
 
 import com.aifeng.mgr.admin.constants.ImgPath;
 import com.aifeng.mgr.admin.model.Agent;
-import com.aifeng.mgr.admin.service.impl.AgentMessageService;
-import com.aifeng.mgr.admin.service.impl.AgentService;
-import com.aifeng.mgr.admin.service.impl.AuxiliaryInformationService;
-import com.aifeng.mgr.admin.service.impl.MemberService;
+import com.aifeng.mgr.admin.service.impl.*;
 import com.aifeng.util.Util;
 import com.aifeng.ws.wx.UserResponse;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -35,14 +32,16 @@ public class WxCtl {
     private final RestTemplate restTemplate;
     private final MemberService memberService;
     private final AgentMessageService agentMessageService;
+    private final VisitRecordService visitRecordService;
 
     @Autowired
-    public WxCtl(AgentService agentService, AuxiliaryInformationService auxiliaryInformationService, RestTemplate restTemplate, MemberService memberService, AgentMessageService agentMessageService) {
+    public WxCtl(AgentService agentService, AuxiliaryInformationService auxiliaryInformationService, RestTemplate restTemplate, MemberService memberService, AgentMessageService agentMessageService, VisitRecordService visitRecordService) {
         this.agentService = agentService;
         this.auxiliaryInformationService = auxiliaryInformationService;
         this.restTemplate = restTemplate;
         this.memberService = memberService;
         this.agentMessageService = agentMessageService;
+        this.visitRecordService = visitRecordService;
     }
 
     @RequestMapping(value = "agent_info", produces = "text/plain;charset=utf-8;")
@@ -126,6 +125,11 @@ public class WxCtl {
         model.addAllAttributes(map);
         model.addAttribute("path", path);
         model.addAttribute("user_id", user_id);
+
+        if (path != null) {
+            List<Map<String, Object>> visitRecordList = visitRecordService.getMemberVisitRecord(id);
+            model.addAttribute("visitRecords", visitRecordList);
+        }
         return "/wx/page_details";
     }
 
@@ -143,6 +147,40 @@ public class WxCtl {
         return result;
     }
 
+    @RequestMapping("to_add_visit_record")
+    public String toAddVisitRecord(long id, String userid, String path, Model model) {
+        model.addAttribute("id", id)
+                .addAttribute("user_id", userid)
+                .addAttribute("path", path);
+        return "/wx/visit_record";
+    }
+
+    @RequestMapping("add_visit_record")
+    public String addVisitRecord(long id, String userid, String path,
+                                 String situation, String remark, String dateStr) {
+        try {
+//            System.out.println("----");
+            visitRecordService.save(id, situation, remark, Util.str2Date(dateStr, "yyyy-MM-dd"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "redirect:/wx/detail.cs?id=" + id + "&path=" + path + "&userid=" + userid;
+    }
+
+    @RequestMapping("add_visit_record1")
+    public String addVisitRecord1() {
+        /*try {
+            visitRecordService.save(id, situation, remark, nextVisitDate);
+            model.addAttribute("id", id).addAttribute("path", path).addAttribute("userid", userid);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }*/
+        System.out.println("---");
+        long id = 65;
+        String path = "total";
+        String userid = "lhg0";
+        return "redirect:/wx/detail.cs?id=" + id + "&path=" + path + "&userid=" + userid;
+    }
 
     @RequestMapping(value = "manage", produces = "text/plain;charset=utf-8;")
     public String manage(HttpServletRequest request, Model model) {
@@ -210,13 +248,11 @@ public class WxCtl {
         return "/wx/today_not_visit";
     }
 
-
     @RequestMapping(value = "get_balance", produces = "text/plain;charset=utf-8;")
     public String getBalance(HttpServletRequest request, Model model) {
         Map<String, String> map = getCode(request, model);
         Agent agent = agentService.getAgentByUserid(map.get("user_id"));
         model.addAttribute("money", agent.getMoney());
-//        model.addAttribute("money", 1000);
         return "/wx/balance";
     }
 

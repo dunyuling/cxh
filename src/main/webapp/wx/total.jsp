@@ -62,7 +62,8 @@
             });
         </script>
     </div>
-    <input type="hidden" id="user_id" value="${user_id}" />
+    <input type="hidden" id="user_id" value="${user_id}"/>
+    <input type="hidden" id="which" value="total"/>
     <div id="content">
         <div class="jilu_main">${count}条信息</div>
         <div class="page02_list_main">

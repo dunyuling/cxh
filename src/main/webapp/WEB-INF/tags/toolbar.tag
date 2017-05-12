@@ -51,7 +51,7 @@
         }
         $.openDlg({
             url: 'transfer.cs?action=view&id=' + data.id,
-            title: '查看' + "${title}",
+            title: '查看' + $("#title1").val(),
             width: '${width}',
             height: '${height}'
         });

@@ -32,8 +32,8 @@
 .zhuangtai_no {position:absolute;right:0; top:0; height:0.8rem; font-size:0.24rem; color:#fc4545; line-height:0.8rem; padding:0 0.2rem}
 
 .page_details_main {width:100%;}
-.page_details_main ul { background-color:#FFF}
-.page_details_main ul li {width:100%; height:0.88rem; line-height:0.88rem; border-bottom:#f1f1f3 solid 1px}
+.page_details_main ul { background-color:#FFF; margin-bottom:10px}
+.page_details_main ul li {width:100%; min-height:0.88rem; line-height:0.88rem; border-bottom:#f1f1f3 solid 1px}
 .page_details_main ul li p { margin:0 0.2rem; color:#333; font-size:0.26rem}
 .tel_now p {color:#4a90e2}
 .page_details_button {margin:0.4rem 0.2rem}
@@ -42,6 +42,10 @@
 .page_details_button2 a {display:inline-block;width:100%; height:0.88rem; background-color:#e4e4e4; color:#666; text-align: center; line-height:0.88rem; font-size:0.28rem; -moz-border-radius:0.1rem; -webkit-border-radius:0.1rem; border-radius:0.1rem; letter-spacing:0.01rem}
 
 
+.su_input p {float:left; height:1rem; line-height:1rem; font-size:0.24rem; color:#333; min-width:1rem; }
+.su_input input {float:left; display:inline-block; width:70%; height:1rem; line-height:1rem; font-size:0.24rem; color:#333; border:none; outline: none; margin: 0 0 0 0.2rem; }
+
+.su_input textarea {float:left; display:inline-block; width:75%; height:2.5rem; line-height:180%; font-size:0.24rem; color:#333; border:none; outline: none; margin: 0.28rem 0 0 0.2rem;   resize:none}
 
 
 
