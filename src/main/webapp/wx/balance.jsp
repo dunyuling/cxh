@@ -10,7 +10,6 @@
     <title>车险汇</title>
     <link rel="stylesheet" href="css/base.css" type="text/css"/>
     <link rel="stylesheet" href="css/page01.css" type="text/css"/>
-    <%--<script type="text/javascript" src="js/jquery.1.7.2.min.js"/>--%>
 </head>
 <body>
 <div class="page_header">

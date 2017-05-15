@@ -34,7 +34,7 @@ public class InitAddress {
 
         });
         AddressService addressService = classPathXmlApplicationContext.getBean(AddressService.class);
-//        addressService.init(areaList, cityList, provinceList);
+        addressService.init(areaList, cityList, provinceList);
 
         AddressFeeService addressFeeService = classPathXmlApplicationContext.getBean(AddressFeeService.class);
         for (Address address : addressService.getAll()) {
