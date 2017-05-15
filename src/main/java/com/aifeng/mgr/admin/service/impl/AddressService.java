@@ -138,6 +138,11 @@ public class AddressService extends BaseService<Address> implements IAddressServ
     }
 
     @Transactional
+    public List<Map<String, Object>> getAddressFee(String province, String city, String area) {
+        return addressDao.getAddressFee(province, city, area);
+    }
+
+    @Transactional
     public Address getOne(long id) {
         return this.addressDao.findById(id);
     }

@@ -10,11 +10,13 @@ import com.alibaba.fastjson.JSONObject;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -50,6 +52,23 @@ public class AddressFeeCtl extends BaseCtl {
         return JSONObject.toJSONString(json, features);
     }
 
+    @RequestMapping("query")
+    public String query(String province, String city, String area, Model model) {
+        model.addAttribute("province", province).addAttribute("city", city).addAttribute("area", area);
+        return "console/addr/query";
+    }
+
+    @RequestMapping(value = "/query2", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public String query2(String province, String city, String area) {
+        List<Map<String, Object>> list = addressService.getAddressFee(province, city, area);
+        long total = list.size();
+        JSONObject json = new JSONObject();
+        json.put("rows", list);
+        json.put("total", total);
+        return JSONObject.toJSONString(json, features);
+    }
+
     @RequestMapping("transfer")
     public String transfer(String id, String action, ModelMap mm) {
         Address address;
@@ -65,18 +84,18 @@ public class AddressFeeCtl extends BaseCtl {
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
     @ResponseBody
-    public String add(String province, String city ,String area, int amount) {
-        if (!StringUtil.isBlank(province,city ,area)) {
-            addressService.saveAddress(province,city,area,amount);
+    public String add(String province, String city, String area, int amount) {
+        if (!StringUtil.isBlank(province, city, area)) {
+            addressService.saveAddress(province, city, area, amount);
         }
         return AJAX_SUCCESS;
     }
 
     @RequestMapping(value = "edit", method = RequestMethod.POST)
     @ResponseBody
-    public String edit(long id ,String province, String city ,String area, int amount) {
-        if (StringUtil.isNotBlank(province,city,area)) {
-            this.addressService.editAddress(id,province,city,area,amount);
+    public String edit(long id, String province, String city, String area, int amount) {
+        if (StringUtil.isNotBlank(province, city, area)) {
+            this.addressService.editAddress(id, province, city, area, amount);
         }
         return AJAX_SUCCESS;
     }
@@ -84,15 +103,15 @@ public class AddressFeeCtl extends BaseCtl {
     @RequestMapping("del")
     @ResponseBody
     public String del(String id) {
-        if(StringUtil.isNotBlank(id)) {
-            if(id.contains(",")) {
-               String[] ids = id.split(",");
-               for(String id_ : ids) {
-                   long l_id = Long.parseLong(id_);
-                   if (l_id != 0) {
-                       this.addressService.delAddress(l_id);
-                   }
-               }
+        if (StringUtil.isNotBlank(id)) {
+            if (id.contains(",")) {
+                String[] ids = id.split(",");
+                for (String id_ : ids) {
+                    long l_id = Long.parseLong(id_);
+                    if (l_id != 0) {
+                        this.addressService.delAddress(l_id);
+                    }
+                }
             } else {
                 long l_id = Long.parseLong(id);
                 if (l_id != 0) {

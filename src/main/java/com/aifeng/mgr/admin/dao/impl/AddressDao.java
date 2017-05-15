@@ -22,6 +22,15 @@ public class AddressDao extends BaseDao<Address> implements IAddressDao {
         return this.findBySql(str);
     }
 
+    public List<Map<String, Object>> getAddressFee(String province, String city, String area) {
+        String sql = "select a.id ,a.area,a.city,a.province ,af.amount from address a " +
+                "left join address_fee af on a.id = af.address_id  " +
+                "where a.active is true and a.province like '%" + province +
+                "%' and a.city like '%" + city + "%' and  a.area like '%" + area + "%'";
+        System.out.println("sql: " + sql);
+        return this.findBySql(sql);
+    }
+
     public long getAddressId(String province, String city, String area) {
         Map<String, Object> params = new HashMap<>();
         params.put("province", province);
@@ -34,6 +43,6 @@ public class AddressDao extends BaseDao<Address> implements IAddressDao {
 
     public List<Address> getAllAddress() {
         String sql = "from Address ";
-        return (List<Address>)this.findByHql(sql, null);
+        return (List<Address>) this.findByHql(sql, null);
     }
 }

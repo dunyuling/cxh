@@ -20,7 +20,7 @@
             </cs:toolbar>
             <table id="tab_addr"
                    data-toggle="table"
-                   data-url="/addr/list2.cs"
+                   data-url="/addr/query2.cs?province=${province}&city=${city}&area=${area}"
                    data-method="get"
                    data-click-to-select="true"
                    data-pagination="true"
@@ -58,13 +58,11 @@
     </div>
 </div>
 <script type="text/javascript">
-    $("#search").click(function() {
+    $("#search").click(function () {
         var province = $("#province").val();
         var city = $("#city").val();
         var area = $("#area").val();
-
-//        alert("ss");
-        if(province.trim() == "" || city.trim() == "" || area.trim() == "") {
+        if (province.trim() == "" || city.trim() == "" || area.trim() == "") {
             alert("请完整输入地址");
             return;
         }

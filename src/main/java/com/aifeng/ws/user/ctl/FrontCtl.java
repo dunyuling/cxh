@@ -55,7 +55,7 @@ public class FrontCtl {
     @RequestMapping("get_news")
     public String getNews(@RequestParam(value = "page", defaultValue = "1") int page, Model model) {
         try {
-            int pageSize = 1;//TODO 前台新闻分页
+            int pageSize = 10;
             List<Map<String, Object>> newses = newsService.getByPage(page, pageSize);
             int pageCount = newsService.getTotalPage(pageSize);
             model.addAttribute("newses", newses);
