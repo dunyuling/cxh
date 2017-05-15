@@ -33,7 +33,7 @@ public class FrontCtl {
     }
 
 
-    @RequestMapping(value = "register_member",produces = "text/plain;charset=utf-8;")
+    @RequestMapping(value = "register_member", produces = "text/plain;charset=utf-8;")
     @ResponseBody
     public String registerMember(HttpServletRequest request, Model model) {
         try {
@@ -53,13 +53,14 @@ public class FrontCtl {
     }
 
     @RequestMapping("get_news")
-    public String getNews(@RequestParam(value="page",defaultValue = "1") int page, Model model) {
+    public String getNews(@RequestParam(value = "page", defaultValue = "1") int page, Model model) {
         try {
-            int pageSize = 10;//TODO 前台新闻分页
-            List<Map<String,Object>> newses = newsService.getByPage(page,pageSize);
-            int totalPage = newsService.getTotalPage(pageSize);
+            int pageSize = 1;//TODO 前台新闻分页
+            List<Map<String, Object>> newses = newsService.getByPage(page, pageSize);
+            int pageCount = newsService.getTotalPage(pageSize);
             model.addAttribute("newses", newses);
-            model.addAttribute("totalPage",totalPage);
+            model.addAttribute("current", page);
+            model.addAttribute("pageCount", pageCount);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -67,9 +68,9 @@ public class FrontCtl {
     }
 
     @RequestMapping("get_news_detail")
-    public String getNewsDetail(@RequestParam(value="id") long id,Model model) {
+    public String getNewsDetail(@RequestParam(value = "id") long id, Model model) {
         try {
-            model.addAttribute("news",newsService.getOne(id));
+            model.addAttribute("news", newsService.getOne(id));
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -72,7 +72,7 @@ public class WxCtl {
 
     @RequestMapping("to_submit")
     public String toSubmit(HttpServletRequest request, Model model) {
-        Map<String, String> map = getCode(request, model);
+        /*Map<String, String> map = getCode(request, model);
         String user_id = map.get("user_id");
 
         Map<String, Object> temp = agentService.getAgentSubmitMsgFromWx(user_id);
@@ -82,7 +82,8 @@ public class WxCtl {
         } else {
             model.addAttribute("temp", temp);
             return "/wx/page_submitted";
-        }
+        }*/
+        return "/wx/page_submit";
     }
 
     public Map<String, String> getCode(HttpServletRequest request, Model model) {
