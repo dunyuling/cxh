@@ -65,6 +65,34 @@ public class LoginCtl extends BaseCtl {
         }
     }
 
+    @RequestMapping("agent2Login")
+    public String agent2Login() {
+        return "agent_login";
+    }
+
+    @RequestMapping("agentLogin")
+    public String agentLogin(String account, String pwd, String code, ModelMap mm) {
+        System.out.println("login ------------------------");
+        if (StringUtil.isBlank(account, pwd)) {
+            log.error("登录信息错误");
+            return "agent_login";
+        }
+
+        Admin user = this.adminService.findByAccount(account);
+        if (user == null) {
+            log.error("账户信息不存在");
+            return "login";
+        }
+
+        if (user.getPwd().equals(Md5.getMd5(pwd.trim() + account.trim()))) {
+            this.set(Constants.SESSION_USER, user);   // 用户信息
+            return LOGIN_SUCCESS;
+        } else {
+            log.error("密码错误");
+            return "login";
+        }
+    }
+
 
     @RequestMapping("main")
     public String main(ModelMap mm) {
