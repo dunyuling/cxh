@@ -72,7 +72,7 @@ public class WxCtl {
 
     @RequestMapping("to_submit")
     public String toSubmit(HttpServletRequest request, Model model) {
-        /*Map<String, String> map = getCode(request, model);
+        Map<String, String> map = getCode(request, model);
         String user_id = map.get("user_id");
 
         Map<String, Object> temp = agentService.getAgentSubmitMsgFromWx(user_id);
@@ -82,8 +82,7 @@ public class WxCtl {
         } else {
             model.addAttribute("temp", temp);
             return "/wx/page_submitted";
-        }*/
-        return "/wx/page_submit";
+        }
     }
 
     public Map<String, String> getCode(HttpServletRequest request, Model model) {
@@ -251,9 +250,13 @@ public class WxCtl {
 
     @RequestMapping(value = "get_balance", produces = "text/plain;charset=utf-8;")
     public String getBalance(HttpServletRequest request, Model model) {
-        Map<String, String> map = getCode(request, model);
-        Agent agent = agentService.getAgentByUserid(map.get("user_id"));
-        model.addAttribute("money", agent.getMoney());
+        try {
+            Map<String, String> map = getCode(request, model);
+            Agent agent = agentService.getAgentByUserid(map.get("user_id"));
+            model.addAttribute("money", agent == null ? 0 : agent.getMoney());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return "/wx/balance";
     }
 
