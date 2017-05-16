@@ -46,9 +46,9 @@
                 <div class="row m-b-sm m-t-sm">
                     <div class="col-md-11">
                         <div class="input-group">
-                            省<input id="province" name="province" value="河南" type="text" placeholder="请输入省" class="input-sm">
-                            市<input id="city" name="city" type="text" value="濮阳" placeholder="请输入市" class="input-sm">
-                            县/区<input id="area" name="area" type="text" value="华龙" placeholder="请输入县/区" class="input-sm">
+                            省<input id="province" name="province" type="text" placeholder="请输入省" class="input-sm">
+                            市<input id="city" name="city" type="text" placeholder="请输入市" class="input-sm">
+                            县/区<input id="area" name="area" type="text" placeholder="请输入县/区" class="input-sm">
                             <span><button id="search" type="button" class="btn btn-sm btn-primary"> 搜索</button></span>
                         </div>
                     </div>

@@ -54,6 +54,6 @@ public class AddressFeeService extends BaseService<AddressFee> implements IAddre
 
     @Transactional
     public void delByAddressId(long address_id) {
-        addressFeeDao.deleteByWhere("address_id = " + address_id);
+        addressFeeDao.deleteByWhere(" and address_id = " + address_id);
     }
 }
