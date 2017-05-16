@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!doctype html>
 <html manifest="manifest.appcache">
@@ -22,9 +23,21 @@
 <div class="submit_main">
     <ul>
         <input type="hidden" id="access_token" value="${access_token}"/>
-        <input type="hidden" id="user_id" value="${user_id}"/>
-        <li class="su_input content-block"><p>代理地区</p><input name="addr" id="addr" readonly type="text"
-                                                             placeholder="省/市/县（区）"></li>
+        <input type="hidden" id="user_id" value="${user_id}1"/>
+        <c:if test="${not empty user_id}">
+            <li class="su_input content-block">
+                <p>代理地区</p>
+                <input name="addr" id="addr" readonly type="text" placeholder="省/市/县（区）">
+            </li>
+            <div class="su_details_button"><a href="#" id="submit">提交</a></div>
+        </c:if>
+        <c:if test="${empty user_id}">
+            <li class="content-block" style="color:black;alignment:center;">
+                <p>请先进行身份验证</p>
+            </li>
+        </c:if>
+        <input type="hidden" id="submit_enable" value="true"/>
+
     </ul>
 </div>
 
@@ -95,9 +108,6 @@
         }
     }
 </script>
-
-<input type="hidden" id="submit_enable" value="true"/>
-<div class="su_details_button"><a href="#" id="submit">提交</a></div>
 <script src="js/jquery-1.11.3.min.js"></script>
 <script src="js/Popt.js"></script>
 <script src="js/cityJson.js"></script>
@@ -118,7 +128,7 @@
             }
 
             disable();
-            $.post('/wx/agent_add.cs',{'addr': addr, 'user_id': user_id},function (res) {
+            $.post('/wx/agent_add.cs', {'addr': addr, 'user_id': user_id}, function (res) {
                 active();
                 alert(res);
             });
