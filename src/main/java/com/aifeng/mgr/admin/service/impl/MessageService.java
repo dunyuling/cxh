@@ -111,4 +111,14 @@ public class MessageService extends BaseService<Message> implements IMessageServ
     public long getTotal() {
         return messageDao.countAll();
     }
+
+    @Transactional
+    public List<Map<String, Object>> getAgentPagerMsg(long agentId, int page, int size) {
+        return messageDao.getAgentMessage(agentId, page, size);
+    }
+
+    @Transactional
+    public long getAgentTotal(long agentId) {
+        return messageDao.getAgentMessageCount(agentId);
+    }
 }

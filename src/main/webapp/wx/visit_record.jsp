@@ -80,7 +80,7 @@
 <input type="hidden" value="true" id="able_submit"/>
 <div class="su_details_button"><a id="submit" href="#">保存</a></div>
 <script type="text/javascript">
-    $("#submit").click(function () {
+    $("#submit").click(function (event) {
 
         var able_submit = $("#able_submit").val();
         if (able_submit == 'true') {
@@ -94,6 +94,7 @@
             var queryParams = "id=" + id + "&userid=" + user_id + "&path=" + path + "&dateStr=" + dateStr + "&situation=" + situation + "&remark=" + remark;
             window.location.href = "/wx/add_visit_record.cs?" + queryParams;
         }
+        event.stopPropagation();
     });
 </script>
 </body>

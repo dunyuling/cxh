@@ -49,4 +49,14 @@ public class RechargeService extends BaseService<Recharge> implements IRechargeS
     public long getTotal() {
         return rechargeDao.countAll();
     }
+
+    @Transactional
+    public List<Map<String, Object>> getAgentPagerRecharge(long agentId, int page, int size) {
+        return rechargeDao.getAgentRecharges(agentId, page, size);
+    }
+
+    @Transactional
+    public int getAgentTotal(long agentId) {
+        return rechargeDao.getAgentRechargesCount(agentId);
+    }
 }

@@ -49,4 +49,14 @@ public class RefundService extends BaseService<Refund> implements IRefundService
     public long getTotal() {
         return refundDao.countAll();
     }
+
+    @Transactional
+    public List<Map<String, Object>> getAgentPagerRefund(long agentId, int page, int size) {
+        return refundDao.getAgentRefunds(agentId, page, size);
+    }
+
+    @Transactional
+    public long getAgentTotal(long agentId) {
+        return refundDao.getAgentRefundsCount(agentId);
+    }
 }

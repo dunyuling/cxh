@@ -23,7 +23,7 @@
             </cs:toolbar>
             <table id="tab_refund"
                    data-toggle="table"
-                   data-url="/recharge/list2.cs"
+                   data-url="/recharge/list2.cs?agentId=${agentId}"
                    data-method="get"
                    data-click-to-select="true"
                    data-pagination="true"

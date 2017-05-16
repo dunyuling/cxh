@@ -1,5 +1,7 @@
 package com.aifeng.mgr.admin.model;
 
+import com.aifeng.constants.Constants;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -8,32 +10,36 @@ import java.util.Date;
  */
 
 @Entity
-@Table(name="agent")
+@Table(name = "agent")
 public class Agent {
 
     @Id
     @GeneratedValue
     @Column(name = "id")
     private long id;
-    @Column(/*unique=true,*/ columnDefinition="varchar(32)")
+    @Column(/*unique=true,*/ columnDefinition = "varchar(32)")
     private String name;
-    @Column(unique=true, columnDefinition="varchar(32)")
+    @Column(unique = true, columnDefinition = "varchar(32)")
     private String userid;
-    @Column(columnDefinition="varchar(11)")
+    @Column(columnDefinition = "varchar(11)")
     private String mobile;
-    @Column(columnDefinition="varchar(18)")
+    @Column(columnDefinition = "varchar(18)")
     private String IDCard;
-    @Column(columnDefinition="varchar(32)")
+    @Column(columnDefinition = "varchar(32)")
     private String corpName;
-    @Column(columnDefinition="varchar(255)")
-//    private String BusinessLicenseImg;
-//    private Date BusinessLicenseExpireDate;
+    @Column(columnDefinition = "varchar(255)")
 
     private String licenseImg;
     private Date expireDate;
 
-    @Column(name="money")
+    @Column(name = "money")
     private int money;//账户余额
+
+    private String pwd;
+
+    public Agent() {
+        this.pwd = Constants.agent_pwd;
+    }
 
     public long getId() {
         return id;
@@ -83,22 +89,6 @@ public class Agent {
         this.corpName = corpName;
     }
 
-    /*public String getBusinessLicenseImg() {
-        return BusinessLicenseImg;
-    }
-
-    public void setBusinessLicenseImg(String businessLicenseImg) {
-        BusinessLicenseImg = businessLicenseImg;
-    }
-
-    public Date getBusinessLicenseExpireDate() {
-        return BusinessLicenseExpireDate;
-    }
-
-    public void setBusinessLicenseExpireDate(Date businessLicenseExpireDate) {
-        BusinessLicenseExpireDate = businessLicenseExpireDate;
-    }*/
-
     public String getLicenseImg() {
         return licenseImg;
     }
@@ -121,5 +111,13 @@ public class Agent {
 
     public void setMoney(int money) {
         this.money = money;
+    }
+
+    public String getPwd() {
+        return pwd;
+    }
+
+    public void setPwd(String pwd) {
+        this.pwd = pwd;
     }
 }

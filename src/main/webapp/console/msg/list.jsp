@@ -22,7 +22,7 @@
             </cs:toolbar>
             <table id="tab_message"
                    data-toggle="table"
-                   data-url="/msg/list2.cs"
+                   data-url="/msg/list2.cs?agentId=${agentId}"
                    data-method="get"
                    data-click-to-select="true"
                    data-pagination="true"

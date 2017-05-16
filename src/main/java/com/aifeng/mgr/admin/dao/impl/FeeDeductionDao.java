@@ -22,4 +22,22 @@ public class FeeDeductionDao extends BaseDao<FeeDeduction> implements IFeeDeduct
                 "limit " + pageSize + " offset " + (page - 1) * pageSize + ";";
         return this.findBySql(str);
     }
+
+    public List<Map<String, Object>> getAgentFds(long agentId, int page, int pageSize) {
+        String str = "select ag.name, m.content,fd.amount from fee_deduction fd " +
+                "left join message m on m.id = fd.message_id " +
+                "left join agent ag on ag.id = fd.agent_id " +
+                " where ag.id = " + agentId +
+                " order by fd.createDate desc " +
+                "limit " + pageSize + " offset " + (page - 1) * pageSize + ";";
+        return this.findBySql(str);
+    }
+
+    public int getAgentFdsCount(long agentId) {
+        String str = "select ag.name, m.content,fd.amount from fee_deduction fd " +
+                "left join message m on m.id = fd.message_id " +
+                "left join agent ag on ag.id = fd.agent_id " +
+                " where ag.id = " + agentId ;
+        return this.findBySql(str).size();
+    }
 }

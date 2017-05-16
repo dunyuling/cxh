@@ -1,5 +1,6 @@
 package com.aifeng.mgr.admin.dao.impl;
 
+import com.aifeng.constants.Constants;
 import com.aifeng.core.dao.impl.BaseDao;
 import com.aifeng.mgr.admin.dao.IAgentDao;
 import com.aifeng.mgr.admin.model.Agent;
@@ -26,6 +27,13 @@ public class AgentDao extends BaseDao<Agent> implements IAgentDao {
         Map<String, Object> map = new HashMap<>();
         map.put("IDCard", IDCard);
         String sql = "from Agent where IDCard =:IDCard";
+        return this.findOneByHql(sql, map);
+    }
+
+    public Agent getAgentByMobile(String mobile) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("mobile", mobile);
+        String sql = "from Agent where mobile =:mobile";
         return this.findOneByHql(sql, map);
     }
 

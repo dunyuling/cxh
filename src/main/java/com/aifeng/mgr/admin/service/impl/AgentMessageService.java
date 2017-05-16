@@ -64,6 +64,16 @@ public class AgentMessageService extends BaseService<AgentMessage> implements IA
     }
 
     @Transactional
+    public List<Map<String, Object>> getAgentPagerAm(long agentId, int page, int size) {
+        return agentMessageDao.getAgentAm(agentId, page, size);
+    }
+
+    @Transactional
+    public int getAgentTotal(long agentId) {
+        return agentMessageDao.getAgentAmCount(agentId);
+    }
+
+    @Transactional
     public void visit(long member_id) {
         AgentMessage agentMessage = agentMessageDao.findByMemberId(member_id);
         if (!agentMessage.isVisit()) {

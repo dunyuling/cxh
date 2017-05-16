@@ -24,4 +24,26 @@ public class MessageDao extends BaseDao<Message> implements IMessageDao {
                 "limit " + pageSize + " offset " + (page - 1) * pageSize + ";";
         return this.findBySql(str);
     }
+
+    public List<Map<String, Object>> getAgentMessage(long agentId, int page, int pageSize) {
+        String str = "select m.id,ag.name, m.content, a.province,a.city,a.area from message m " +
+                "left join proxy_address pa on m.proxyAddress_id = pa.id " +
+                "left join address_fee af on pa.af_id = af.id " +
+                "left join agent ag on pa.agent_id = ag.id " +
+                "left join address a on af.address_id = a.id " +
+                "where ag.id = " + agentId +
+                " order by m.createDate desc " +
+                "limit " + pageSize + " offset " + (page - 1) * pageSize + ";";
+        return this.findBySql(str);
+    }
+
+    public int getAgentMessageCount(long agentId) {
+        String str = "select m.id,ag.name, m.content, a.province,a.city,a.area from message m " +
+                "left join proxy_address pa on m.proxyAddress_id = pa.id " +
+                "left join address_fee af on pa.af_id = af.id " +
+                "left join agent ag on pa.agent_id = ag.id " +
+                "left join address a on af.address_id = a.id " +
+                "where ag.id = " + agentId;
+        return this.findBySql(str).size();
+    }
 }

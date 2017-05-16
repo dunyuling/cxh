@@ -141,4 +141,10 @@ public class AgentService extends BaseService<Agent> implements IAgentService {
     public Map<String, Object> getAgentSubmitMsgFromWx(String user_id) {
         return agentDao.getAgentSubmitMsgFromWx(user_id);
     }
+
+    @Transactional
+    public Agent findByMobile(String mobile) {
+        Agent agent = agentDao.getAgentByMobile(mobile);
+        return agent;
+    }
 }

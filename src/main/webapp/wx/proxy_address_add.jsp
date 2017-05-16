@@ -23,7 +23,7 @@
 <div class="submit_main">
     <ul>
         <input type="hidden" id="access_token" value="${access_token}"/>
-        <input type="hidden" id="user_id" value="${user_id}1"/>
+        <input type="hidden" id="user_id" value="${user_id}"/>
         <c:if test="${not empty user_id}">
             <li class="su_input content-block">
                 <p>代理地区</p>

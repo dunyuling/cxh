@@ -1,6 +1,7 @@
 package com.aifeng.ws.wx;
 
 import com.aifeng.util.DateUtil;
+import com.aifeng.util.Md5;
 import com.aifeng.util.Util;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -45,14 +46,15 @@ public class Test {
 //        String newName = Util.getRandomName(originalName) + suffix;
 //        System.out.println(newName);
 
-        String dateStr = "2017-09-08";
+        /*String dateStr = "2017-09-08";
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date date = dateFormat.parse(dateStr);
             System.out.println("date: " + date);
         } catch (ParseException e) {
             e.printStackTrace();
-        }
+        }*/
+        System.out.println(Md5.getMd5("123456"));
 
     }
 

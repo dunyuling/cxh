@@ -49,4 +49,14 @@ public class FeeDeductionService extends BaseService<FeeDeduction> implements IF
     public long getTotal() {
         return feeDeductionDao.countAll();
     }
+
+    @Transactional
+    public List<Map<String, Object>> getAgentPagerFeeDeduction(long agentId, int page, int size) {
+        return feeDeductionDao.getAgentFds(agentId, page, size);
+    }
+
+    @Transactional
+    public int getAgentTotal(long agentId) {
+        return feeDeductionDao.getAgentFdsCount(agentId);
+    }
 }

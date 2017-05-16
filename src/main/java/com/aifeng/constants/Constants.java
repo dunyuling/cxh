@@ -13,7 +13,7 @@ public interface Constants {
     String getUserId = "https://qyapi.weixin.qq.com/cgi-bin/user/getuserinfo?access_token=SWO6gqpSbkuu1KAuSOE6F4ddLQVqQzYXW0yI8yc1L5tZZEPwn4T5za1THuhe6ed8&code=riRg8WQotd1bIq1cbqqmfdCuhVsn5RO7J9EoZjVUdt4";
     String secondAuth = "https://qyapi.weixin.qq.com/cgi-bin/user/authsucc?access_token=SWO6gqpSbkuu1KAuSOE6F4ddLQVqQzYXW0yI8yc1L5tZZEPwn4T5za1THuhe6ed8&userid=lhg0";
     String sendMeg = "https://qyapi.weixin.qq.com/cgi-bin/message/send";
-//    String host = "http://192.168.50.120:8080/";
+    //    String host = "http://192.168.50.120:8080/";
     String host = "http://47.93.6.231/";
 
     int message_repeat_gap = 3600; //一个小时
@@ -21,4 +21,6 @@ public interface Constants {
 
     String wxMsgTitle = "南阳三六零度 车险询价";
 
+    String agent_code = "000100";
+    String agent_pwd = "123456";
 }

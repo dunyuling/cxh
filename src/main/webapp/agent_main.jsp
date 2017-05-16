@@ -71,7 +71,7 @@
                                 <c:forEach items="${permissions }" var="p2">
                                     <c:if test="${p2.pid == p.menu_id && p2.display }">
                                         <li>
-                                            <a class="J_menuItem" href="${p2.url}?menuCode=${p2.menu_code}&agentId=0"
+                                            <a class="J_menuItem" href="${p2.url}?menuCode=${p2.menu_code}&agentId=${user.id}"
                                                code="${p2.menu_code }">${p2.menu_name }</a>
                                         </li>
                                     </c:if>

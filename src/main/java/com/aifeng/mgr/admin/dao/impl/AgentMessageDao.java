@@ -31,6 +31,24 @@ public class AgentMessageDao extends BaseDao<AgentMessage> implements IAgentMess
         return this.findBySql(str);
     }
 
+    public List<Map<String, Object>> getAgentAm(long agentId, int page, int pageSize) {
+        String str = "select am.id,a.name,m.content,am.times,am.visit,am.visitDate from agent_message am " +
+                "left join agent a on am.agent_id = a.id " +
+                "left join message m on am.message_id = m.id " +
+                "where a.id = " + agentId +
+                " order by am.visitDate desc,am.updateDate desc " +
+                "limit " + pageSize + " offset " + (page - 1) * pageSize + ";";
+        return this.findBySql(str);
+    }
+
+    public int getAgentAmCount(long agentId) {
+        String str = "select am.id,a.name,m.content,am.times,am.visit,am.visitDate from agent_message am " +
+                "left join agent a on am.agent_id = a.id " +
+                "left join message m on am.message_id = m.id " +
+                "where a.id = " + agentId;
+        return this.findBySql(str).size();
+    }
+
     public List<Map<String, Object>> getUnVisit() {
         String sql = "select am.id ,am.agent_id ,am.member_id,m.address_id from agent_message am " +
                 " join member m on am.member_id = m.id" +
