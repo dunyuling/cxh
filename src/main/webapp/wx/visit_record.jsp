@@ -15,7 +15,7 @@
     <link rel="stylesheet" type="text/css" href="css/mobiscroll_002.css">
     <link rel="stylesheet" type="text/css" href="css/mobiscroll.css">
     <link rel="stylesheet" type="text/css" href="css/mobiscroll_003.css">
-    <script type="text/javascript" src="js/jquery.1.11.3.min.js"></script>
+    <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="js/mobiscroll_002.js"></script>
     <script type="text/javascript" src="js/mobiscroll_004.js"></script>
     <script type="text/javascript" src="js/mobiscroll.js"></script>
@@ -77,21 +77,23 @@
 <input type="hidden" id="id" value="${id}"/>
 <input type="hidden" id="user_id" value="${user_id}"/>
 <input type="hidden" id="path" value="${path}"/>
+<input type="hidden" value="true" id="able_submit"/>
 <div class="su_details_button"><a id="submit" href="#">保存</a></div>
 <script type="text/javascript">
     $("#submit").click(function () {
-//        alert("ss1");
-        var id = $("#id").val();
-        var user_id = $("#user_id").val();
-        var path = $("#path").val();
-        var dateStr = $("#appDate").val();
-        var situation = $("#situation").val();
-        var remark = $("#remark").val();
 
-//        $.post("/wx/add_visit_record1.cs");
-        var queryParams = "id=" + id + "&userid=" + user_id + "&path=" + path + "&dateStr=" + dateStr + "&situation=" + situation + "&remark=" + remark;
-        window.location.href = "/wx/add_visit_record.cs?" + queryParams;
-
+        var able_submit = $("#able_submit").val();
+        if (able_submit == 'true') {
+            $("#able_submit").val(false);
+            var id = $("#id").val();
+            var user_id = $("#user_id").val();
+            var path = $("#path").val();
+            var dateStr = $("#appDate").val();
+            var situation = $("#situation").val();
+            var remark = $("#remark").val();
+            var queryParams = "id=" + id + "&userid=" + user_id + "&path=" + path + "&dateStr=" + dateStr + "&situation=" + situation + "&remark=" + remark;
+            window.location.href = "/wx/add_visit_record.cs?" + queryParams;
+        }
     });
 </script>
 </body>

@@ -12,7 +12,7 @@
     <link rel="stylesheet" type="text/css" href="css/base.css">
     <link rel="stylesheet" type="text/css" href="css/page01.css">
 
-    <script type="text/javascript" src="js/jquery.1.11.3.min.js"></script>
+    <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="../common/translateType.js"></script>
 </head>
 <body>

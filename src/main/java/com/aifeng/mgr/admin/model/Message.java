@@ -1,9 +1,6 @@
 package com.aifeng.mgr.admin.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -17,6 +14,7 @@ public class Message {
     @GeneratedValue
     private long id;
     private long proxyAddress_id;
+    @Column(columnDefinition = "text")
     private String content;
     private Date createDate;
 

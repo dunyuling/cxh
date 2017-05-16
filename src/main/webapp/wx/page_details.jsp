@@ -11,8 +11,7 @@
     <title>车险汇</title>
     <link rel="stylesheet" type="text/css" href="css/base.css">
     <link rel="stylesheet" type="text/css" href="css/page01.css">
-    <script type="text/javascript" src="js/jquery.1.11.3.min.js"></script>
-    <script type="text/javascript" src="../common/translateType.js"></script>
+    <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
 </head>
 <body>
 <div class="page_header">
@@ -65,6 +64,7 @@
 
     <input type="hidden" value="${id}" id="id"/>
 
+    <script type="text/javascript" src="../common/translateType.js"></script>
     <script type="text/javascript">
         $("#to_visit").click(function () {
             var id = $("#id").val();
