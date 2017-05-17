@@ -1,6 +1,5 @@
 package com.aifeng.mgr.admin.service.impl;
 
-import com.aifeng.constants.Constants;
 import com.aifeng.core.service.impl.BaseService;
 import com.aifeng.core.util.SpringUtil;
 import com.aifeng.mgr.admin.constants.InsuranceType;
@@ -92,31 +91,16 @@ public class MemberService extends BaseService<Member> implements IMemberService
             Agent agent = agentService.findById(agent_id);
 
             if (agent.getMoney() > addressFee.getAmount()) {
-
                 String zone = address.getProvince() + " " + address.getCity() + " " + address.getArea();
-                String content = Constants.wxMsgTitle +
-                        "\n\n时间: " + Util.date2String(new Date(), "yyyy-MM-dd HH:mm") +
-                        "\n姓名: " + member.getName() + "" +
-                        "\n电话: " + member.getMobile() +
-                        "\n地区: " + zone +
-                        "\n咨询类型: " + member.getType().getType() +
-//                        "\n备注:第" + 1 + "次提醒" +
-                        "\n您处理该信息后，请点击:" + Constants.host + "wx/detail.cs?id=" + member.getId();
+                String content = Util.loadMsg(address,member,-1);
                 AliSMSUtil.send(agent.getName(), zone, member.getType().getType(), member.getName(), member.getMobile(), agent.getMobile());
-
                 //基本信息
                 Message message = messageService.save(content, proxyAddress.getId());
                 //做为重发凭证
                 agentMessageService.save(member, message, agent);
-
                 messageService.sendMsg(agent, message, amount, true);
             }
         }
-    }
-
-    @Transactional
-    private void toSendMsg() {
-
     }
 
     @Transactional
@@ -133,18 +117,6 @@ public class MemberService extends BaseService<Member> implements IMemberService
     public long getTotal() {
         return memberDao.countAll();
     }
-
-    /*@Transactional
-    public void edit(long id, String name, String mobile, String type, String province, String city, String area) {
-        long addressId = addressService.getAddressId(province, city, area);
-        Member member = findById(id);
-        member.setName(name);
-        member.setMobile(mobile);
-        member.setType(InsuranceType.valueOf(type));
-        member.setAddress_id(addressId);
-        member.setUpdateDate(new Date());
-        memberDao.insert(member);
-    }*/
 
     @Transactional
     public void delMember(long id) {

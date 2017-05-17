@@ -1,6 +1,5 @@
 package com.aifeng.mgr.admin.service.impl;
 
-import com.aifeng.constants.Constants;
 import com.aifeng.core.service.impl.BaseService;
 import com.aifeng.core.util.SpringUtil;
 import com.aifeng.mgr.admin.dao.impl.AgentMessageDao;
@@ -12,7 +11,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.PostConstruct;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -103,24 +101,12 @@ public class AgentMessageService extends BaseService<AgentMessage> implements IA
             Address address = addressService.findById(address_id);
             AgentMessage agentMessage = findById(id);
 
-            String content = loadMsg(address, member, agent, agentMessage.getTimes() + 1);
+            String content = Util.loadMsg(address, member, agentMessage.getTimes() + 1);
             System.out.println("id: " + id + "\t agent_id: " + agent_id + "\tmember_id: " + member_id + "\taddress_id: " + address_id + "\t ===========");
             messageService.sendMsg(agent.getUserid(), content);
 
             agentMessage.setTimes(agentMessage.getTimes() + 1);
             agentMessageDao.update(agentMessage);
         }
-    }
-
-    private String loadMsg(Address address, Member member, Agent agent, int times) {
-        String zone = address.getProvince() + " " + address.getCity() + " " + address.getArea();
-        return Constants.wxMsgTitle +
-                "\n\n时间: " + Util.date2String(new Date(), "yyyy-MM-dd HH:mm") +
-                "\n姓名: " + member.getName() + "" +
-                "\n电话: " + member.getMobile() +
-                "\n地区: " + zone +
-                "\n咨询类型: " + member.getType().getType() +
-                "\n备注:第" + times + "次提醒" +
-                "\n您处理该信息后，请点击:" + Constants.host + "wx/detail.cs?id=" + member.getId();
     }
 }

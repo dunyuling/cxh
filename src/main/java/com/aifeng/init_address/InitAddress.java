@@ -1,9 +1,6 @@
 package com.aifeng.init_address;
 
-import com.aifeng.mgr.admin.model.Address;
-import com.aifeng.mgr.admin.service.impl.AddressFeeService;
-import com.aifeng.mgr.admin.service.impl.AddressService;
-import com.aifeng.mgr.admin.service.impl.AgentService;
+import com.aifeng.mgr.admin.service.impl.VisitRecordService;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -42,7 +39,8 @@ public class InitAddress {
 //            addressFeeService.saveAddressFee(address.getId(),10);
 //        }
 
-//        AgentService agentService = classPathXmlApplicationContext.getBean(AgentService.class);
+        VisitRecordService visitRecordService = classPathXmlApplicationContext.getBean(VisitRecordService.class);
+        visitRecordService.test();
 
     }
 

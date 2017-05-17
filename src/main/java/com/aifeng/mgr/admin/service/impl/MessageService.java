@@ -18,6 +18,8 @@ import org.springframework.web.client.RestTemplate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
 
 /**
  * Created by pro on 17-4-28.
@@ -32,6 +34,7 @@ public class MessageService extends BaseService<Message> implements IMessageServ
     private final RestTemplate restTemplate;
     private final AuxiliaryInformationService auxiliaryInformationService;
     private final FeeDeductionService feeDeductionService;
+    ExecutorService executorService;
 
     @Autowired
     public MessageService(MessageDao messageDao, AgentMessageService agentMessageService, AgentService agentService, MessageRepeatService messageRepeatService, RestTemplate restTemplate, AuxiliaryInformationService auxiliaryInformationService, FeeDeductionService feeDeductionService) {
@@ -42,6 +45,7 @@ public class MessageService extends BaseService<Message> implements IMessageServ
         this.restTemplate = restTemplate;
         this.auxiliaryInformationService = auxiliaryInformationService;
         this.feeDeductionService = feeDeductionService;
+        executorService = new ScheduledThreadPoolExecutor(10);
     }
 
     //TODO 此处添加定时器,定时器的间隔要从数据库读取
@@ -77,7 +81,6 @@ public class MessageService extends BaseService<Message> implements IMessageServ
     }
 
     //不计费
-    @Transactional
     public void sendMsg(String toUser, String content) {
         RequestBody requestBody = new RequestBody();
         requestBody.setTouser(toUser);
@@ -89,9 +92,20 @@ public class MessageService extends BaseService<Message> implements IMessageServ
         requestBody.setText(map);
         requestBody.setSafe(0);
 
-        String access_token = auxiliaryInformationService.getAccessToken();
-        ResponseEntity<ResponseType> response = restTemplate.postForEntity(Util.loadSendMsgUrl(access_token), requestBody, ResponseType.class);
-        System.out.println(response.getBody().getErrmsg());
+        executorService.execute(() -> {
+            String access_token = auxiliaryInformationService.getAccessToken();
+            ResponseEntity<ResponseType> response = restTemplate.postForEntity(Util.loadSendMsgUrl(access_token), requestBody, ResponseType.class);
+            System.out.println("msg: " + response.getBody().getErrmsg());
+        });
+
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                String access_token = auxiliaryInformationService.getAccessToken();
+//                ResponseEntity<ResponseType> response = restTemplate.postForEntity(Util.loadSendMsgUrl(access_token), requestBody, ResponseType.class);
+//                System.out.println("msg: " + response.getBody().getErrmsg());
+//            }
+//        }).start();
     }
 
     @Transactional

@@ -29,6 +29,8 @@ public class VisitRecord {
     @Column(name = "member_id")
     private long memberId;
 
+    private boolean remind;
+
     public VisitRecord() {
         this.visitDate = new Date();
     }
@@ -87,5 +89,13 @@ public class VisitRecord {
 
     public void setMemberId(long memberId) {
         this.memberId = memberId;
+    }
+
+    public boolean isRemind() {
+        return remind;
+    }
+
+    public void setRemind(boolean remind) {
+        this.remind = remind;
     }
 }

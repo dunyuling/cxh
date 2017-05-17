@@ -1,6 +1,8 @@
 package com.aifeng.util;
 
 import com.aifeng.constants.Constants;
+import com.aifeng.mgr.admin.model.Address;
+import com.aifeng.mgr.admin.model.Member;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -191,4 +193,21 @@ public class Util {
         }
         return date;
     }
+
+    public static String loadMsg(Address address, Member member, int times) {
+        String zone = address.getProvince() + " " + address.getCity() + " " + address.getArea();
+        String content = Constants.wxMsgTitle +
+                "\n\n时间: " + Util.date2String(new Date(), "yyyy-MM-dd HH:mm") +
+                "\n姓名: " + member.getName() + "" +
+                "\n电话: " + member.getMobile() +
+                "\n地区: " + zone +
+                "\n咨询类型: " + member.getType().getType();
+        if (times != -1) {
+            content += "\n备注:第" + times + "次提醒";
+        }
+        content += "\n您处理该信息后，请点击:" + Constants.host + "wx/detail.cs?id=" + member.getId();
+        return content;
+    }
+
+    
 }

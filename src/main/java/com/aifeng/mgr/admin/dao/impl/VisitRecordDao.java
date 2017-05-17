@@ -39,4 +39,16 @@ public class VisitRecordDao extends BaseDao<VisitRecord> implements IVisitRecord
         List<Map<String, Object>> list = this.findBySql(sql);
         return list.size();
     }
+
+    public List<Map<String, Object>> getNeedRemindInThreeDays() {
+        String sql = "select vr.id,vr.member_id, vr.next_visit_date,vr.times, " +
+                " m.name,m.mobile,m.type , a.province,a.city, a.area, ag.userid from visit_record vr " +
+                "left join member m on vr.member_id = m.id " +
+                "left join agent_message am on vr.member_id = am.member_id " +
+                "left join agent ag on am.agent_id = ag.id " +
+                "left join address a on m.address_id = a.id " +
+                "where vr.next_visit_date between curdate() and adddate(curdate(), interval 3 day) and vr.remind is false ";
+        System.out.println("3 day3 sql: " + sql);
+        return this.findBySql(sql);
+    }
 }
