@@ -54,8 +54,12 @@ public class AgentDao extends BaseDao<Agent> implements IAgentDao {
         return list.isEmpty() ? null : list.get(0);
     }
 
-    public List<Agent> findAll() {
-        String hql = " from Agent ";
-        return (List<Agent>) this.findByHql(hql, null);
+    public List<Map<String, Object>> findAllBalanceLow() {
+        String sql = "select a.id,a.userid,a.name,a.money,floor(a.money/b.amount) as count from agent a join " +
+                " (select a.userid, sum(af.amount) as amount  from agent a " +
+                " right join proxy_address pa on a.id = pa.agent_id " +
+                " join address_fee af on pa.af_id = af.id group by a.userid) b" +
+                " on a.userid=b.userid where a.money < b.amount * 10";
+        return this.findBySql(sql);
     }
 }

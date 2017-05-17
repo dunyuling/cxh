@@ -14,6 +14,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -156,13 +157,21 @@ public class AgentService extends BaseService<Agent> implements IAgentService {
     public void balanceLow() {
         messageService = messageService == null ? SpringUtil.getBean("messageService") : messageService;
 
-        List<Agent> agents = agentDao.findAll();
-        for (Agent agent : agents) {
-            if (agent.getMoney() < 100) {
-                String content = "尊敬的" + agent.getName() + "用户您当前余额为:" + agent.getMoney() + "元。为了避免余额不足时，您无法及时收到推荐会员信息，给您造成不便，请及时充值。";
-                messageService.sendMsg(agent.getUserid(), content);
-                System.out.println("-----: " + agent.getName() + " \t " + agent.getMoney());
+        List<Map<String, Object>> list = agentDao.findAllBalanceLow();
+        for (Map<String, Object> map : list) {
+            Long countTemp = (Long) map.get("count");
+            int count = countTemp == null ? 0 : countTemp.intValue();
+
+            StringBuilder content = new StringBuilder();
+            content.append("尊敬的").append(map.get("name")).append("用户,您当前余额为:").append(map.get("money")).append("元。");
+            if (count == 0) {
+                content.append("已不能收到新增会员提醒");
+            } else {
+                content.append("只能收到").append(count).append("次新增会员提醒");
             }
+            content.append("，请及时充值，以免遗漏会员提醒，给您造成损失。");
+            messageService.sendMsg(map.get("userid").toString(), content.toString());
+            System.out.println("-----: " + map.get("name") + " \t " + map.get("money"));
         }
         System.exit(0);
     }
