@@ -51,7 +51,7 @@ public class ProxyAddressService extends BaseService<ProxyAddress> implements IP
         proxyAddress.setAgent_id(agent_id);
         proxyAddress.setAf_id(af_id);
         proxyAddress.setCreateDate(new Date());
-        proxyAddress.setProxyStatus(ProxyStatus.APPLYING); //TODO 基于后台手动授权
+        proxyAddress.setProxyStatus(ProxyStatus.APPLYING);
         this.proxyAddressDao.insert(proxyAddress);
     }
 

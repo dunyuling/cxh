@@ -3,6 +3,7 @@ package com.aifeng.init_address;
 import com.aifeng.mgr.admin.model.Address;
 import com.aifeng.mgr.admin.service.impl.AddressFeeService;
 import com.aifeng.mgr.admin.service.impl.AddressService;
+import com.aifeng.mgr.admin.service.impl.AgentService;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -33,13 +34,16 @@ public class InitAddress {
                 "spring-redis.xml"
 
         });
-        AddressService addressService = classPathXmlApplicationContext.getBean(AddressService.class);
-        addressService.init(areaList, cityList, provinceList);
+//        AddressService addressService = classPathXmlApplicationContext.getBean(AddressService.class);
+//        addressService.init(areaList, cityList, provinceList);
+//
+//        AddressFeeService addressFeeService = classPathXmlApplicationContext.getBean(AddressFeeService.class);
+//        for (Address address : addressService.getAll()) {
+//            addressFeeService.saveAddressFee(address.getId(),10);
+//        }
 
-        AddressFeeService addressFeeService = classPathXmlApplicationContext.getBean(AddressFeeService.class);
-        for (Address address : addressService.getAll()) {
-            addressFeeService.saveAddressFee(address.getId(),10);
-        }
+//        AgentService agentService = classPathXmlApplicationContext.getBean(AgentService.class);
+
     }
 
 
@@ -58,3 +62,7 @@ public class InitAddress {
         return list;
     }
 }
+
+//TODO 余额不足提醒
+//TODO 回访时间提醒
+//TODO 会员短信群发

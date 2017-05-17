@@ -129,7 +129,7 @@ public class AddressService extends BaseService<Address> implements IAddressServ
     public void delAddress(long id) {
         Address address = addressDao.findById(id);
         addressDao.delete(address);
-        addressFeeService.delByAddressId(address.getId()); //TODO
+        addressFeeService.delByAddressId(address.getId());
     }
 
     @Transactional

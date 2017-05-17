@@ -133,8 +133,6 @@
                 alert(res);
             });
         }
-//        alert("document.close()"); //TODO 关不掉当前页面
-//        document.close();
     });
 
     function active() {

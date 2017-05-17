@@ -30,7 +30,7 @@ public class Member {
 
     public Member() {
         this.createDate = new Date();
-        this.status = Status.WAITING; //TODO 数据库字段显示方式
+        this.status = Status.WAITING;
     }
 
     public long getId() {

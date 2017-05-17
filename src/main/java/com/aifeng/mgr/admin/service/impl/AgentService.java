@@ -1,6 +1,7 @@
 package com.aifeng.mgr.admin.service.impl;
 
 import com.aifeng.core.service.impl.BaseService;
+import com.aifeng.core.util.SpringUtil;
 import com.aifeng.mgr.admin.dao.impl.AgentDao;
 import com.aifeng.mgr.admin.model.AddressFee;
 import com.aifeng.mgr.admin.model.Agent;
@@ -9,6 +10,7 @@ import com.aifeng.mgr.admin.service.IAgentService;
 import com.aifeng.util.DateStyle;
 import com.aifeng.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +25,7 @@ public class AgentService extends BaseService<Agent> implements IAgentService {
     private final AddressService addressService;
     private final AddressFeeService addressFeeService;
     private final ProxyAddressService proxyAddressService;
+    private MessageService messageService;
 
     @Autowired
     public AgentService(AgentDao agentDao, AddressService addressService, AddressFeeService addressFeeService, ProxyAddressService proxyAddressService) {
@@ -146,5 +149,21 @@ public class AgentService extends BaseService<Agent> implements IAgentService {
     public Agent findByMobile(String mobile) {
         Agent agent = agentDao.getAgentByMobile(mobile);
         return agent;
+    }
+
+    @Scheduled(fixedDelay = 1000 * 60 * 60 * 24)
+    @Transactional
+    public void balanceLow() {
+        messageService = messageService == null ? SpringUtil.getBean("messageService") : messageService;
+
+        List<Agent> agents = agentDao.findAll();
+        for (Agent agent : agents) {
+            if (agent.getMoney() < 100) {
+                String content = "尊敬的" + agent.getName() + "用户您当前余额为:" + agent.getMoney() + "元。为了避免余额不足时，您无法及时收到推荐会员信息，给您造成不便，请及时充值。";
+                messageService.sendMsg(agent.getUserid(), content);
+                System.out.println("-----: " + agent.getName() + " \t " + agent.getMoney());
+            }
+        }
+        System.exit(0);
     }
 }

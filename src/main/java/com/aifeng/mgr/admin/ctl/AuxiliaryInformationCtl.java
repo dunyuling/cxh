@@ -39,15 +39,4 @@ public class AuxiliaryInformationCtl extends BaseCtl {
         }
         return AJAX_SUCCESS;
     }
-
-    //TODO 返回页面的改变
-    /*@RequestMapping("edit")
-    public String edit(String access_token,String corpID,String secret) {
-        try {
-            auxiliaryInformationService.edit(access_token,corpID,secret);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "redirect:/ai/to_edit.cs";
-    }*/
 }

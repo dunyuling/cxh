@@ -170,7 +170,6 @@
             var mobile = $("#mobile").val();
             var IDCard = $("#IDCard").val();
             var addr = $("#addr").val();
-            //TODO 选择到 县/区
             var corpName = $("#corpName").val();
             var file = $("#img").val();
             var expireDate = $("#expireDate").val();
@@ -252,9 +251,6 @@
             }).fail(function (res) {
                 $("#submit_enable").val(true);
             });
-
-//        alert("document.close()"); //TODO 关不掉当前页面
-//        document.close();
         } else {
             alert("您已提交过资料")
         }

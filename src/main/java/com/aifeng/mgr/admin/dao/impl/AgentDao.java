@@ -1,6 +1,5 @@
 package com.aifeng.mgr.admin.dao.impl;
 
-import com.aifeng.constants.Constants;
 import com.aifeng.core.dao.impl.BaseDao;
 import com.aifeng.mgr.admin.dao.IAgentDao;
 import com.aifeng.mgr.admin.model.Agent;
@@ -55,8 +54,8 @@ public class AgentDao extends BaseDao<Agent> implements IAgentDao {
         return list.isEmpty() ? null : list.get(0);
     }
 
-    /*public Map<String,Object> getAgentByUserId2(String user_id) {
-        String sql = "select id,name from agent where userid = '" + user_id + "'";
-        return this.findBySql(sql).get(0);
-    }*/
+    public List<Agent> findAll() {
+        String hql = " from Agent ";
+        return (List<Agent>) this.findByHql(hql, null);
+    }
 }
