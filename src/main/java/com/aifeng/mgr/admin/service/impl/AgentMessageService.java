@@ -81,7 +81,7 @@ public class AgentMessageService extends BaseService<AgentMessage> implements IA
         }
     }
 
-    @Scheduled(fixedDelay = 300000)
+    @Scheduled(cron="0 0/5 * * * ?")
     @Transactional
     public void repeatSend() {
         addressService = addressService == null ? SpringUtil.getBean("addressService") : addressService;

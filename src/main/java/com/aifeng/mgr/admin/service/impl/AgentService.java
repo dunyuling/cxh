@@ -157,7 +157,7 @@ public class AgentService extends BaseService<Agent> implements IAgentService {
         messageService = messageService == null ? SpringUtil.getBean("messageService") : messageService;
 
         List<Map<String, Object>> list = agentDao.findAllBalanceLow();
-        for (Map<String, Object> map : list) {
+        /*for (Map<String, Object> map : list) {
             Long countTemp = (Long) map.get("count");
             int count = countTemp == null ? 0 : countTemp.intValue();
 
@@ -168,6 +168,14 @@ public class AgentService extends BaseService<Agent> implements IAgentService {
             } else {
                 content.append("只能收到").append(count).append("次新增会员提醒");
             }
+            content.append("，请及时充值，以免遗漏会员提醒，给您造成损失。");
+            messageService.sendMsg(map.get("userid").toString(), content.toString());
+            System.out.println("-----: " + map.get("name") + " \t " + map.get("money"));
+        }*/
+
+        for (Map<String, Object> map : list) {
+            StringBuilder content = new StringBuilder();
+            content.append("尊敬的").append(map.get("name")).append("用户,您当前余额为:").append(map.get("money")).append("元。");
             content.append("，请及时充值，以免遗漏会员提醒，给您造成损失。");
             messageService.sendMsg(map.get("userid").toString(), content.toString());
             System.out.println("-----: " + map.get("name") + " \t " + map.get("money"));

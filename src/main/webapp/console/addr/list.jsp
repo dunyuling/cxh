@@ -64,7 +64,7 @@
         var area = $("#area").val();
 
 //        alert("ss");
-        if(province.trim() == "" || city.trim() == "" || area.trim() == "") {
+        if(province.trim() == "" && city.trim() == "" && area.trim() == "") {
             alert("请完整输入地址");
             return;
         }

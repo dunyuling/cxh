@@ -105,7 +105,7 @@ public class WxCtl {
         try {
             UserResponse userResponse = mapper.readValue(codeStr, UserResponse.class);
             user_id = userResponse.getUser_id();
-            System.out.println("---");
+            System.out.println("getCode userid: " + user_id);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -262,7 +262,16 @@ public class WxCtl {
 
     @RequestMapping(value = "to_re_add", produces = "text/plain;charset=utf-8;")
     public String toReAdd(HttpServletRequest request, Model model) {
-        model.addAllAttributes(getCode(request, model));
+        Map<String, String> map = getCode(request, model);
+        String user_id = map.get("user_id");
+        if(user_id != null) {
+            Agent agent = agentService.getAgentByUserid(user_id);
+            model.addAttribute("agent", agent);
+        } else {
+            model.addAttribute("agent", null);
+        }
+        model.addAllAttributes(map);
+
         return "/wx/proxy_address_add";
     }
 

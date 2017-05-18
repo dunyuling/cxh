@@ -66,12 +66,21 @@ public class MemberDao extends BaseDao<Member> implements IMemberDao {
     }
 
     public List<Map<String, Object>> getToday(String user_id) {
-        String sql = "select m.id, m.name,m.mobile,m.type,m.createDate,am.visit from agent_message am " +
-                "left join member m on am.member_id = m.id " +
-                "left join agent ag on am.agent_id = ag.id " +
-                "where ag.userid = '" + user_id +
-                "' and date_format(am.updateDate,'%Y-%m-%d') = curdate()　" +
-                " order by m.createDate desc ";
+//        String sql = "select m.id, m.name,m.mobile,m.type,m.createDate,am.visit from agent_message am " +
+//                "left join member m on am.member_id = m.id " +
+//                "left join agent ag on am.agent_id = ag.id " +
+//                "where ag.userid = '" + user_id +
+//                "' and date_format(am.updateDate,'%Y-%m-%d') = curdate()　" +
+//                " order by m.createDate desc ";
+
+
+        String sql = "select m.id, m.name,m.mobile,m.type,m.createDate,am.visit from agent_message am" +
+                " left join member m on am.member_id = m.id " +
+                " left join agent ag on am.agent_id = ag.id " +
+                " where ag.userid='" + user_id + "'" +
+                " and date_format(am.updateDate,'%Y-%m-%d') = curdate() " +
+                " order by m.createDate desc";
+        System.out.println("111sql: " + sql);
         return this.findBySql(sql);
     }
 

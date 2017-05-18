@@ -24,14 +24,14 @@
     <ul>
         <input type="hidden" id="access_token" value="${access_token}"/>
         <input type="hidden" id="user_id" value="${user_id}"/>
-        <c:if test="${not empty user_id}">
+        <c:if test="${not empty agent}">
             <li class="su_input content-block">
                 <p>代理地区</p>
                 <input name="addr" id="addr" readonly type="text" placeholder="省/市/县（区）">
             </li>
             <div class="su_details_button"><a href="#" id="submit">提交</a></div>
         </c:if>
-        <c:if test="${empty user_id}">
+        <c:if test="${empty agent}">
             <li class="content-block" style="color:black;alignment:center;">
                 <p>请先进行身份验证</p>
             </li>

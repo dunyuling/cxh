@@ -88,10 +88,11 @@ public class VisitRecordService extends BaseService<VisitRecord> implements IVis
             messageService.sendMsg(m.get("userid").toString(), loadMsg(m));
         }
 
-
-        ids = ids.substring(0, ids.lastIndexOf(","));
-        String sql = "update visit_record vr set vr.remind = true where vr.id in (" + ids + ")";
-        visitRecordDao.sqlUpdate(sql);
+        if (!ids.isEmpty()) {
+            ids = ids.substring(0, ids.lastIndexOf(","));
+            String sql = "update visit_record vr set vr.remind = true where vr.id in (" + ids + ")";
+            visitRecordDao.sqlUpdate(sql);
+        }
     }
 
     public void test() {

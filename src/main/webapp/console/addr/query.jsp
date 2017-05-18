@@ -62,7 +62,7 @@
         var province = $("#province").val();
         var city = $("#city").val();
         var area = $("#area").val();
-        if (province.trim() == "" || city.trim() == "" || area.trim() == "") {
+        if (province.trim() == "" && city.trim() == "" && area.trim() == "") {
             alert("请完整输入地址");
             return;
         }
