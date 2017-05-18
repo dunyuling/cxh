@@ -1,5 +1,6 @@
 package com.aifeng.init_address;
 
+import com.aifeng.mgr.admin.service.impl.AgentMessageService;
 import com.aifeng.mgr.admin.service.impl.VisitRecordService;
 import com.alibaba.fastjson.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -39,8 +40,11 @@ public class InitAddress {
 //            addressFeeService.saveAddressFee(address.getId(),10);
 //        }
 
-        VisitRecordService visitRecordService = classPathXmlApplicationContext.getBean(VisitRecordService.class);
-        visitRecordService.visitRemind();
+/*        VisitRecordService visitRecordService = classPathXmlApplicationContext.getBean(VisitRecordService.class);
+        visitRecordService.visitRemind();*/
+
+        AgentMessageService agentMessageService = classPathXmlApplicationContext.getBean(AgentMessageService.class);
+        agentMessageService.repeatSend();
 
     }
 

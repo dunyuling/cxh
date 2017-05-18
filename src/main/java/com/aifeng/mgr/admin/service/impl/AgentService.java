@@ -176,7 +176,7 @@ public class AgentService extends BaseService<Agent> implements IAgentService {
         for (Map<String, Object> map : list) {
             StringBuilder content = new StringBuilder();
             content.append("尊敬的").append(map.get("name")).append("用户,您当前余额为:").append(map.get("money")).append("元。");
-            content.append("，请及时充值，以免遗漏会员提醒，给您造成损失。");
+            content.append("请及时充值，以免遗漏会员提醒，给您造成损失。");
             messageService.sendMsg(map.get("userid").toString(), content.toString());
             System.out.println("-----: " + map.get("name") + " \t " + map.get("money"));
         }

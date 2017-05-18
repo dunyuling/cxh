@@ -81,7 +81,7 @@ public class AgentMessageService extends BaseService<AgentMessage> implements IA
         }
     }
 
-    @Scheduled(cron="0 0/5 * * * ?")
+    @Scheduled(cron="0 */5 * * * ?")
     @Transactional
     public void repeatSend() {
         addressService = addressService == null ? SpringUtil.getBean("addressService") : addressService;
@@ -102,7 +102,7 @@ public class AgentMessageService extends BaseService<AgentMessage> implements IA
             AgentMessage agentMessage = findById(id);
 
             String content = Util.loadMsg(address, member, agentMessage.getTimes() + 1);
-            System.out.println("id: " + id + "\t agent_id: " + agent_id + "\tmember_id: " + member_id + "\taddress_id: " + address_id + "\t ===========");
+            System.out.println("id: " + id + "\t agent_id: " + agent_id + "\tmember_id: " + member_id + "\taddress_id: " + address_id + "\t where am.visit is false");
             messageService.sendMsg(agent.getUserid(), content);
 
             agentMessage.setTimes(agentMessage.getTimes() + 1);
