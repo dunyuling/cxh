@@ -14,7 +14,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -152,7 +151,7 @@ public class AgentService extends BaseService<Agent> implements IAgentService {
         return agent;
     }
 
-    @Scheduled(initialDelay = 1000 * 30, fixedDelay = 1000 * 60 * 60 * 24)
+    @Scheduled(fixedDelay = 1000 * 60 * 60 * 24)
     @Transactional
     public void balanceLow() {
         messageService = messageService == null ? SpringUtil.getBean("messageService") : messageService;
@@ -173,6 +172,5 @@ public class AgentService extends BaseService<Agent> implements IAgentService {
             messageService.sendMsg(map.get("userid").toString(), content.toString());
             System.out.println("-----: " + map.get("name") + " \t " + map.get("money"));
         }
-        System.exit(0);
     }
 }

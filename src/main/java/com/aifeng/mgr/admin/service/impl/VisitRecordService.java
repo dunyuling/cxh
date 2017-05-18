@@ -30,8 +30,6 @@ public class VisitRecordService extends BaseService<VisitRecord> implements IVis
     VisitRecordDao visitRecordDao;
     private final AgentMessageService agentMessageService;
     private final MessageService messageService;
-    @Autowired
-    SessionFactory sessionFactory;
 
     @Autowired
     public VisitRecordService(VisitRecordDao visitRecordDao, AgentMessageService agentMessageService, MessageService messageService) {
@@ -93,23 +91,17 @@ public class VisitRecordService extends BaseService<VisitRecord> implements IVis
 
         ids = ids.substring(0, ids.lastIndexOf(","));
         String sql = "update visit_record vr set vr.remind = true where vr.id in (" + ids + ")";
-
-        Session session = sessionFactory.openSession();
-        Transaction tx = session.beginTransaction();
-        Query query = session.createSQLQuery(sql);
-        query.executeUpdate();
-        tx.commit();
-        session.close();
+        visitRecordDao.sqlUpdate(sql);
     }
 
     public void test() {
-        String sql = "update visit_record vr set vr.remind = true where vr.id in (23,24)";
-        Session session = sessionFactory.openSession();
-        Transaction tx = session.beginTransaction();
-        Query query = session.createSQLQuery(sql);
-        query.executeUpdate();
-        tx.commit();
-        session.close();
+//        String sql = "update visit_record vr set vr.remind = true where vr.id in (23,24)";
+//        Session session = sessionFactory.openSession();
+//        Transaction tx = session.beginTransaction();
+//        Query query = session.createSQLQuery(sql);
+//        query.executeUpdate();
+//        tx.commit();
+//        session.close();
     }
 
     private String loadMsg(Map<String, Object> map) {
