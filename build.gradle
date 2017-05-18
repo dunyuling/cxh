@@ -4,13 +4,16 @@ version '1.0-SNAPSHOT'
 apply plugin: 'java'
 apply plugin: 'war'
 
-sourceCompatibility = 1.5
+sourceCompatibility = 1.8
 
 repositories {
-    mavenCentral()
-    maven {
-        url="http://maven.aliyun.com/nexus/content/groups/public"
-    }
+//    mavenCentral()
+//    maven {
+//        url="http://maven.aliyun.com/nexus/content/groups/public"
+//    }
+//    flatDir {
+//        dirs 'src/main/webapp/WEB-INF/libs'
+//    }
 }
 
 ext {
@@ -19,6 +22,7 @@ ext {
     mybatisVersion = '3.4.4'
     mybatisSpringVersion = '1.3.1'
     springDataVersion = '1.11.1.RELEASE'
+    libDir='src/main/webapp/WEB-INF/libs'
 }
 
 dependencies {
@@ -53,4 +57,72 @@ dependencies {
 
     compile "commons-io:commons-io:2.4"
     compile "commons-codec:commons-codec:1.9"*/
+
+    compile files(
+            'src/main/webapp/WEB-INF/libs/aliyun-sdk-mns-1.1.8.jar',
+            'src/main/webapp/WEB-INF/libs/antlr-2.7.7.jar',
+            'src/main/webapp/WEB-INF/libs/aopalliance-1.0.jar',
+            'src/main/webapp/WEB-INF/libs/a.txt',
+            'src/main/webapp/WEB-INF/libs/commons-beanutils-1.9.3.jar',
+            'src/main/webapp/WEB-INF/libs/commons-codec-1.9.jar',
+            'src/main/webapp/WEB-INF/libs/commons-collections-3.2.1.jar',
+            'src/main/webapp/WEB-INF/libs/commons-fileupload-1.3.1.jar',
+            'src/main/webapp/WEB-INF/libs/commons-httpclient-3.0.1.jar',
+            'src/main/webapp/WEB-INF/libs/commons-io-2.2.jar',
+            'src/main/webapp/WEB-INF/libs/commons-lang-2.5.jar',
+            'src/main/webapp/WEB-INF/libs/commons-lang3-3.5.jar',
+            'src/main/webapp/WEB-INF/libs/commons-logging-1.2.jar',
+            'src/main/webapp/WEB-INF/libs/commons-pool2-2.4.1.jar',
+            'src/main/webapp/WEB-INF/libs/dom4j-1.6.1.jar',
+            'src/main/webapp/WEB-INF/libs/druid-1.0.13.jar',
+            'src/main/webapp/WEB-INF/libs/fastjson-1.2.3.jar',
+            'src/main/webapp/WEB-INF/libs/gson-2.8.0.jar',
+            'src/main/webapp/WEB-INF/libs/hibernate-commons-annotations-4.0.5.Final.jar',
+            'src/main/webapp/WEB-INF/libs/hibernate-core-4.3.7.Final.jar',
+            'src/main/webapp/WEB-INF/libs/hibernate-jpa-2.1-api-1.0.0.Final.jar',
+            'src/main/webapp/WEB-INF/libs/httpasyncclient-4.1.3.jar',
+            'src/main/webapp/WEB-INF/libs/httpclient-4.4.jar',
+            'src/main/webapp/WEB-INF/libs/httpcore-4.4.jar',
+            'src/main/webapp/WEB-INF/libs/httpcore-nio-4.4.6.jar',
+            'src/main/webapp/WEB-INF/libs/httpmime-4.3.5.jar',
+            'src/main/webapp/WEB-INF/libs/jackson-annotations-2.6.7.jar',
+            'src/main/webapp/WEB-INF/libs/jackson-core-2.6.7.jar',
+            'src/main/webapp/WEB-INF/libs/jackson-core-asl-1.9.12.jar',
+            'src/main/webapp/WEB-INF/libs/jackson-databind-2.6.7.jar',
+            'src/main/webapp/WEB-INF/libs/jackson-mapper-asl-1.9.12.jar',
+            'src/main/webapp/WEB-INF/libs/jackson-module-jaxb-annotations-2.6.7.jar',
+            'src/main/webapp/WEB-INF/libs/jai_codec.jar',
+            'src/main/webapp/WEB-INF/libs/jai_core.jar',
+            'src/main/webapp/WEB-INF/libs/javassist-3.18.1-GA.jar',
+            'src/main/webapp/WEB-INF/libs/javax.servlet-api-3.1.0.jar',
+            'src/main/webapp/WEB-INF/libs/javax.websocket-api-1.1.jar',
+            'src/main/webapp/WEB-INF/libs/jboss-logging-3.1.3.GA.jar',
+            'src/main/webapp/WEB-INF/libs/jboss-transaction-api_1.2_spec-1.0.0.Final.jar',
+            'src/main/webapp/WEB-INF/libs/jdom-1.1.jar',
+            'src/main/webapp/WEB-INF/libs/jedis_2.9.0.jar',
+            'src/main/webapp/WEB-INF/libs/jpinyin-1.0.jar',
+            'src/main/webapp/WEB-INF/libs/json-20160810.jar',
+            'src/main/webapp/WEB-INF/libs/jsp-api-2.0.jar',
+            'src/main/webapp/WEB-INF/libs/jstl-1.2.jar',
+            'src/main/webapp/WEB-INF/libs/log4j-1.2.17.jar',
+            'src/main/webapp/WEB-INF/libs/mysql-connector-java-5.1.34.jar',
+            'src/main/webapp/WEB-INF/libs/simpleimage-1.2.3.jar',
+            'src/main/webapp/WEB-INF/libs/spring-aop-4.1.9.RELEASE.jar',
+            'src/main/webapp/WEB-INF/libs/spring-aspects-4.1.9.RELEASE.jar',
+            'src/main/webapp/WEB-INF/libs/spring-beans-4.1.9.RELEASE.jar',
+            'src/main/webapp/WEB-INF/libs/spring-context-4.1.9.RELEASE.jar',
+            'src/main/webapp/WEB-INF/libs/spring-context-support-4.1.9.RELEASE.jar',
+            'src/main/webapp/WEB-INF/libs/spring-core-4.1.9.RELEASE.jar',
+            'src/main/webapp/WEB-INF/libs/spring-data-commons-1.12.6.RELEASE.jar',
+            'src/main/webapp/WEB-INF/libs/spring-data-redis-1.6.6.RELEASE.jar',
+            'src/main/webapp/WEB-INF/libs/spring-expression-4.1.9.RELEASE.jar',
+            'src/main/webapp/WEB-INF/libs/spring-jdbc-4.1.9.RELEASE.jar',
+            'src/main/webapp/WEB-INF/libs/spring-jms-4.1.9.RELEASE.jar',
+            'src/main/webapp/WEB-INF/libs/spring-orm-4.1.9.RELEASE.jar',
+            'src/main/webapp/WEB-INF/libs/spring-oxm-4.1.9.RELEASE.jar',
+            'src/main/webapp/WEB-INF/libs/spring-tx-4.1.9.RELEASE.jar',
+            'src/main/webapp/WEB-INF/libs/spring-web-4.1.9.RELEASE.jar',
+            'src/main/webapp/WEB-INF/libs/spring-webmvc-4.1.9.RELEASE.jar',
+            'src/main/webapp/WEB-INF/libs/zxing-3.2.1.jar'
+    )
 }

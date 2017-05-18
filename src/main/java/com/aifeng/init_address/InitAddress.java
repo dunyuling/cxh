@@ -1,7 +1,7 @@
 package com.aifeng.init_address;
 
 import com.aifeng.mgr.admin.service.impl.VisitRecordService;
-import com.fasterxml.jackson.core.type.TypeReference;
+import com.alibaba.fastjson.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -40,7 +40,7 @@ public class InitAddress {
 //        }
 
         VisitRecordService visitRecordService = classPathXmlApplicationContext.getBean(VisitRecordService.class);
-        visitRecordService.test();
+        visitRecordService.visitRemind();
 
     }
 
@@ -52,7 +52,8 @@ public class InitAddress {
         File file = new File(basePath + arName);
         ObjectMapper mapper = new ObjectMapper();
         try {
-            list = mapper.readValue(file, new TypeReference<List<AdminRanking>>() {
+            mapper.readValue(file, new com.fasterxml.jackson.core.type.TypeReference<List<AdminRanking>>() {
+
             });
         } catch (IOException e) {
             e.printStackTrace();
@@ -61,6 +62,4 @@ public class InitAddress {
     }
 }
 
-//TODO 余额不足提醒
-//TODO 回访时间提醒
 //TODO 会员短信群发

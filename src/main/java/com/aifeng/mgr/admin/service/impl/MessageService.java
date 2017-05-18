@@ -97,15 +97,6 @@ public class MessageService extends BaseService<Message> implements IMessageServ
             ResponseEntity<ResponseType> response = restTemplate.postForEntity(Util.loadSendMsgUrl(access_token), requestBody, ResponseType.class);
             System.out.println("msg: " + response.getBody().getErrmsg());
         });
-
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                String access_token = auxiliaryInformationService.getAccessToken();
-//                ResponseEntity<ResponseType> response = restTemplate.postForEntity(Util.loadSendMsgUrl(access_token), requestBody, ResponseType.class);
-//                System.out.println("msg: " + response.getBody().getErrmsg());
-//            }
-//        }).start();
     }
 
     @Transactional

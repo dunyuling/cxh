@@ -71,10 +71,8 @@ public class VisitRecordService extends BaseService<VisitRecord> implements IVis
     }
 
 
-
     String ids = "";
-
-    @Scheduled(fixedDelay = 1000 * 60 * 60 * 24)
+    @Scheduled(initialDelay = 1000 * 60, fixedDelay = 1000 * 60 * 60 * 24)
     public void visitRemind() {
         List<Map<String, Object>> list = visitRecordDao.getNeedRemindInThreeDays();
         list.forEach(m -> {
@@ -87,15 +85,21 @@ public class VisitRecordService extends BaseService<VisitRecord> implements IVis
         });
         System.out.println("ids: " + ids);
 
-//        for (Map<String, Object> m : list) {
-//            System.out.println("id: " + m.get("id") + "\t -----------++++++++");
-//            messageService.sendMsg(m.get("userid").toString(), loadMsg(m));
-//        }
+        for (Map<String, Object> m : list) {
+            System.out.println("id: " + m.get("id") + "\t -----------++++++++");
+            messageService.sendMsg(m.get("userid").toString(), loadMsg(m));
+        }
 
 
-//        ids = ids.substring(0, ids.lastIndexOf(","));
-//        String sql = "update visit_record vr set vr.remind = true where vr.id in (" + ids + ")";
-        test();
+        ids = ids.substring(0, ids.lastIndexOf(","));
+        String sql = "update visit_record vr set vr.remind = true where vr.id in (" + ids + ")";
+
+        Session session = sessionFactory.openSession();
+        Transaction tx = session.beginTransaction();
+        Query query = session.createSQLQuery(sql);
+        query.executeUpdate();
+        tx.commit();
+        session.close();
     }
 
     public void test() {
@@ -111,13 +115,16 @@ public class VisitRecordService extends BaseService<VisitRecord> implements IVis
     private String loadMsg(Map<String, Object> map) {
         String type = InsuranceType.valueOf(map.get("type").toString()).getType();
         String nextDateStr = map.get("next_visit_date").toString();
+        String memberCreateDate = map.get("m_create_date").toString();
+
+
         String zone = map.get("province") + " " + map.get("city") + " " + map.get("area");
         String content = "第" + map.get("times") + "次回访的下次回访提醒" +
                 "\n回访时间" + Util.date2String(Util.str2Date(nextDateStr, "yyyy-MM-dd"), "yyyy-MM-dd") +
                 "\n相应信息:" +
                 "\n____________________________" +
                 "\n\n" + Constants.wxMsgTitle +
-                "\n时间: " + Util.date2String(new Date(), "yyyy-MM-dd HH:mm") +
+                "\n时间: " + Util.date2String(Util.str2Date(memberCreateDate, "yyyy-MM-dd"), "yyyy-MM-dd") +
                 "\n姓名: " + map.get("name") + "" +
                 "\n电话: " + map.get("mobile") +
                 "\n地区: " + zone +

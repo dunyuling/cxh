@@ -152,7 +152,7 @@ public class AgentService extends BaseService<Agent> implements IAgentService {
         return agent;
     }
 
-    @Scheduled(fixedDelay = 1000 * 60 * 60 * 24)
+    @Scheduled(initialDelay = 1000 * 30, fixedDelay = 1000 * 60 * 60 * 24)
     @Transactional
     public void balanceLow() {
         messageService = messageService == null ? SpringUtil.getBean("messageService") : messageService;
