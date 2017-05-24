@@ -9,8 +9,6 @@
 
     <title>车险汇管理系统 - 主页</title>
 
-    <%--<meta name="keywords" content="恒之源礼品管理系统 Bate1.0" />
-    <meta name="description" content="恒之源礼品管理系统 Bate1.0" />--%>
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html"/>
     <![endif]-->
@@ -41,23 +39,14 @@
                                 <span class="text-muted text-xs block">${roleName} <%--<b class="caret"></b>--%></span>
                                 </span>
                         </a>
-                        <%--<ul class="dropdown-menu animated fadeInRight m-t-xs">
-                            <li><a class="J_menuItem" href="form_avatar.html">修改头像</a>
-                            </li>
-                            <li><a class="J_menuItem" href="profile.html">个人资料</a>
-                            </li>
-                            <li><a class="J_menuItem" href="contacts.html">联系我们</a>
-                            </li>
-                            <li><a class="J_menuItem" href="mailbox.html">信箱</a>
-                            </li>
-                            <li class="divider"></li>
-                            <li><a href="mgr/logout.cs">安全退出</a>
-                            </li>
-                        </ul>--%>
+                        <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                            <li><a class="J_menuItem" href="javascript:;" id="edit_main_pwd">修改密码</a></li>
+                        </ul>
                     </div>
                     <div class="logo-element">H+
                     </div>
                 </li>
+                <input type="hidden" id="user_id" value="${user.id}"/>
 
                 <c:forEach items="${permissions }" var="p">
                     <c:if test="${p.pid == 0 }">
@@ -124,5 +113,17 @@
     </div>
     <!--右侧部分结束-->
 </div>
+<script type="text/javascript">
+    $("#edit_main_pwd").click(function () {
+        var user_id = $("#user_id").val();
+        if (user_id == null) return;
+        $.openDlg({
+            url: "/mgr/to_edit_main_pwd.cs?id=" + user_id,
+            title: '修改密码' + "${title}",
+            width: '768px',
+            height: '420px'
+        });
+    });
+</script>
 </body>
 </html>

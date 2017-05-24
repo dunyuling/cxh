@@ -4,11 +4,13 @@ import com.aifeng.core.service.impl.BaseService;
 import com.aifeng.core.util.SpringUtil;
 import com.aifeng.mgr.admin.dao.impl.AgentDao;
 import com.aifeng.mgr.admin.model.AddressFee;
+import com.aifeng.mgr.admin.model.Admin;
 import com.aifeng.mgr.admin.model.Agent;
 import com.aifeng.mgr.admin.model.ProxyAddress;
 import com.aifeng.mgr.admin.service.IAgentService;
 import com.aifeng.util.DateStyle;
 import com.aifeng.util.DateUtil;
+import com.aifeng.util.Md5;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -180,5 +182,12 @@ public class AgentService extends BaseService<Agent> implements IAgentService {
             messageService.sendMsg(map.get("userid").toString(), content.toString());
             System.out.println("-----: " + map.get("name") + " \t " + map.get("money"));
         }
+    }
+
+    @Transactional
+    public void editAgentPwd(long id, String pwd) {
+        Agent agent = this.agentDao.findById(id);
+        agent.setPwd(Md5.getMd5(pwd));
+        agentDao.update(agent);
     }
 }

@@ -37,6 +37,7 @@
                 <tr>
                     <th data-checkbox="true" data-click-to-select="true"></th>
                     <th data-field="id" data-visible="false"></th>
+                    <th data-field="account">帐户</th>
                     <th data-field="name">名字</th>
                     <th data-field="phone">电话</th>
                     <th data-field="sex" data-formatter="sexFormatter">性别</th>
