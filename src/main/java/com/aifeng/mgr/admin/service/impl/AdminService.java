@@ -123,12 +123,13 @@ public class AdminService extends BaseService<Admin> implements IAdminService {
                 String code = generateCode();
 
                 Admin admin = new Admin();
-                admin.setPwd(Md5.getMd5(pwd));
+                String account = "cs" + code;
+                admin.setPwd(Md5.getMd5(pwd.trim() + account.trim()));
                 admin.setName(name);
                 admin.setAddr(province);
                 admin.setCode(code);
                 admin.setPhone(phone);
-                admin.setAccount("cs" + code);
+                admin.setAccount(account);
                 admin.setSex(sex);
                 adminDao.insert(admin);
                 provincesUsed = false;
