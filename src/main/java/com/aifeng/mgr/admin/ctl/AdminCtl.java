@@ -38,7 +38,7 @@ public class AdminCtl extends BaseCtl {
     @ResponseBody
     public String list2(int page, int pageSize) {
         List<Map<String, Object>> list = adminService.getPagerCustomerService(page, pageSize);
-        long total = adminService.getTotal();
+        long total = adminService.getCustomerServiceTotal();
         JSONObject json = new JSONObject();
         json.put("rows", list);
         json.put("total", total);

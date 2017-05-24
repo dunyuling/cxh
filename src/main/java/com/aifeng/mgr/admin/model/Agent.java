@@ -1,6 +1,7 @@
 package com.aifeng.mgr.admin.model;
 
 import com.aifeng.constants.Constants;
+import com.aifeng.util.Md5;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -38,7 +39,7 @@ public class Agent {
     private String pwd;
 
     public Agent() {
-        this.pwd = Constants.agent_pwd;
+        this.pwd = Md5.getMd5(Constants.agent_pwd);
     }
 
     public long getId() {

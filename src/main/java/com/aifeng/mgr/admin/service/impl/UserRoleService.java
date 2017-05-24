@@ -52,4 +52,9 @@ public class UserRoleService extends BaseService<UserRole> implements IUserRoleS
         userRole.setCreateDate(new Date());
         userRoleDao.insert(userRole);
     }
+
+    @Transactional
+    public void deleteByUserCode(String user_code) {
+        userRoleDao.deleteByWhere(" and user_code = '" + user_code + "'");
+    }
 }

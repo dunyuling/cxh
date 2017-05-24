@@ -94,6 +94,11 @@ public class AdminService extends BaseService<Admin> implements IAdminService {
     }
 
     @Transactional
+    public int getCustomerServiceTotal() {
+        return adminDao.getCustomerServiceTotal();
+    }
+
+    @Transactional
     public long getTotal() {
         return adminDao.countAll();
     }
@@ -174,6 +179,9 @@ public class AdminService extends BaseService<Admin> implements IAdminService {
 
     @Transactional
     public void delCustomerService(long id) {
+        Admin admin = adminDao.findById((int) id);
+        String code = admin.getCode();
+        userRoleService.deleteByUserCode(code);
         adminDao.deleteByWhere(" and id = " + id);
     }
 
