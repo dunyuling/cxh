@@ -31,7 +31,8 @@
 </head>
 
 <body class="gray-bg">
-欢迎登录车险汇管理系统
+<div><p class="nav_icon"><img src="/front/img/banner1.jpg"></p>
+</div>
 </body>
 
 </html>
