@@ -26,6 +26,10 @@
             <mvc:mapping path="/**"/>
             <bean id="authCheckInterceptor" class="com.aifeng.ws.interceptor.AuthCheckInterceptor"></bean>
         </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean id="sessionInterceptor" class="com.aifeng.mgr.util.SessionInterceptor"></bean>
+        </mvc:interceptor>
     </mvc:interceptors>
 
     <bean id="conversionService"
