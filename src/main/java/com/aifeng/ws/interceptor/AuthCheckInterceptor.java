@@ -24,8 +24,7 @@ public class AuthCheckInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		// TODO Auto-generated method stub
-		
-		
+
 		HandlerMethod methodHandler=(HandlerMethod) handler;
 		Valid valid= methodHandler.getMethodAnnotation(Valid.class);
 		String data = request.getParameter("data");

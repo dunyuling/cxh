@@ -18,7 +18,7 @@
     <!--               <div class="ibox-content"> -->
     <div class="row row-lg">
         <div class="col-sm-12">
-            <cs:toolbar title="消息管理" tableId="tab_message" width="100%" height="100%" menuCode="221" hdMenu="7">
+            <cs:toolbar title="消息管理" tableId="tab_message" width="100%" height="100%" menuCode="25" hdMenu="7">
             </cs:toolbar>
             <table id="tab_message"
                    data-toggle="table"

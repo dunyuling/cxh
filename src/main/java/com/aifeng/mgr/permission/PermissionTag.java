@@ -61,6 +61,8 @@ public class PermissionTag extends TagSupport {
         List<Map<String, Object>> permissions = (List<Map<String, Object>>) session.getAttribute(Constants.SESSION_PERMISSIONS);
         int actionVal = 0;
 
+        if(permissions == null) return false;
+
         for (Map<String, Object> map : permissions) {
             if (map.get("menu_code").toString().equals(this.menuCode)) {
                 actionVal = Integer.valueOf(map.get("action_val").toString());

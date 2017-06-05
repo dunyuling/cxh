@@ -18,8 +18,7 @@
     <!--               <div class="ibox-content"> -->
     <div class="row row-lg">
         <div class="col-sm-12">
-
-                <cs:toolbar title="消息费用流水" tableId="tab_feededuction" width="100%" height="100%" menuCode="221" hdMenu="15">
+            <cs:toolbar title="消息费用流水" tableId="tab_feededuction" width="100%" height="100%" menuCode="29" hdMenu="15">
             </cs:toolbar>
             <table id="tab_feededuction"
                    data-toggle="table"

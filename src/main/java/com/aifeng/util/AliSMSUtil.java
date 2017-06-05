@@ -1,5 +1,6 @@
 package com.aifeng.util;
 
+import com.aifeng.mgr.admin.model.AuxiliaryInformation;
 import com.aliyun.mns.client.CloudAccount;
 import com.aliyun.mns.client.CloudTopic;
 import com.aliyun.mns.client.MNSClient;
@@ -18,11 +19,11 @@ public class AliSMSUtil {
     private static final String AccessKey = "iFiVqaG5LAJVM3HhbfIW7xa4Qtt0rt";
     private static final String MNSEndpoint = "https://1093588017502147.mns.cn-hangzhou.aliyuncs.com/";
     private static final String Topic = "sms.topic-cn-hangzhou";
-    private static final String SignName = "车险汇";
-    private static final String TemplateCode = "SMS_65975238";
+//    private static final String SignName = "车险汇";
+//    private static final String TemplateCode = "SMS_65975238";
 
 
-    public static void send(String name, String zone, String type, String member_name, String member_phone, String... receiverPhones) {
+    public static void send(AuxiliaryInformation auxiliaryInformation, String name, String zone, String type, String member_name, String member_phone, String... receiverPhones) {
         /**
          * Step 1. 获取主题引用
          */
@@ -42,9 +43,9 @@ public class AliSMSUtil {
         MessageAttributes messageAttributes = new MessageAttributes();
         BatchSmsAttributes batchSmsAttributes = new BatchSmsAttributes();
         // 3.1 设置发送短信的签名（SMSSignName）
-        batchSmsAttributes.setFreeSignName(SignName);
+        batchSmsAttributes.setFreeSignName(auxiliaryInformation.getSign());
         // 3.2 设置发送短信使用的模板（SMSTempateCode）
-        batchSmsAttributes.setTemplateCode(TemplateCode);
+        batchSmsAttributes.setTemplateCode(auxiliaryInformation.getTemplate());
         // 3.3 设置发送短信所使用的模板中参数对应的值（在短信模板中定义的，没有可以不用设置）
         BatchSmsAttributes.SmsReceiverParams smsReceiverParams = new BatchSmsAttributes.SmsReceiverParams();
         smsReceiverParams.setParam("name", name);

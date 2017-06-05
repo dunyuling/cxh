@@ -71,17 +71,21 @@ public class LoginCtl extends BaseCtl {
 
     @RequestMapping("main")
     public String main(ModelMap mm) {
-        // 初始化左侧菜单及权限信息
-        Admin user = (Admin) this.get(Constants.SESSION_USER);
-        if (user == null) {
-            return "redirect:/mgr/toLogin.cs";
-        }
-        List<Map<String, Object>> permissions = this.adminService.getPermissions(user.getCode());
-        this.set(Constants.SESSION_PERMISSIONS, permissions);  //权限信息
+        try {
+            // 初始化左侧菜单及权限信息
+            Admin user = (Admin) this.get(Constants.SESSION_USER);
+            if (user == null) {
+                return "redirect:/mgr/toLogin.cs";
+            }
+            List<Map<String, Object>> permissions = this.adminService.getPermissions(user.getCode());
+            this.set(Constants.SESSION_PERMISSIONS, permissions);  //权限信息
 
-        mm.put("user", user);
-        mm.put("roleName", permissions.get(0).get("role_name"));
-        mm.put(Constants.SESSION_PERMISSIONS, permissions);
+            mm.put("user", user);
+            mm.put("roleName", permissions.get(0).get("role_name"));
+            mm.put(Constants.SESSION_PERMISSIONS, permissions);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return "main";
     }
 

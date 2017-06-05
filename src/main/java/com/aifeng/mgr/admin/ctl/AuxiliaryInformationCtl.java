@@ -2,6 +2,7 @@ package com.aifeng.mgr.admin.ctl;
 
 import com.aifeng.core.ctl.BaseCtl;
 import com.aifeng.mgr.admin.service.impl.AuxiliaryInformationService;
+import com.aifeng.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,9 +32,9 @@ public class AuxiliaryInformationCtl extends BaseCtl {
 
     @RequestMapping("edit")
     @ResponseBody
-    public String edit(String access_token,String corpID,String secret) {
+    public String edit(String access_token, String corpID, String secret, String sign, String template) {
         try {
-            auxiliaryInformationService.edit(access_token,corpID,secret);
+            auxiliaryInformationService.edit(Util.trim(access_token), Util.trim(corpID), Util.trim(secret), Util.trim(sign), Util.trim(template));
         } catch (Exception e) {
             e.printStackTrace();
         }

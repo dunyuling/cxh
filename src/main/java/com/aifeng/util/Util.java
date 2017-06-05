@@ -209,5 +209,7 @@ public class Util {
         return content;
     }
 
-    
+    public static String trim(String str) {
+        return str == null ? null : str.trim();
+    }
 }

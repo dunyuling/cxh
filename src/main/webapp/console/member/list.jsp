@@ -19,7 +19,7 @@
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row row-lg">
         <div class="col-sm-12">
-            <cs:toolbar title="会员管理" tableId="tab_member" width="768px" height="420px" menuCode="21" hdMenu="15">
+            <cs:toolbar title="会员管理" tableId="tab_member" width="768px" height="420px" menuCode="24" hdMenu="15">
                 <button class="btn btn-sm btn-info" type="button" onclick="audit1()"><i class="fa fa-info"></i>&nbsp;审核
                 </button>
                 <button class="btn btn-sm btn-danger" type="button" onclick="del()"><i class="fa fa-minus"></i> 删除

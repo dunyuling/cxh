@@ -20,7 +20,7 @@ public interface Constants {
     int message_repeat_gap = 3600; //一个小时
     int message_repeat_total_times = 10;
 
-    String wxMsgTitle = "南阳三六零度 车险询价";
+    String wxMsgTitle = "车险汇 车险询价";
 
     String agent_code = "000100";
     String agent_pwd = "123456";

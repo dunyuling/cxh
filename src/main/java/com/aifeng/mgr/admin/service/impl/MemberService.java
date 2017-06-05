@@ -47,9 +47,7 @@ public class MemberService extends BaseService<Member> implements IMemberService
                 member.setType(InsuranceType.getTypeByIndex(index));
                 member.setAddress_id(address_id);
                 memberDao.insert(member);
-                msg = "订单提交成功";
-
-
+                msg = "已提交，请保持通话通畅，稍后有客服人员与您联系。";
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -80,6 +78,7 @@ public class MemberService extends BaseService<Member> implements IMemberService
         AgentService agentService = SpringUtil.getBean("agentService");
         MessageService messageService = SpringUtil.getBean("messageService");
         AgentMessageService agentMessageService = SpringUtil.getBean("agentMessageService");
+        AuxiliaryInformationService auxiliaryInformationService = SpringUtil.getBean("auxiliaryInformationService");
 
         Address address = addressService.findById(member.getAddress_id());
         AddressFee addressFee = addressFeeService.getAddressFee(member.getAddress_id());
@@ -92,8 +91,9 @@ public class MemberService extends BaseService<Member> implements IMemberService
 
             if (agent.getMoney() > addressFee.getAmount()) {
                 String zone = address.getProvince() + " " + address.getCity() + " " + address.getArea();
-                String content = Util.loadMsg(address,member,-1);
-                AliSMSUtil.send(agent.getName(), zone, member.getType().getType(), member.getName(), member.getMobile(), agent.getMobile());
+                String content = Util.loadMsg(address, member, -1);
+                AuxiliaryInformation auxiliaryInformation = auxiliaryInformationService.getOrMockFirst();
+                AliSMSUtil.send(auxiliaryInformation, agent.getName(), zone, member.getType().getType(), member.getName(), member.getMobile(), agent.getMobile());
                 //基本信息
                 Message message = messageService.save(content, proxyAddress.getId());
                 //做为重发凭证

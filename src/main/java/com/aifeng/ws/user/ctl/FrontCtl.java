@@ -32,7 +32,6 @@ public class FrontCtl {
         this.newsService = newsService;
     }
 
-
     @RequestMapping(value = "register_member", produces = "text/plain;charset=utf-8;")
     @ResponseBody
     public String registerMember(HttpServletRequest request, Model model) {

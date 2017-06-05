@@ -37,9 +37,9 @@ public class AuxiliaryInformationService extends BaseService<AuxiliaryInformatio
     }
 
     @Transactional
-    public void edit(String access_token, String CorpID, String secret) {
+    public void edit(String access_token, String CorpID, String secret, String sign, String template) {
         AuxiliaryInformation auxiliaryInformation = auxiliaryInformationDao.getFirst();
-        auxiliaryInformation.config(access_token, CorpID, secret);
+        auxiliaryInformation.config(access_token, CorpID, secret, sign, template);
         auxiliaryInformationDao.update(auxiliaryInformation);
     }
 

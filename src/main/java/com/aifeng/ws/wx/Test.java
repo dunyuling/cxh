@@ -1,16 +1,11 @@
 package com.aifeng.ws.wx;
 
-import com.aifeng.util.Md5;
-import com.aifeng.util.Util;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.net.URLEncoder;
-import java.text.ParsePosition;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -50,14 +45,15 @@ public class Test {
         } catch (ParseException e) {
             e.printStackTrace();
         }*/
-        System.out.println(Md5.getMd5("123456"));
+//        System.out.println(Md5.getMd5("123456"));
+//
+//        String str = "2017-05-14 00:00:00.0";
+//        System.out.println(Util.str2Date(str, "yyyy-MM-dd"));
+//        String result = Util.date2String(Util.str2Date(str,"yyyy-MM-dd"), "yyyy-MM-dd");
+//        System.out.println("result: " + result);
 
-        String str = "2017-05-14 00:00:00.0";
-        System.out.println(Util.str2Date(str, "yyyy-MM-dd"));
-        String result = Util.date2String(Util.str2Date(str,"yyyy-MM-dd"), "yyyy-MM-dd");
-        System.out.println("result: " + result);
-
-
+        System.out.println(3 & 8);
+//        System.out.println(Md5.getMd5("123456" + "cs000003"));
     }
 
     public static void send1() {

@@ -19,7 +19,7 @@
     <div class="row row-lg">
         <div class="col-sm-12">
 
-            <cs:toolbar title="退费记录管理" tableId="tab_refund" width="100%" height="100%" menuCode="221" hdMenu="15">
+            <cs:toolbar title="退费记录管理" tableId="tab_refund" width="100%" height="100%" menuCode="27" hdMenu="15">
             </cs:toolbar>
             <table id="tab_refund"
                    data-toggle="table"

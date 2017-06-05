@@ -43,7 +43,8 @@ public class AdminService extends BaseService<Admin> implements IAdminService {
     @Transactional(readOnly = false)
     public List<Map<String, Object>> getPermissions(String userCode) {
         StringBuffer sb = new StringBuffer(
-                "SELECT tmm.display, tmur.role_code,tmr.name AS role_name, tmm.id AS menu_id, tmm.name AS menu_name, tma.id as user_id,action_val, menu_code, pid, url, weight,icon FROM tb_mgr_user_role tmur left join tb_mgr_admin tma on (tma.code = tmur.user_code)");
+                "SELECT tmm.display, tmur.role_code,tmr.name AS role_name, tmm.id AS menu_id, tmm.name AS menu_name, tma.id as user_id,action_val, menu_code, pid, url, weight,icon FROM tb_mgr_user_role tmur " +
+                        "left join tb_mgr_admin tma on (tma.code = tmur.user_code)");
         sb.append(" LEFT JOIN  tb_mgr_role tmr ON (tmur.`role_code` = tmr.code) ");
         sb.append(" RIGHT JOIN tb_mgr_role_menu tmrm ON (tmur.`role_code` = tmrm.`role_code`)  ");
         sb.append(" LEFT JOIN tb_mgr_menu tmm ON(tmm.code = tmrm.`menu_code`) ");
@@ -158,7 +159,7 @@ public class AdminService extends BaseService<Admin> implements IAdminService {
                 Admin admin = findById(id);
                 admin.setName(name);
                 if (!pwd.isEmpty()) {
-                    admin.setPwd(Md5.getMd5(pwd));
+                    admin.setPwd(Md5.getMd5(pwd.trim() + admin.getAccount().trim()));
                 }
                 admin.setAddr(province);
                 admin.setPhone(phone);

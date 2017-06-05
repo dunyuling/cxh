@@ -9,7 +9,7 @@ import java.util.Date;
 /**
  * Created by pro on 17-4-21.
  */
-@Table(name="auxiliary_information")
+@Table(name = "auxiliary_information")
 @Entity
 public class AuxiliaryInformation {
 
@@ -23,14 +23,21 @@ public class AuxiliaryInformation {
 
     private String secret = "";
 
+    private String sign = "";
+
+    private String template = "";
+
     private Date updateDate;
 
-    public AuxiliaryInformation() {}
+    public AuxiliaryInformation() {
+    }
 
-    public void config(String access_token,String CorpID,String secret) {
+    public void config(String access_token, String CorpID, String secret, String sign, String template) {
         this.access_token = access_token;
         this.corpID = CorpID;
         this.secret = secret;
+        this.sign = sign;
+        this.template = template;
         this.updateDate = new Date();
     }
 
@@ -64,6 +71,22 @@ public class AuxiliaryInformation {
 
     public void setSecret(String secret) {
         this.secret = secret;
+    }
+
+    public String getSign() {
+        return sign;
+    }
+
+    public void setSign(String sign) {
+        this.sign = sign;
+    }
+
+    public String getTemplate() {
+        return template;
+    }
+
+    public void setTemplate(String template) {
+        this.template = template;
     }
 
     public Date getUpdateDate() {
