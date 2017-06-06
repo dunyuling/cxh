@@ -52,6 +52,7 @@
                     <th data-field="city">市</th>
                     <th data-field="area">县/区</th>
                     <th data-field="createDate" data-formatter="dateFormatter">创建时间</th>
+                    <th data-field="tma_name">操作人</th>
                 </tr>
                 </thead>
             </table>
@@ -60,29 +61,29 @@
 
     <script type="text/javascript">
         /*function formatType(type) {
-            switch (type) {
-                case "IT_0":
-                    return "交强险";
-                case "IT_1":
-                    return "机动车辆损失险";
-                case "IT_2":
-                    return "第三者责任险";
-                case "IT_3":
-                    return "盗抢险";
-                case "IT_4":
-                    return "车上人员责任险";
-                case "IT_5":
-                    return "车身划痕损失险";
-                case "IT_6":
-                    return "玻璃单独破碎险";
-                case "IT_7":
-                    return "自燃损失险";
-                case "IT_8":
-                    return "发动机特别损失险";
-                case "IT_9":
-                    return "不计免赔率特约损失险";
-            }
-        }*/
+         switch (type) {
+         case "IT_0":
+         return "交强险";
+         case "IT_1":
+         return "机动车辆损失险";
+         case "IT_2":
+         return "第三者责任险";
+         case "IT_3":
+         return "盗抢险";
+         case "IT_4":
+         return "车上人员责任险";
+         case "IT_5":
+         return "车身划痕损失险";
+         case "IT_6":
+         return "玻璃单独破碎险";
+         case "IT_7":
+         return "自燃损失险";
+         case "IT_8":
+         return "发动机特别损失险";
+         case "IT_9":
+         return "不计免赔率特约损失险";
+         }
+         }*/
 
         function formatStatus(status) {
             switch (status) {

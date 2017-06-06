@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -45,7 +46,7 @@ public class LoginCtl extends BaseCtl {
         return "login";
     }
 
-    @RequestMapping("login")
+    @RequestMapping(value = "login",method = RequestMethod.POST)
     public String login(String account, String pwd) {
         System.out.println("login ------------------------");
         if (StringUtil.isBlank(account, pwd)) {
@@ -93,7 +94,7 @@ public class LoginCtl extends BaseCtl {
         return "agent_login";
     }
 
-    @RequestMapping("agentLogin")
+    @RequestMapping(value = "agentLogin",method = RequestMethod.POST)
     public String agentLogin(String mobile, String pwd) {
         System.out.println("agent login ------------------------");
         if (StringUtil.isBlank(mobile, pwd)) {

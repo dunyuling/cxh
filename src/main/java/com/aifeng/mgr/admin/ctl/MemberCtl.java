@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -26,12 +25,10 @@ import java.util.Map;
 public class MemberCtl extends BaseCtl {
 
     private final MemberService memberService;
-    private final AdminService adminService;
 
     @Autowired
-    public MemberCtl(MemberService memberService, AdminService adminService) {
+    public MemberCtl(MemberService memberService) {
         this.memberService = memberService;
-        this.adminService = adminService;
     }
 
     @RequestMapping("list")
@@ -78,7 +75,8 @@ public class MemberCtl extends BaseCtl {
     public String audit(long id, String status, String denyReason) {
         try {
             System.out.println("---");
-            memberService.audit(id, status, denyReason);
+            Admin admin = (Admin) this.get(Constants.SESSION_USER);
+            memberService.audit(id, status, denyReason, admin.getId());
         } catch (Exception e) {
             e.printStackTrace();
         }

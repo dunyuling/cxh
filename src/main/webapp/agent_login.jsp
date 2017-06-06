@@ -38,7 +38,7 @@
         </div>
         <h3>欢迎登陆车险汇管理系统</h3>
 
-        <form class="m-t" role="form" action="/mgr/agentLogin.cs">
+        <form class="m-t" role="form" action="/mgr/agentLogin.cs" method="post">
             <div class="form-group">
                 <input type="text" class="form-control" name="mobile" placeholder="手机号" required="">
             </div>

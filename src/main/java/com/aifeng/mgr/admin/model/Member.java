@@ -27,6 +27,7 @@ public class Member {
     @Enumerated(value = EnumType.STRING)
     private Status status;
     private String denyReason;
+    private long user_id;
 
     public Member() {
         this.createDate = new Date();
@@ -103,5 +104,13 @@ public class Member {
 
     public void setDenyReason(String denyReason) {
         this.denyReason = denyReason;
+    }
+
+    public long getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(long user_id) {
+        this.user_id = user_id;
     }
 }

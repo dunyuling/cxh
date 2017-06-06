@@ -56,14 +56,16 @@ public class MemberService extends BaseService<Member> implements IMemberService
     }
 
     @Transactional
-    public void audit(long member_id, String status, String denyReason) {
+    public void audit(long member_id, String status, String denyReason, long user_id) {
         Member member = findById(member_id);
         Status status1 = Status.valueOf(status);
         member.setStatus(status1);
         if (status1 == Status.FAILURE) {
             member.setDenyReason(denyReason);
         }
+        member.setUser_id(user_id);
         member.setUpdateDate(new Date());
+
 
         if (status1 == Status.SUCCESS) {
             toSendWxMsg(member);
@@ -110,7 +112,7 @@ public class MemberService extends BaseService<Member> implements IMemberService
 
     @Transactional
     public int getInitTotal(String addr) {
-        return memberDao.getInitCount( addr == null ? null : loadAddr(addr));
+        return memberDao.getInitCount(addr == null ? null : loadAddr(addr));
     }
 
     private String loadAddr(String addr) {
