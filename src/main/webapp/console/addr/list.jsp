@@ -15,9 +15,12 @@
 <body class="gray-bg">
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row row-lg">
+
         <div class="col-sm-12">
-            <cs:toolbar title="地区费用管理" tableId="tab_addr" width="768px" height="420px" menuCode="21" hdMenu="1">
-            </cs:toolbar>
+            <c:if test="${role != null && role != '客服'}">
+                <cs:toolbar title="地区费用管理" tableId="tab_addr" width="768px" height="420px" menuCode="21" hdMenu="1">
+                </cs:toolbar>
+            </c:if>
             <table id="tab_addr"
                    data-toggle="table"
                    data-url="/addr/list2.cs"
@@ -58,13 +61,13 @@
     </div>
 </div>
 <script type="text/javascript">
-    $("#search").click(function() {
+    $("#search").click(function () {
         var province = $("#province").val();
         var city = $("#city").val();
         var area = $("#area").val();
 
 //        alert("ss");
-        if(province.trim() == "" && city.trim() == "" && area.trim() == "") {
+        if (province.trim() == "" && city.trim() == "" && area.trim() == "") {
             alert("请完整输入地址");
             return;
         }

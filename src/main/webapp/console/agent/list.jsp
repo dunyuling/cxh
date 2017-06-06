@@ -16,12 +16,16 @@
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row row-lg">
         <div class="col-sm-12">
-            <cs:toolbar title="代理商管理" tableId="tab_agent" width="768px" height="420px" menuCode="22" hdMenu="3">
-                <button class="btn btn-sm btn-warning" type="button" onclick="recharge()"><i class="fa fa-plus"></i> 充值
-                </button>
-                <button class="btn btn-sm btn-warning" type="button" onclick="refund()"><i class="fa fa-plus"></i> 退费
-                </button>
-            </cs:toolbar>
+            <c:if test="${role != null && role != '客服'}">
+                <cs:toolbar title="代理商管理" tableId="tab_agent" width="768px" height="420px" menuCode="22" hdMenu="3">
+                    <button class="btn btn-sm btn-warning" type="button" onclick="recharge()"><i class="fa fa-plus"></i>
+                        充值
+                    </button>
+                    <button class="btn btn-sm btn-warning" type="button" onclick="refund()"><i class="fa fa-plus"></i>
+                        退费
+                    </button>
+                </cs:toolbar>
+            </c:if>
             <table id="tab_agent"
                    data-toggle="table"
                    data-url="/agent/list2.cs"

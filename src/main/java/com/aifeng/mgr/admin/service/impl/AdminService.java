@@ -198,4 +198,9 @@ public class AdminService extends BaseService<Admin> implements IAdminService {
         admin.setPwd(Md5.getMd5(pwd.trim() + admin.getAccount().trim()));
         adminDao.update(admin);
     }
+
+    @Transactional
+    public String getRole(String usercode) {
+        return this.adminDao.getRole(usercode);
+    }
 }

@@ -1,6 +1,7 @@
 package com.aifeng.mgr.admin.ctl;
 
 import com.aifeng.core.ctl.BaseCtl;
+import com.aifeng.mgr.admin.service.impl.AdminService;
 import com.aifeng.mgr.admin.service.impl.AgentMessageService;
 import com.aifeng.mgr.admin.service.impl.VisitRecordService;
 import com.alibaba.fastjson.JSONObject;
@@ -26,16 +27,19 @@ public class AgentMessageCtl extends BaseCtl {
 
     private final AgentMessageService agentMessageService;
     private final VisitRecordService visitRecordService;
+    private final AdminService adminService;
 
     @Autowired
-    public AgentMessageCtl(AgentMessageService agentMessageService, VisitRecordService visitRecordService) {
+    public AgentMessageCtl(AgentMessageService agentMessageService, VisitRecordService visitRecordService, AdminService adminService) {
         this.agentMessageService = agentMessageService;
         this.visitRecordService = visitRecordService;
+        this.adminService = adminService;
     }
 
     @RequestMapping("list")
     public String list(int agentId, Model model) {
         model.addAttribute("agentId", agentId);
+        loadRole(adminService, model);
         return "console/am/list";
     }
 

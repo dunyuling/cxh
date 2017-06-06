@@ -18,13 +18,13 @@
     <!--               <div class="ibox-content"> -->
     <div class="row row-lg">
         <div class="col-sm-12">
-
-            <cs:toolbar title="代理地区管理" tableId="tab_proxyaddress" width="100%" height="100%" menuCode="23" hdMenu="7">
-                <button class="btn btn-sm btn-info" type="button" onclick="audit()"><i class="fa fa-info"></i>&nbsp;审核
-                </button>
-                <button class="btn btn-sm btn-danger" type="button" onclick="del()"><i class="fa fa-minus"></i> 删除
-                </button>
-            </cs:toolbar>
+            <c:if test="${role != null && role != '客服'}">
+                <cs:toolbar title="代理地区管理" tableId="tab_proxyaddress" width="100%" height="100%" menuCode="23"
+                            hdMenu="7">
+                    <button class="btn btn-sm btn-info" type="button" onclick="audit()"><i class="fa fa-info"></i>&nbsp;审核
+                    </button>
+                </cs:toolbar>
+            </c:if>
             <table id="tab_proxyaddress"
                    data-toggle="table"
                    data-url="/pa/list2.cs"

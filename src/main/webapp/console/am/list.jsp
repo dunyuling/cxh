@@ -18,13 +18,22 @@
     <!--               <div class="ibox-content"> -->
     <div class="row row-lg">
         <div class="col-sm-12">
-
-            <cs:toolbar title="代理商消息管理" tableId="tab_agentmessage" width="100%" height="100%" menuCode="26" hdMenu="7">
+            <c:if test="${role != null && role != '客服'}">
+                <cs:toolbar title="代理商消息管理" tableId="tab_agentmessage" width="100%" height="100%" menuCode="26"
+                            hdMenu="7">
+                    <button class="btn btn-sm btn-success" type="button" onclick="view()">
+                        <input type="hidden" name="title1" value="回访记录"/>
+                        <i class="fa fa-plus"></i>&nbsp;查看回访记录
+                    </button>
+                </cs:toolbar>
+            </c:if>
+            <c:if test="${role != null && role == '客服'}">
                 <button class="btn btn-sm btn-success" type="button" onclick="view()">
-                    <input type="hidden" id="title1" value="回访记录" />
+                    <input type="hidden" name="title1" value="回访记录"/>
                     <i class="fa fa-plus"></i>&nbsp;查看回访记录
                 </button>
-            </cs:toolbar>
+            </c:if>
+
             <table id="tab_agentmessage"
                    data-toggle="table"
                    data-url="/am/list2.cs?agentId=${agentId}"

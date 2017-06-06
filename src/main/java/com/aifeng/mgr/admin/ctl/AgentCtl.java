@@ -5,6 +5,7 @@ import com.aifeng.core.ctl.BaseCtl;
 import com.aifeng.mgr.admin.constants.ImgPath;
 import com.aifeng.mgr.admin.model.Admin;
 import com.aifeng.mgr.admin.model.Agent;
+import com.aifeng.mgr.admin.service.impl.AdminService;
 import com.aifeng.mgr.admin.service.impl.AgentService;
 import com.aifeng.mgr.admin.service.impl.RechargeService;
 import com.aifeng.mgr.admin.service.impl.RefundService;
@@ -13,6 +14,7 @@ import com.aifeng.util.Util;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,16 +34,19 @@ public class AgentCtl extends BaseCtl {
     private final AgentService agentService;
     private final RechargeService rechargeService;
     private final RefundService refundService;
+    private final AdminService adminService;
 
     @Autowired
-    public AgentCtl(AgentService agentService, RechargeService rechargeService, RefundService refundService) {
+    public AgentCtl(AgentService agentService, RechargeService rechargeService, RefundService refundService, AdminService adminService) {
         this.agentService = agentService;
         this.rechargeService = rechargeService;
         this.refundService = refundService;
+        this.adminService = adminService;
     }
 
     @RequestMapping("list")
-    public String list() {
+    public String list(Model model) {
+        loadRole(adminService, model);
         return "console/agent/list";
     }
 

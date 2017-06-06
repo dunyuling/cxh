@@ -41,4 +41,13 @@ public class AdminDao extends BaseDao<Admin> implements IAdminDao {
                 "left join tb_mgr_role tmr on tmr.code = tmur.role_code ";
         return this.findBySql(sql);
     }
+
+    public String getRole(String usercode) {
+        String sql = "select tmr.name from tb_mgr_admin tma " +
+                " left join tb_mgr_user_role tmur on tma.code = tmur.user_code " +
+                " left join tb_mgr_role tmr on tmur.role_code = tmr.code " +
+                " where tma.code = '" + usercode + "'";
+        List<Map<String, Object>> list = this.findBySql(sql);
+        return list.isEmpty() ? null : list.get(0).get("name").toString();
+    }
 }

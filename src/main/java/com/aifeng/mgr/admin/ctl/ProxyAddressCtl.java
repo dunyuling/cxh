@@ -1,11 +1,13 @@
 package com.aifeng.mgr.admin.ctl;
 
 import com.aifeng.core.ctl.BaseCtl;
+import com.aifeng.mgr.admin.service.impl.AdminService;
 import com.aifeng.mgr.admin.service.impl.ProxyAddressService;
 import com.aifeng.util.StringUtil;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,14 +24,17 @@ import java.util.Map;
 public class ProxyAddressCtl extends BaseCtl {
 
     private final ProxyAddressService proxyAddressService;
+    private final AdminService adminService;
 
     @Autowired
-    public ProxyAddressCtl(ProxyAddressService proxyAddressService) {
+    public ProxyAddressCtl(ProxyAddressService proxyAddressService, AdminService adminService) {
         this.proxyAddressService = proxyAddressService;
+        this.adminService = adminService;
     }
 
     @RequestMapping("list")
-    public String list() {
+    public String list(Model model) {
+        loadRole(adminService, model);
         return "console/pa/list";
     }
 
