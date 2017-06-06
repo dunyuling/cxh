@@ -46,7 +46,7 @@ public class LoginCtl extends BaseCtl {
         return "login";
     }
 
-    @RequestMapping(value = "login",method = RequestMethod.POST)
+    @RequestMapping(value = "login", method = RequestMethod.POST)
     public String login(String account, String pwd) {
         System.out.println("login ------------------------");
         if (StringUtil.isBlank(account, pwd)) {
@@ -94,7 +94,7 @@ public class LoginCtl extends BaseCtl {
         return "agent_login";
     }
 
-    @RequestMapping(value = "agentLogin",method = RequestMethod.POST)
+    @RequestMapping(value = "agentLogin", method = RequestMethod.POST)
     public String agentLogin(String mobile, String pwd) {
         System.out.println("agent login ------------------------");
         if (StringUtil.isBlank(mobile, pwd)) {
@@ -154,10 +154,15 @@ public class LoginCtl extends BaseCtl {
 
     @RequestMapping("edit_main_pwd")
     @ResponseBody
-    public String editMainPwd(int id, String pwd) {
+    public String editMainPwd(int id, String pwd, String oldPwd) {
         try {
-            adminService.editMainPwd(id, pwd);
-            return "success";
+            Admin admin = adminService.findById(id);
+            if (admin.getPwd().equals(Md5.getMd5(oldPwd.trim() + admin.getAccount().trim()))) {
+                adminService.editMainPwd(id, pwd);
+                return "success";
+            } else {
+                return "oldpwd is wrong";
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return "failure";
@@ -172,10 +177,14 @@ public class LoginCtl extends BaseCtl {
 
     @RequestMapping("edit_agent_pwd")
     @ResponseBody
-    public String editAgentPwd(long id, String pwd) {
+    public String editAgentPwd(long id, String pwd, String oldPwd) {
         try {
-            agentService.editAgentPwd(id, pwd);
-            return "success";
+            if (agentService.findById(id).getPwd().equals(Md5.getMd5(oldPwd))) {
+                agentService.editAgentPwd(id, pwd);
+                return "success";
+            } else {
+                return "oldpwd is wrong";
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return "failure";

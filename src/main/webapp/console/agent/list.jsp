@@ -50,7 +50,7 @@
                     <th data-field="mobile">电话</th>
                     <th data-field="IDCard">身份证号</th>
                     <th data-field="corpName">公司名称</th>
-                    <th data-field="money">金额(元)</th>
+                    <th data-field="money">余额(元)</th>
                     <th data-field="licenseImg" data-formatter="imageFormatter">营业执照</th>
                     <th data-field="expireDate" data-formatter="dateFormatter">营业执照过期时间</th>
                 </tr>

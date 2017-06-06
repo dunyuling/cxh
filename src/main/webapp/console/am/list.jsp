@@ -28,10 +28,13 @@
                 </cs:toolbar>
             </c:if>
             <c:if test="${role != null && role == '客服'}">
-                <button class="btn btn-sm btn-success" type="button" onclick="view()">
-                    <input type="hidden" name="title1" value="回访记录"/>
-                    <i class="fa fa-plus"></i>&nbsp;查看回访记录
-                </button>
+                <cs:toolbar title="代理商消息管理" tableId="tab_agentmessage" width="100%" height="100%" menuCode="26"
+                            hdMenu="15">
+                    <button class="btn btn-sm btn-success" type="button" onclick="view()">
+                        <input type="hidden" name="title1" value="回访记录"/>
+                        <i class="fa fa-plus"></i>&nbsp;查看回访记录
+                    </button>
+                </cs:toolbar>
             </c:if>
 
             <table id="tab_agentmessage"

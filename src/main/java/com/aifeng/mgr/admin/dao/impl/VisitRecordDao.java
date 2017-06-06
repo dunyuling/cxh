@@ -28,7 +28,7 @@ public class VisitRecordDao extends BaseDao<VisitRecord> implements IVisitRecord
 
     public List<Map<String, Object>> getMessageVisitRecordByAmId(long am_id) {
         String sql = "select vr.id,vr.situation,vr.remark,vr.visit_date as visitDate,vr.next_visit_date as nextVisitDate ,vr.times from agent_message am " +
-                "left join visit_record vr on am.member_id = vr.member_id " +
+                "join visit_record vr on am.member_id = vr.member_id " +
                 " where am.id = " + am_id +
                 " order by vr.times desc ";
         return this.findBySql(sql);
