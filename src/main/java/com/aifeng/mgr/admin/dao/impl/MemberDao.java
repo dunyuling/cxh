@@ -14,13 +14,36 @@ import java.util.Map;
 @Repository
 public class MemberDao extends BaseDao<Member> implements IMemberDao {
 
-    public List<Map<String, Object>> getMember(int page, int pageSize) {
-        String str = "select m.id,m.name,m.mobile,m.type,m.status, a.province,a.city,a.area,m.createDate from member m " +
-                "left join address a on m.address_id = a.id " +
-                "order by m.createDate desc " +
-                "limit " + pageSize + " offset " + (page - 1) * pageSize + ";";
-        System.out.println("sql: " + str);
-        return this.findBySql(str);
+    public List<Map<String, Object>> getMember(int page, int pageSize, String addr) {
+        String sql = "";
+        if (addr == null) {
+            sql = "select m.id,m.name,m.mobile,m.type,m.status, a.province,a.city,a.area,m.createDate from member m " +
+                    "left join address a on m.address_id = a.id " +
+                    "order by m.createDate desc " +
+                    "limit " + pageSize + " offset " + (page - 1) * pageSize + ";";
+        } else {
+            sql = "select m.id,m.name,m.mobile,m.type,m.status, a.province,a.city,a.area,m.createDate from member m " +
+                    "left join address a on m.address_id = a.id " +
+                    " where a.province in (" + addr +
+                    " ) order by m.createDate desc " +
+                    "limit " + pageSize + " offset " + (page - 1) * pageSize + ";";
+        }
+        System.out.println("sql: " + sql);
+        return this.findBySql(sql);
+    }
+
+    public int getInitCount(String addr) {
+        String sql = "";
+        if (addr == null) {
+            sql = "select count(m.id) as count from member m " +
+                    "left join address a on m.address_id = a.id ";
+        } else {
+            sql = "select count(m.id) as count from member m " +
+                    "left join address a on m.address_id = a.id " +
+                    " where a.province in (" + addr + " )";
+        }
+        System.out.println("sql: " + sql);
+        return Integer.parseInt(this.findBySql(sql).get(0).get("count").toString());
     }
 
     public Map<String, Object> getSingleProxyAddress(long id) {

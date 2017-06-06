@@ -36,9 +36,18 @@ public class AdminDao extends BaseDao<Admin> implements IAdminDao {
     }
 
     public List<Map<String, Object>> getUsedProvinces() {
-        String sql = "select tma.addr from tb_mgr_admin tma " +
+        String sql = "select tma.addr as province from tb_mgr_admin tma " +
                 "left join tb_mgr_user_role tmur on tmur.user_code = tma.code " +
-                "left join tb_mgr_role tmr on tmr.code = tmur.role_code ";
+                "left join tb_mgr_role tmr on tmr.code = tmur.role_code" +
+                " where tma.addr is not null ";
+        return this.findBySql(sql);
+    }
+
+    public List<Map<String, Object>> getUsedProvinces(long id) {
+        String sql = "select tma.addr as province from tb_mgr_admin tma " +
+                "left join tb_mgr_user_role tmur on tmur.user_code = tma.code " +
+                "left join tb_mgr_role tmr on tmr.code = tmur.role_code" +
+                " where tma.addr is not null and tma.id != " + id;
         return this.findBySql(sql);
     }
 

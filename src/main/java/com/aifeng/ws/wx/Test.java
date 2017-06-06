@@ -1,5 +1,7 @@
 package com.aifeng.ws.wx;
 
+import com.aifeng.constants.Constants;
+import com.aifeng.util.Md5;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
@@ -52,8 +54,15 @@ public class Test {
 //        String result = Util.date2String(Util.str2Date(str,"yyyy-MM-dd"), "yyyy-MM-dd");
 //        System.out.println("result: " + result);
 
-        System.out.println(3 & 8);
+//        System.out.println(3 & 8);
 //        System.out.println(Md5.getMd5("123456" + "cs000003"));
+//        for (String temp : "北京市".split(",")) {
+//            System.out.println(temp);
+//        }
+
+//        String str = Md5.getMd5("123456" + "cs000005");
+//        System.out.println(str);
+        System.out.println(Md5.getMd5(Constants.agent_pwd));
     }
 
     public static void send1() {

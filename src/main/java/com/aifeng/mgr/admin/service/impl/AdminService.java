@@ -109,15 +109,21 @@ public class AdminService extends BaseService<Admin> implements IAdminService {
         return adminDao.getSingleCustomerService(id);
     }
 
-    transient boolean provincesUsed = false;
+    private transient boolean provincesUsed = false;
+
+    private void checkProvinceUsed(Map<String, Object> map, String province) {
+        Object province1 = map.get("province");
+        for (String provinceTemp : province.split(",")) {
+            if (province1 != null && province1.toString().contains(provinceTemp))
+                provincesUsed = true;
+        }
+    }
 
     @Transactional
     public boolean addCustomerService(String name, String pwd, String province, String phone, int sex) {
         synchronized (lock) {
             getUsedProvinces().forEach(map -> {
-                Object province1 = map.get("province");
-                if (province1 != null && province1.toString().equals(province))
-                    provincesUsed = true;
+                checkProvinceUsed(map, province);
             });
 
             if (!provincesUsed) {
@@ -139,6 +145,7 @@ public class AdminService extends BaseService<Admin> implements IAdminService {
                 userRoleService.save(code, role.getCode());
                 return true;
             } else {
+                provincesUsed = false;
                 return false;
             }
         }
@@ -149,10 +156,8 @@ public class AdminService extends BaseService<Admin> implements IAdminService {
     @Transactional
     public boolean editCustomerService(int id, String name, String pwd, String province, String phone, int sex) {
         synchronized (lock) {
-            getUsedProvinces().forEach(map -> {
-                Object province1 = map.get("province");
-                if (province1 != null && province1.toString().equals(province))
-                    provincesUsed = true;
+            getUsedProvinces(id).forEach(map -> {
+                checkProvinceUsed(map, province);
             });
 
             if (!provincesUsed) {
@@ -168,6 +173,7 @@ public class AdminService extends BaseService<Admin> implements IAdminService {
                 provincesUsed = false;
                 return true;
             } else {
+                provincesUsed = false;
                 return false;
             }
         }
@@ -190,6 +196,11 @@ public class AdminService extends BaseService<Admin> implements IAdminService {
     @Transactional
     public List<Map<String, Object>> getUsedProvinces() {
         return adminDao.getUsedProvinces();
+    }
+
+    @Transactional
+    public List<Map<String, Object>> getUsedProvinces(long id) {
+        return adminDao.getUsedProvinces(id);
     }
 
     @Transactional

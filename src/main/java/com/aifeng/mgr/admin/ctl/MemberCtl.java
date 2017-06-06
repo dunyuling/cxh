@@ -1,6 +1,9 @@
 package com.aifeng.mgr.admin.ctl;
 
+import com.aifeng.constants.Constants;
 import com.aifeng.core.ctl.BaseCtl;
+import com.aifeng.mgr.admin.model.Admin;
+import com.aifeng.mgr.admin.service.impl.AdminService;
 import com.aifeng.mgr.admin.service.impl.MemberService;
 import com.aifeng.util.StringUtil;
 import com.alibaba.fastjson.JSONObject;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -22,10 +26,12 @@ import java.util.Map;
 public class MemberCtl extends BaseCtl {
 
     private final MemberService memberService;
+    private final AdminService adminService;
 
     @Autowired
-    public MemberCtl(MemberService memberService) {
+    public MemberCtl(MemberService memberService, AdminService adminService) {
         this.memberService = memberService;
+        this.adminService = adminService;
     }
 
     @RequestMapping("list")
@@ -36,8 +42,9 @@ public class MemberCtl extends BaseCtl {
     @RequestMapping(value = "/list2", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
     @ResponseBody
     public String list2(int page, int pageSize) {
-        List<Map<String, Object>> list = memberService.getPageMember(page, pageSize);
-        long total = memberService.getTotal();
+        Admin admin = (Admin) this.get(Constants.SESSION_USER);
+        List<Map<String, Object>> list = memberService.getPageMember(page, pageSize, admin.getAddr());
+        long total = memberService.getInitTotal(admin.getAddr());
         JSONObject json = new JSONObject();
         json.put("rows", list);
         json.put("total", total);

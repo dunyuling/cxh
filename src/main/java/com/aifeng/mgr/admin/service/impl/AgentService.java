@@ -4,7 +4,6 @@ import com.aifeng.core.service.impl.BaseService;
 import com.aifeng.core.util.SpringUtil;
 import com.aifeng.mgr.admin.dao.impl.AgentDao;
 import com.aifeng.mgr.admin.model.AddressFee;
-import com.aifeng.mgr.admin.model.Admin;
 import com.aifeng.mgr.admin.model.Agent;
 import com.aifeng.mgr.admin.model.ProxyAddress;
 import com.aifeng.mgr.admin.service.IAgentService;
@@ -12,7 +11,6 @@ import com.aifeng.util.DateStyle;
 import com.aifeng.util.DateUtil;
 import com.aifeng.util.Md5;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -67,6 +65,7 @@ public class AgentService extends BaseService<Agent> implements IAgentService {
             boolean proxied = proxyAddressService.checkProxied(af_id);
             if (proxied) {
                 result = "您或其它代理商已经申请过代理该地区";
+                success = true;
             } else {
                 result = "身份证信息未正确填写";
             }
@@ -153,7 +152,7 @@ public class AgentService extends BaseService<Agent> implements IAgentService {
         return agent;
     }
 
-    @Scheduled(fixedDelay = 1000 * 60 * 60 * 24)
+    //    @Scheduled(fixedDelay = 1000 * 60 * 60 * 24)
     @Transactional
     public void balanceLow() {
         messageService = messageService == null ? SpringUtil.getBean("messageService") : messageService;
@@ -179,8 +178,8 @@ public class AgentService extends BaseService<Agent> implements IAgentService {
             StringBuilder content = new StringBuilder();
             content.append("尊敬的").append(map.get("name")).append("用户,您当前余额为:").append(map.get("money")).append("元。");
             content.append("请及时充值，以免遗漏会员提醒，给您造成损失。");
-            messageService.sendMsg(map.get("userid").toString(), content.toString());
-            System.out.println("-----: " + map.get("name") + " \t " + map.get("money"));
+//            messageService.sendMsg(map.get("userid").toString(), content.toString());
+            System.out.println("-----: " + map.get("name") + " \t " + map.get("money") + "\t" + content);
         }
     }
 

@@ -31,7 +31,7 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label">省：</label>
                     <div class="col-sm-7">
-                        <select id="province" name="province" class="form-control">
+                        <select id="province" name="province" class="form-control" multiple>
                             <option value="北京市">北京市</option>
                             <option value="天津市">天津市</option>
                             <option value="河北省">河北省</option>

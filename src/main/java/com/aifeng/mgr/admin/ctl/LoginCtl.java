@@ -4,7 +4,6 @@ import com.aifeng.constants.Constants;
 import com.aifeng.core.ctl.BaseCtl;
 import com.aifeng.mgr.admin.model.Admin;
 import com.aifeng.mgr.admin.model.Agent;
-import com.aifeng.mgr.admin.service.IAdminService;
 import com.aifeng.mgr.admin.service.impl.AdminService;
 import com.aifeng.mgr.admin.service.impl.AgentService;
 import com.aifeng.util.Md5;
@@ -135,8 +134,14 @@ public class LoginCtl extends BaseCtl {
 
     @RequestMapping("logout")
     public String login() {
-        this.set(Constants.SESSION_USER, null);   // 用户信息
-        return "redirect:/mgr/login.cs";
+        Object o = this.get(Constants.SESSION_USER);
+        if (o instanceof Admin) {
+            this.set(Constants.SESSION_USER, null);   // 用户信息
+            return "redirect:/mgr/toLogin.cs";
+        } else {
+            this.set(Constants.SESSION_USER, null);   // 用户信息
+            return "redirect:/mgr/agent2Login.cs";
+        }
     }
 
 

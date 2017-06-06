@@ -12,8 +12,8 @@
 <div class="wrapper wrapper-content">
     <div class="row">
         <div class="col-sm-12">
-            <cs:form_validate formId="addAddressForm"/>
-            <form class="form-horizontal" action="edit.cs" id="addAddressForm" method="POST">
+            <cs:form_validate formId="editAddressForm"/>
+            <form class="form-horizontal" action="edit.cs" id="editAddressForm" method="POST">
 
                 <div class="form-group">
                     <label class="col-sm-3 control-label">名字：</label>
@@ -35,7 +35,8 @@
                     <label class="col-sm-3 control-label">省：</label>
                     <div class="col-sm-7">
                         <input type="hidden" id="province_" value="${temp.addr}"/>
-                        <select id="province" name="province" class="form-control">
+                        <%--<input type="hidden" id="province_" value="北京市，天津市，上海市"/>--%>
+                        <select id="province" name="province" class="form-control" multiple>
                             <option value="北京市">北京市</option>
                             <option value="天津市">天津市</option>
                             <option value="河北省">河北省</option>
@@ -107,8 +108,14 @@
     var sex_ = $("#sex_").val();
     $("#sex option[value='" + sex_ + "']").attr("selected", true);
 
-    var province_ = $("#province_").val();
-    $("#province option[value='" + province_ + "']").attr("selected", true);
+    //    var province_ = $("#province_").val();
+    //    for (p in province_.split("，")) {
+    //        $("#province option[value='" + p + "']").attr("selected", true);
+    //    }
 
+    $.each($("#province_").val().split(","), function (i, val) {
+//        alert("i: " + i + " \t val: " + val);
+        $("#province option[value='" + val + "']").attr("selected", true);
+    })
 </script>
 </html>

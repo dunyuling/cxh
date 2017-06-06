@@ -211,4 +211,13 @@ public class BaseCtl {
         }
     }
 
+    public String loadRole(AdminService adminService) {
+        Object object = this.get(Constants.SESSION_USER);
+        if (object != null && object instanceof Admin) {
+            Admin admin = (Admin) object;
+            return adminService.getRole(admin.getCode());
+        }
+        return null;
+    }
+
 }

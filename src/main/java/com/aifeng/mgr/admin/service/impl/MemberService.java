@@ -104,9 +104,24 @@ public class MemberService extends BaseService<Member> implements IMemberService
     }
 
     @Transactional
-    public List<Map<String, Object>> getPageMember(int page, int size) {
-        return memberDao.getMember(page, size);
+    public List<Map<String, Object>> getPageMember(int page, int size, String addr) {
+        return memberDao.getMember(page, size, addr == null ? null : loadAddr(addr));
     }
+
+    @Transactional
+    public int getInitTotal(String addr) {
+        return memberDao.getInitCount( addr == null ? null : loadAddr(addr));
+    }
+
+    private String loadAddr(String addr) {
+        String addrTemp = "";
+        for (String temp : addr.split(",")) {
+            addrTemp += "'" + temp + "',";
+        }
+        addrTemp = addrTemp.substring(0, addrTemp.lastIndexOf(","));
+        return addrTemp;
+    }
+
 
     @Transactional
     public Map<String, Object> getSingleMember(long id) {

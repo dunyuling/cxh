@@ -42,7 +42,7 @@ public class SessionInterceptor extends HandlerInterceptorAdapter {
         }
 
         //后台代理商
-        if (url.contains("agent2Login.cs")) {
+        if (url.contains("agentLogin.cs")) {
             agent = true;
             return super.preHandle(request, response, handler);
         }
