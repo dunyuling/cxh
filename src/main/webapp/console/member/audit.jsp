@@ -14,7 +14,7 @@
     <div class="row">
         <div class="col-sm-12">
             <cs:form_validate formId="editAIForm"/>
-            <form class="form-horizontal" <%--action="audit.cs"--%> id="editAIForm" method="POST">
+            <form class="form-horizontal" <%--action="audit.cs"--%> <%--onsubmit="javascript:return false;"--%> id="editAIForm" method="POST">
                 <div class="form-group">
                     <label class="col-sm-3 control-label">名字：</label>
                     <div class="col-sm-6">
@@ -85,8 +85,15 @@
         var id = $("#id").val();
         var status = $("#status").find("option:selected").val();
         var denyReason = $("#denyReason").val();
-        $.post("/member/audit.cs",{"id":id,"status":status,"denyReason":denyReason},function(res) {
-            $.closeDlg();
+        $.post("/member/audit.cs", {"id": id, "status": status, "denyReason": denyReason}, function (res) {
+            var index = parent.layer.getFrameIndex(window.name);
+            $(parent.document.getElementsByTagName('table')).each(function () {
+                _id = $(this).attr('id');
+                if (_id != '' && _id != undefined) {
+                    parent.reflush(_id);
+                }
+            });
+            parent.layer.close(index);
         });
         return true;
     });
