@@ -41,26 +41,7 @@ public class AgentService extends BaseService<Agent> implements IAgentService {
         boolean success = false;
         String result = "代理已成功添加，请等待运营认证";
         Agent agent = agentDao.getAgentByIDCard(IDCard);
-        if (agent == null) {
-            agent = new Agent();
-            agent.setName(name);
-            agent.setMobile(mobile);
-            agent.setIDCard(IDCard);
-            agent.setCorpName(corpName);
-            agent.setLicenseImg(licenceImg);
-            agent.setExpireDate(DateUtil.parseDate(DateStyle.YYYYMMDD, expireDate));
-            agent.setUserid(user_id);
-            agent = agentDao.insert(agent);
-
-            AddressFee addressFee = addressFeeService.getAddressFee(getAddressId(addr));
-            boolean proxied = proxyAddressService.checkProxied(addressFee.getId());
-            if (proxied) {
-                result = "您或其它代理商已经申请过代理该地区";
-            } else {
-                proxyAddressService.save(agent.getId(), addressFee.getId());
-                success = true;
-            }
-        } else {
+        if (agent != null) {
             long af_id = addressFeeService.getAddressFee(getAddressId(addr)).getId();
             boolean proxied = proxyAddressService.checkProxied(af_id);
             if (proxied) {
@@ -69,6 +50,46 @@ public class AgentService extends BaseService<Agent> implements IAgentService {
             } else {
                 result = "身份证信息未正确填写";
             }
+            map.put("result", result);
+            map.put("success", success);
+            return map;
+        }
+
+
+        agent = agentDao.getAgentByMobile(IDCard);
+        if (agent != null) {
+            long af_id = addressFeeService.getAddressFee(getAddressId(addr)).getId();
+            boolean proxied = proxyAddressService.checkProxied(af_id);
+            if (proxied) {
+                result = "您或其它代理商已经申请过代理该地区";
+                success = true;
+            } else {
+                result = "该手机号已被使用";
+            }
+            map.put("result", result);
+            map.put("success", success);
+            return map;
+        }
+
+        
+
+        agent = new Agent();
+        agent.setName(name);
+        agent.setMobile(mobile);
+        agent.setIDCard(IDCard);
+        agent.setCorpName(corpName);
+        agent.setLicenseImg(licenceImg);
+        agent.setExpireDate(DateUtil.parseDate(DateStyle.YYYYMMDD, expireDate));
+        agent.setUserid(user_id);
+        agent = agentDao.insert(agent);
+
+        AddressFee addressFee = addressFeeService.getAddressFee(getAddressId(addr));
+        boolean proxied = proxyAddressService.checkProxied(addressFee.getId());
+        if (proxied) {
+            result = "您或其它代理商已经申请过代理该地区";
+        } else {
+            proxyAddressService.save(agent.getId(), addressFee.getId());
+            success = true;
         }
         map.put("result", result);
         map.put("success", success);
@@ -188,5 +209,10 @@ public class AgentService extends BaseService<Agent> implements IAgentService {
         Agent agent = this.agentDao.findById(id);
         agent.setPwd(Md5.getMd5(pwd));
         agentDao.update(agent);
+    }
+
+    @Transactional
+    public Map<String, Object> getByMobile(String mobile) {
+        return agentDao.getByMobile(mobile);
     }
 }

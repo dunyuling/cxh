@@ -214,4 +214,9 @@ public class AdminService extends BaseService<Admin> implements IAdminService {
     public String getRole(String usercode) {
         return this.adminDao.getRole(usercode);
     }
+
+    @Transactional
+    public Map<String, Object> getByMobile(String mobile) {
+        return adminDao.getByMobile(mobile);
+    }
 }

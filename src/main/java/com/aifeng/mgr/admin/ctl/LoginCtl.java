@@ -4,10 +4,16 @@ import com.aifeng.constants.Constants;
 import com.aifeng.core.ctl.BaseCtl;
 import com.aifeng.mgr.admin.model.Admin;
 import com.aifeng.mgr.admin.model.Agent;
+import com.aifeng.mgr.admin.model.AuxiliaryInformation;
+import com.aifeng.mgr.admin.model.ValidateCode;
 import com.aifeng.mgr.admin.service.impl.AdminService;
 import com.aifeng.mgr.admin.service.impl.AgentService;
+import com.aifeng.mgr.admin.service.impl.AuxiliaryInformationService;
+import com.aifeng.mgr.admin.service.impl.ValidateCodeService;
 import com.aifeng.util.Md5;
+import com.aifeng.util.PwdReminderUtil;
 import com.aifeng.util.StringUtil;
+import com.aifeng.util.Util;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,11 +34,15 @@ public class LoginCtl extends BaseCtl {
 
     private final AdminService adminService;
     private final AgentService agentService;
+    private final ValidateCodeService validateCodeService;
+    private final AuxiliaryInformationService auxiliaryInformationService;
 
     @Autowired
-    public LoginCtl(AdminService adminService, AgentService agentService) {
+    public LoginCtl(AdminService adminService, AgentService agentService, ValidateCodeService validateCodeService, AuxiliaryInformationService auxiliaryInformationService) {
         this.adminService = adminService;
         this.agentService = agentService;
+        this.validateCodeService = validateCodeService;
+        this.auxiliaryInformationService = auxiliaryInformationService;
     }
 
 
@@ -237,6 +247,70 @@ public class LoginCtl extends BaseCtl {
         } catch (Exception e) {
             e.printStackTrace();
             return "failure";
+        }
+    }
+
+    @RequestMapping("to_pwd_reminder")
+    public String toPwdReminder(String action, Model model) {
+        model.addAttribute("action", action);
+        return "pwd_reminder";
+    }
+
+    @RequestMapping("pwd_reminder")
+    @ResponseBody
+    public boolean getValidateCode(String mobile, String action) {
+        Map<String, Object> map = null;
+        if (action.equals("admin") || action.equals("customerservice")) {
+            map = adminService.getByMobile(mobile);
+        } else {
+            map = agentService.getByMobile(mobile);
+        }
+
+        boolean exist = map == null;
+        if (exist) {
+            String code = Util.generateValidateCode();
+            ValidateCode validateCode = new ValidateCode(mobile, code);
+            validateCodeService.add(validateCode);
+
+            AuxiliaryInformation auxiliaryInformation = auxiliaryInformationService.getOrMockFirst();
+            PwdReminderUtil.send(auxiliaryInformation, getRole(action), (String) map.get("name"), code, mobile);
+        }
+        return exist;
+    }
+
+    @RequestMapping("pwd_reminder")
+    @ResponseBody
+    public String retrievalPwd(String mobile, String action, String pwd, String code) {
+        String result = "";
+        ValidateCode validateCode = validateCodeService.get(mobile, code);
+        if (validateCode != null) {
+            if (System.currentTimeMillis() - validateCode.getCreateDate().getTime() > 10 * 60 * 1000) {
+                result = "验证码已过期，请重新获取";
+                validateCodeService.delete(validateCode);
+            } else {
+                Map<String, Object> map = null;
+                if (action.equals("admin") || action.equals("customerservice")) {
+                    map = adminService.getByMobile(mobile);
+                    int id = Integer.parseInt(map.get("id").toString());
+                    adminService.editMainPwd(id, pwd);
+                } else {
+                    map = agentService.getByMobile(mobile);
+                    long id = Long.parseLong(map.get("id").toString());
+                    agentService.editAgentPwd(id, pwd);
+                }
+                result = "修改密码成功,请重新登录";
+            }
+        }
+        return result;
+    }
+
+    private String getRole(String action) {
+        if (action.equals("admin")) {
+            return "管理员";
+        } else if (action.equals("customerservice")) {
+            return "客服";
+        } else {
+            return "代理商";
         }
     }
 }

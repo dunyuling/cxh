@@ -27,8 +27,7 @@ import java.util.Map;
 public class WxCtl {
 
     private final AuxiliaryInformationService auxiliaryInformationService;
-    private final
-    AgentService agentService;
+    private final AgentService agentService;
     private final RestTemplate restTemplate;
     private final MemberService memberService;
     private final AgentMessageService agentMessageService;

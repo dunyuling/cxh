@@ -212,4 +212,9 @@ public class Util {
     public static String trim(String str) {
         return str == null ? null : str.trim();
     }
+
+    public static String generateValidateCode() {
+        String generatedString = RandomStringUtils.random(6, false, true);
+        return generatedString.toLowerCase();
+    }
 }

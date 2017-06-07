@@ -62,4 +62,10 @@ public class AgentDao extends BaseDao<Agent> implements IAgentDao {
                 " on a.userid=b.userid where a.money < b.amount * 10";
         return this.findBySql(sql);
     }
+
+    public Map<String, Object> getByMobile(String mobile) {
+        String sql = "select mobile from agent where mobile = '" + mobile + "'";
+        List<Map<String, Object>> list = this.findBySql(sql);
+        return list.isEmpty() ? null : list.get(0);
+    }
 }
