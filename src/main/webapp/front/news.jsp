@@ -19,12 +19,9 @@
     <div class="index_nav_body">
         <div class="index_nav_main">
             <div class="index_nav_box1">
-                <div class="index_nav_box1_icon"><p class="nav_icon"><img src="img/icon_01.png"></p>
-                    <p>chexianhui@163.com</p></div>
-                <div class="index_nav_box1_icon"><p class="nav_icon"><img src="img/icon_02.png"></p>
-                    <p>133-3385-0551</p></div>
-                <div class="index_nav_box1_icon2"><p class="nav_icon"><img src="img/icon_03.png"></p>
-                    <p>周一至周五 09:00-18:00</p></div>
+                <div class="index_nav_box1_icon"><p class="nav_icon"><img src="img/icon_01.png"></p><p>cxhqcbxdl@126.com</p></div>
+                <div class="index_nav_box1_icon"><p class="nav_icon"><img src="img/icon_02.png"></p><p>4000080099</p></div>
+                <div class="index_nav_box1_icon2"><p class="nav_icon"><img src="img/icon_03.png"></p><p>周一至周五  09:00-18:00</p></div>
             </div>
             <div class="index_nav_box2">
                 <div class="index_logo"><a href="index.html"><img src="img/logo_03.png"></a></div>
