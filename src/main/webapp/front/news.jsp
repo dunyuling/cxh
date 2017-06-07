@@ -78,13 +78,12 @@
 <div class="public_bottom">
     <div class="public_bottom_main1">
         <div class="xinxi_main">
-            <p>地址：郑州经济技术开发区第五大街经北三路河南通信产业园六层</p>
-            <p>Copyright @ 车险汇 &nbsp;&nbsp;&nbsp;&nbsp;营业执照注册号：4101980000014605（1-1） http://www.cxh360.com/
-                备案号：豫ICP备12010516号-2</p>
+            <p>地址：河南省南阳市工业南路兴达商务楼六楼G室</p>
+            <p>Copyright @ 车险汇 &nbsp;&nbsp;&nbsp;&nbsp;营业执照注册号：9141130235803319XY 备案号：豫ICP备12010516号-2</p>
         </div>
         <div class="dianhua_main">
             <div class="dianhua_img"><img src="img/dianhua.png"></div>
-            <div class="dianhua_txt1">客服热线&nbsp;&nbsp;133-3385-0551</div>
+            <div class="dianhua_txt1">客服热线&nbsp;&nbsp;4000080099</div>
             <div class="dianhua_txt2">周一至周五&nbsp;9:00-18:00（仅收市话费）</div>
         </div>
     </div>

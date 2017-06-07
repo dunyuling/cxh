@@ -89,6 +89,55 @@ public class LoginCtl extends BaseCtl {
         return "main";
     }
 
+
+    @RequestMapping("customerservice2Login")
+    public String customerservice2Login() {
+        return "customerservice_login";
+    }
+
+    @RequestMapping(value = "customerserviceLogin", method = RequestMethod.POST)
+    public String csLogin(String account, String pwd) {
+        System.out.println("customerservice login ------------------------");
+        if (StringUtil.isBlank(account, pwd)) {
+            log.error("登录信息错误");
+            return "customerservice_login";
+        }
+
+        Admin user = this.adminService.findByAccount(account);
+        if (user == null) {
+            log.error("账户信息不存在");
+            return "customerservice_login";
+        }
+
+        if (user.getPwd().equals(Md5.getMd5(pwd.trim() + account.trim()))) {
+            this.set(Constants.SESSION_USER, user);   // 用户信息
+            return "redirect:/mgr/csMain.cs";
+        } else {
+            log.error("密码错误");
+            return "customerservice_login";
+        }
+    }
+
+    @RequestMapping("customerserviceMain")
+    public String csMain(ModelMap mm) {
+        try {
+            // 初始化左侧菜单及权限信息
+            Admin user = (Admin) this.get(Constants.SESSION_USER);
+            if (user == null) {
+                return "redirect:/mgr/customerservice2Login.cs";
+            }
+            List<Map<String, Object>> permissions = this.adminService.getPermissions(user.getCode());
+            this.set(Constants.SESSION_PERMISSIONS, permissions);  //权限信息
+
+            mm.put("user", user);
+            mm.put("roleName", permissions.get(0).get("role_name"));
+            mm.put(Constants.SESSION_PERMISSIONS, permissions);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "customerservice_login";
+    }
+
     @RequestMapping("agent2Login")
     public String agent2Login() {
         return "agent_login";

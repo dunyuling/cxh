@@ -1,8 +1,10 @@
 package com.aifeng.ws.wx;
 
-import com.aifeng.constants.Constants;
+import com.aifeng.mgr.admin.model.AuxiliaryInformation;
 import com.aifeng.util.Md5;
+import com.aifeng.util.PwdReminderUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
@@ -23,46 +25,13 @@ public class Test {
     private static String url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxd3c4992eaa887396&redirect_uri=http%3A%2F%2F192.168.50.108%3A8080%2Fmobile%2Fad.json&response_type=code&scope=snsapi_base&state=123456789#wechat_redirect";
 
     public static void main(String[] args) {
+        System.out.println(Md5.getMd5("123456"));
 
-//        String str = DateUtils.formatDate(new Date(), "yyyy-MM-dd HH:mm");
-//        System.out.println("str: " + str + " \t " + new Date());
-//        System.out.println(Util.date2String(new Date(), "yyyy-MM-dd HH:mm"));
-//        String str = "a$a";
-//        str = str.replaceAll("/\\*[\\s\\S]*?\\*/", "");
-//        System.out.println("str: " + str);
-//        String generatedString = RandomStringUtils.random(6, true, true);
-//
-//        System.out.println(generatedString.toLowerCase() + new Date().getTime());
-//
-//        String originalName = "lhg.png";
-//        String suffix = originalName.substring(originalName.lastIndexOf("."), originalName.length());
-//        String newName = Util.getRandomName(originalName) + suffix;
-//        System.out.println(newName);
-
-        /*String dateStr = "2017-09-08";
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            Date date = dateFormat.parse(dateStr);
-            System.out.println("date: " + date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }*/
-//        System.out.println(Md5.getMd5("123456"));
-//
-//        String str = "2017-05-14 00:00:00.0";
-//        System.out.println(Util.str2Date(str, "yyyy-MM-dd"));
-//        String result = Util.date2String(Util.str2Date(str,"yyyy-MM-dd"), "yyyy-MM-dd");
-//        System.out.println("result: " + result);
-
-//        System.out.println(3 & 8);
-//        System.out.println(Md5.getMd5("123456" + "cs000003"));
-//        for (String temp : "北京市".split(",")) {
-//            System.out.println(temp);
-//        }
-
-//        String str = Md5.getMd5("123456" + "cs000005");
-//        System.out.println(str);
-        System.out.println(Md5.getMd5(Constants.agent_pwd));
+//        String generatedString = RandomStringUtils.random(6, false, true);
+//        System.out.println(generatedString.toLowerCase());
+//        AuxiliaryInformation auxiliaryInformation = new AuxiliaryInformation();
+//        auxiliaryInformation.config("", "", "", "车险汇", "", "SMS_70285207");
+//        PwdReminderUtil.send(auxiliaryInformation, "代理商", "lhg", generatedString.toLowerCase(), "13818280352");
     }
 
     public static void send1() {

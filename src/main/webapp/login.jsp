@@ -46,11 +46,11 @@
                 <input type="password" class="form-control" name="pwd" placeholder="密码" required="">
             </div>
             <button type="submit" class="btn btn-primary block full-width m-b">登 录</button>
-
-
-            <!--                 <p class="text-muted text-center"> <a href="login.html#"><small>忘记密码了？</small></a> | <a href="register.html">注册一个新账号</a> -->
+            <p class="text-muted text-center">
+                <a href="login.html#">
+                    <small>忘记密码了？</small>
+                </a>
             </p>
-
         </form>
     </div>
 </div>

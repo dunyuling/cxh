@@ -17,7 +17,6 @@ import javax.servlet.http.HttpSession;
 public class SessionInterceptor extends HandlerInterceptorAdapter {
     private String[] excludes;// 不使用过滤器的部分，可以不登录使用的内容，需要在spring-mvc中进行配置
     private Logger log = Logger.getLogger(SessionInterceptor.class);
-    private boolean agent = false;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
@@ -31,23 +30,16 @@ public class SessionInterceptor extends HandlerInterceptorAdapter {
         }*/
 
         //非后台
-        if(url.contains("wx") || url.contains("front")) {
-            return super.preHandle(request, response, handler);
-        }
-
-        //后台管理员或者客服
-        if (url.contains("login.cs")) {
-            agent = false;
-            return super.preHandle(request, response, handler);
-        }
-
-        //后台代理商
-        if (url.contains("agentLogin.cs")) {
-            agent = true;
+        if (url.contains("wx") || url.contains("front")) {
             return super.preHandle(request, response, handler);
         }
 
         HttpSession session = request.getSession();
+        //后台管理员，客服，代理商
+        if (url.contains("login.cs") || url.contains("customerserviceLogin.cs") || url.contains("agentLogin.cs")) {
+            return super.preHandle(request, response, handler);
+        }
+
         Object objUser = session.getAttribute(Constants.SESSION_USER);
         if (objUser == null) {// 未登录，或者登录超时
             if (excludes != null) {
@@ -59,7 +51,12 @@ public class SessionInterceptor extends HandlerInterceptorAdapter {
                     }
                 } // 需要登陆的跳转
             }
-            response.sendRedirect(agent ? contextPath + "/agent_login.jsp" : contextPath + "/login.jsp");
+
+            if (referer == null) {
+                response.sendRedirect(url.contains("agent") ? contextPath + "/agent_login.jsp" : (url.contains("customerservice") ? contextPath + "/customerservice_login.jsp" : contextPath + "/login.jsp"));
+            } else {
+                response.sendRedirect(referer.contains("agent") ? contextPath + "/agent_login.jsp" : (referer.contains("customerservice") ? contextPath + "/customerservice_login.jsp" : contextPath + "/login.jsp"));
+            }
             return false;
         }
         log.info(url);
@@ -69,4 +66,5 @@ public class SessionInterceptor extends HandlerInterceptorAdapter {
     public void setExcludes(String[] excludes) {
         this.excludes = excludes;
     }
+
 }

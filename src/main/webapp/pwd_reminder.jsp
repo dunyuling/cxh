@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-    <title>车险汇管理系统 - 登录</title>
+    <title>车险汇管理系统 - 密码找回</title>
     <%--<meta name="keywords" content="计分系统 Bate1.0">
     <meta name="description" content="计分系统 Bate1.0">--%>
 
@@ -32,15 +32,13 @@
 <div class="middle-box text-center loginscreen  animated fadeInDown">
     <div>
         <div>
-
             <h1 class="logo-name">G+</h1>
-
         </div>
-        <h3>欢迎登陆车险汇管理系统</h3>
+        <h3>密码找回</h3>
 
-        <form class="m-t" role="form" action="/mgr/agentLogin.cs" method="post">
+        <form class="m-t" role="form" action="/mgr/login.cs" method="post">
             <div class="form-group">
-                <input type="text" class="form-control" name="mobile" placeholder="手机号" required="">
+                <input type="text" class="form-control" name="account" placeholder="用户名" required="">
             </div>
             <div class="form-group">
                 <input type="password" class="form-control" name="pwd" placeholder="密码" required="">
