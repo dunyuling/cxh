@@ -19,7 +19,7 @@ public class MemberDao extends BaseDao<Member> implements IMemberDao {
         if (addr == null) {
             sql = "select m.id,m.name,m.mobile,m.type,m.status, a.province,a.city,a.area,m.createDate,tma.name as tma_name from member m " +
                     "left join address a on m.address_id = a.id " +
-                    "join tb_mgr_admin tma on tma.id = m.user_id " +
+                    "left join tb_mgr_admin tma on tma.id = m.user_id " +
                     "order by m.createDate desc " +
                     "limit " + pageSize + " offset " + (page - 1) * pageSize + ";";
         } else {

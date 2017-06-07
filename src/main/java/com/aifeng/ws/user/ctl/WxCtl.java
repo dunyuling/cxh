@@ -72,7 +72,7 @@ public class WxCtl {
 
     @RequestMapping("to_submit")
     public String toSubmit(HttpServletRequest request, Model model) {
-        Map<String, String> map = getCode(request, model);
+        Map<String, String> map = getCode(request, model, "toSubmit");
         String user_id = map.get("user_id");
 
         Map<String, Object> temp = agentService.getAgentSubmitMsgFromWx(user_id);
@@ -85,7 +85,7 @@ public class WxCtl {
         }
     }
 
-    public Map<String, String> getCode(HttpServletRequest request, Model model) {
+    public Map<String, String> getCode(HttpServletRequest request, Model model, String method) {
         /*AuxiliaryInformation ai = auxiliaryInformationService.getOrMockFirst();
         String access_token = ai.getAccess_token();
         if (access_token.isEmpty() || expire(System.currentTimeMillis(), ai.getUpdateDate().getTime())) {
@@ -105,7 +105,7 @@ public class WxCtl {
         try {
             UserResponse userResponse = mapper.readValue(codeStr, UserResponse.class);
             user_id = userResponse.getUser_id();
-            System.out.println("getCode userid: " + user_id);
+            System.out.println("method: " + method + " getCode userid:" + user_id);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -184,7 +184,7 @@ public class WxCtl {
 
     @RequestMapping(value = "manage", produces = "text/plain;charset=utf-8;")
     public String manage(HttpServletRequest request, Model model) {
-        Map<String, String> map = getCode(request, model);
+        Map<String, String> map = getCode(request, model, "manage");
         model.addAllAttributes(map);
         String user_id = request.getParameter("userid");
         if (user_id != null && !user_id.isEmpty()) model.addAttribute("user_id", user_id);
@@ -251,7 +251,7 @@ public class WxCtl {
     @RequestMapping(value = "get_balance", produces = "text/plain;charset=utf-8;")
     public String getBalance(HttpServletRequest request, Model model) {
         try {
-            Map<String, String> map = getCode(request, model);
+            Map<String, String> map = getCode(request, model,"getBalance");
             Agent agent = agentService.getAgentByUserid(map.get("user_id"));
             model.addAttribute("money", agent == null ? 0 : agent.getMoney());
         } catch (Exception e) {
@@ -262,9 +262,9 @@ public class WxCtl {
 
     @RequestMapping(value = "to_re_add", produces = "text/plain;charset=utf-8;")
     public String toReAdd(HttpServletRequest request, Model model) {
-        Map<String, String> map = getCode(request, model);
+        Map<String, String> map = getCode(request, model,"toReAdd");
         String user_id = map.get("user_id");
-        if(user_id != null) {
+        if (user_id != null) {
             Agent agent = agentService.getAgentByUserid(user_id);
             model.addAttribute("agent", agent);
         } else {

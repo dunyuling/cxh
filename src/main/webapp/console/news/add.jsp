@@ -30,7 +30,7 @@
                       <div class="form-group">
                           <label class="col-sm-3 control-label">图片：</label>
                           <div class="col-sm-6">
-                              <input id="img" name="img" type="file" class="form-control" validate="{required:true}" validateMessage="{required:'请上传图片'}" >
+                              <input id="img" name="img" type="file" class="form-control" validate="{required:true}" validateMessage="{required:'请上传图片'}" required >
                               <%--<cs:file name="img"  type="150" />--%>
                           </div>
                       </div>

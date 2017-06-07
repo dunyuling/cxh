@@ -25,19 +25,22 @@ public class AuxiliaryInformation {
 
     private String sign = "";
 
-    private String template = "";
+    private String registerTemplate = "";
+
+    private String identifyPwdTemplate = "";
 
     private Date updateDate;
 
     public AuxiliaryInformation() {
     }
 
-    public void config(String access_token, String CorpID, String secret, String sign, String template) {
+    public void config(String access_token, String CorpID, String secret, String sign, String registerTemplate, String identifyPwdTemplate) {
         this.access_token = access_token;
         this.corpID = CorpID;
         this.secret = secret;
         this.sign = sign;
-        this.template = template;
+        this.registerTemplate = registerTemplate;
+        this.identifyPwdTemplate = identifyPwdTemplate;
         this.updateDate = new Date();
     }
 
@@ -81,12 +84,20 @@ public class AuxiliaryInformation {
         this.sign = sign;
     }
 
-    public String getTemplate() {
-        return template;
+    public String getRegisterTemplate() {
+        return registerTemplate;
     }
 
-    public void setTemplate(String template) {
-        this.template = template;
+    public void setRegisterTemplate(String registerTemplate) {
+        this.registerTemplate = registerTemplate;
+    }
+
+    public String getIdentifyPwdTemplate() {
+        return identifyPwdTemplate;
+    }
+
+    public void setIdentifyPwdTemplate(String identifyPwdTemplate) {
+        this.identifyPwdTemplate = identifyPwdTemplate;
     }
 
     public Date getUpdateDate() {

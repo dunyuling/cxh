@@ -38,6 +38,8 @@ public class Agent {
 
     private String pwd;
 
+    private Date createDate;
+
     public Agent() {
         this.pwd = Md5.getMd5(Constants.agent_pwd);
     }
@@ -120,5 +122,13 @@ public class Agent {
 
     public void setPwd(String pwd) {
         this.pwd = pwd;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 }

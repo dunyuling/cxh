@@ -13,7 +13,7 @@
     <div class="wrapper wrapper-content">
         <div class="row">
             <div class="col-sm-12">
-            	 <cs:form_validate formId="editAIForm"/>
+            	 <%--<cs:form_validate formId="editAIForm"/>--%>
                   <form class="form-horizontal" action="edit.cs" id="editAIForm" method="POST">
                       <div class="form-group">
                           <label class="col-sm-3 control-label">微信access_token：</label>
@@ -43,9 +43,16 @@
                       </div>
 
                       <div class="form-group">
-                          <label class="col-sm-3 control-label">短信模板：</label>
+                          <label class="col-sm-3 control-label">短信注册模板：</label>
                           <div class="col-sm-6">
-                              <input id="template" name="template" value="${ai.template}"  class="form-control" validate="{required:true}" validateMessage="{required:'请输入模板'}" >
+                              <input id="registerTemplate" name="registerTemplate" value="${ai.registerTemplate}"  class="form-control" validate="{required:true}" validateMessage="{required:'请输入注册模板'}" >
+                          </div>
+                      </div>
+
+                      <div class="form-group">
+                          <label class="col-sm-3 control-label">短信找回密码模板：</label>
+                          <div class="col-sm-6">
+                              <input id="identifyPwdTemplate" name="identifyPwdTemplate" value="${ai.identifyPwdTemplate}"  class="form-control" validate="{required:true}" validateMessage="{required:'请输入找回密码模板'}" >
                           </div>
                       </div>
                       <div class="form-group">
