@@ -91,7 +91,7 @@
             var action = $("#action").val();
             $.post("/mgr/pwd_reminder.cs", {"action": action, "mobile": mobile}, function (data) {
                 if (data == false) {
-                    alert("手机号未被使用，请填写正确的手机号");
+                    alert("手机号码与注册时的手机号码不一致，请填写正确的手机号");
                 }
             });
         }

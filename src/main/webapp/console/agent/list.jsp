@@ -53,9 +53,6 @@
                     <th data-field="money">余额(元)</th>
                     <th data-field="licenseImg" data-formatter="imageFormatter">营业执照</th>
                     <th data-field="expireDate" data-formatter="dateFormatter">营业执照过期时间</th>
-                    <th data-field="province">代理省</th>
-                    <th data-field="city">代理市</th>
-                    <th data-field="area">代理县/区</th>
                 </tr>
                 </thead>
             </table>

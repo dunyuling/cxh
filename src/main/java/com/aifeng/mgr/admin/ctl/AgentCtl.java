@@ -73,10 +73,10 @@ public class AgentCtl extends BaseCtl {
 
     @RequestMapping(value = "edit", method = RequestMethod.POST)
     @ResponseBody
-    public String edit(HttpServletRequest request, long id, String name, String IDCard, String corpName, String expireDate) {
+    public String edit(HttpServletRequest request, long id, String name, String IDCard, String mobile, String corpName, String expireDate) {
         try {
             String licenceImg = Util.editImg(request, ImgPath.wxAgentBusinessCardPath);
-            agentService.editAgent(id, name, IDCard, corpName, licenceImg, expireDate);
+            agentService.editAgent(id, name, IDCard, mobile, corpName, licenceImg, expireDate);
         } catch (Exception e) {
             e.printStackTrace();
         }

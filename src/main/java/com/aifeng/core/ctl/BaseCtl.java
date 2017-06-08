@@ -2,6 +2,7 @@ package com.aifeng.core.ctl;
 
 import com.aifeng.constants.Constants;
 import com.aifeng.mgr.admin.model.Admin;
+import com.aifeng.mgr.admin.model.Agent;
 import com.aifeng.mgr.admin.service.impl.AdminService;
 import com.aifeng.util.StringUtil;
 import com.alibaba.fastjson.JSONObject;
@@ -204,10 +205,15 @@ public class BaseCtl {
 
     public void loadRole(AdminService adminService, Model model) {
         Object object = this.get(Constants.SESSION_USER);
-        if (object != null && object instanceof Admin) {
-            Admin admin = (Admin) object;
-            String role = adminService.getRole(admin.getCode());
-            model.addAttribute("role", role);
+        if (object != null) {
+            if (object instanceof Admin) {
+                Admin admin = (Admin) object;
+                String role = adminService.getRole(admin.getCode());
+                model.addAttribute("role", role);
+            }
+            if (object instanceof Agent) {
+                model.addAttribute("role", "代理商");
+            }
         }
     }
 

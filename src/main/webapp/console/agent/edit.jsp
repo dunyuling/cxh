@@ -32,6 +32,13 @@
                                validate="{required:true}" validateMessage="{required:'请输入身份证号'}">
                     </div>
                 </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">手机号：</label>
+                    <div class="col-sm-6">
+                        <input id="mobile" name="mobile" value="${agent.mobile}" class="form-control"
+                               validate="{required:true}" validateMessage="{required:'请输入手机号'}">
+                    </div>
+                </div>
 
                 <div class="form-group">
                     <label class="col-sm-3 control-label">公司名称：</label>

@@ -71,7 +71,6 @@ public class AgentService extends BaseService<Agent> implements IAgentService {
             return map;
         }
 
-        
 
         agent = new Agent();
         agent.setName(name);
@@ -137,12 +136,13 @@ public class AgentService extends BaseService<Agent> implements IAgentService {
     }
 
     @Transactional
-    public void editAgent(long id, String name, String IDCard, String corpName, String licenceImg, String expireDate) {
+    public void editAgent(long id, String name, String IDCard, String mobile, String corpName, String licenceImg, String expireDate) {
         //mobile 不能修改，在企业号后台已经通过短信方式验证
         //user_id 也不能修改
         Agent agent = agentDao.findById(id);
         agent.setName(name);
         agent.setIDCard(IDCard);
+        agent.setMobile(mobile);
         agent.setCorpName(corpName);
         if (licenceImg != null && !licenceImg.isEmpty()) {
             agent.setLicenseImg(licenceImg);

@@ -22,6 +22,7 @@ public interface Constants {
 
     String wxMsgTitle = "车险汇 车险询价";
 
+    String agent_mark = "代理商";
     String agent_code = "000100";
     String agent_pwd = "123456";
 }
