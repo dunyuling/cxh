@@ -14,12 +14,18 @@ public class Problem {
     @GeneratedValue
     private long id;
 
-    private long customerService_id;
+    private int customerService_id;
+
+    private long agent_id;
 
     private String title;
 
     @Column(columnDefinition = "text")
     private String description;
+
+    private boolean solve = false;
+
+    private String solution;
 
     private Date createDate;
 
@@ -38,12 +44,20 @@ public class Problem {
         this.id = id;
     }
 
-    public long getCustomerService_id() {
+    public int getCustomerService_id() {
         return customerService_id;
     }
 
-    public void setCustomerService_id(long customerService_id) {
+    public void setCustomerService_id(int customerService_id) {
         this.customerService_id = customerService_id;
+    }
+
+    public long getAgent_id() {
+        return agent_id;
+    }
+
+    public void setAgent_id(long agent_id) {
+        this.agent_id = agent_id;
     }
 
     public String getTitle() {
@@ -60,6 +74,22 @@ public class Problem {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public boolean isSolve() {
+        return solve;
+    }
+
+    public void setSolve(boolean solve) {
+        this.solve = solve;
+    }
+
+    public String getSolution() {
+        return solution;
+    }
+
+    public void setSolution(String solution) {
+        this.solution = solution;
     }
 
     public Date getCreateDate() {

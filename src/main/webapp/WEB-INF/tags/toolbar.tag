@@ -180,4 +180,16 @@
             height: '${height}'
         });
     }
+
+    function solve() {
+        var data = getSelectedRow("${tableId}");
+        if (null == data) return;
+
+        $.openDlg({
+            url: 'transfer.cs?action=solve&id=' + data.id,
+            title: '解决反馈问题' + "${title}",
+            width: '${width}',
+            height: '${height}'
+        });
+    }
 </script>

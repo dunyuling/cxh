@@ -16,19 +16,11 @@
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row row-lg">
         <div class="col-sm-12">
-            <c:if test="${role != null && role != '客服'}">
-                <cs:toolbar title="代理商管理" tableId="tab_agent" width="768px" height="420px" menuCode="22" hdMenu="3">
-                    <button class="btn btn-sm btn-warning" type="button" onclick="recharge()"><i class="fa fa-plus"></i>
-                        充值
-                    </button>
-                    <button class="btn btn-sm btn-warning" type="button" onclick="refund()"><i class="fa fa-plus"></i>
-                        退费
-                    </button>
-                </cs:toolbar>
-            </c:if>
-            <table id="tab_agent"
+            <cs:toolbar title="反馈问题管理" tableId="tab_problem" width="768px" height="420px" menuCode="184" hdMenu="1">
+            </cs:toolbar>
+            <table id="tab_problem"
                    data-toggle="table"
-                   data-url="/agent/list2.cs"
+                   data-url="/problem/cs_list2.cs"
                    data-method="get"
                    data-click-to-select="true"
                    data-pagination="true"
@@ -45,17 +37,11 @@
                 <tr>
                     <th data-checkbox="true" data-click-to-select="true"></th>
                     <th data-field="id" data-visible="false"></th>
-                    <th data-field="name">名字</th>
-                    <th data-field="userid">userid</th>
-                    <th data-field="mobile">电话</th>
-                    <th data-field="IDCard">身份证号</th>
-                    <th data-field="corpName">公司名称</th>
-                    <th data-field="money">余额(元)</th>
-                    <th data-field="licenseImg" data-formatter="imageFormatter">营业执照</th>
-                    <th data-field="expireDate" data-formatter="dateFormatter">营业执照过期时间</th>
-                    <th data-field="province">代理省</th>
-                    <th data-field="city">代理市</th>
-                    <th data-field="area">代理县/区</th>
+                    <th data-field="title">标题</th>
+                    <th data-field="description">描述</th>
+                    <th data-field="name">客服</th>
+                    <th data-field="solve" data-formatter="solveFormatter">是否解决</th>
+                    <th data-field="solution">解决方案</th>
                 </tr>
                 </thead>
             </table>

@@ -106,7 +106,7 @@ public class LoginCtl extends BaseCtl {
     }
 
     @RequestMapping(value = "customerserviceLogin", method = RequestMethod.POST)
-    public String csLogin(String account, String pwd) {
+    public String customerserviceLogin(String account, String pwd) {
         System.out.println("customerservice login ------------------------");
         if (StringUtil.isBlank(account, pwd)) {
             log.error("登录信息错误");
@@ -121,7 +121,7 @@ public class LoginCtl extends BaseCtl {
 
         if (user.getPwd().equals(Md5.getMd5(pwd.trim() + account.trim()))) {
             this.set(Constants.SESSION_USER, user);   // 用户信息
-            return "redirect:/mgr/csMain.cs";
+            return "redirect:/mgr/customerserviceMain.cs";
         } else {
             log.error("密码错误");
             return "customerservice_login";
@@ -129,7 +129,7 @@ public class LoginCtl extends BaseCtl {
     }
 
     @RequestMapping("customerserviceMain")
-    public String csMain(ModelMap mm) {
+    public String customerserviceMain(ModelMap mm) {
         try {
             // 初始化左侧菜单及权限信息
             Admin user = (Admin) this.get(Constants.SESSION_USER);
@@ -145,7 +145,7 @@ public class LoginCtl extends BaseCtl {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "customerservice_login";
+        return "customerservice_main";
     }
 
     @RequestMapping("agent2Login")
@@ -193,7 +193,7 @@ public class LoginCtl extends BaseCtl {
     }
 
     @RequestMapping("logout")
-    public String login() {
+    public String logout() {
         Object o = this.get(Constants.SESSION_USER);
         if (o instanceof Admin) {
             this.set(Constants.SESSION_USER, null);   // 用户信息
@@ -203,7 +203,6 @@ public class LoginCtl extends BaseCtl {
             return "redirect:/mgr/agent2Login.cs";
         }
     }
-
 
     @RequestMapping("to_edit_main_pwd")
     public String toEditMainPwd(int id, Model model) {

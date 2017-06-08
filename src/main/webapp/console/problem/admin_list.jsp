@@ -16,11 +16,21 @@
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row row-lg">
         <div class="col-sm-12">
-            <cs:toolbar title="反馈问题管理" tableId="tab_problem" width="768px" height="420px" menuCode="21"
-                        hdMenu="1"></cs:toolbar>
+            <cs:toolbar title="反馈问题管理" tableId="tab_problem" width="768px" height="420px" menuCode="183"
+                        hdMenu="2">
+                <button class="btn btn-sm btn-warning" type="button" onclick="edit()"><i
+                        class="fa fa-pencil-square-o"></i> 编辑
+                </button>
+                <button class="btn btn-sm btn-danger" type="button" onclick="del()"><i class="fa fa-minus"></i> 删除
+                </button>
+                <button class="btn btn-sm btn-warning" type="button" onclick="solve()"><i
+                        class="fa fa-pencil-square-o"></i>解决
+                </button>
+            </cs:toolbar>
+
             <table id="tab_problem"
                    data-toggle="table"
-                   data-url="/problem/list2.cs"
+                   data-url="/problem/admin_list2.cs"
                    data-method="get"
                    data-click-to-select="true"
                    data-pagination="true"
@@ -39,7 +49,10 @@
                     <th data-field="id" data-visible="false"></th>
                     <th data-field="title">标题</th>
                     <th data-field="description">描述</th>
-                    <th data-field="name">客服</th>
+                    <th data-field="cs_name">客服</th>
+                    <th data-field="a_name">代理商</th>
+                    <th data-field="solve" data-formatter="solveFormatter">是否解决</th>
+                    <th data-field="solution">解决方案</th>
                 </tr>
                 </thead>
             </table>

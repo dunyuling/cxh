@@ -20,14 +20,14 @@
                     <div class="col-sm-6">
                         <input id="id" name="id" value="${temp.id}" class="form-control" type="hidden">
                         <input id="title" name="title" value="${temp.title }" class="form-control"
-                               validate="{required:true}" validateMessage="{required:'请输入省'}">
+                               validate="{required:true}" validateMessage="{required:'请输入标题'}">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-3 control-label">描述：</label>
                     <div class="col-sm-6">
                         <input id="description" name="description" value="${temp.description}" class="form-control"
-                               validate="{required:true}" validateMessage="{required:'请输入市'}">
+                               validate="{required:true}" validateMessage="{required:'请输入描述'}">
                     </div>
                 </div>
                 <div class="form-group">

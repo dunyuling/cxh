@@ -16,7 +16,10 @@ import java.util.Map;
 public class AgentDao extends BaseDao<Agent> implements IAgentDao {
 
     public List<Map<String, Object>> getAgents(int page, int pageSize) {
-        String str = "select a.id,a.name,a.userid,a.mobile,a.IDCard,a.corpName,a.licenseImg,a.expireDate,a.money from agent a " +
+        String str = "select a.id,a.name,a.userid,a.mobile,a.IDCard,a.corpName,a.licenseImg,a.expireDate,a.money ,addr.province,addr.city,addr.area from agent a " +
+                "join proxy_address pa on a.id = pa.agent_id " +
+                "join address_fee af on af.id = pa.af_id " +
+                "join address addr on addr.id = af.address_id " +
                 "order by a.id desc " +
                 "limit " + pageSize + " offset " + (page - 1) * pageSize + ";";
         return this.findBySql(str);

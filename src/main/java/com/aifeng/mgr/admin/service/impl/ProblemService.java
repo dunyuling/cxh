@@ -2,7 +2,6 @@ package com.aifeng.mgr.admin.service.impl;
 
 import com.aifeng.core.service.impl.BaseService;
 import com.aifeng.mgr.admin.dao.impl.ProblemDao;
-import com.aifeng.mgr.admin.model.Agent;
 import com.aifeng.mgr.admin.model.Problem;
 import com.aifeng.mgr.admin.service.IProblemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,20 +26,28 @@ public class ProblemService extends BaseService<Problem> implements IProblemServ
     }
 
     @Transactional
-    public void save(String title, String description, long customerService_id) {
+    public void save(String title, String description, int customerService_id, long agent_id) {
         Problem problem = new Problem();
         problem.setTitle(title);
         problem.setDescription(description);
         problem.setCustomerService_id(customerService_id);
+        problem.setAgent_id(agent_id);
         problemDao.insert(problem);
     }
 
     @Transactional
-    public void edit(long id, String title, String description, long customerService_id) {
+    public void edit(long id, String title, String description) {
         Problem problem = findById(id);
         problem.setTitle(title);
         problem.setDescription(description);
-        problem.setCustomerService_id(customerService_id);
+        problemDao.insert(problem);
+    }
+
+    @Transactional
+    public void solve(long id, String solution) {
+        Problem problem = findById(id);
+        problem.setSolve(true);
+        problem.setSolution(solution);
         problemDao.insert(problem);
     }
 
@@ -53,6 +60,26 @@ public class ProblemService extends BaseService<Problem> implements IProblemServ
     @Transactional
     public List<Map<String, Object>> getPagerProblems(int page, int size) {
         return problemDao.getProblems(page, size);
+    }
+
+    @Transactional
+    public List<Map<String, Object>> getCsPagerProblems(int id, int page, int size) {
+        return problemDao.getCsProblems(id, page, size);
+    }
+
+    @Transactional
+    public int getCsCount(int id) {
+        return problemDao.getCsProblemCount(id);
+    }
+
+    @Transactional
+    public List<Map<String, Object>> getAgentPagerProblems(long id, int page, int size) {
+        return problemDao.getAgentProblems(id, page, size);
+    }
+
+    @Transactional
+    public int getAgentCount(long id) {
+        return problemDao.getAgentProblemCount(id);
     }
 
     @Transactional

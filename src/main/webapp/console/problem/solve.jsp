@@ -2,6 +2,7 @@
          pageEncoding="UTF-8" %>
 
 <!doctype html>
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,20 +13,28 @@
 <div class="wrapper wrapper-content">
     <div class="row">
         <div class="col-sm-12">
-            <cs:form_validate formId="addProblemForm"/>
-            <form class="form-horizontal" action="add.cs" id="addProblemForm" method="POST">
+            <cs:form_validate formId="editAddressForm"/>
+            <form class="form-horizontal" action="solve.cs" id="editAddressForm" method="POST">
                 <div class="form-group">
                     <label class="col-sm-3 control-label">标题：</label>
                     <div class="col-sm-6">
-                        <input id="title" name="title" class="form-control" validate="{required:true}"
-                               validateMessage="{required:'请输入标题'}">
+                        <input id="id" name="id" value="${temp.id}" class="form-control" type="hidden">
+                        <input id="title" name="title" value="${temp.title }" class="form-control"
+                               validate="{required:true}" readonly>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-3 control-label">描述：</label>
                     <div class="col-sm-6">
-                        <input id="description" name="description" class="form-control" validate="{required:true}"
-                               validateMessage="{required:'请输入描述'}">
+                        <input id="description" name="description" value="${temp.description}" class="form-control"
+                               validate="{required:true}" readonly>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">解决方案：</label>
+                    <div class="col-sm-6">
+                        <textarea id="solution" name="solution" class="form-control"
+                                  validate="{required:true}"></textarea>
                     </div>
                 </div>
                 <div class="form-group">
@@ -34,6 +43,7 @@
                         <button class="btn btn-primary" type="submit">提交</button>
                     </div>
                 </div>
+
             </form>
         </div>
     </div>

@@ -41,7 +41,7 @@
     }
 
     function dateFormatter(value) {
-        if(value == null) {
+        if (value == null) {
             return value;
         } else {
             var date = new Date(value);
@@ -56,6 +56,10 @@
 
     function format(value) {
         return value < 10 ? '0' + value : value;
+    }
+
+    function solveFormatter(solve) {
+        return solve == false ? "未解决" : "已解决";
     }
 </script>
 
