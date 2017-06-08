@@ -23,9 +23,14 @@ public class ValidateCode {
 
     private Date createDate;
 
+    public ValidateCode() {
+
+    }
+
     public ValidateCode(String mobile,String code) {
         this.mobile = mobile;
         this.code = code;
+        createDate = new Date();
     }
 
     public long getId() {

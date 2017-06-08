@@ -47,7 +47,7 @@
             </div>
             <button type="submit" class="btn btn-primary block full-width m-b">登 录</button>
             <p class="text-muted text-center">
-                <a href="login.html#">
+                <a href="/mgr/to_pwd_reminder.cs?action=agent">
                     <small>忘记密码了？</small>
                 </a>
             </p>

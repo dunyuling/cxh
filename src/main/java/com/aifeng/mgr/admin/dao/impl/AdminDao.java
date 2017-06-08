@@ -61,7 +61,7 @@ public class AdminDao extends BaseDao<Admin> implements IAdminDao {
     }
 
     public Map<String, Object> getByMobile(String mobile) {
-        String sql = "select tma.mobile from tb_mgr_admin tma where tma.phone = '" + mobile + "'";
+        String sql = "select tma.phone,tma.name,tma.id from tb_mgr_admin tma where tma.phone = '" + mobile + "'";
         List<Map<String, Object>> list = this.findBySql(sql);
         return list.isEmpty() ? null : list.get(0);
     }

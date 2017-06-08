@@ -29,26 +29,48 @@
 
 <body class="gray-bg">
 
-<div class="middle-box text-center loginscreen  animated fadeInDown">
+<div class="ibox-content text-center loginscreen  animated fadeInDown">
     <div>
         <div>
             <h1 class="logo-name">G+</h1>
         </div>
         <h3>密码找回</h3>
 
-        <form class="m-t" role="form" action="/mgr/login.cs" method="post">
+        <form class="form-horizontal m-t" role="form" method="post">
             <div class="form-group">
-                <input type="text" class="form-control" name="account" placeholder="用户名" required="">
+                <label class="col-sm-4 control-label">手机号：</label>
+                <div class="col-sm-4">
+                    <input id="mobile" name="mobile" minlength="11" type="text" class="form-control" required
+                           aria-required="true">
+                </div>
+                <di class="col-sm-1" id="get_validate_code_div">
+                    <input type="button" id="get＿validate_code" value="获取验证码"/>
+                </di>
+                <di class="col-lg-1" id="timer_div" style="display:none;">
+                    <input type="text" id="timer" readonly/>
+                </di>
             </div>
             <div class="form-group">
-                <input type="password" class="form-control" name="pwd" placeholder="密码" required="">
+                <label class="col-sm-4 control-label">验证码：</label>
+                <div class="col-sm-4">
+                    <input id="code" type="text" class="form-control" name="code" required aria-required="true">
+                </div>
             </div>
-            <button type="submit" class="btn btn-primary block full-width m-b">登 录</button>
-            <p class="text-muted text-center">
-                <a href="login.html#">
-                    <small>忘记密码了？</small>
-                </a>
-            </p>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">密码：</label>
+                <div class="col-sm-4">
+                    <input type="password" class="form-control" id="pwd" name="pwd" placeholder="密码" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">确认密码：</label>
+                <div class="col-sm-4">
+                    <input type="password" class="form-control" id="repeat_pwd" name="repeat_pwd" placeholder="密码"
+                           required>
+                </div>
+            </div>
+            <input type="hidden" id="action" name="action" value="${action}"/>
+            <button type="button" id="submit" class="btn btn-primary m-b center-block">登 录</button>
         </form>
     </div>
 </div>
@@ -56,7 +78,79 @@
 <!-- 全局js -->
 <script src="/res/js/jquery.min.js"></script>
 <script src="/res/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    $("#get＿validate_code").click(function () {
+        var mobile = $("#mobile").val();
+        if (!validateMobile(mobile)) {
+            alert("手机号必须正确填写");
+        } else {
+//            $("#get_validate_code_div").hide();
+//            $("#timer_div").show();
+//            startTime(60);
 
+            var action = $("#action").val();
+            $.post("/mgr/pwd_reminder.cs", {"action": action, "mobile": mobile}, function (data) {
+                if (data == false) {
+                    alert("手机号未被使用，请填写正确的手机号");
+                }
+            });
+        }
+    });
+
+    $("#submit").click(function () {
+        var pwd = $("#pwd").val().trim();
+        var repeat_pwd = $("#repeat_pwd").val().trim();
+        var mobile = $("#mobile").val();
+        var code = $("#code").val();
+
+        if (!validateMobile(mobile)) {
+            alert("手机号必须正确填写");
+            return;
+        }
+
+        if (!validateCode(code)) {
+            alert("验证码必须正确填写");
+            return;
+        }
+
+        if (pwd == '' || repeat_pwd == '') {
+            alert("密码中存在空值");
+        } else if (pwd != repeat_pwd) {
+            alert("两次密码不一致");
+        } else {
+            var action = $("#action").val();
+            $.post("/mgr/retrieval_pwd.cs", {
+                "mobile": mobile,
+                "pwd": pwd,
+                "action": action,
+                "code": code
+            }, function (data) {
+                alert(data);
+            });
+        }
+    });
+
+    function startTime(total) {
+        if (total > 0) {
+            $("#timer").val(total);
+            total--;
+            setTimeout('startTime(' + total + ')', 1000);
+        } else {
+            $("#get_validate_code_div").show();
+            $("#timer_div").hide();
+        }
+    }
+
+    function validateMobile(mobile) {
+        var reg = /^1[0-9]{10}$/; //验证规则
+        return reg.test(mobile); //true
+    }
+
+    function validateCode(code) {
+        var reg = /^[0-9]{6}$/; //验证规则
+        return reg.test(code); //true
+    }
+</script>
 <!--统计代码，可删除-->
 </body>
 

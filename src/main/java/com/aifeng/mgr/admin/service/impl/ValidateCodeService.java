@@ -19,6 +19,13 @@ public class ValidateCodeService extends BaseService<ValidateCode> implements IV
         return validateCodeDao.getByMobileAndCode(mobile, code);
     }
 
+    @Transactional
+    public ValidateCode create(String mobile, String code) {
+        String sql = " and mobile = '" + mobile + "'";
+        this.validateCodeDao.deleteByWhere(sql);
+        ValidateCode validateCode = new ValidateCode(mobile, code);
+        return this.validateCodeDao.insert(validateCode);
+    }
 
 
 }

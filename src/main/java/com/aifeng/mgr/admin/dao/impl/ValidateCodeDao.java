@@ -15,6 +15,7 @@ public class ValidateCodeDao extends BaseDao<ValidateCode> implements IValidateC
     public ValidateCode getByMobileAndCode(String mobile, String code) {
         Map<String, Object> map = new HashMap<>();
         map.put("mobile", mobile);
+        map.put("code", code);
         String sql = "from ValidateCode where mobile =:mobile and code =:code";
         return this.findOneByHql(sql, map);
     }

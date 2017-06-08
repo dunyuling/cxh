@@ -266,11 +266,10 @@ public class LoginCtl extends BaseCtl {
             map = agentService.getByMobile(mobile);
         }
 
-        boolean exist = map == null;
+        boolean exist = map != null;
         if (exist) {
             String code = Util.generateValidateCode();
-            ValidateCode validateCode = new ValidateCode(mobile, code);
-            validateCodeService.add(validateCode);
+            validateCodeService.create(mobile, code);
 
             AuxiliaryInformation auxiliaryInformation = auxiliaryInformationService.getOrMockFirst();
             PwdReminderUtil.send(auxiliaryInformation, getRole(action), (String) map.get("name"), code, mobile);
@@ -278,7 +277,7 @@ public class LoginCtl extends BaseCtl {
         return exist;
     }
 
-    @RequestMapping("pwd_reminder")
+    @RequestMapping(value = "retrieval_pwd", produces = "application/text;charset=utf8;")
     @ResponseBody
     public String retrievalPwd(String mobile, String action, String pwd, String code) {
         String result = "";
@@ -286,7 +285,6 @@ public class LoginCtl extends BaseCtl {
         if (validateCode != null) {
             if (System.currentTimeMillis() - validateCode.getCreateDate().getTime() > 10 * 60 * 1000) {
                 result = "验证码已过期，请重新获取";
-                validateCodeService.delete(validateCode);
             } else {
                 Map<String, Object> map = null;
                 if (action.equals("admin") || action.equals("customerservice")) {
@@ -300,6 +298,7 @@ public class LoginCtl extends BaseCtl {
                 }
                 result = "修改密码成功,请重新登录";
             }
+            validateCodeService.delete(validateCode);
         }
         return result;
     }

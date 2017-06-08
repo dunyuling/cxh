@@ -15,7 +15,14 @@ import javax.servlet.http.HttpSession;
  * @date: 2016年10月3日 上午12:28:30
  */
 public class SessionInterceptor extends HandlerInterceptorAdapter {
-    private String[] excludes;// 不使用过滤器的部分，可以不登录使用的内容，需要在spring-mvc中进行配置
+    private String[] excludes = new String[]{"wx",
+            "front",
+            "login.cs",
+            "customerserviceLogin.cs",
+            "agentLogin.cs",
+            "to_pwd_reminder.cs",
+            "pwd_reminder.cs",
+            "retrieval_pwd.cs"};
     private Logger log = Logger.getLogger(SessionInterceptor.class);
 
     @Override
@@ -29,29 +36,15 @@ public class SessionInterceptor extends HandlerInterceptorAdapter {
             response.sendRedirect(contextPath + "/mgr/main.cs");
         }*/
 
-        //非后台
-        if (url.contains("wx") || url.contains("front")) {
-            return super.preHandle(request, response, handler);
-        }
-
         HttpSession session = request.getSession();
-        //后台管理员，客服，代理商
-        if (url.contains("login.cs") || url.contains("customerserviceLogin.cs") || url.contains("agentLogin.cs")) {
-            return super.preHandle(request, response, handler);
+        for (String exclude : excludes) {
+            if (url.contains(exclude)) { // 不过滤内容
+                return super.preHandle(request, response, handler);
+            }
         }
 
         Object objUser = session.getAttribute(Constants.SESSION_USER);
         if (objUser == null) {// 未登录，或者登录超时
-            if (excludes != null) {
-                for (String exclude : excludes) {
-                    if (url.startsWith(contextPath + exclude)) { // 不过滤内容
-                        return true;
-                    } else {
-                        continue;
-                    }
-                } // 需要登陆的跳转
-            }
-
             if (referer == null) {
                 response.sendRedirect(url.contains("agent") ? contextPath + "/agent_login.jsp" : (url.contains("customerservice") ? contextPath + "/customerservice_login.jsp" : contextPath + "/login.jsp"));
             } else {

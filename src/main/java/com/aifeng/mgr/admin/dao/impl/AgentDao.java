@@ -64,7 +64,7 @@ public class AgentDao extends BaseDao<Agent> implements IAgentDao {
     }
 
     public Map<String, Object> getByMobile(String mobile) {
-        String sql = "select mobile from agent where mobile = '" + mobile + "'";
+        String sql = "select mobile ,name,id from agent where mobile = '" + mobile + "'";
         List<Map<String, Object>> list = this.findBySql(sql);
         return list.isEmpty() ? null : list.get(0);
     }
