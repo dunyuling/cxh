@@ -70,18 +70,15 @@
 
     // 删除事件
     function del() {
-//	    alert("del");
         var ids = [];
         var param_id = '';
 
         $($('#' + "${tableId}").bootstrapTable('getSelections')).each(function () {
-//			ids.push(this.id);
             param_id += this.id + ',';
         });
 
         if (param_id.length == 0) return;
         param_id = param_id.substr(0, param_id.length - 1);
-//        alert("param_id: " + param_id);
 
         $.confirm("确定删除吗？ ", function () {
             $.post('del.cs?id=' + param_id,
@@ -118,12 +115,8 @@
         });
     }
 
-    function audit() {
+    function auditProxyAddress() {
         var data = getSelectedRow("${tableId}");
-        /*$.each( data, function( key, value ) {
-         alert( key + ": " + value );
-         });*/
-
         if (null == data) {
             return;
         }
@@ -139,7 +132,7 @@
         }
     }
 
-    function audit1() {
+    function auditMember() {
         var data = getSelectedRow("${tableId}");
         if (null == data) {
             return;
@@ -156,29 +149,64 @@
         }
     }
 
+    function auditCancel() {
+        var data = getSelectedRow("${tableId}");
+        if (null == data) {
+            return;
+        }
+        if (data.status == 'WAITING') {
+            $.openDlg({
+                url: 'transfer.cs?action=auditCancel&id=' + data.id,
+                title: '取消授权' + "${title}",
+                width: '${width}',
+                height: '${height}'
+            });
+        } else {
+            alert("只有等待中的会员才需要审核！")
+        }
+    }
+
     function recharge() {
-//        alert("recharge");
         var data = getSelectedRow("${tableId}");
         if (null == data) return;
-        $.openDlg({
+
+
+        $.confirm("确定充值吗？ ", function () {
+            $.openDlg({
+                url: 'transfer.cs?action=recharge&id=' + data.id,
+                title: '充值' + "${title}",
+                width: '${width}',
+                height: '${height}'
+            });
+        });
+
+        /*$.openDlg({
             url: 'transfer.cs?action=recharge&id=' + data.id,
             title: '充值' + "${title}",
             width: '${width}',
             height: '${height}'
-        });
+        });*/
     }
 
     function refund() {
-//        alert("refund");
         var data = getSelectedRow("${tableId}");
         if (null == data) return;
 
-        $.openDlg({
+        $.confirm("确定退费吗？ ", function () {
+            $.openDlg({
+                url: 'transfer.cs?action=refund&id=' + data.id,
+                title: '退费' + "${title}",
+                width: '${width}',
+                height: '${height}'
+            });
+        });
+
+        /*$.openDlg({
             url: 'transfer.cs?action=refund&id=' + data.id,
             title: '退费' + "${title}",
             width: '${width}',
             height: '${height}'
-        });
+        });*/
     }
 
     function solve() {

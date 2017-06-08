@@ -76,6 +76,16 @@ public class ProxyAddressService extends BaseService<ProxyAddress> implements IP
     }
 
     @Transactional
+    public List<Map<String, Object>> getAgentPagerProxyAddress(long agent_id, int page, int size) {
+        return proxyAddressDao.getAgentProxyAddress(agent_id, page, size);
+    }
+
+    @Transactional
+    public long getAgentCount(long agent_id) {
+        return proxyAddressDao.getAgentCount(agent_id);
+    }
+
+    @Transactional
     public synchronized void auditProxyAddress(long id, String province, String city, String area, String proxyStatus, String denyReason) {
         ProxyAddress proxyAddress = proxyAddressDao.findById(id);
         if (proxyAddress.getProxyStatus() == ProxyStatus.APPLYING) {

@@ -14,14 +14,12 @@
 
 <body class="gray-bg">
 <div class="wrapper wrapper-content animated fadeInRight">
-    <!--           <div class="ibox " style=""> -->
-    <!--               <div class="ibox-content"> -->
     <div class="row row-lg">
         <div class="col-sm-12">
-            <c:if test="${role != null && role != '客服'}">
+            <c:if test="${role != null && role == '管理员'}">
                 <cs:toolbar title="代理地区管理" tableId="tab_proxyaddress" width="100%" height="100%" menuCode="23"
-                            hdMenu="7">
-                    <button class="btn btn-sm btn-info" type="button" onclick="audit()"><i class="fa fa-info"></i>&nbsp;审核
+                            hdMenu="15">
+                    <button class="btn btn-sm btn-info" type="button" onclick="auditProxyAddress()"><i class="fa fa-info"></i>&nbsp;审核
                     </button>
                 </cs:toolbar>
             </c:if>
@@ -56,8 +54,6 @@
             </table>
         </div>
     </div>
-    <!--               </div> -->
-    <!--           </div> -->
 </div>
 </body>
 

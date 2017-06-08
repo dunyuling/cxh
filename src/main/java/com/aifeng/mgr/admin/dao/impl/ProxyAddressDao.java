@@ -43,6 +43,27 @@ public class ProxyAddressDao extends BaseDao<ProxyAddress> implements IProxyAddr
         return this.findBySql(sql);
     }
 
+    public List<Map<String, Object>> getAgentProxyAddress(long agent_id, int page, int pageSize) {
+        String sql = "select pa.id, ag.name,  a.province ,a.city, a.area,pa.proxyStatus,pa.createDate,pa.updateDate from proxy_address pa " +
+                "left join address_fee af on pa.af_id = af.id " +
+                "left join address a on af.address_id = a.id " +
+                "left join agent ag on pa.agent_id = ag.id " +
+                "where ag.id = " + agent_id +
+                " order by pa.createDate desc " +
+                "limit " + pageSize + " offset " + (page - 1) * pageSize + ";";
+        return this.findBySql(sql);
+    }
+
+    public int getAgentCount(long agent_id) {
+        String sql = "select count(pa.id) as count from proxy_address pa " +
+                "left join address_fee af on pa.af_id = af.id " +
+                "left join address a on af.address_id = a.id " +
+                "left join agent ag on pa.agent_id = ag.id " +
+                "where ag.id = " + agent_id;
+        return Integer.parseInt(this.findBySql(sql).get(0).get("count").toString());
+    }
+
+
     public Map<String, Object> getSingleProxyAddress(long id) {
         String sql = "select pa.id, ag.name,  a.province ,a.city, a.area,pa.proxyStatus, " +
                 "ag.mobile,ag.IDCard,ag.corpName,ag.licenseImg,ag.expireDate from proxy_address pa " +

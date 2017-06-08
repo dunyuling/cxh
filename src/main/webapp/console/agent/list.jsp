@@ -17,7 +17,11 @@
     <div class="row row-lg">
         <div class="col-sm-12">
             <c:if test="${role != null && role != '客服'}">
-                <cs:toolbar title="代理商管理" tableId="tab_agent" width="768px" height="420px" menuCode="22" hdMenu="3">
+                <cs:toolbar title="代理商管理" tableId="tab_agent" width="768px" height="420px" menuCode="22" hdMenu="15">
+                    <button class="btn btn-sm btn-warning" type="button" onclick="edit()"><i
+                            class="fa fa-pencil-square-o"></i> 编辑
+                    </button>
+                    <button class="btn btn-sm btn-danger" type="button" onclick="auditCancel()"><i class="fa fa-minus"></i>取消授权</button>
                     <button class="btn btn-sm btn-warning" type="button" onclick="recharge()"><i class="fa fa-plus"></i>
                         充值
                     </button>

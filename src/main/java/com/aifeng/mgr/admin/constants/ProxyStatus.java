@@ -5,7 +5,7 @@ package com.aifeng.mgr.admin.constants;
  */
 public enum ProxyStatus {
 
-    APPLYING("申请中"), AUTHORED("已授权"), EXPIRED("已过期") , REFUSED("被拒绝");
+    APPLYING("申请中"), AUTHORED("已授权"), EXPIRED("已过期") , REFUSED("被拒绝"),CANCELD("被取消授权");
 
     private String ps;
 

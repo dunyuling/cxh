@@ -1,6 +1,9 @@
 package com.aifeng.mgr.admin.ctl;
 
+import com.aifeng.constants.Constants;
 import com.aifeng.core.ctl.BaseCtl;
+import com.aifeng.mgr.admin.model.Admin;
+import com.aifeng.mgr.admin.model.Agent;
 import com.aifeng.mgr.admin.service.impl.AdminService;
 import com.aifeng.mgr.admin.service.impl.ProxyAddressService;
 import com.aifeng.util.StringUtil;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -41,8 +45,17 @@ public class ProxyAddressCtl extends BaseCtl {
     @RequestMapping(value = "/list2", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
     @ResponseBody
     public String list2(int page, int pageSize) {
-        List<Map<String, Object>> list = proxyAddressService.getPagerProxyAddress(page, pageSize);
-        long total = proxyAddressService.getTotal();
+        Object object = this.get(Constants.SESSION_USER);
+        List<Map<String, Object>> list = new ArrayList<>();
+        long total = 0;
+        if (object instanceof Admin) {
+            list = proxyAddressService.getPagerProxyAddress(page, pageSize);
+            total = proxyAddressService.getTotal();
+        } else {
+            Agent agent = (Agent) object;
+            list = proxyAddressService.getAgentPagerProxyAddress(agent.getId(), page, pageSize);
+            total = proxyAddressService.getAgentCount(agent.getId());
+        }
         JSONObject json = new JSONObject();
         json.put("rows", list);
         json.put("total", total);
