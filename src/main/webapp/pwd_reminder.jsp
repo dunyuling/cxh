@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -71,6 +72,27 @@
             </div>
             <input type="hidden" id="action" name="action" value="${action}"/>
             <button type="button" id="submit" class="btn btn-primary m-b center-block">确 定</button>
+            <c:if test="${action == 'admin'}">
+                <p class="text-muted text-center">
+                    <a href="/mgr/toLogin.cs">
+                        <small>重新登录？</small>
+                    </a>
+                </p>
+            </c:if>
+            <c:if test="${action == 'agent'}">
+                <p class="text-muted text-center">
+                    <a href="/mgr/agent2Login.cs">
+                        <small>重新登录？</small>
+                    </a>
+                </p>
+            </c:if>
+            <c:if test="${action == 'customerservice'}">
+                <p class="text-muted text-center">
+                    <a href="/mgr/customerservice2Login.cs">
+                        <small>重新登录？</small>
+                    </a>
+                </p>
+            </c:if>
         </form>
     </div>
 </div>

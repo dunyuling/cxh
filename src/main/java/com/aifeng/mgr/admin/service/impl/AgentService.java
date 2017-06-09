@@ -71,7 +71,6 @@ public class AgentService extends BaseService<Agent> implements IAgentService {
             return map;
         }
 
-
         agent = new Agent();
         agent.setName(name);
         agent.setMobile(mobile);

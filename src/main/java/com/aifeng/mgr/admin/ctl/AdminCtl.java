@@ -57,9 +57,10 @@ public class AdminCtl extends BaseCtl {
     public String addCustomerService(String name, String pwd, String province, String phone, int sex) {
         try {
             boolean added = adminService.addCustomerService(name, pwd, province, phone, sex);
-            if (!added) return "您添加的地区中已有客服，请选择别的地区";
+            if (!added) return "省份或者手机有重复";
         } catch (Exception e) {
             e.printStackTrace();
+            return "省份或者手机有重复";
         }
         return AJAX_SUCCESS;
     }

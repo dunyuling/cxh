@@ -20,14 +20,14 @@
                     <div class="col-sm-6">
                         <input id="id" name="id" value="${address.id }" class="form-control" type="hidden">
                         <input id="province" name="province" value="${address.province }" class="form-control"
-                               validate="{required:true}" validateMessage="{required:'请输入省'}">
+                               validate="{required:true}" validateMessage="{required:'请输入省'}" readonly>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-3 control-label">市：</label>
                     <div class="col-sm-6">
                         <input id="city" name="city" value="${address.city }" class="form-control"
-                               validate="{required:true}" validateMessage="{required:'请输入市'}">
+                               validate="{required:true}" validateMessage="{required:'请输入市'}" readonly>
                     </div>
                 </div>
 
@@ -35,7 +35,7 @@
                     <label class="col-sm-3 control-label">县/区：</label>
                     <div class="col-sm-6">
                         <input id="area" name="area" value="${address.area }" class="form-control"
-                               validate="{required:true}" validateMessage="{required:'请输入县/区'}">
+                               validate="{required:true}" validateMessage="{required:'请输入县/区'}" readonly>
                     </div>
                 </div>
 

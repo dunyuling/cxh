@@ -34,7 +34,10 @@
                         <span><img alt="image" class="img-circle" src="res/img/profile_small.jpg"/></span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <span class="clear">
-                               <span class="block m-t-xs"><strong class="font-bold">${user.name}</strong></span>
+                               <span class="block m-t-xs">
+                                   <strong class="font-bold">${user.name}</strong>
+                                   ${user.money}元
+                               </span>
                                 <span class="text-muted text-xs block">${roleName} <b class="caret"></b></span>
                                 </span>
                         </a>
@@ -59,7 +62,8 @@
                                 <c:forEach items="${permissions }" var="p2">
                                     <c:if test="${p2.pid == p.menu_id && p2.display }">
                                         <li>
-                                            <a class="J_menuItem" href="${p2.url}?menuCode=${p2.menu_code}&agentId=${user.id}"
+                                            <a class="J_menuItem"
+                                               href="${p2.url}?menuCode=${p2.menu_code}&agentId=${user.id}"
                                                code="${p2.menu_code }">${p2.menu_name }</a>
                                         </li>
                                     </c:if>

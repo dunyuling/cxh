@@ -18,7 +18,9 @@
 
         <div class="col-sm-12">
             <c:if test="${role != null && role != '客服'}">
-                <cs:toolbar title="地区费用管理" tableId="tab_addr" width="768px" height="420px" menuCode="21" hdMenu="1">
+                <cs:toolbar title="地区费用管理" tableId="tab_addr" width="768px" height="420px" menuCode="21" hdMenu="15">
+                    <button class="btn btn-sm btn-warning" type="button" onclick="edit()"><i class="fa fa-pencil-square-o"></i> 编辑
+                    </button>
                 </cs:toolbar>
             </c:if>
             <table id="tab_addr"

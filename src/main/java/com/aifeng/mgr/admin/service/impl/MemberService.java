@@ -66,7 +66,6 @@ public class MemberService extends BaseService<Member> implements IMemberService
         member.setUser_id(user_id);
         member.setUpdateDate(new Date());
 
-
         if (status1 == Status.SUCCESS) {
             toSendWxMsg(member);
         }

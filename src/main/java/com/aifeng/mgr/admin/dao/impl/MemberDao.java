@@ -140,11 +140,8 @@ public class MemberDao extends BaseDao<Member> implements IMemberDao {
 
     public Map<String, Object> getDetail(long member_id) {
         String sql = "select m.id, m.name,m.mobile,m.type, m.createDate,am.visit,m.type, addr.province,addr.city,addr.area ,am.visitDate from agent_message am " +
-                "left join member m on am.member_id = m.id " +
-                /*"left join agent ag on am.agent_id = ag.id " +*/
-                "left join proxy_address pa on pa.agent_id = am.agent_id " +
-                "join address_fee af on pa.af_id = af.id " +
-                "join address addr on addr.id = af.address_id " +
+                "join member m on am.member_id = m.id " +
+                "join address addr on addr.id = m.address_id " +
                 "where m.id = '" + member_id + "'";
         return this.findBySql(sql).get(0);
     }

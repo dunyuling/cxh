@@ -20,7 +20,7 @@
         <div class="col-sm-12">
             <c:if test="${role != null && role != '客服'}">
                 <cs:toolbar title="代理商消息管理" tableId="tab_agentmessage" width="100%" height="100%" menuCode="26"
-                            hdMenu="7">
+                            hdMenu="15">
                     <button class="btn btn-sm btn-success" type="button" onclick="view()">
                         <input type="hidden" name="title1" value="回访记录"/>
                         <i class="fa fa-plus"></i>&nbsp;查看回访记录
