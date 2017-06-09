@@ -21,7 +21,7 @@ import java.util.Map;
  * Created by pro on 17-4-24.
  */
 @Service
-@Scope(value="singleton")
+@Scope(value = "singleton")
 public class AddressService extends BaseService<Address> implements IAddressService {
 
 
@@ -138,8 +138,13 @@ public class AddressService extends BaseService<Address> implements IAddressServ
     }
 
     @Transactional
-    public List<Map<String, Object>> getAddressFee(String province, String city, String area) {
-        return addressDao.getAddressFee(province, city, area);
+    public List<Map<String, Object>> getAddressFee(int page, int pageSize, String province, String city, String area) {
+        return addressDao.getAddressFee(page, pageSize, province, city, area);
+    }
+
+    @Transactional
+    public int getAddressFeeCount(String province, String city, String area) {
+        return addressDao.getAddressFeeCount(province, city, area);
     }
 
     @Transactional

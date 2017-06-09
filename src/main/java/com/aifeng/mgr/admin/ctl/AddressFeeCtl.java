@@ -54,15 +54,16 @@ public class AddressFeeCtl extends BaseCtl {
 
     @RequestMapping("query")
     public String query(String province, String city, String area, Model model) {
+        loadRole(adminService, model);
         model.addAttribute("province", province).addAttribute("city", city).addAttribute("area", area);
         return "console/addr/query";
     }
 
     @RequestMapping(value = "/query2", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public String query2(String province, String city, String area) {
-        List<Map<String, Object>> list = addressService.getAddressFee(province, city, area);
-        long total = list.size();
+    public String query2(int page, int pageSize, String province, String city, String area) {
+        List<Map<String, Object>> list = addressService.getAddressFee(page, pageSize, province, city, area);
+        long total = addressService.getAddressFeeCount(province, city, area);
         JSONObject json = new JSONObject();
         json.put("rows", list);
         json.put("total", total);

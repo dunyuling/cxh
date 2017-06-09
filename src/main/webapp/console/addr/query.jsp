@@ -16,8 +16,10 @@
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row row-lg">
         <div class="col-sm-12">
-            <cs:toolbar title="地区费用管理" tableId="tab_addr" width="768px" height="420px" menuCode="21" hdMenu="1">
-            </cs:toolbar>
+            <c:if test="${role != null && role != '客服'}">
+                <cs:toolbar title="地区费用管理" tableId="tab_addr" width="768px" height="420px" menuCode="21" hdMenu="1">
+                </cs:toolbar>
+            </c:if>
             <table id="tab_addr"
                    data-toggle="table"
                    data-url="/addr/query2.cs?province=${province}&city=${city}&area=${area}"

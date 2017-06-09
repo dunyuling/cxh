@@ -22,13 +22,23 @@ public class AddressDao extends BaseDao<Address> implements IAddressDao {
         return this.findBySql(str);
     }
 
-    public List<Map<String, Object>> getAddressFee(String province, String city, String area) {
+    public List<Map<String, Object>> getAddressFee(int page, int pageSize, String province, String city, String area) {
         String sql = "select a.id ,a.area,a.city,a.province ,af.amount from address a " +
                 "left join address_fee af on a.id = af.address_id  " +
                 "where a.active is true and a.province like '%" + province +
-                "%' and a.city like '%" + city + "%' and  a.area like '%" + area + "%'";
+                "%' and a.city like '%" + city + "%' and  a.area like '%" + area + "%'" +
+                " limit " + pageSize + " offset " + (page - 1) * pageSize + ";";
         System.out.println("sql: " + sql);
         return this.findBySql(sql);
+    }
+
+    public int getAddressFeeCount(String province, String city, String area) {
+        String sql = "select count(a.id) as count from address a " +
+                "left join address_fee af on a.id = af.address_id  " +
+                "where a.active is true and a.province like '%" + province +
+                "%' and a.city like '%" + city + "%' and  a.area like '%" + area + "%'";
+        List<Map<String, Object>> list = this.findBySql(sql);
+        return list.isEmpty() ? 0 : Integer.parseInt(list.get(0).get("count").toString());
     }
 
     public long getAddressId(String province, String city, String area) {
