@@ -123,7 +123,7 @@ public class AdminService extends BaseService<Admin> implements IAdminService {
     public boolean addCustomerService(String name, String pwd, String province, String phone, int sex) {
         synchronized (lock) {
             getUsedProvinces().forEach(map -> {
-                    checkProvinceUsed(map, province);
+                checkProvinceUsed(map, province);
             });
 
             if (!provincesUsed) {
@@ -180,9 +180,9 @@ public class AdminService extends BaseService<Admin> implements IAdminService {
     }
 
     @Transactional
-    private String generateCode() {
-        long total = getTotal() + 1;
-        return total < 10 ? "00000" + total : "0000" + total;
+    public String generateCode() {
+        long current = adminDao.getLastCs() + 1;
+        return current < 10 ? "00000" + current : "0000" + current;
     }
 
     @Transactional

@@ -65,4 +65,11 @@ public class AdminDao extends BaseDao<Admin> implements IAdminDao {
         List<Map<String, Object>> list = this.findBySql(sql);
         return list.isEmpty() ? null : list.get(0);
     }
+
+    public int getLastCs() {
+        String sql = "select tma.account from tb_mgr_admin tma where tma.account like '%cs%'";
+        List<Map<String, Object>> list = this.findBySql(sql);
+        return list.isEmpty() ? 0 : Integer.parseInt(list.get(list.size() - 1).get("account").toString().replace("cs", ""));
+    }
+
 }
