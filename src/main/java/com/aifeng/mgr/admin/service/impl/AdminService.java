@@ -123,7 +123,7 @@ public class AdminService extends BaseService<Admin> implements IAdminService {
     public boolean addCustomerService(String name, String pwd, String province, String phone, int sex) {
         synchronized (lock) {
             getUsedProvinces().forEach(map -> {
-                checkProvinceUsed(map, province);
+                    checkProvinceUsed(map, province);
             });
 
             if (!provincesUsed) {

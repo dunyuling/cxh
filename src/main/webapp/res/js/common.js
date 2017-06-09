@@ -119,7 +119,7 @@ $.fn.extend({
                     success: function (json) {
 
                         var index = parent.layer.getFrameIndex(window.name);
-        //            	parent.location.reload();
+                        //            	parent.location.reload();
 
                         $(parent.document.getElementsByTagName('table')).each(function () {
                             _id = $(this).attr('id');
@@ -129,8 +129,13 @@ $.fn.extend({
                         });
                         parent.layer.close(index);
                     },
-                    error: function () {
-                        alert('error');
+                    error: function (data) {
+                        var responseText = data.responseText;
+                        if (responseText == 'common/ajax_return') {
+                            alert("error");
+                        } else {
+                            alert(data.responseText);
+                        }
                     }
                 });
             }

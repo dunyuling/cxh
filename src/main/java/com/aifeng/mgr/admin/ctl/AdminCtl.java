@@ -1,7 +1,6 @@
 package com.aifeng.mgr.admin.ctl;
 
 import com.aifeng.core.ctl.BaseCtl;
-import com.aifeng.init_address.InitAddress;
 import com.aifeng.mgr.admin.service.impl.AdminService;
 import com.aifeng.util.StringUtil;
 import com.alibaba.fastjson.JSONObject;
@@ -53,12 +52,12 @@ public class AdminCtl extends BaseCtl {
         return "console/cs/" + action;
     }
 
-    @RequestMapping(value = "add", method = RequestMethod.POST)
+    @RequestMapping(value = "add", method = RequestMethod.POST, produces = "application/json;charset=utf8")
     @ResponseBody
     public String addCustomerService(String name, String pwd, String province, String phone, int sex) {
         try {
             boolean added = adminService.addCustomerService(name, pwd, province, phone, sex);
-            if (!added) return AJAX_RETURN;
+            if (!added) return "您添加的地区中已有客服，请选择别的地区";
         } catch (Exception e) {
             e.printStackTrace();
         }

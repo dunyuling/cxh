@@ -70,7 +70,7 @@
                 </div>
             </div>
             <input type="hidden" id="action" name="action" value="${action}"/>
-            <button type="button" id="submit" class="btn btn-primary m-b center-block">登 录</button>
+            <button type="button" id="submit" class="btn btn-primary m-b center-block">确 定</button>
         </form>
     </div>
 </div>
