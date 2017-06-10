@@ -72,6 +72,18 @@ public class MemberService extends BaseService<Member> implements IMemberService
     }
 
     @Transactional
+    public void error(long member_id, String status, String denyReason, long user_id) {
+        Member member = findById(member_id);
+        Status status1 = Status.valueOf(status);
+        member.setStatus(status1);
+        if (status1 == Status.FAILURE) {
+            member.setDenyReason(denyReason);
+        }
+        member.setUser_id(user_id);
+        member.setUpdateDate(new Date());
+    }
+
+    @Transactional
     private void toSendWxMsg(Member member) {
         AddressService addressService = SpringUtil.getBean("addressService");
         AddressFeeService addressFeeService = SpringUtil.getBean("addressFeeService");

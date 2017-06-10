@@ -5,7 +5,9 @@ package com.aifeng.mgr.admin.constants;
  */
 public enum Status {
 
-    WAITING("等待中"), SUCCESS("成功"), FAILURE("失败");
+    WAITING("等待中"), SUCCESS("成功"), FAILURE("失败"),
+
+    ERROR("错误");
 
     private String status;
 

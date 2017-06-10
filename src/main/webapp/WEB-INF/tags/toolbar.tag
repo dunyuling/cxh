@@ -237,6 +237,22 @@
         });
     }
 
+    function error() {
+        var data = getSelectedRow("${tableId}");
+        if (null == data) {
+            return;
+        }
+
+        $.post("/member/error.cs", {"id": data.id}, function (data) {
+            if (data.indexOf(200) != -1) {
+                alert("无效化成功");
+                $('#tab_member').bootstrapTable('refresh');
+            } else {
+                alert("无效化失败");
+            }
+        });
+    }
+
     function refresh() {
         var index = parent.layer.getFrameIndex(window.name);
         $(parent.document.getElementsByTagName('table')).each(function () {

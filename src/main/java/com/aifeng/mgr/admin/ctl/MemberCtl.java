@@ -2,8 +2,8 @@ package com.aifeng.mgr.admin.ctl;
 
 import com.aifeng.constants.Constants;
 import com.aifeng.core.ctl.BaseCtl;
+import com.aifeng.mgr.admin.constants.Status;
 import com.aifeng.mgr.admin.model.Admin;
-import com.aifeng.mgr.admin.service.impl.AdminService;
 import com.aifeng.mgr.admin.service.impl.MemberService;
 import com.aifeng.util.StringUtil;
 import com.alibaba.fastjson.JSONObject;
@@ -77,6 +77,18 @@ public class MemberCtl extends BaseCtl {
             System.out.println("---");
             Admin admin = (Admin) this.get(Constants.SESSION_USER);
             memberService.audit(id, status, denyReason, admin.getId());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return AJAX_SUCCESS;
+    }
+
+    @RequestMapping(value = "error", method = RequestMethod.POST)
+    @ResponseBody
+    public String error(long id) {
+        try {
+            Admin admin = (Admin) this.get(Constants.SESSION_USER);
+            memberService.error(id, Status.ERROR.toString(), "", admin.getId());
         } catch (Exception e) {
             e.printStackTrace();
         }

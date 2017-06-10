@@ -22,7 +22,7 @@
             <cs:toolbar title="会员管理" tableId="tab_member" width="768px" height="420px" menuCode="24" hdMenu="15">
                 <button class="btn btn-sm btn-info" type="button" onclick="auditMember()"><i class="fa fa-info"></i>&nbsp;审核
                 </button>
-                <button class="btn btn-sm btn-danger" type="button" onclick="del()"><i class="fa fa-minus"></i> 删除
+                <button class="btn btn-sm btn-danger" type="button" onclick="error()"><i class="fa fa-minus"></i> 无效
                 </button>
             </cs:toolbar>
             <table id="tab_member"
@@ -60,31 +60,6 @@
     </div>
 
     <script type="text/javascript">
-        /*function formatType(type) {
-         switch (type) {
-         case "IT_0":
-         return "交强险";
-         case "IT_1":
-         return "机动车辆损失险";
-         case "IT_2":
-         return "第三者责任险";
-         case "IT_3":
-         return "盗抢险";
-         case "IT_4":
-         return "车上人员责任险";
-         case "IT_5":
-         return "车身划痕损失险";
-         case "IT_6":
-         return "玻璃单独破碎险";
-         case "IT_7":
-         return "自燃损失险";
-         case "IT_8":
-         return "发动机特别损失险";
-         case "IT_9":
-         return "不计免赔率特约损失险";
-         }
-         }*/
-
         function formatStatus(status) {
             switch (status) {
                 case "WAITING":
@@ -93,9 +68,10 @@
                     return "成功";
                 case "FAILURE":
                     return "失败";
+                case "ERROR":
+                    return "错误";
             }
         }
-
     </script>
 </div>
 </body>
