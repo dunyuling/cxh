@@ -1,8 +1,6 @@
 package com.aifeng.init_address;
 
-import com.aifeng.mgr.admin.dao.impl.AgentDao;
-import com.aifeng.mgr.admin.model.Agent;
-import com.aifeng.mgr.admin.service.impl.AgentService;
+import com.aifeng.mgr.admin.service.impl.AddressService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -29,7 +27,7 @@ public class InitAddress {
                 "druid.xml",
                 "spring-config.xml",
 //                "spring-mvc.xml",
-                "spring-redis.xml"
+//                "spring-redis.xml"
 
         });
 //        AddressService addressService = classPathXmlApplicationContext.getBean(AddressService.class);
@@ -49,11 +47,17 @@ public class InitAddress {
 //        AgentService agentService = classPathXmlApplicationContext.getBean(AgentService.class);
 //        agentService.auditCancel(48);
 
-        AgentDao agentDao = classPathXmlApplicationContext.getBean(AgentDao.class);
-        Agent agent = agentDao.getActiveAgentByMobile("13818280352");
-        System.out.println(agent.getName() + " \t ==========");
+//        AgentDao agentDao = classPathXmlApplicationContext.getBean(AgentDao.class);
+//        Agent agent = agentDao.getActiveAgentByMobile("13818280352");
+//        System.out.println(agent.getName() + " \t ==========");
 
 
+        String[] province = {"广东省", "广东省", "海南省", "海南省", "甘肃省"};
+        String[] cities = {"东莞市", "中山市", "三沙市", "儋州市", "嘉峪关市"};
+        String[] areas = {"东莞市", "中山市", "三沙市", "儋州市", "嘉峪关市"};
+
+        AddressService addressService = classPathXmlApplicationContext.getBean(AddressService.class);
+        addressService.test(province, cities, areas);
     }
 
 

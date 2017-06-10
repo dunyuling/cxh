@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -163,5 +164,21 @@ public class AddressService extends BaseService<Address> implements IAddressServ
     @Transactional
     public List<Address> getAll() {
         return addressDao.getAllAddress();
+    }
+
+    String[] province = {"广东市", "广东市", "海南市", "海南市", "甘肃省"};
+    String[] cities = {"东莞市", "中山市", "三沙市", "儋州市", "嘉峪关市"};
+    String[] areas = {"东莞市", "中山市", "三沙市", "儋州市", "嘉峪关市"};
+
+    @Transactional
+    public void test(String[] province,String[] cities ,String[] areas ) {
+        for (int i = 0; i < 5; i++) {
+            Address address = new Address();
+            address.setProvince(province[i]);
+            address.setCity(cities[i]);
+            address.setArea(areas[i]);
+            address.setCreateDate(new Date());
+            addressDao.insert(address);
+        }
     }
 }
