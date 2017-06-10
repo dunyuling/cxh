@@ -51,6 +51,9 @@
                     <small>忘记密码了？</small>
                 </a>
             </p>
+            <p class="text-center">
+                <big>不推荐使用IE浏览器，请用Google或者火狐浏览器。</big>
+            </p>
         </form>
     </div>
 </div>

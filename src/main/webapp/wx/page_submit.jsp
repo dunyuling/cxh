@@ -18,6 +18,11 @@
     <div class="sub2">完善资料</div>
     <div class="sub3"></div>
 </div>
+<div class="page_header_info1">
+    <div class="sub_info1"><a href="#1"></a></div>
+    <div class="sub_info2">如果没有收到欢迎你关注“车险汇”，请退出身份验证等几分钟后重新点击身份验证提交信息。</div>
+    <div class="sub_info3"></div>
+</div>
 <div class="submit_main">
     <ul>
         <input type="hidden" id="access_token" value="${access_token}"/>
