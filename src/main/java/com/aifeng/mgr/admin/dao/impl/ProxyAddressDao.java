@@ -34,7 +34,7 @@ public class ProxyAddressDao extends BaseDao<ProxyAddress> implements IProxyAddr
     }
 
     public List<Map<String, Object>> getProxyAddress(int page, int pageSize) {
-        String sql = "select pa.id, ag.name,  a.province ,a.city, a.area,pa.proxyStatus,pa.createDate,pa.updateDate from proxy_address pa " +
+        String sql = "select pa.id, ag.name,ag.corpName,  a.province ,a.city, a.area,pa.proxyStatus,pa.createDate,pa.updateDate from proxy_address pa " +
                 "left join address_fee af on pa.af_id = af.id " +
                 "left join address a on af.address_id = a.id " +
                 "left join agent ag on pa.agent_id = ag.id " +
@@ -54,7 +54,7 @@ public class ProxyAddressDao extends BaseDao<ProxyAddress> implements IProxyAddr
     }
 
     public List<Map<String, Object>> getQueryProxyAddress(int page, int pageSize, String name) {
-        String sql = "select pa.id, ag.name,  a.province ,a.city, a.area,pa.proxyStatus,pa.createDate,pa.updateDate from proxy_address pa " +
+        String sql = "select pa.id, ag.name, ag.corpName, a.province ,a.city, a.area,pa.proxyStatus,pa.createDate,pa.updateDate from proxy_address pa " +
                 "left join address_fee af on pa.af_id = af.id " +
                 "left join address a on af.address_id = a.id " +
                 "left join agent ag on pa.agent_id = ag.id " +
@@ -74,7 +74,7 @@ public class ProxyAddressDao extends BaseDao<ProxyAddress> implements IProxyAddr
     }
 
     public List<Map<String, Object>> getAgentProxyAddress(long agent_id, int page, int pageSize) {
-        String sql = "select pa.id, ag.name,  a.province ,a.city, a.area,pa.proxyStatus,pa.createDate,pa.updateDate from proxy_address pa " +
+        String sql = "select pa.id, ag.name, ag.corpName, a.province ,a.city, a.area,pa.proxyStatus,pa.createDate,pa.updateDate from proxy_address pa " +
                 "left join address_fee af on pa.af_id = af.id " +
                 "left join address a on af.address_id = a.id " +
                 "left join agent ag on pa.agent_id = ag.id " +
@@ -94,7 +94,7 @@ public class ProxyAddressDao extends BaseDao<ProxyAddress> implements IProxyAddr
     }
 
     public List<Map<String, Object>> getAgentQueryProxyAddress(long agent_id, int page, int pageSize, String name) {
-        String sql = "select pa.id, ag.name,  a.province ,a.city, a.area,pa.proxyStatus,pa.createDate,pa.updateDate from proxy_address pa " +
+        String sql = "select pa.id, ag.name,ag.corpName,  a.province ,a.city, a.area,pa.proxyStatus,pa.createDate,pa.updateDate from proxy_address pa " +
                 "left join address_fee af on pa.af_id = af.id " +
                 "left join address a on af.address_id = a.id " +
                 "left join agent ag on pa.agent_id = ag.id " +
@@ -114,7 +114,7 @@ public class ProxyAddressDao extends BaseDao<ProxyAddress> implements IProxyAddr
     }
 
     public Map<String, Object> getSingleProxyAddress(long id) {
-        String sql = "select pa.id, ag.name,  a.province ,a.city, a.area,pa.proxyStatus, " +
+        String sql = "select pa.id, ag.name,ag.corpName,  a.province ,a.city, a.area,pa.proxyStatus, " +
                 "ag.mobile,ag.IDCard,ag.corpName,ag.licenseImg,ag.expireDate from proxy_address pa " +
                 "left join address_fee af on pa.af_id = af.id " +
                 "left join address a on af.address_id = a.id " +
@@ -131,9 +131,3 @@ public class ProxyAddressDao extends BaseDao<ProxyAddress> implements IProxyAddr
         this.sqlUpdate(sql, null);
     }
 }
-/*
-select pa.id, ag.name,  a.province ,a.city, a.area,pa.proxyStatus from proxy_address pa
-        left join address_fee af on pa.af_id = af.id
-        left join address a on af.address_id = a.id
-        left join agent ag on pa.agent_id = ag.id
-        */

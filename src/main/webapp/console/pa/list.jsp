@@ -44,6 +44,7 @@
                     <th data-checkbox="true" data-click-to-select="true"></th>
                     <th data-field="id" data-visible="false"></th>
                     <th data-field="name">名字</th>
+                    <th data-field="corpName">公司名称</th>
                     <th data-field="province">省</th>
                     <th data-field="city">市</th>
                     <th data-field="area">区</th>

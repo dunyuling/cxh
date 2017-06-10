@@ -21,12 +21,12 @@ public class AdminDao extends BaseDao<Admin> implements IAdminDao {
     }
 
     public int getCustomerServiceTotal() {
-        String sql = "select count(tma.id) from tb_mgr_admin tma " +
+        String sql = "select count(tma.id) as count from tb_mgr_admin tma " +
                 "left join tb_mgr_user_role tmur on tmur.user_code = tma.code " +
                 "join tb_mgr_role tmr on tmur.role_code = tmr.code " +
                 "where tmr.name='客服';";
         System.out.println("sql1: " + sql);
-        return this.findBySql(sql).size();
+        return Integer.parseInt(this.findBySql(sql).get(0).get("count").toString());
     }
 
     public Map<String, Object> getSingleCustomerService(long id) {

@@ -15,9 +15,10 @@ import java.util.Map;
 public class ProblemDao extends BaseDao<Problem> implements IProblemDao {
 
     public List<Map<String, Object>> getProblems(int page, int pageSize) {
-        String str = "select p.id, p.title, p.description, tma.name as cs_name, a.name as a_name,p.solve,p.solution from problem p " +
+        String str = "select p.id, p.title, p.description, p.createDate, tma.name as cs_name, a.name as a_name,p.solve,p.solution from problem p " +
                 "left join tb_mgr_admin tma on tma.id= p.customerservice_id " +
                 "left join agent a on p.agent_id = a.id " +
+                "order by solve , createDate desc " +
                 "limit " + pageSize + " offset " + (page - 1) * pageSize + ";";
         return this.findBySql(str);
     }
@@ -26,6 +27,7 @@ public class ProblemDao extends BaseDao<Problem> implements IProblemDao {
         String str = "select p.id, p.title, p.description,p.solve,p.solution, tma.name from problem p " +
                 "join tb_mgr_admin tma on p.customerService_id = tma.id " +
                 "where p.customerService_id = '" + id + "'" +
+                "order by solve , createDate desc " +
                 "limit " + pageSize + " offset " + (page - 1) * pageSize + ";";
         return this.findBySql(str);
     }
@@ -41,6 +43,7 @@ public class ProblemDao extends BaseDao<Problem> implements IProblemDao {
         String str = "select p.id, p.title, p.description,p.solve,p.solution, a.name from problem p " +
                 "join agent a on p.agent_id = a.id " +
                 "where p.agent_id = '" + id + "'" +
+                "order by solve , createDate desc " +
                 "limit " + pageSize + " offset " + (page - 1) * pageSize + ";";
         return this.findBySql(str);
     }

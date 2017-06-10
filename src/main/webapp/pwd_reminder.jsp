@@ -106,9 +106,9 @@
         if (!validateMobile(mobile)) {
             alert("手机号必须正确填写");
         } else {
-//            $("#get_validate_code_div").hide();
-//            $("#timer_div").show();
-//            startTime(60);
+            $("#get_validate_code_div").hide();
+            $("#timer_div").show();
+            startTime(60);
 
             var action = $("#action").val();
             $.post("/mgr/pwd_reminder.cs", {"action": action, "mobile": mobile}, function (data) {
