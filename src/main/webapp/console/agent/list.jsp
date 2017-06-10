@@ -29,6 +29,9 @@
                     <button class="btn btn-sm btn-warning" type="button" onclick="refund()"><i class="fa fa-plus"></i>
                         退费
                     </button>
+                    <button class="btn btn-sm btn-danger" type="button" onclick="auditCancelFee()"><i class="fa fa-minus"></i>
+                        取消授权退费
+                    </button>
                 </cs:toolbar>
             </c:if>
             <table id="tab_agent"

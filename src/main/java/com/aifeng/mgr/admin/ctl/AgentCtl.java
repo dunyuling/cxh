@@ -5,10 +5,7 @@ import com.aifeng.core.ctl.BaseCtl;
 import com.aifeng.mgr.admin.constants.ImgPath;
 import com.aifeng.mgr.admin.model.Admin;
 import com.aifeng.mgr.admin.model.Agent;
-import com.aifeng.mgr.admin.service.impl.AdminService;
-import com.aifeng.mgr.admin.service.impl.AgentService;
-import com.aifeng.mgr.admin.service.impl.RechargeService;
-import com.aifeng.mgr.admin.service.impl.RefundService;
+import com.aifeng.mgr.admin.service.impl.*;
 import com.aifeng.util.StringUtil;
 import com.aifeng.util.Util;
 import com.alibaba.fastjson.JSONObject;
@@ -35,13 +32,15 @@ public class AgentCtl extends BaseCtl {
     private final RechargeService rechargeService;
     private final RefundService refundService;
     private final AdminService adminService;
+    private final AuditCancelService auditCancelService;
 
     @Autowired
-    public AgentCtl(AgentService agentService, RechargeService rechargeService, RefundService refundService, AdminService adminService) {
+    public AgentCtl(AgentService agentService, RechargeService rechargeService, RefundService refundService, AdminService adminService, AuditCancelService auditCancelService) {
         this.agentService = agentService;
         this.rechargeService = rechargeService;
         this.refundService = refundService;
         this.adminService = adminService;
+        this.auditCancelService = auditCancelService;
     }
 
     @RequestMapping("list")
@@ -151,4 +150,17 @@ public class AgentCtl extends BaseCtl {
         }
         return AJAX_SUCCESS;
     }
+
+    @RequestMapping("auditCancelFee")
+    @ResponseBody
+    public String auditCancelFee(long id) {
+        try {
+            long operate_id = ((Admin) get(Constants.SESSION_USER)).getId();
+            auditCancelService.save(operate_id, id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return AJAX_SUCCESS;
+    }
+
 }

@@ -152,8 +152,29 @@
                 }
             });
         } else {
-            alert("只有已授权的会员才能取消授权！")
+            alert("只有已授权的会员才能取消授权！");
         }
+    }
+
+    function auditCancelFee() {
+        var data = getSelectedRow("${tableId}");
+        if (null == data) {
+            return;
+        }
+
+        if (data.active == false && data.money > 0) {
+            $.post("/agent/auditCancelFee.cs", {"id": data.id}, function (data) {
+                if (data.indexOf(200) != -1) {
+                    alert("退费成功");
+                    $('#tab_agent').bootstrapTable('refresh');
+                } else {
+                    alert("退费失败");
+                }
+            });
+        } else {
+            alert("只有取消授权的会员尚有余额才能被退费！")
+        }
+
     }
 
     function reAudit() {
