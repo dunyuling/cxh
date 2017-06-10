@@ -20,11 +20,13 @@ public class AuditCancelService extends BaseService<AuditCancel> implements IAud
 
     private final AuditCancelDao auditCancelDao;
     private final AgentService agentService;
+    private final MessageService messageService;
 
     @Autowired
-    public AuditCancelService(AuditCancelDao auditCancelDao, AgentService agentService) {
+    public AuditCancelService(AuditCancelDao auditCancelDao, AgentService agentService, MessageService messageService) {
         this.auditCancelDao = auditCancelDao;
         this.agentService = agentService;
+        this.messageService = messageService;
     }
 
     @Transactional
@@ -39,6 +41,9 @@ public class AuditCancelService extends BaseService<AuditCancel> implements IAud
 
         agent.setMoney(0);
         agentService.update(agent);
+
+        String content = "您与车险汇解除关系后，剩余的" + agent.getMoney() + " 元，已归还给您";
+        messageService.sendMsg(agent.getUserid(), content);
     }
 
     @Transactional

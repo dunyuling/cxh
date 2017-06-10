@@ -20,11 +20,13 @@ public class RechargeService extends BaseService<Recharge> implements IRechargeS
 
     private final RechargeDao rechargeDao;
     private final AgentService agentService;
+    private final MessageService messageService;
 
     @Autowired
-    public RechargeService(RechargeDao refundDao, AgentService agentService) {
+    public RechargeService(RechargeDao refundDao, AgentService agentService, MessageService messageService) {
         this.rechargeDao = refundDao;
         this.agentService = agentService;
+        this.messageService = messageService;
     }
 
     @Transactional
@@ -38,6 +40,9 @@ public class RechargeService extends BaseService<Recharge> implements IRechargeS
         Agent agent = agentService.findById(agent_id);
         agent.setMoney(agent.getMoney() + amount);
         agentService.update(agent);
+
+        String content = "为您成功充值： " + amount + " 元";
+        messageService.sendMsg(agent.getUserid(), content);
     }
 
     @Transactional

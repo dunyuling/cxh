@@ -20,11 +20,13 @@ public class RefundService extends BaseService<Refund> implements IRefundService
 
     private final RefundDao refundDao;
     private final AgentService agentService;
+    private final MessageService messageService;
 
     @Autowired
-    public RefundService(RefundDao refundDao, AgentService agentService) {
+    public RefundService(RefundDao refundDao, AgentService agentService, MessageService messageService) {
         this.refundDao = refundDao;
         this.agentService = agentService;
+        this.messageService = messageService;
     }
 
     @Transactional
@@ -38,6 +40,9 @@ public class RefundService extends BaseService<Refund> implements IRefundService
         Agent agent = agentService.findById(agent_id);
         agent.setMoney(agent.getMoney() + amount);
         agentService.update(agent);
+
+        String content = "为您成功退费： " + amount + " 元";
+        messageService.sendMsg(agent.getUserid(), content);
     }
 
     @Transactional
