@@ -53,6 +53,26 @@ public class ProxyAddressDao extends BaseDao<ProxyAddress> implements IProxyAddr
         return Integer.parseInt(this.findBySql(sql).get(0).get("count").toString());
     }
 
+    public List<Map<String, Object>> getQueryProxyAddress(int page, int pageSize, String name) {
+        String sql = "select pa.id, ag.name,  a.province ,a.city, a.area,pa.proxyStatus,pa.createDate,pa.updateDate from proxy_address pa " +
+                "left join address_fee af on pa.af_id = af.id " +
+                "left join address a on af.address_id = a.id " +
+                "left join agent ag on pa.agent_id = ag.id " +
+                "where pa.proxyStatus != '" + ProxyStatus.CANCELD + "' and name like '%" + name + "%'" +
+                "order by pa.createDate desc " +
+                "limit " + pageSize + " offset " + (page - 1) * pageSize + ";";
+        return this.findBySql(sql);
+    }
+
+    public int getQueryProxyAddressCount(String name) {
+        String sql = "select count(pa.id) as count from proxy_address pa " +
+                "left join address_fee af on pa.af_id = af.id " +
+                "left join address a on af.address_id = a.id " +
+                "left join agent ag on pa.agent_id = ag.id " +
+                "where pa.proxyStatus != '" + ProxyStatus.CANCELD + "' and name like '%" + name + "%'";
+        return Integer.parseInt(this.findBySql(sql).get(0).get("count").toString());
+    }
+
     public List<Map<String, Object>> getAgentProxyAddress(long agent_id, int page, int pageSize) {
         String sql = "select pa.id, ag.name,  a.province ,a.city, a.area,pa.proxyStatus,pa.createDate,pa.updateDate from proxy_address pa " +
                 "left join address_fee af on pa.af_id = af.id " +
@@ -70,6 +90,26 @@ public class ProxyAddressDao extends BaseDao<ProxyAddress> implements IProxyAddr
                 "left join address a on af.address_id = a.id " +
                 "left join agent ag on pa.agent_id = ag.id " +
                 "where ag.id = " + agent_id + " and pa.proxyStatus != '" + ProxyStatus.CANCELD + "'";
+        return Integer.parseInt(this.findBySql(sql).get(0).get("count").toString());
+    }
+
+    public List<Map<String, Object>> getAgentQueryProxyAddress(long agent_id, int page, int pageSize, String name) {
+        String sql = "select pa.id, ag.name,  a.province ,a.city, a.area,pa.proxyStatus,pa.createDate,pa.updateDate from proxy_address pa " +
+                "left join address_fee af on pa.af_id = af.id " +
+                "left join address a on af.address_id = a.id " +
+                "left join agent ag on pa.agent_id = ag.id " +
+                "where ag.id = " + agent_id + " and pa.proxyStatus != '" + ProxyStatus.CANCELD + "' and name like '%" + name + "%'" +
+                " order by pa.createDate desc " +
+                "limit " + pageSize + " offset " + (page - 1) * pageSize + ";";
+        return this.findBySql(sql);
+    }
+
+    public int getAgentQueryCount(long agent_id, String name) {
+        String sql = "select count(pa.id) as count from proxy_address pa " +
+                "left join address_fee af on pa.af_id = af.id " +
+                "left join address a on af.address_id = a.id " +
+                "left join agent ag on pa.agent_id = ag.id " +
+                "where ag.id = " + agent_id + " and pa.proxyStatus != '" + ProxyStatus.CANCELD + "' and name like '%" + name + "%'";
         return Integer.parseInt(this.findBySql(sql).get(0).get("count").toString());
     }
 

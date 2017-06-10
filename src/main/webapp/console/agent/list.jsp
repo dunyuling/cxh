@@ -86,7 +86,7 @@
         var mobile = $("#mobile").val();
         var IDCard = $("#IDCard").val();
 
-        if (mobile.trim() == "" || IDCard.trim() == "") {
+        if (mobile.trim() != "" || IDCard.trim() != "") {
             window.location.href = "/agent/query.cs?mobile=" + mobile + "&IDCard=" + IDCard;
         }
     });

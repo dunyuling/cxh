@@ -26,7 +26,7 @@
             </c:if>
             <table id="tab_proxyaddress"
                    data-toggle="table"
-                   data-url="/pa/list2.cs"
+                   data-url="/pa/query2.cs?name=${name}"
                    data-method="get"
                    data-click-to-select="true"
                    data-pagination="true"
@@ -88,4 +88,5 @@
         }
     });
 </script>
+
 </html>

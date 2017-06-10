@@ -62,6 +62,33 @@ public class ProxyAddressCtl extends BaseCtl {
         return JSONObject.toJSONString(json, features);
     }
 
+    @RequestMapping("query")
+    public String query(Model model,String name) {
+        loadRole(adminService, model);
+        model.addAttribute("name", name);
+        return "console/pa/query";
+    }
+
+    @RequestMapping(value = "/query2", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public String query2(int page, int pageSize, String name) {
+        Object object = this.get(Constants.SESSION_USER);
+        List<Map<String, Object>> list = new ArrayList<>();
+        long total = 0;
+        if (object instanceof Admin) {
+            list = proxyAddressService.getQueryProxyAddress(page, pageSize, name);
+            total = proxyAddressService.getQueryProxyAddressCount(name);
+        } else {
+            Agent agent = (Agent) object;
+            list = proxyAddressService.getAgentQueryPagerProxyAddress(agent.getId(), page, pageSize, name);
+            total = proxyAddressService.getAgentQueryCount(agent.getId(), name);
+        }
+        JSONObject json = new JSONObject();
+        json.put("rows", list);
+        json.put("total", total);
+        return JSONObject.toJSONString(json, features);
+    }
+
     @RequestMapping("transfer")
     public String transfer(String id, String action, ModelMap mm) {
         Map<String, Object> map;

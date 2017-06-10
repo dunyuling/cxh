@@ -71,13 +71,18 @@ public class ProxyAddressService extends BaseService<ProxyAddress> implements IP
     }
 
     @Transactional
-    public Map<String, Object> getProxyAddress(long id) {
-        return proxyAddressDao.getSingleProxyAddress(id);
+    public List<Map<String, Object>> getQueryProxyAddress(int page, int size, String name) {
+        return proxyAddressDao.getQueryProxyAddress(page, size, name);
     }
 
     @Transactional
-    public long getTotal() {
-        return proxyAddressDao.countAll();
+    public int getQueryProxyAddressCount(String name) {
+        return proxyAddressDao.getQueryProxyAddressCount(name);
+    }
+
+    @Transactional
+    public Map<String, Object> getProxyAddress(long id) {
+        return proxyAddressDao.getSingleProxyAddress(id);
     }
 
     @Transactional
@@ -88,6 +93,16 @@ public class ProxyAddressService extends BaseService<ProxyAddress> implements IP
     @Transactional
     public long getAgentCount(long agent_id) {
         return proxyAddressDao.getAgentCount(agent_id);
+    }
+
+    @Transactional
+    public List<Map<String, Object>> getAgentQueryPagerProxyAddress(long agent_id, int page, int size, String name) {
+        return proxyAddressDao.getAgentQueryProxyAddress(agent_id, page, size, name);
+    }
+
+    @Transactional
+    public long getAgentQueryCount(long agent_id, String name) {
+        return proxyAddressDao.getAgentQueryCount(agent_id, name);
     }
 
     @Transactional
