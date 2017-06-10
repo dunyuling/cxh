@@ -66,6 +66,11 @@ public class ProxyAddressService extends BaseService<ProxyAddress> implements IP
     }
 
     @Transactional
+    public int getProxyAddressCount() {
+        return proxyAddressDao.getProxyAddressCount();
+    }
+
+    @Transactional
     public Map<String, Object> getProxyAddress(long id) {
         return proxyAddressDao.getSingleProxyAddress(id);
     }
@@ -116,5 +121,10 @@ public class ProxyAddressService extends BaseService<ProxyAddress> implements IP
     public void delAgent(long id) {
         ProxyAddress proxyAddress = proxyAddressDao.findById(id);
         proxyAddressDao.delete(proxyAddress);
+    }
+
+    @Transactional
+    public void auditCancelPa(long agent_id) {
+        this.proxyAddressDao.auditCancelPa(agent_id);
     }
 }

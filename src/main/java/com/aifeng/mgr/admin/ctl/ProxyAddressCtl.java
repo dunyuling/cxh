@@ -50,7 +50,7 @@ public class ProxyAddressCtl extends BaseCtl {
         long total = 0;
         if (object instanceof Admin) {
             list = proxyAddressService.getPagerProxyAddress(page, pageSize);
-            total = proxyAddressService.getTotal();
+            total = proxyAddressService.getProxyAddressCount();
         } else {
             Agent agent = (Agent) object;
             list = proxyAddressService.getAgentPagerProxyAddress(agent.getId(), page, pageSize);

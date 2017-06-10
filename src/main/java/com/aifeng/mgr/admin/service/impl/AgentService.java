@@ -168,7 +168,7 @@ public class AgentService extends BaseService<Agent> implements IAgentService {
 
     @Transactional
     public Agent findByMobile(String mobile) {
-        Agent agent = agentDao.getAgentByMobile(mobile);
+        Agent agent = agentDao.getActiveAgentByMobile(mobile);
         return agent;
     }
 
@@ -213,5 +213,21 @@ public class AgentService extends BaseService<Agent> implements IAgentService {
     @Transactional
     public Map<String, Object> getByMobile(String mobile) {
         return agentDao.getByMobile(mobile);
+    }
+
+    @Transactional
+    public void auditCancel(long id) {
+        Agent agent = agentDao.findById(id);
+        agent.setActive(false);
+        update(agent);
+
+        proxyAddressService.auditCancelPa(id);
+    }
+
+    @Transactional
+    public void reAudit(long id) {
+        Agent agent = agentDao.findById(id);
+        agent.setActive(true);
+        update(agent);
     }
 }

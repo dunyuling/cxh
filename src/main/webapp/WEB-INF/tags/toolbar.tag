@@ -59,7 +59,6 @@
 
     // 新增事件
     function add() {
-//	    alert("add");
         $.openDlg({
             url: 'transfer.cs?action=add',
             title: '新增' + "${title}",
@@ -87,9 +86,7 @@
                 }
             );
         });
-
     }
-
 
     // 预览事件
     function edit() {
@@ -100,16 +97,6 @@
         $.openDlg({
             url: 'transfer.cs?action=edit&id=' + data.id,
             title: '编辑' + "${title}",
-            width: '${width}',
-            height: '${height}'
-        });
-    }
-
-    // 双击事件
-    function view_dbclick(id) {
-        $.openDlg({
-            url: 'transfer.cs?action=view&id=' + id,
-            title: '查看' + "${title}",
             width: '${width}',
             height: '${height}'
         });
@@ -145,7 +132,7 @@
                 height: '${height}'
             });
         } else {
-            alert("只有等待中的会员才需要审核！")
+            alert("只有'等待中'的会员才需要审核！")
         }
     }
 
@@ -154,22 +141,44 @@
         if (null == data) {
             return;
         }
-        if (data.status == 'WAITING') {
-            $.openDlg({
-                url: 'transfer.cs?action=auditCancel&id=' + data.id,
-                title: '取消授权' + "${title}",
-                width: '${width}',
-                height: '${height}'
+        if (data.active == true) {
+            $.post("/agent/auditCancel.cs", {"id": data.id}, function (data) {
+                if (data.indexOf(200) != -1) {
+                    alert("取消授权成功");
+//                    refresh();
+                    $('#tab_agent').bootstrapTable('refresh');
+                } else {
+                    alert("取消授权失败");
+                }
             });
         } else {
-            alert("只有等待中的会员才需要审核！")
+            alert("只有已授权的会员才能取消授权！")
+        }
+    }
+
+    function reAudit() {
+        var data = getSelectedRow("${tableId}");
+        if (null == data) {
+            return;
+        }
+        if (data.active == false) {
+            $.post("/agent/reAudit.cs", {"id": data.id}, function (data) {
+                if (data.indexOf(200) != -1) {
+                    alert("重新授权成功");
+//                    refresh();
+                    $('#tab_agent').bootstrapTable('refresh');
+                } else {
+                    alert("重新授权失败");
+                }
+            });
+        } else {
+            alert("只有取消授权的会员才能取消授权！")
         }
     }
 
     function recharge() {
         var data = getSelectedRow("${tableId}");
         if (null == data) return;
-
 
         $.confirm("确定充值吗？ ", function () {
             $.openDlg({
@@ -179,13 +188,6 @@
                 height: '${height}'
             });
         });
-
-        /*$.openDlg({
-            url: 'transfer.cs?action=recharge&id=' + data.id,
-            title: '充值' + "${title}",
-            width: '${width}',
-            height: '${height}'
-        });*/
     }
 
     function refund() {
@@ -200,13 +202,6 @@
                 height: '${height}'
             });
         });
-
-        /*$.openDlg({
-            url: 'transfer.cs?action=refund&id=' + data.id,
-            title: '退费' + "${title}",
-            width: '${width}',
-            height: '${height}'
-        });*/
     }
 
     function solve() {
@@ -219,5 +214,16 @@
             width: '${width}',
             height: '${height}'
         });
+    }
+
+    function refresh() {
+        var index = parent.layer.getFrameIndex(window.name);
+        $(parent.document.getElementsByTagName('table')).each(function () {
+            _id = $(this).attr('id');
+            if (_id != '' && _id != undefined) {
+                parent.reflush(_id);
+            }
+        });
+        parent.layer.close(index);
     }
 </script>

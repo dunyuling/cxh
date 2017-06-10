@@ -16,7 +16,7 @@ import java.util.Map;
 public class AgentDao extends BaseDao<Agent> implements IAgentDao {
 
     public List<Map<String, Object>> getAgents(int page, int pageSize) {
-        String str = "select a.id,a.name,a.userid,a.mobile,a.IDCard,a.corpName,a.licenseImg,a.expireDate,a.money from agent a " +
+        String str = "select a.id,a.name,a.userid,a.mobile,a.IDCard,a.corpName,a.licenseImg,a.expireDate,a.money,a.active from agent a " +
                 "order by a.id desc " +
                 "limit " + pageSize + " offset " + (page - 1) * pageSize + ";";
         return this.findBySql(str);
@@ -26,6 +26,14 @@ public class AgentDao extends BaseDao<Agent> implements IAgentDao {
         Map<String, Object> map = new HashMap<>();
         map.put("IDCard", IDCard);
         String sql = "from Agent where IDCard =:IDCard";
+        return this.findOneByHql(sql, map);
+    }
+
+    public Agent getActiveAgentByMobile(String mobile) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("mobile", mobile);
+        map.put("active", true);
+        String sql = "from Agent where mobile =:mobile and active =:active";
         return this.findOneByHql(sql, map);
     }
 
@@ -59,12 +67,12 @@ public class AgentDao extends BaseDao<Agent> implements IAgentDao {
                 " (select a.userid, sum(af.amount) as amount  from agent a " +
                 " right join proxy_address pa on a.id = pa.agent_id " +
                 " join address_fee af on pa.af_id = af.id group by a.userid) b" +
-                " on a.userid=b.userid where a.money < b.amount * 10";
+                " on a.userid=b.userid where a.money < b.amount * 10 and a.active is true";
         return this.findBySql(sql);
     }
 
     public Map<String, Object> getByMobile(String mobile) {
-        String sql = "select mobile ,name,id from agent where mobile = '" + mobile + "'";
+        String sql = "select mobile ,name,id from agent where mobile = '" + mobile + "' and active is true";
         List<Map<String, Object>> list = this.findBySql(sql);
         return list.isEmpty() ? null : list.get(0);
     }

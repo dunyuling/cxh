@@ -40,8 +40,11 @@ public class Agent {
 
     private Date createDate;
 
+    private boolean active = true;
+
     public Agent() {
         this.pwd = Md5.getMd5(Constants.agent_pwd);
+        this.active = true;
     }
 
     public long getId() {
@@ -130,5 +133,9 @@ public class Agent {
 
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

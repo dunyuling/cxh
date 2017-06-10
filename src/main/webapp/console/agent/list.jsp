@@ -18,10 +18,11 @@
         <div class="col-sm-12">
             <c:if test="${role != null && role != '客服'}">
                 <cs:toolbar title="代理商管理" tableId="tab_agent" width="768px" height="420px" menuCode="22" hdMenu="15">
-                    <button class="btn btn-sm btn-warning" type="button" onclick="edit()"><i
-                            class="fa fa-pencil-square-o"></i> 编辑
+                    <button class="btn btn-sm btn-warning" type="button" onclick="edit()">
+                        <i class="fa fa-pencil-square-o"></i> 编辑
                     </button>
                     <button class="btn btn-sm btn-danger" type="button" onclick="auditCancel()"><i class="fa fa-minus"></i>取消授权</button>
+                    <button class="btn btn-sm btn-success" type="button" onclick="reAudit()"><i class="fa fa-plus"></i>&nbsp;重新授权</button>
                     <button class="btn btn-sm btn-warning" type="button" onclick="recharge()"><i class="fa fa-plus"></i>
                         充值
                     </button>
@@ -50,6 +51,7 @@
                     <th data-checkbox="true" data-click-to-select="true"></th>
                     <th data-field="id" data-visible="false"></th>
                     <th data-field="name">名字</th>
+                    <th data-field="active" data-formatter="auditStatus">授权状态</th>
                     <th data-field="userid">userid</th>
                     <th data-field="mobile">电话</th>
                     <th data-field="IDCard">身份证号</th>

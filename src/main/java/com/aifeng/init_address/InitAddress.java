@@ -1,8 +1,8 @@
 package com.aifeng.init_address;
 
-import com.aifeng.mgr.admin.service.impl.AgentMessageService;
-import com.aifeng.mgr.admin.service.impl.VisitRecordService;
-import com.alibaba.fastjson.TypeReference;
+import com.aifeng.mgr.admin.dao.impl.AgentDao;
+import com.aifeng.mgr.admin.model.Agent;
+import com.aifeng.mgr.admin.service.impl.AgentService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -43,8 +43,16 @@ public class InitAddress {
 /*        VisitRecordService visitRecordService = classPathXmlApplicationContext.getBean(VisitRecordService.class);
         visitRecordService.visitRemind();*/
 
-        AgentMessageService agentMessageService = classPathXmlApplicationContext.getBean(AgentMessageService.class);
-        agentMessageService.repeatSend();
+//        AgentMessageService agentMessageService = classPathXmlApplicationContext.getBean(AgentMessageService.class);
+//        agentMessageService.repeatSend();
+
+//        AgentService agentService = classPathXmlApplicationContext.getBean(AgentService.class);
+//        agentService.auditCancel(48);
+
+        AgentDao agentDao = classPathXmlApplicationContext.getBean(AgentDao.class);
+        Agent agent = agentDao.getActiveAgentByMobile("13818280352");
+        System.out.println(agent.getName() + " \t ==========");
+
 
     }
 

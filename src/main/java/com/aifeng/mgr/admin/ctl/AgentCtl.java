@@ -130,4 +130,25 @@ public class AgentCtl extends BaseCtl {
         return AJAX_SUCCESS;
     }
 
+    @RequestMapping("auditCancel")
+    @ResponseBody
+    public String auditCancel(long id) {
+        try {
+            agentService.auditCancel(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return AJAX_SUCCESS;
+    }
+
+    @RequestMapping("reAudit")
+    @ResponseBody
+    public String reAudit(long id) {
+        try {
+            agentService.reAudit(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return AJAX_SUCCESS;
+    }
 }

@@ -61,5 +61,9 @@
     function solveFormatter(solve) {
         return solve == false ? "未解决" : "已解决";
     }
+
+    function auditStatus(active) {
+        return active == false ? "取消授权" : "已授权";
+    }
 </script>
 
