@@ -70,9 +70,10 @@ public class AdminCtl extends BaseCtl {
     public String edit(int id, String name, String pwd, String province, String phone, int sex) {
         try {
             boolean edit = adminService.editCustomerService(id, name, pwd, province, phone, sex);
-            if (!edit) return AJAX_RETURN;
+            if (!edit) return "省份或者手机有重复";;
         } catch (Exception e) {
             e.printStackTrace();
+            return "省份或者手机有重复";
         }
         return AJAX_SUCCESS;
     }

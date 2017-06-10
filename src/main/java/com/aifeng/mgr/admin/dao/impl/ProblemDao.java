@@ -24,10 +24,10 @@ public class ProblemDao extends BaseDao<Problem> implements IProblemDao {
     }
 
     public List<Map<String, Object>> getCsProblems(int id, int page, int pageSize) {
-        String str = "select p.id, p.title, p.description,p.solve,p.solution, tma.name from problem p " +
+            String str = "select p.id, p.title,p.createDate, p.description,p.solve,p.solution, tma.name from problem p " +
                 "join tb_mgr_admin tma on p.customerService_id = tma.id " +
                 "where p.customerService_id = '" + id + "'" +
-                "order by solve , createDate desc " +
+                " order by solve , createDate desc " +
                 "limit " + pageSize + " offset " + (page - 1) * pageSize + ";";
         return this.findBySql(str);
     }
@@ -40,10 +40,10 @@ public class ProblemDao extends BaseDao<Problem> implements IProblemDao {
     }
 
     public List<Map<String, Object>> getAgentProblems(long id, int page, int pageSize) {
-        String str = "select p.id, p.title, p.description,p.solve,p.solution, a.name from problem p " +
+        String str = "select p.id, p.title, p.createDate, p.description,p.solve,p.solution, a.name from problem p " +
                 "join agent a on p.agent_id = a.id " +
                 "where p.agent_id = '" + id + "'" +
-                "order by solve , createDate desc " +
+                " order by solve , createDate desc " +
                 "limit " + pageSize + " offset " + (page - 1) * pageSize + ";";
         return this.findBySql(str);
     }
