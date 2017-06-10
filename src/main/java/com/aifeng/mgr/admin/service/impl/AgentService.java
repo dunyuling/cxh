@@ -136,6 +136,16 @@ public class AgentService extends BaseService<Agent> implements IAgentService {
     }
 
     @Transactional
+    public List<Map<String, Object>> getPagerAgent(int page, int size, String mobile, String IDCard) {
+        return agentDao.getAgents(page, size, mobile, IDCard);
+    }
+
+    @Transactional
+    public long getQueryAgentCount(String mobile, String IDCard) {
+        return agentDao.getAgentsCount(mobile, IDCard);
+    }
+
+    @Transactional
     public void editAgent(long id, String name, String IDCard, String mobile, String corpName, String licenceImg, String expireDate) {
         //mobile 不能修改，在企业号后台已经通过短信方式验证
         //user_id 也不能修改

@@ -40,7 +40,7 @@
             </c:if>
             <table id="tab_agent"
                    data-toggle="table"
-                   data-url="/agent/list2.cs"
+                   data-url="/agent/query2.cs?mobile=${mobile}&IDCard=${IDCard}"
                    data-method="get"
                    data-click-to-select="true"
                    data-pagination="true"

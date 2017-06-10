@@ -22,6 +22,20 @@ public class AgentDao extends BaseDao<Agent> implements IAgentDao {
         return this.findBySql(str);
     }
 
+    public List<Map<String, Object>> getAgents(int page, int pageSize, String mobile, String IDCard) {
+        String str = "select a.id,a.name,a.userid,a.mobile,a.IDCard,a.corpName,a.licenseImg,a.expireDate,a.money,a.active from agent a " +
+                "where a.mobile like '%" + mobile + "%' and a.IDCard like '%" + IDCard + "%' " +
+                "order by a.id desc " +
+                "limit " + pageSize + " offset " + (page - 1) * pageSize + ";";
+        return this.findBySql(str);
+    }
+
+    public int getAgentsCount(String mobile, String IDCard) {
+        String str = "select count(a.id) as count from agent a " +
+                "where a.mobile like '%" + mobile + "%' and a.IDCard like '%" + IDCard + "%'";
+        return Integer.parseInt(this.findBySql(str).get(0).get("count").toString());
+    }
+
     public Agent getAgentByIDCard(String IDCard) {
         Map<String, Object> map = new HashMap<>();
         map.put("IDCard", IDCard);

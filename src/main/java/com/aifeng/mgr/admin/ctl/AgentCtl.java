@@ -60,6 +60,24 @@ public class AgentCtl extends BaseCtl {
         return JSONObject.toJSONString(json, features);
     }
 
+    @RequestMapping("query")
+    public String query(String mobile, String IDCard, Model model) {
+        loadRole(adminService, model);
+        model.addAttribute("mobile", mobile).addAttribute("IDCard", IDCard);
+        return "console/agent/query";
+    }
+
+    @RequestMapping(value = "/query2", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public String query2(int page, int pageSize, String mobile, String IDCard) {
+        List<Map<String, Object>> list = agentService.getPagerAgent(page, pageSize, mobile, IDCard);
+        long total = agentService.getQueryAgentCount(mobile, IDCard);
+        JSONObject json = new JSONObject();
+        json.put("rows", list);
+        json.put("total", total);
+        return JSONObject.toJSONString(json, features);
+    }
+
     @RequestMapping("transfer")
     public String transfer(String id, String action, ModelMap mm) {
         Agent agent;
