@@ -16,3 +16,4 @@ hs_err_pid*
 .gradle
 /logs
 resources/system.properties
+src/main/resources/system.properties
