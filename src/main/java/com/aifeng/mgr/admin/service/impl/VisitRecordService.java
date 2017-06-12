@@ -7,10 +7,6 @@ import com.aifeng.mgr.admin.dao.impl.VisitRecordDao;
 import com.aifeng.mgr.admin.model.VisitRecord;
 import com.aifeng.mgr.admin.service.IVisitRecordService;
 import com.aifeng.util.Util;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -69,25 +65,22 @@ public class VisitRecordService extends BaseService<VisitRecord> implements IVis
     }
 
 
-    String ids = "";
-    @Scheduled(initialDelay = 1000 * 60, fixedDelay = 1000 * 60 * 60 * 24)
+    private String ids = "";
+    @Scheduled(fixedDelay = 1000 * 60 * 60 * 24)
     public void visitRemind() {
+        ids = "";
         List<Map<String, Object>> list = visitRecordDao.getNeedRemindInThreeDays();
         list.forEach(m -> {
             try {
                 long id = Long.parseLong(m.get("id").toString());
                 ids += id + ",";
+                System.out.println("id: " + m.get("id") + "\t -----------++++++++");
+                messageService.sendMsg(m.get("userid").toString(), loadMsg(m));
             } catch (Exception e) {
                 e.printStackTrace();
             }
         });
         System.out.println("ids: " + ids);
-
-        for (Map<String, Object> m : list) {
-            System.out.println("id: " + m.get("id") + "\t -----------++++++++");
-            messageService.sendMsg(m.get("userid").toString(), loadMsg(m));
-        }
-
         if (!ids.isEmpty()) {
             ids = ids.substring(0, ids.lastIndexOf(","));
             String sql = "update visit_record vr set vr.remind = true where vr.id in (" + ids + ")";

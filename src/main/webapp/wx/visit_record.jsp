@@ -90,12 +90,15 @@
             var path = $("#path").val();
             var dateStr = $("#appDate").val();
 
-            var year = dateStr.substring(0, 4);
-            var month = dateStr.substring(4, 6);
-            var day = dateStr.substring(6, 8);
-            if (new Date(year, month, day) < new Date()) {
-                alert("提醒时间必须在今日之后");
-                return;
+            if (dateStr != '') {
+                var year = dateStr.substring(0, 4);
+                var month = dateStr.substring(4, 6);
+                var day = dateStr.substring(6, 8);
+
+                if (new Date(year, month, day) < new Date()) {
+                    alert("提醒时间必须在今日之后");
+                    return;
+                }
             }
 
             var situation = $("#situation").val();
