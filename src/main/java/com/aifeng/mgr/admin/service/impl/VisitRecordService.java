@@ -69,7 +69,7 @@ public class VisitRecordService extends BaseService<VisitRecord> implements IVis
     @Scheduled(fixedDelay = 1000 * 60 * 60 * 24)
     public void visitRemind() {
         ids = "";
-        List<Map<String, Object>> list = visitRecordDao.getNeedRemindInThreeDays();
+        List<Map<String, Object>> list = visitRecordDao.getNeedRemindInCurdate();
         list.forEach(m -> {
             try {
                 long id = Long.parseLong(m.get("id").toString());
