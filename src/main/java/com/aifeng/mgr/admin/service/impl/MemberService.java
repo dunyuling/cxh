@@ -17,21 +17,16 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by pro on 17-4-27.
- */
 @Service
 public class MemberService extends BaseService<Member> implements IMemberService {
 
     private final MemberDao memberDao;
     private final AddressService addressService;
-    private final AgentMessageService agentMessageService;
 
     @Autowired
-    public MemberService(MemberDao memberDao, AddressService addressService, AgentMessageService agentMessageService) {
+    public MemberService(MemberDao memberDao, AddressService addressService) {
         this.memberDao = memberDao;
         this.addressService = addressService;
-        this.agentMessageService = agentMessageService;
     }
 
     @Transactional
@@ -118,23 +113,13 @@ public class MemberService extends BaseService<Member> implements IMemberService
 
     @Transactional
     public List<Map<String, Object>> getPageMember(int page, int size, String addr) {
-        return memberDao.getMember(page, size, addr == null ? null : loadAddr(addr));
+        return memberDao.getMember(page, size, addr);
     }
 
     @Transactional
     public int getInitTotal(String addr) {
-        return memberDao.getInitCount(addr == null ? null : loadAddr(addr));
+        return memberDao.getInitCount(addr);
     }
-
-    private String loadAddr(String addr) {
-        String addrTemp = "";
-        for (String temp : addr.split(",")) {
-            addrTemp += "'" + temp + "',";
-        }
-        addrTemp = addrTemp.substring(0, addrTemp.lastIndexOf(","));
-        return addrTemp;
-    }
-
 
     @Transactional
     public Map<String, Object> getSingleMember(long id) {

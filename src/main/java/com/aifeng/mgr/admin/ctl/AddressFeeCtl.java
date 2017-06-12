@@ -1,11 +1,14 @@
 package com.aifeng.mgr.admin.ctl;
 
+import com.aifeng.constants.Constants;
 import com.aifeng.core.ctl.BaseCtl;
 import com.aifeng.mgr.admin.model.Address;
+import com.aifeng.mgr.admin.model.Admin;
 import com.aifeng.mgr.admin.service.impl.AddressFeeService;
 import com.aifeng.mgr.admin.service.impl.AddressService;
 import com.aifeng.mgr.admin.service.impl.AdminService;
 import com.aifeng.util.StringUtil;
+import com.aifeng.util.Util;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,12 +31,16 @@ public class AddressFeeCtl extends BaseCtl {
 
     Logger log = Logger.getLogger(AddressFeeCtl.class);
 
+    private final AddressService addressService;
+    private final AdminService adminService;
+    private final AddressFeeService addressFeeService;
+
     @Autowired
-    AddressService addressService;
-    @Autowired
-    AdminService adminService;
-    @Autowired
-    AddressFeeService addressFeeService;
+    public AddressFeeCtl(AddressService addressService, AdminService adminService, AddressFeeService addressFeeService) {
+        this.addressService = addressService;
+        this.adminService = adminService;
+        this.addressFeeService = addressFeeService;
+    }
 
     @RequestMapping("list")
     public String list(Model model) {
@@ -44,8 +51,10 @@ public class AddressFeeCtl extends BaseCtl {
     @RequestMapping(value = "/list2", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
     @ResponseBody
     public String list2(int page, int pageSize) {
-        List<Map<String, Object>> list = addressService.getByPage(page, pageSize);
-        long total = addressService.getTotal();
+        Admin admin = (Admin) this.get(Constants.SESSION_USER);
+        String addr = admin == null ? null : (admin.getAddr() == null ? null : Util.loadAddr(admin.getAddr()));
+        List<Map<String, Object>> list = addressService.getByPage(page, pageSize, addr);
+        long total = addressService.getTotal(addr);
         JSONObject json = new JSONObject();
         json.put("rows", list);
         json.put("total", total);
@@ -62,8 +71,10 @@ public class AddressFeeCtl extends BaseCtl {
     @RequestMapping(value = "/query2", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
     @ResponseBody
     public String query2(int page, int pageSize, String province, String city, String area) {
-        List<Map<String, Object>> list = addressService.getAddressFee(page, pageSize, province, city, area);
-        long total = addressService.getAddressFeeCount(province, city, area);
+        Admin admin = (Admin) this.get(Constants.SESSION_USER);
+        String addr = admin == null ? null : (admin.getAddr() == null ? null : Util.loadAddr(admin.getAddr()));
+        List<Map<String, Object>> list = addressService.getAddressFee(page, pageSize, province, city, area, addr);
+        long total = addressService.getAddressFeeCount(province, city, area, addr);
         JSONObject json = new JSONObject();
         json.put("rows", list);
         json.put("total", total);

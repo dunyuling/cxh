@@ -6,6 +6,7 @@ import com.aifeng.mgr.admin.constants.Status;
 import com.aifeng.mgr.admin.model.Admin;
 import com.aifeng.mgr.admin.service.impl.MemberService;
 import com.aifeng.util.StringUtil;
+import com.aifeng.util.Util;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,9 +18,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by pro on 17-5-2.
- */
 @Controller
 @RequestMapping("/member")
 public class MemberCtl extends BaseCtl {
@@ -40,8 +38,9 @@ public class MemberCtl extends BaseCtl {
     @ResponseBody
     public String list2(int page, int pageSize) {
         Admin admin = (Admin) this.get(Constants.SESSION_USER);
-        List<Map<String, Object>> list = memberService.getPageMember(page, pageSize, admin.getAddr());
-        long total = memberService.getInitTotal(admin.getAddr());
+        String addr = admin == null ? null : Util.loadAddr(admin.getAddr());
+        List<Map<String, Object>> list = memberService.getPageMember(page, pageSize, addr);
+        long total = memberService.getInitTotal(addr);
         JSONObject json = new JSONObject();
         json.put("rows", list);
         json.put("total", total);

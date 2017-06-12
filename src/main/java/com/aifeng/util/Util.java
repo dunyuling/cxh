@@ -217,4 +217,13 @@ public class Util {
         String generatedString = RandomStringUtils.random(6, false, true);
         return generatedString.toLowerCase();
     }
+
+    public static String loadAddr(String addr) {
+        String addrTemp = "";
+        for (String temp : addr.split(",")) {
+            addrTemp += "'" + temp + "',";
+        }
+        addrTemp = addrTemp.substring(0, addrTemp.lastIndexOf(","));
+        return addrTemp;
+    }
 }

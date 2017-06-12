@@ -5,39 +5,24 @@ import com.aifeng.init_address.AdminRanking;
 import com.aifeng.mgr.admin.dao.impl.AddressDao;
 import com.aifeng.mgr.admin.model.Address;
 import com.aifeng.mgr.admin.model.AddressFee;
-import com.aifeng.mgr.admin.model.ProxyAddress;
 import com.aifeng.mgr.admin.service.IAddressService;
-import com.aifeng.util.Pager;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by pro on 17-4-24.
- */
 @Service
-@Scope(value = "singleton")
 public class AddressService extends BaseService<Address> implements IAddressService {
 
-
-    private final
-    AddressDao addressDao;
-
-    private final
-    AddressFeeService addressFeeService;
-    private final ProxyAddressService proxyAddressService;
+    private final AddressDao addressDao;
+    private final AddressFeeService addressFeeService;
 
     @Autowired
-    public AddressService(AddressDao addressDao, AddressFeeService addressFeeService, ProxyAddressService proxyAddressService) {
+    public AddressService(AddressDao addressDao, AddressFeeService addressFeeService) {
         this.addressDao = addressDao;
         this.addressFeeService = addressFeeService;
-        this.proxyAddressService = proxyAddressService;
     }
 
     @Transactional
@@ -57,48 +42,16 @@ public class AddressService extends BaseService<Address> implements IAddressServ
                 }
             }
         }
-        /*Address address = new Address("2","3","1");
-        addressDao.insert(address);*/
     }
 
     @Transactional
-    public Map<String, Object> getAll(int page) {
-        long total = addressDao.countAll();
-        long mod = total % 10;
-        long divide = total / 10;
-        long totalPage = mod == 0 ? divide : (divide + 1);
-        Pager pager = new Pager(page);
-        List<Address> addresses = addressDao.findAll(pager);
-
-        Map<String, Object> map = new HashMap<>();
-        map.put("total", total);
-        map.put("totalPage", totalPage);
-        map.put("addresses", addresses);
-        return map;
+    public List<Map<String, Object>> getByPage(int page, int size, String addr) {
+        return addressDao.getAddressFee(page, size, addr);
     }
 
     @Transactional
-    public long getTotal() {
-        return addressDao.countAll();
-    }
-
-    @Transactional
-    public int getTotalPage(int pageSize) {
-        long total = addressDao.countAll();
-        long mod = total % pageSize;
-        long divide = total / pageSize;
-        return (int) (mod == 0 ? divide : (divide + 1));
-    }
-
-    @Transactional
-    public List<Address> getByPage(int page) {
-        Pager pager = new Pager();
-        return addressDao.findAll(pager);
-    }
-
-    @Transactional
-    public List<Map<String, Object>> getByPage(int page, int size) {
-        return addressDao.getAddressFee(page, size);
+    public long getTotal(String addr) {
+        return addressDao.getAddressFeeCount(addr);
     }
 
     @Transactional
@@ -139,46 +92,12 @@ public class AddressService extends BaseService<Address> implements IAddressServ
     }
 
     @Transactional
-    public List<Map<String, Object>> getAddressFee(int page, int pageSize, String province, String city, String area) {
-        return addressDao.getAddressFee(page, pageSize, province, city, area);
+    public List<Map<String, Object>> getAddressFee(int page, int pageSize, String province, String city, String area, String addr) {
+        return addressDao.getAddressFee(page, pageSize, province, city, area, addr);
     }
 
     @Transactional
-    public int getAddressFeeCount(String province, String city, String area) {
-        return addressDao.getAddressFeeCount(province, city, area);
-    }
-
-    @Transactional
-    public Address getOne(long id) {
-        return this.addressDao.findById(id);
-    }
-
-    @Transactional
-    public Address getAddressByProxyAddressId(long proxyAddressId) {
-        ProxyAddress proxyAddress = proxyAddressService.getOne(proxyAddressId);
-        long af_id = proxyAddress.getAf_id();
-        long address_id = addressFeeService.getOne(af_id).getAddress_id();
-        return this.addressDao.findById(address_id);
-    }
-
-    @Transactional
-    public List<Address> getAll() {
-        return addressDao.getAllAddress();
-    }
-
-    String[] province = {"广东市", "广东市", "海南市", "海南市", "甘肃省"};
-    String[] cities = {"东莞市", "中山市", "三沙市", "儋州市", "嘉峪关市"};
-    String[] areas = {"东莞市", "中山市", "三沙市", "儋州市", "嘉峪关市"};
-
-    @Transactional
-    public void test(String[] province,String[] cities ,String[] areas ) {
-        for (int i = 0; i < 5; i++) {
-            Address address = new Address();
-            address.setProvince(province[i]);
-            address.setCity(cities[i]);
-            address.setArea(areas[i]);
-            address.setCreateDate(new Date());
-            addressDao.insert(address);
-        }
+    public int getAddressFeeCount(String province, String city, String area, String addr) {
+        return addressDao.getAddressFeeCount(province, city, area, addr);
     }
 }

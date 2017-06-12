@@ -50,16 +50,7 @@ public class InitAddress {
 //        AgentDao agentDao = classPathXmlApplicationContext.getBean(AgentDao.class);
 //        Agent agent = agentDao.getActiveAgentByMobile("13818280352");
 //        System.out.println(agent.getName() + " \t ==========");
-
-
-        String[] province = {"广东省", "广东省", "海南省", "海南省", "甘肃省"};
-        String[] cities = {"东莞市", "中山市", "三沙市", "儋州市", "嘉峪关市"};
-        String[] areas = {"东莞市", "中山市", "三沙市", "儋州市", "嘉峪关市"};
-
-        AddressService addressService = classPathXmlApplicationContext.getBean(AddressService.class);
-        addressService.test(province, cities, areas);
     }
-
 
     static String basePath = "src/main/java/com/aifeng/init_address/";
 
