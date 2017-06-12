@@ -10,19 +10,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by pro on 17-4-28.
- */
 @Repository
 public class ProxyAddressDao extends BaseDao<ProxyAddress> implements IProxyAddressDao {
-
-    public ProxyAddress getAuthoredByAgentIdAndAfId(long af_id) {
-        Map<String, Object> params = new HashMap<>();
-        params.put("af_id", af_id);
-        params.put("proxyStatus1", ProxyStatus.AUTHORED);
-        String sql = "from ProxyAddress where af_id =:af_id and proxyStatus =:proxyStatus1";
-        return this.findOneByHql(sql, params);
-    }
 
     public ProxyAddress getByAgentIdAndAfId(long af_id) {
         Map<String, Object> params = new HashMap<>();
@@ -33,43 +22,47 @@ public class ProxyAddressDao extends BaseDao<ProxyAddress> implements IProxyAddr
         return this.findOneByHql(sql, params);
     }
 
-    public List<Map<String, Object>> getProxyAddress(int page, int pageSize) {
+    public List<Map<String, Object>> getProxyAddress(int page, int pageSize, String addr) {
         String sql = "select pa.id, ag.name,ag.corpName,  a.province ,a.city, a.area,pa.proxyStatus,pa.createDate,pa.updateDate from proxy_address pa " +
                 "left join address_fee af on pa.af_id = af.id " +
                 "left join address a on af.address_id = a.id " +
                 "left join agent ag on pa.agent_id = ag.id " +
-                "where pa.proxyStatus != '" + ProxyStatus.CANCELD + "'" +
-                "order by pa.createDate desc " +
+                "where pa.proxyStatus != '" + ProxyStatus.CANCELD + "'";
+        sql += addr == null ? "" : " and a.province in (" + addr + ")";
+        sql += " order by pa.createDate desc " +
                 "limit " + pageSize + " offset " + (page - 1) * pageSize + ";";
         return this.findBySql(sql);
     }
 
-    public int getProxyAddressCount() {
+    public int getProxyAddressCount(String addr) {
         String sql = "select count(pa.id) as count from proxy_address pa " +
                 "left join address_fee af on pa.af_id = af.id " +
                 "left join address a on af.address_id = a.id " +
                 "left join agent ag on pa.agent_id = ag.id " +
                 "where pa.proxyStatus != '" + ProxyStatus.CANCELD + "'";
+        sql += addr == null ? "" : " and a.province in (" + addr + ")";
         return Integer.parseInt(this.findBySql(sql).get(0).get("count").toString());
     }
 
-    public List<Map<String, Object>> getQueryProxyAddress(int page, int pageSize, String name) {
+    public List<Map<String, Object>> getQueryProxyAddress(int page, int pageSize, String name, String addr) {
         String sql = "select pa.id, ag.name, ag.corpName, a.province ,a.city, a.area,pa.proxyStatus,pa.createDate,pa.updateDate from proxy_address pa " +
                 "left join address_fee af on pa.af_id = af.id " +
                 "left join address a on af.address_id = a.id " +
                 "left join agent ag on pa.agent_id = ag.id " +
-                "where pa.proxyStatus != '" + ProxyStatus.CANCELD + "' and name like '%" + name + "%'" +
-                "order by pa.createDate desc " +
+                "where pa.proxyStatus != '" + ProxyStatus.CANCELD + "' and name like '%" + name + "%'";
+        sql += addr == null ? "" : " and a.province in (" + addr + ")";
+        sql += " order by pa.createDate desc " +
                 "limit " + pageSize + " offset " + (page - 1) * pageSize + ";";
         return this.findBySql(sql);
     }
 
-    public int getQueryProxyAddressCount(String name) {
+    public int getQueryProxyAddressCount(String name, String addr) {
         String sql = "select count(pa.id) as count from proxy_address pa " +
                 "left join address_fee af on pa.af_id = af.id " +
                 "left join address a on af.address_id = a.id " +
                 "left join agent ag on pa.agent_id = ag.id " +
                 "where pa.proxyStatus != '" + ProxyStatus.CANCELD + "' and name like '%" + name + "%'";
+        sql += addr == null ? "" : " and a.province in (" + addr + ")";
         return Integer.parseInt(this.findBySql(sql).get(0).get("count").toString());
     }
 

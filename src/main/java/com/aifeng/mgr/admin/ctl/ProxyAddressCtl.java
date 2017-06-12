@@ -16,13 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by pro on 17-5-2.
- */
 @Controller
 @RequestMapping("/pa")
 public class ProxyAddressCtl extends BaseCtl {
@@ -46,11 +42,12 @@ public class ProxyAddressCtl extends BaseCtl {
     @ResponseBody
     public String list2(int page, int pageSize) {
         Object object = this.get(Constants.SESSION_USER);
-        List<Map<String, Object>> list = new ArrayList<>();
-        long total = 0;
+        List<Map<String, Object>> list;
+        long total;
         if (object instanceof Admin) {
-            list = proxyAddressService.getPagerProxyAddress(page, pageSize);
-            total = proxyAddressService.getProxyAddressCount();
+            String addr = getAddr();
+            list = proxyAddressService.getPagerProxyAddress(page, pageSize, addr);
+            total = proxyAddressService.getProxyAddressCount(addr);
         } else {
             Agent agent = (Agent) object;
             list = proxyAddressService.getAgentPagerProxyAddress(agent.getId(), page, pageSize);
@@ -63,7 +60,7 @@ public class ProxyAddressCtl extends BaseCtl {
     }
 
     @RequestMapping("query")
-    public String query(Model model,String name) {
+    public String query(Model model, String name) {
         loadRole(adminService, model);
         model.addAttribute("name", name);
         return "console/pa/query";
@@ -73,11 +70,12 @@ public class ProxyAddressCtl extends BaseCtl {
     @ResponseBody
     public String query2(int page, int pageSize, String name) {
         Object object = this.get(Constants.SESSION_USER);
-        List<Map<String, Object>> list = new ArrayList<>();
-        long total = 0;
+        List<Map<String, Object>> list;
+        long total;
         if (object instanceof Admin) {
-            list = proxyAddressService.getQueryProxyAddress(page, pageSize, name);
-            total = proxyAddressService.getQueryProxyAddressCount(name);
+            String addr = getAddr();
+            list = proxyAddressService.getQueryProxyAddress(page, pageSize, name, addr);
+            total = proxyAddressService.getQueryProxyAddressCount(name, addr);
         } else {
             Agent agent = (Agent) object;
             list = proxyAddressService.getAgentQueryPagerProxyAddress(agent.getId(), page, pageSize, name);
