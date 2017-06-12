@@ -5,6 +5,7 @@ import com.aifeng.mgr.admin.model.Admin;
 import com.aifeng.mgr.admin.model.Agent;
 import com.aifeng.mgr.admin.service.impl.AdminService;
 import com.aifeng.util.StringUtil;
+import com.aifeng.util.Util;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import org.apache.commons.lang.StringUtils;
@@ -226,4 +227,9 @@ public class BaseCtl {
         return null;
     }
 
+
+    protected String getAddr() {
+        Admin admin = (Admin) this.get(Constants.SESSION_USER);
+        return admin == null ? null : (admin.getAddr() == null ? null : Util.loadAddr(admin.getAddr()));
+    }
 }

@@ -52,8 +52,9 @@ public class AgentCtl extends BaseCtl {
     @RequestMapping(value = "/list2", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
     @ResponseBody
     public String list2(int page, int pageSize) {
-        List<Map<String, Object>> list = agentService.getPagerAgent(page, pageSize);
-        long total = agentService.getTotal();
+        String addr = getAddr();
+        List<Map<String, Object>> list = agentService.getPagerAgent(page, pageSize, addr);
+        long total = agentService.getTotal(addr);
         JSONObject json = new JSONObject();
         json.put("rows", list);
         json.put("total", total);
@@ -70,8 +71,9 @@ public class AgentCtl extends BaseCtl {
     @RequestMapping(value = "/query2", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
     @ResponseBody
     public String query2(int page, int pageSize, String mobile, String IDCard, String expire_days) {
-        List<Map<String, Object>> list = agentService.getPagerAgent(page, pageSize, mobile, IDCard, expire_days);
-        long total = agentService.getQueryAgentCount(mobile, IDCard, expire_days);
+        String addr = getAddr();
+        List<Map<String, Object>> list = agentService.getPagerAgent(page, pageSize, mobile, IDCard, expire_days, addr);
+        long total = agentService.getQueryAgentCount(mobile, IDCard, expire_days, addr);
         JSONObject json = new JSONObject();
         json.put("rows", list);
         json.put("total", total);
@@ -180,5 +182,4 @@ public class AgentCtl extends BaseCtl {
         }
         return AJAX_SUCCESS;
     }
-
 }

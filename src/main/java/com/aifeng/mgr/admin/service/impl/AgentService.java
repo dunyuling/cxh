@@ -118,31 +118,23 @@ public class AgentService extends BaseService<Agent> implements IAgentService {
     }
 
     @Transactional
-    public Agent getAgentByProxyAddressId(long proxyAddressId) {
-        ProxyAddress proxyAddress = proxyAddressService.getOne(proxyAddressId);
-        long agent_id = proxyAddress.getAgent_id();
-        return this.agentDao.findById(agent_id);
-    }
-
-
-    @Transactional
-    public List<Map<String, Object>> getPagerAgent(int page, int size) {
-        return agentDao.getAgents(page, size);
+    public List<Map<String, Object>> getPagerAgent(int page, int size, String addr) {
+        return agentDao.getAgents(page, size, addr);
     }
 
     @Transactional
-    public long getTotal() {
-        return agentDao.countAll();
+    public long getTotal(String addr) {
+        return agentDao.getAgentsCount(addr);
     }
 
     @Transactional
-    public List<Map<String, Object>> getPagerAgent(int page, int size, String mobile, String IDCard, String expire_days) {
-        return agentDao.getAgents(page, size, mobile, IDCard, expire_days);
+    public List<Map<String, Object>> getPagerAgent(int page, int size, String mobile, String IDCard, String expire_days, String addr) {
+        return agentDao.getAgents(page, size, mobile, IDCard, expire_days, addr);
     }
 
     @Transactional
-    public long getQueryAgentCount(String mobile, String IDCard, String expire_days) {
-        return agentDao.getAgentsCount(mobile, IDCard, expire_days);
+    public long getQueryAgentCount(String mobile, String IDCard, String expire_days, String addr) {
+        return agentDao.getAgentsCount(mobile, IDCard, expire_days, addr);
     }
 
     @Transactional
@@ -179,8 +171,7 @@ public class AgentService extends BaseService<Agent> implements IAgentService {
 
     @Transactional
     public Agent findByMobile(String mobile) {
-        Agent agent = agentDao.getActiveAgentByMobile(mobile);
-        return agent;
+        return agentDao.getActiveAgentByMobile(mobile);
     }
 
     @Scheduled(fixedDelay = 1000 * 60 * 60 * 24)
@@ -189,22 +180,6 @@ public class AgentService extends BaseService<Agent> implements IAgentService {
         messageService = messageService == null ? SpringUtil.getBean("messageService") : messageService;
 
         List<Map<String, Object>> list = agentDao.findAllBalanceLow();
-        /*for (Map<String, Object> map : list) {
-            Long countTemp = (Long) map.get("count");
-            int count = countTemp == null ? 0 : countTemp.intValue();
-
-            StringBuilder content = new StringBuilder();
-            content.append("尊敬的").append(map.get("name")).append("用户,您当前余额为:").append(map.get("money")).append("元。");
-            if (count == 0) {
-                content.append("已不能收到新增会员提醒");
-            } else {
-                content.append("只能收到").append(count).append("次新增会员提醒");
-            }
-            content.append("，请及时充值，以免遗漏会员提醒，给您造成损失。");
-            messageService.sendMsg(map.get("userid").toString(), content.toString());
-            System.out.println("-----: " + map.get("name") + " \t " + map.get("money"));
-        }*/
-
         for (Map<String, Object> map : list) {
             StringBuilder content = new StringBuilder();
             content.append("尊敬的").append(map.get("name")).append("用户,您当前余额为:").append(map.get("money")).append("元。");
@@ -236,13 +211,6 @@ public class AgentService extends BaseService<Agent> implements IAgentService {
 
     @Transactional
     public void reAudit(long id) {
-        Agent agent = agentDao.findById(id);
-        agent.setActive(true);
-        update(agent);
-    }
-
-    @Transactional
-    public void auditCancelFee(long id) {
         Agent agent = agentDao.findById(id);
         agent.setActive(true);
         update(agent);

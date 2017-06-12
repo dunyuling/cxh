@@ -16,25 +16,48 @@ import java.util.Map;
 @Repository
 public class AgentDao extends BaseDao<Agent> implements IAgentDao {
 
-    public List<Map<String, Object>> getAgents(int page, int pageSize) {
-        String str = "select a.id,a.name,a.userid,a.mobile,a.IDCard,a.corpName,a.licenseImg,a.expireDate,a.money,a.active from agent a " +
-                "order by a.id desc " +
+    public List<Map<String, Object>> getAgents(int page, int pageSize, String addr) {
+        String sql = "select distinct a.id,a.name,a.userid,a.mobile,a.IDCard,a.corpName,a.licenseImg,a.expireDate,a.money,a.active from agent a ";
+        sql += addr == null ? "" : " join proxy_address pa on a.id = pa.agent_id " +
+                " join address_fee af on pa.af_id = af.id " +
+                " join address addr on addr.id = af.address_id " +
+                " where addr.province in (" + addr + ")";
+        sql += " order by a.id desc " +
                 "limit " + pageSize + " offset " + (page - 1) * pageSize + ";";
-        return this.findBySql(str);
+        return this.findBySql(sql);
     }
 
-    public List<Map<String, Object>> getAgents(int page, int pageSize, String mobile, String IDCard, String expire_days) {
-        String sql = "select a.id,a.name,a.userid,a.mobile,a.IDCard,a.corpName,a.licenseImg,a.expireDate,a.money,a.active from agent a " +
-                "where a.mobile like '%" + mobile + "%' and a.IDCard like '%" + IDCard + "%' ";
+    public int getAgentsCount(String addr) {
+        String sql = "select count(distinct a.id) as count from agent a ";
+        sql += addr == null ? "" : " join proxy_address pa on a.id = pa.agent_id " +
+                " join address_fee af on pa.af_id = af.id " +
+                " join address addr on addr.id = af.address_id " +
+                " where addr.province in (" + addr + ")";
+        return Integer.parseInt(this.findBySql(sql).get(0).get("count").toString());
+    }
+
+    public List<Map<String, Object>> getAgents(int page, int pageSize, String mobile, String IDCard, String expire_days, String addr) {
+        String sql = "select a.id,a.name,a.userid,a.mobile,a.IDCard,a.corpName,a.licenseImg,a.expireDate,a.money,a.active from agent a ";
+        sql += addr == null ? "" : " join proxy_address pa on a.id = pa.agent_id " +
+                " join address_fee af on pa.af_id = af.id " +
+                " join address addr on addr.id = af.address_id " +
+                " where addr.province in (" + addr + ")";
+        sql += sql.contains("where") ? " and " : " where ";
+        sql += " a.mobile like '%" + mobile + "%' and a.IDCard like '%" + IDCard + "%' ";
         sql += StringUtil.isBlank(expire_days) ? "" : " and TIMESTAMPDIFF(day,curdate(),expireDate) < " + expire_days;
         sql += " order by a.id desc " +
                 "limit " + pageSize + " offset " + (page - 1) * pageSize;
         return this.findBySql(sql);
     }
 
-    public int getAgentsCount(String mobile, String IDCard, String expire_days) {
-        String sql = "select count(a.id) as count from agent a " +
-                "where a.mobile like '%" + mobile + "%' and a.IDCard like '%" + IDCard + "%'";
+    public int getAgentsCount(String mobile, String IDCard, String expire_days, String addr) {
+        String sql = "select count(distinct a.id) as count from agent a ";
+        sql += addr == null ? "" : " join proxy_address pa on a.id = pa.agent_id " +
+                " join address_fee af on pa.af_id = af.id " +
+                " join address addr on addr.id = af.address_id " +
+                " where addr.province in (" + addr + ")";
+        sql += sql.contains("where") ? " and " : " where ";
+        sql += " a.mobile like '%" + mobile + "%' and a.IDCard like '%" + IDCard + "%' ";
         sql += StringUtil.isBlank(expire_days) ? "" : " and TIMESTAMPDIFF(day,curdate(),expireDate) < " + expire_days;
         return Integer.parseInt(this.findBySql(sql).get(0).get("count").toString());
     }
