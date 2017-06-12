@@ -3,6 +3,7 @@ package com.aifeng.mgr.admin.dao.impl;
 import com.aifeng.core.dao.impl.BaseDao;
 import com.aifeng.mgr.admin.dao.IAgentDao;
 import com.aifeng.mgr.admin.model.Agent;
+import com.aifeng.util.StringUtil;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
@@ -22,18 +23,20 @@ public class AgentDao extends BaseDao<Agent> implements IAgentDao {
         return this.findBySql(str);
     }
 
-    public List<Map<String, Object>> getAgents(int page, int pageSize, String mobile, String IDCard) {
-        String str = "select a.id,a.name,a.userid,a.mobile,a.IDCard,a.corpName,a.licenseImg,a.expireDate,a.money,a.active from agent a " +
-                "where a.mobile like '%" + mobile + "%' and a.IDCard like '%" + IDCard + "%' " +
-                "order by a.id desc " +
-                "limit " + pageSize + " offset " + (page - 1) * pageSize + ";";
-        return this.findBySql(str);
+    public List<Map<String, Object>> getAgents(int page, int pageSize, String mobile, String IDCard, String expire_days) {
+        String sql = "select a.id,a.name,a.userid,a.mobile,a.IDCard,a.corpName,a.licenseImg,a.expireDate,a.money,a.active from agent a " +
+                "where a.mobile like '%" + mobile + "%' and a.IDCard like '%" + IDCard + "%' ";
+        sql += StringUtil.isBlank(expire_days) ? "" : " and TIMESTAMPDIFF(day,curdate(),expireDate) < " + expire_days;
+        sql += " order by a.id desc " +
+                "limit " + pageSize + " offset " + (page - 1) * pageSize;
+        return this.findBySql(sql);
     }
 
-    public int getAgentsCount(String mobile, String IDCard) {
-        String str = "select count(a.id) as count from agent a " +
+    public int getAgentsCount(String mobile, String IDCard, String expire_days) {
+        String sql = "select count(a.id) as count from agent a " +
                 "where a.mobile like '%" + mobile + "%' and a.IDCard like '%" + IDCard + "%'";
-        return Integer.parseInt(this.findBySql(str).get(0).get("count").toString());
+        sql += StringUtil.isBlank(expire_days) ? "" : " and TIMESTAMPDIFF(day,curdate(),expireDate) < " + expire_days;
+        return Integer.parseInt(this.findBySql(sql).get(0).get("count").toString());
     }
 
     public Agent getAgentByIDCard(String IDCard) {

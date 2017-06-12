@@ -61,17 +61,17 @@ public class AgentCtl extends BaseCtl {
     }
 
     @RequestMapping("query")
-    public String query(String mobile, String IDCard, Model model) {
+    public String query(String mobile, String IDCard, String expire_days, Model model) {
         loadRole(adminService, model);
-        model.addAttribute("mobile", mobile).addAttribute("IDCard", IDCard);
+        model.addAttribute("mobile", mobile).addAttribute("IDCard", IDCard).addAttribute("expire_days", expire_days);
         return "console/agent/query";
     }
 
     @RequestMapping(value = "/query2", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public String query2(int page, int pageSize, String mobile, String IDCard) {
-        List<Map<String, Object>> list = agentService.getPagerAgent(page, pageSize, mobile, IDCard);
-        long total = agentService.getQueryAgentCount(mobile, IDCard);
+    public String query2(int page, int pageSize, String mobile, String IDCard, String expire_days) {
+        List<Map<String, Object>> list = agentService.getPagerAgent(page, pageSize, mobile, IDCard, expire_days);
+        long total = agentService.getQueryAgentCount(mobile, IDCard, expire_days);
         JSONObject json = new JSONObject();
         json.put("rows", list);
         json.put("total", total);

@@ -136,13 +136,13 @@ public class AgentService extends BaseService<Agent> implements IAgentService {
     }
 
     @Transactional
-    public List<Map<String, Object>> getPagerAgent(int page, int size, String mobile, String IDCard) {
-        return agentDao.getAgents(page, size, mobile, IDCard);
+    public List<Map<String, Object>> getPagerAgent(int page, int size, String mobile, String IDCard, String expire_days) {
+        return agentDao.getAgents(page, size, mobile, IDCard, expire_days);
     }
 
     @Transactional
-    public long getQueryAgentCount(String mobile, String IDCard) {
-        return agentDao.getAgentsCount(mobile, IDCard);
+    public long getQueryAgentCount(String mobile, String IDCard, String expire_days) {
+        return agentDao.getAgentsCount(mobile, IDCard, expire_days);
     }
 
     @Transactional

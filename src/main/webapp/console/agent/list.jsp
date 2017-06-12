@@ -73,6 +73,8 @@
                         <div class="input-group">
                             手机<input id="mobile" name="mobile" type="text" placeholder="请输入手机" class="input-sm">
                             身份证<input id="IDCard" name="IDCard" type="text" placeholder="请输入身份证" class="input-sm">
+                            过期天数<input id="expire_days" name="expire_days" type="number" placeholder="请输入过期天数"
+                                       class="input-sm">
                             <span><button id="search" type="button" class="btn btn-sm btn-primary"> 搜索</button></span>
                         </div>
                     </div>
@@ -85,9 +87,15 @@
     $("#search").click(function () {
         var mobile = $("#mobile").val();
         var IDCard = $("#IDCard").val();
+        var expire_days = $("#expire_days").val();
 
-        if (mobile.trim() != "" || IDCard.trim() != "") {
-            window.location.href = "/agent/query.cs?mobile=" + mobile + "&IDCard=" + IDCard;
+        if (expire_days < 0) {
+            $("#expire_days").val('');
+            return;
+        }
+
+        if (mobile.trim() != "" || IDCard.trim() != "" || expire_days != "") {
+            window.location.href = "/agent/query.cs?mobile=" + mobile + "&IDCard=" + IDCard + "&expire_days=" + expire_days;
         }
     });
 </script>
