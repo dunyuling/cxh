@@ -19,10 +19,9 @@
             <cs:toolbar title="取消授权记录管理" tableId="tab_auditcancel" width="100%" height="100%" menuCode="291"
                         hdMenu="15">
             </cs:toolbar>
-            <input hidden id="agentId" value="${agentId}"/>
             <table id="tab_auditcancel"
                    data-toggle="table"
-                   data-url="/audit_cancel/list2.cs?agentId=${agentId}"
+                   data-url="/audit_cancel/query2.cs?name=${name}"
                    data-method="get"
                    data-click-to-select="true"
                    data-pagination="true"
@@ -62,11 +61,10 @@
 </div>
 <script type="text/javascript">
     $("#search").click(function () {
-        var agentId = $("#agentId").val();
         var name = $("#name").val();
 
         if (name.trim() != "") {
-            window.location.href = "/audit_cancel/query.cs?agentId=" + agentId + "&name=" + name;
+            window.location.href = "/audit_cancel/query.cs?agentId=0&name=" + name;
         }
     });
 </script>

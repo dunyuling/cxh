@@ -12,9 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by pro on 17-4-28.
- */
 @Service
 public class AuditCancelService extends BaseService<AuditCancel> implements IAuditCancelService {
 
@@ -47,13 +44,23 @@ public class AuditCancelService extends BaseService<AuditCancel> implements IAud
     }
 
     @Transactional
-    public List<Map<String, Object>> getPagerAuditCancel(int page, int size) {
-        return auditCancelDao.getAuditCancels(page, size);
+    public List<Map<String, Object>> getPagerAuditCancel(int page, int size, String addr) {
+        return auditCancelDao.getAuditCancels(page, size, addr);
     }
 
     @Transactional
-    public long getTotal() {
-        return auditCancelDao.countAll();
+    public int getTotal(String addr) {
+        return auditCancelDao.getAuditCancelsCount(addr);
+    }
+
+    @Transactional
+    public List<Map<String, Object>> queryAuditCancel(int page, int size, String name, String addr) {
+        return auditCancelDao.queryAuditCancels(page, size, name, addr);
+    }
+
+    @Transactional
+    public int queryTotal(String name, String addr) {
+        return auditCancelDao.queryAuditCancelsCount(name, addr);
     }
 
     @Transactional
