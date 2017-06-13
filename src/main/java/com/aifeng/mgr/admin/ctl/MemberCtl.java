@@ -6,10 +6,10 @@ import com.aifeng.mgr.admin.constants.Status;
 import com.aifeng.mgr.admin.model.Admin;
 import com.aifeng.mgr.admin.service.impl.MemberService;
 import com.aifeng.util.StringUtil;
-import com.aifeng.util.Util;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -37,10 +37,27 @@ public class MemberCtl extends BaseCtl {
     @RequestMapping(value = "/list2", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
     @ResponseBody
     public String list2(int page, int pageSize) {
-        Admin admin = (Admin) this.get(Constants.SESSION_USER);
-        String addr = admin == null ? null : Util.loadAddr(admin.getAddr());
+        String addr = getAddr();
         List<Map<String, Object>> list = memberService.getPageMember(page, pageSize, addr);
         long total = memberService.getInitTotal(addr);
+        JSONObject json = new JSONObject();
+        json.put("rows", list);
+        json.put("total", total);
+        return JSONObject.toJSONString(json, features);
+    }
+
+    @RequestMapping("query")
+    public String query(String mobile, String name, Model model) {
+        model.addAttribute("mobile", mobile).addAttribute("name", name);
+        return "console/member/query";
+    }
+
+    @RequestMapping(value = "/query2", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public String query2(int page, int pageSize, String name, String mobile) {
+        String addr = getAddr();
+        List<Map<String, Object>> list = memberService.queryPageMember(page, pageSize, name, mobile, addr);
+        long total = memberService.queryTotal(name, mobile, addr);
         JSONObject json = new JSONObject();
         json.put("rows", list);
         json.put("total", total);
@@ -56,18 +73,6 @@ public class MemberCtl extends BaseCtl {
         }
         return "console/member/" + action;
     }
-
-    //不提供修改功能，后台可以删除，会员重新注册
-    /*@RequestMapping(value = "edit", method = RequestMethod.POST)
-    @ResponseBody
-    public String edit(long id, String name, String mobile, String type, String province, String city, String area) {
-        try {
-            memberService.edit(id, name, mobile, type, province, city, area);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return AJAX_SUCCESS;
-    }*/
 
     @RequestMapping(value = "audit", method = RequestMethod.POST)
     @ResponseBody

@@ -122,6 +122,16 @@ public class MemberService extends BaseService<Member> implements IMemberService
     }
 
     @Transactional
+    public List<Map<String, Object>> queryPageMember(int page, int size, String name, String mobile, String addr) {
+        return memberDao.queryMember(page, size, name, mobile, addr);
+    }
+
+    @Transactional
+    public int queryTotal(String name, String mobile, String addr) {
+        return memberDao.queryInitCount(name, mobile, addr);
+    }
+
+    @Transactional
     public Map<String, Object> getSingleMember(long id) {
         return memberDao.getSingleProxyAddress(id);
     }

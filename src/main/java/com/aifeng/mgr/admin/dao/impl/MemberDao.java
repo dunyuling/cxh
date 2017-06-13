@@ -8,34 +8,31 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by pro on 17-4-27.
- */
 @Repository
 public class MemberDao extends BaseDao<Member> implements IMemberDao {
 
     public List<Map<String, Object>> getMember(int page, int pageSize, String addr) {
-        String sql = "";
+        String sql;
         if (addr == null) {
             sql = "select m.id,m.name,m.mobile,m.type,m.status, a.province,a.city,a.area,m.createDate,tma.name as tma_name from member m " +
                     "left join address a on m.address_id = a.id " +
                     "left join tb_mgr_admin tma on tma.id = m.user_id " +
                     "order by m.createDate desc " +
-                    "limit " + pageSize + " offset " + (page - 1) * pageSize + ";";
+                    "limit " + pageSize + " offset " + (page - 1) * pageSize;
         } else {
             sql = "select m.id,m.name,m.mobile,m.type,m.status, a.province,a.city,a.area,m.createDate,tma.name as tma_name from member m " +
                     "left join address a on m.address_id = a.id " +
                     "left join tb_mgr_admin tma on tma.id = m.user_id " +
                     " where a.province in (" + addr +
                     " ) order by m.createDate desc " +
-                    "limit " + pageSize + " offset " + (page - 1) * pageSize + ";";
+                    "limit " + pageSize + " offset " + (page - 1) * pageSize;
         }
         System.out.println("sql: " + sql);
         return this.findBySql(sql);
     }
 
     public int getInitCount(String addr) {
-        String sql = "";
+        String sql;
         if (addr == null) {
             sql = "select count(m.id) as count from member m " +
                     "left join address a on m.address_id = a.id ";
@@ -43,6 +40,43 @@ public class MemberDao extends BaseDao<Member> implements IMemberDao {
             sql = "select count(m.id) as count from member m " +
                     "left join address a on m.address_id = a.id " +
                     " where a.province in (" + addr + " )";
+        }
+        System.out.println("sql: " + sql);
+        return Integer.parseInt(this.findBySql(sql).get(0).get("count").toString());
+    }
+
+    public List<Map<String, Object>> queryMember(int page, int pageSize, String name, String mobile, String addr) {
+        String sql;
+        if (addr == null) {
+            sql = "select m.id,m.name,m.mobile,m.type,m.status, a.province,a.city,a.area,m.createDate,tma.name as tma_name from member m " +
+                    "left join address a on m.address_id = a.id " +
+                    "left join tb_mgr_admin tma on tma.id = m.user_id " +
+                    " where m.name like '%" + name + "%' and m.mobile like '%" + mobile + "%'" +
+                    " order by m.createDate desc " +
+                    "limit " + pageSize + " offset " + (page - 1) * pageSize;
+        } else {
+            sql = "select m.id,m.name,m.mobile,m.type,m.status, a.province,a.city,a.area,m.createDate,tma.name as tma_name from member m " +
+                    "left join address a on m.address_id = a.id " +
+                    "left join tb_mgr_admin tma on tma.id = m.user_id " +
+                    " where m.name like '%" + name + "%' and m.mobile like '%" + mobile + "%'" +
+                    " and a.province in (" + addr + " ) order by m.createDate desc " +
+                    "limit " + pageSize + " offset " + (page - 1) * pageSize;
+        }
+        System.out.println("sql: " + sql);
+        return this.findBySql(sql);
+    }
+
+    public int queryInitCount(String name, String mobile, String addr) {
+        String sql;
+        if (addr == null) {
+            sql = "select count(m.id) as count from member m " +
+                    "left join address a on m.address_id = a.id " +
+                    " where m.name like '%" + name + "%' and m.mobile like '%" + mobile + "%'";
+        } else {
+            sql = "select count(m.id) as count from member m " +
+                    "left join address a on m.address_id = a.id " +
+                    " where m.name like '%" + name + "%' and m.mobile like '%" + mobile + "%'" +
+                    " and a.province in (" + addr + " )";
         }
         System.out.println("sql: " + sql);
         return Integer.parseInt(this.findBySql(sql).get(0).get("count").toString());

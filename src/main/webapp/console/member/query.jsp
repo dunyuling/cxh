@@ -27,7 +27,7 @@
             </cs:toolbar>
             <table id="tab_member"
                    data-toggle="table"
-                   data-url="/member/list2.cs"
+                   data-url="/member/query2.cs?name=${name}&mobile=${mobile}"
                    data-method="get"
                    data-click-to-select="true"
                    data-pagination="true"
