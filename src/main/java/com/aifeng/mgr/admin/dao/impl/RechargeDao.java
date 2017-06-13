@@ -23,7 +23,7 @@ public class RechargeDao extends BaseDao<Recharge> implements IRechargeDao {
                 " join address addr on af.address_id = addr.id ";
         sql += addr == null ? "" : " where addr.province in (" + addr + ") ";
         sql += "order by r.createDate desc " +
-                "limit " + pageSize + " offset " + (page - 1) * pageSize + ";";
+                "limit " + pageSize + " offset " + (page - 1) * pageSize;
         return this.findBySql(sql);
     }
 

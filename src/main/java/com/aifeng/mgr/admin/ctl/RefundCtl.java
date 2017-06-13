@@ -45,10 +45,30 @@ public class RefundCtl extends BaseCtl {
             list = refundService.getAgentPagerRefund(agentId, page, pageSize);
             total = refundService.getAgentTotal(agentId);
         } else {
-            list = refundService.getPagerRefund(page, pageSize);
-            total = refundService.getTotal();
+            String addr = getAddr();
+            list = refundService.getPagerRefund(page, pageSize, addr);
+            total = refundService.getTotal(addr);
         }
 
+        JSONObject json = new JSONObject();
+        json.put("rows", list);
+        json.put("total", total);
+        return JSONObject.toJSONString(json, features);
+    }
+
+    @RequestMapping("query")
+    public String query(long agentId, String name, Model model) {
+        model.addAttribute("agentId", agentId).addAttribute("name", name);
+        return "console/refund/query";
+    }
+
+    @RequestMapping(value = "/query2", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public String query2(int page, int pageSize, String name) {
+        //目前根据代理商名字查询，代理商登录则不提供查询功能
+        String addr = getAddr();
+        List<Map<String, Object>> list = refundService.queryRefunds(page, pageSize, name, addr);
+        int total = refundService.queryTotal(name, addr);
         JSONObject json = new JSONObject();
         json.put("rows", list);
         json.put("total", total);

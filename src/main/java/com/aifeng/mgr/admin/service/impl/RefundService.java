@@ -46,13 +46,23 @@ public class RefundService extends BaseService<Refund> implements IRefundService
     }
 
     @Transactional
-    public List<Map<String, Object>> getPagerRefund(int page, int size) {
-        return refundDao.getRefunds(page, size);
+    public List<Map<String, Object>> getPagerRefund(int page, int size, String addr) {
+        return refundDao.getRefunds(page, size, addr);
     }
 
     @Transactional
-    public long getTotal() {
-        return refundDao.countAll();
+    public long getTotal(String addr) {
+        return refundDao.getRefundsCount(addr);
+    }
+
+    @Transactional
+    public List<Map<String, Object>> queryRefunds(int page, int size, String name, String addr) {
+        return refundDao.queryRefunds(page, size, name, addr);
+    }
+
+    @Transactional
+    public int queryTotal(String name, String addr) {
+        return refundDao.queryRefundsCount(name, addr);
     }
 
     @Transactional
