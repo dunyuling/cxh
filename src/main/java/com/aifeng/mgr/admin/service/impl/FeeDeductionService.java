@@ -41,13 +41,23 @@ public class FeeDeductionService extends BaseService<FeeDeduction> implements IF
     }
 
     @Transactional
-    public List<Map<String, Object>> getPagerFeeDeduction(int page, int size) {
-        return feeDeductionDao.getFds(page, size);
+    public List<Map<String, Object>> getPagerFeeDeduction(int page, int size, String addr) {
+        return feeDeductionDao.getFds(page, size, addr);
     }
 
     @Transactional
-    public long getTotal() {
-        return feeDeductionDao.countAll();
+    public int getTotal(String addr) {
+        return feeDeductionDao.getFdsCount(addr);
+    }
+
+    @Transactional
+    public List<Map<String, Object>> queryFeeDeduction(int page, int size, String name, String addr) {
+        return feeDeductionDao.queryFds(page, size, name, addr);
+    }
+
+    @Transactional
+    public int queryFeeDeductionCount(String name, String addr) {
+        return feeDeductionDao.queryFdsCount(name, addr);
     }
 
     @Transactional
