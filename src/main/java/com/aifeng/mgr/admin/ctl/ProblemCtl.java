@@ -9,6 +9,7 @@ import com.aifeng.util.StringUtil;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -41,6 +42,23 @@ public class ProblemCtl extends BaseCtl {
     public String adminList2(int page, int pageSize) {
         List<Map<String, Object>> list = problemService.getPagerProblems(page, pageSize);
         long total = problemService.getTotal();
+        JSONObject json = new JSONObject();
+        json.put("rows", list);
+        json.put("total", total);
+        return JSONObject.toJSONString(json, features);
+    }
+
+    @RequestMapping("admin_query")
+    public String adminQuery(String agent_name, String cs_name, Model model) {
+        model.addAttribute("agent_name", agent_name).addAttribute("cs_name", cs_name);
+        return "console/problem/admin_query";
+    }
+
+    @RequestMapping(value = "/admin_query2", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public String adminQuery2(int page, int pageSize, String agent_name, String cs_name) {
+        List<Map<String, Object>> list = problemService.queryProblems(page, pageSize, agent_name, cs_name);
+        long total = problemService.queryTotal(agent_name, cs_name);
         JSONObject json = new JSONObject();
         json.put("rows", list);
         json.put("total", total);

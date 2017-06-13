@@ -63,6 +63,23 @@ public class ProblemService extends BaseService<Problem> implements IProblemServ
     }
 
     @Transactional
+    public int getTotal() {
+        return problemDao.countAll();
+    }
+
+
+    @Transactional
+    public List<Map<String, Object>> queryProblems(int page, int size, String agent_name, String cs_name) {
+        return problemDao.queryProblems(page, size, agent_name, cs_name);
+    }
+
+    @Transactional
+    public int queryTotal(String agent_name,String cs_name) {
+        return problemDao.queryProblemsCount(agent_name,cs_name);
+    }
+
+
+    @Transactional
     public List<Map<String, Object>> getCsPagerProblems(int id, int page, int size) {
         return problemDao.getCsProblems(id, page, size);
     }
@@ -87,9 +104,5 @@ public class ProblemService extends BaseService<Problem> implements IProblemServ
         return problemDao.getSingleProblem(id);
     }
 
-    @Transactional
-    public long getTotal() {
-        return problemDao.countAll();
-    }
 
 }

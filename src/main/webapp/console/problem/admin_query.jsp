@@ -30,7 +30,7 @@
 
             <table id="tab_problem"
                    data-toggle="table"
-                   data-url="/problem/admin_list2.cs"
+                   data-url="/problem/admin_query2.cs?agent_name=${agent_name}&cs_name=${cs_name}"
                    data-method="get"
                    data-click-to-select="true"
                    data-pagination="true"
@@ -58,8 +58,7 @@
                 <div class="row m-b-sm m-t-sm">
                     <div class="col-md-11">
                         <div class="input-group">
-                            代理商名字<input id="agent_name" name="agent_name" type="text" placeholder="请输入代理商名字"
-                                        class="input-sm">
+                            代理商名字<input id="agent_name" name="agent_name" type="text" placeholder="请输入代理商名字" class="input-sm">
                             客服名字<input id="cs_name" name="cs_name" type="text" placeholder="请输入客服名字" class="input-sm">
                             <span><button id="search" type="button"
                                           class="btn btn-sm btn-primary"> 搜索</button></span>

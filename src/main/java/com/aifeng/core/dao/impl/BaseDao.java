@@ -158,7 +158,7 @@ public class BaseDao<T> implements IBaseDao<T> {
 		});
 	}
 
-	public Long countAll() {
+	public Integer countAll() {
 		Number val =  hibernateTemplate.execute(new HibernateCallback<Number>() {
 			@Override
 			public Number doInHibernate(Session session) throws HibernateException {
@@ -169,7 +169,7 @@ public class BaseDao<T> implements IBaseDao<T> {
 
 		});
 		
-		return val == null ? 0 : val.longValue();
+		return val == null ? 0 : val.intValue();
 	}
 
 	@Override
