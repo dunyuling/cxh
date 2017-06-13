@@ -18,10 +18,9 @@
         <div class="col-sm-12">
             <cs:toolbar title="消息管理" tableId="tab_message" width="100%" height="100%" menuCode="25" hdMenu="15">
             </cs:toolbar>
-            <input hidden id="agentId" value="${agentId}"/>
             <table id="tab_message"
                    data-toggle="table"
-                   data-url="/msg/list2.cs?agentId=${agentId}"
+                   data-url="/msg/query2.cs?name=${name}"
                    data-method="get"
                    data-click-to-select="true"
                    data-pagination="true"
@@ -75,11 +74,10 @@
     }
 
     $("#search").click(function () {
-        var agentId = $("#agentId").val();
         var name = $("#name").val();
 
         if (name.trim() != "") {
-            window.location.href = "/msg/query.cs?agentId=" + agentId + "&name=" + name;
+            window.location.href = "/msg/query.cs?agentId=0&name=" + name;
         }
     });
 </script>

@@ -11,13 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by pro on 17-5-2.
- */
 @Controller
 @RequestMapping("/msg")
 public class MessageCtl extends BaseCtl {
@@ -30,7 +26,7 @@ public class MessageCtl extends BaseCtl {
     }
 
     @RequestMapping("list")
-    public String list(int agentId, Model model) {
+    public String list(long agentId, Model model) {
         model.addAttribute("agentId", agentId);
         return "console/msg/list";
     }
@@ -39,15 +35,35 @@ public class MessageCtl extends BaseCtl {
     @ResponseBody
     public String list2(HttpServletRequest request, int page, int pageSize) {
         long agentId = Long.parseLong(request.getParameter("agentId"));
-        List<Map<String, Object>> list = new ArrayList<>();
-        long total = 0;
+        List<Map<String, Object>> list;
+        long total;
         if (agentId != 0) {
             list = messageService.getAgentPagerMsg(agentId, page, pageSize);
             total = messageService.getAgentTotal(agentId);
         } else {
-            list = messageService.getPagerMsg(page, pageSize);
-            total = messageService.getTotal();
+            String addr = getAddr();
+            list = messageService.getPagerMsg(page, pageSize, addr);
+            total = messageService.getPagerMsgCount(addr);
         }
+        JSONObject json = new JSONObject();
+        json.put("rows", list);
+        json.put("total", total);
+        return JSONObject.toJSONString(json, features);
+    }
+
+    @RequestMapping("query")
+    public String query(long agentId, String name, Model model) {
+        model.addAttribute("agentId", agentId).addAttribute("name", name);
+        return "console/msg/query";
+    }
+
+    @RequestMapping(value = "/query2", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public String query2(int page, int pageSize, String name) {
+        //目前根据代理商名字查询，代理商登录则不提供查询功能
+        String addr = getAddr();
+        List<Map<String, Object>> list = messageService.queryMsg(page, pageSize, name, addr);
+        int total = messageService.queryMsgCount(name, addr);
         JSONObject json = new JSONObject();
         json.put("rows", list);
         json.put("total", total);

@@ -21,27 +21,22 @@ import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 
-/**
- * Created by pro on 17-4-28.
- */
 @Service
 public class MessageService extends BaseService<Message> implements IMessageService {
 
     private final MessageDao messageDao;
     private final AgentMessageService agentMessageService;
     private final AgentService agentService;
-    private final MessageRepeatService messageRepeatService;
     private final RestTemplate restTemplate;
     private final AuxiliaryInformationService auxiliaryInformationService;
     private final FeeDeductionService feeDeductionService;
-    ExecutorService executorService;
+    private final ExecutorService executorService;
 
     @Autowired
-    public MessageService(MessageDao messageDao, AgentMessageService agentMessageService, AgentService agentService, MessageRepeatService messageRepeatService, RestTemplate restTemplate, AuxiliaryInformationService auxiliaryInformationService, FeeDeductionService feeDeductionService) {
+    public MessageService(MessageDao messageDao, AgentMessageService agentMessageService, AgentService agentService, RestTemplate restTemplate, AuxiliaryInformationService auxiliaryInformationService, FeeDeductionService feeDeductionService) {
         this.messageDao = messageDao;
         this.agentMessageService = agentMessageService;
         this.agentService = agentService;
-        this.messageRepeatService = messageRepeatService;
         this.restTemplate = restTemplate;
         this.auxiliaryInformationService = auxiliaryInformationService;
         this.feeDeductionService = feeDeductionService;
@@ -97,8 +92,6 @@ public class MessageService extends BaseService<Message> implements IMessageServ
             ResponseEntity<ResponseType> response = restTemplate.postForEntity(Util.loadSendMsgUrl(access_token), requestBody, ResponseType.class);
             System.out.println("msg: " + response.getBody().getErrmsg());
         });
-
-
     }
 
     @Transactional
@@ -110,13 +103,23 @@ public class MessageService extends BaseService<Message> implements IMessageServ
     }
 
     @Transactional
-    public List<Map<String, Object>> getPagerMsg(int page, int size) {
-        return messageDao.getMessage(page, size);
+    public List<Map<String, Object>> getPagerMsg(int page, int size, String addr) {
+        return messageDao.getMessage(page, size, addr);
     }
 
     @Transactional
-    public long getTotal() {
-        return messageDao.countAll();
+    public long getPagerMsgCount(String addr) {
+        return messageDao.getMessageCount(addr);
+    }
+
+    @Transactional
+    public List<Map<String, Object>> queryMsg(int page, int size, String name, String addr) {
+        return messageDao.queryMessage(page, size, name, addr);
+    }
+
+    @Transactional
+    public int queryMsgCount(String name, String addr) {
+        return messageDao.queryMessageCount(name, addr);
     }
 
     @Transactional
