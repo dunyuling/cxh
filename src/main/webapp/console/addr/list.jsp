@@ -19,7 +19,8 @@
         <div class="col-sm-12">
             <c:if test="${role != null && role != '客服'}">
                 <cs:toolbar title="地区费用管理" tableId="tab_addr" width="768px" height="420px" menuCode="21" hdMenu="15">
-                    <button class="btn btn-sm btn-warning" type="button" onclick="edit()"><i class="fa fa-pencil-square-o"></i> 编辑
+                    <button class="btn btn-sm btn-warning" type="button" onclick="edit()"><i
+                            class="fa fa-pencil-square-o"></i> 编辑
                     </button>
                 </cs:toolbar>
             </c:if>
@@ -68,12 +69,9 @@
         var city = $("#city").val();
         var area = $("#area").val();
 
-//        alert("ss");
-        if (province.trim() == "" && city.trim() == "" && area.trim() == "") {
-            alert("请完整输入地址");
-            return;
+        if (province.trim() != "" || city.trim() != "" || area.trim() != "") {
+            window.location.href = "/addr/query.cs?province=" + province + "&city=" + city + "&area=" + area;
         }
-        window.location.href = "/addr/query.cs?province=" + province + "&city=" + city + "&area=" + area;
     });
 </script>
 </body>

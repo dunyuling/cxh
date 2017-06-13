@@ -18,6 +18,7 @@
         <div class="col-sm-12">
             <cs:toolbar title="退费记录管理" tableId="tab_refund" width="100%" height="100%" menuCode="27" hdMenu="15">
             </cs:toolbar>
+            <input hidden id="agentId" value="${agentId}"/>
             <table id="tab_refund"
                    data-toggle="table"
                    data-url="/recharge/query2.cs?name=${name}"
@@ -47,7 +48,7 @@
                     <div class="row m-b-sm m-t-sm">
                         <div class="col-md-11">
                             <div class="input-group">
-                                名字<input id="name" name="name" type="text" placeholder="请输入名字" class="input-sm">
+                                名字<input id="name" name="name" value="${name}" type="text" placeholder="请输入名字" class="input-sm">
                                 <span><button id="search" type="button"
                                               class="btn btn-sm btn-primary"> 搜索</button></span>
                             </div>
@@ -64,6 +65,9 @@
 
         if (name.trim() != "") {
             window.location.href = "/recharge/query.cs?agentId=0&name=" + name;
+        } else {
+            var agentId = $("#agentId").val();
+            window.location.href = "/recharge/list.cs?agentId="+agentId;
         }
     });
 </script>

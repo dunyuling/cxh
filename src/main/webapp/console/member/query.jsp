@@ -58,8 +58,8 @@
                 <div class="row m-b-sm m-t-sm">
                     <div class="col-md-11">
                         <div class="input-group">
-                            名字<input id="name" name="name" type="text" placeholder="请输入名字" class="input-sm">
-                            手机<input id="mobile" name="mobile" type="text" placeholder="请输入手机" class="input-sm">
+                            名字<input id="name" name="name" value="${name}" type="text" placeholder="请输入名字" class="input-sm">
+                            手机<input id="mobile" name="mobile" value="${mobile}" type="text" placeholder="请输入手机" class="input-sm">
                             <span><button id="search" type="button" class="btn btn-sm btn-primary"> 搜索</button></span>
                         </div>
                     </div>
@@ -88,6 +88,8 @@
 
             if (mobile.trim() != "" || name.trim() != "") {
                 window.location.href = "/member/query.cs?mobile=" + mobile + "&name=" + name;
+            } else {
+                window.location.href = "/member/list.cs";
             }
         });
     </script>

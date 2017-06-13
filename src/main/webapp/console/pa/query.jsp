@@ -56,7 +56,7 @@
                 <div class="row m-b-sm m-t-sm">
                     <div class="col-md-11">
                         <div class="input-group">
-                            名字<input id="name" name="name" type="text" placeholder="请输入名字" class="input-sm">
+                            名字<input id="name" name="name" type="text" value="${name}" placeholder="请输入名字" class="input-sm">
                             <span><button id="search" type="button" class="btn btn-sm btn-primary"> 搜索</button></span>
                         </div>
                     </div>
@@ -86,6 +86,8 @@
 
         if (name.trim() != "") {
             window.location.href = "/pa/query.cs?name=" + name;
+        } else {
+            window.location.href = "/pa/list.cs";
         }
     });
 </script>

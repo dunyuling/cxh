@@ -48,9 +48,9 @@
                 <div class="row m-b-sm m-t-sm">
                     <div class="col-md-11">
                         <div class="input-group">
-                            省<input id="province" name="province" type="text" placeholder="请输入省" class="input-sm">
-                            市<input id="city" name="city" type="text" placeholder="请输入市" class="input-sm">
-                            县/区<input id="area" name="area" type="text" placeholder="请输入县/区" class="input-sm">
+                            省<input id="province" name="province" value="${province}" type="text" placeholder="请输入省" class="input-sm">
+                            市<input id="city" name="city" value="${city}" type="text" placeholder="请输入市" class="input-sm">
+                            县/区<input id="area" name="area" value="${area}" type="text" placeholder="请输入县/区" class="input-sm">
                             <span><button id="search" type="button" class="btn btn-sm btn-primary"> 搜索</button></span>
                         </div>
                     </div>
@@ -64,11 +64,11 @@
         var province = $("#province").val();
         var city = $("#city").val();
         var area = $("#area").val();
-        if (province.trim() == "" && city.trim() == "" && area.trim() == "") {
-            alert("请完整输入地址");
-            return;
+        if (province.trim() != "" || city.trim() != "" || area.trim() != "") {
+            window.location.href = "/addr/query.cs?province=" + province + "&city=" + city + "&area=" + area;
+        } else {
+            window.location.href = "/addr/list.cs";
         }
-        window.location.href = "/addr/query.cs?province=" + province + "&city=" + city + "&area=" + area;
     });
 </script>
 </body>

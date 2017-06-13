@@ -35,6 +35,7 @@
                 </cs:toolbar>
             </c:if>
 
+            <input hidden id="agentId" value="${agentId}"/>
             <table id="tab_agentmessage"
                    data-toggle="table"
                    data-url="/am/query2.cs?name=${name}"
@@ -65,7 +66,7 @@
                     <div class="row m-b-sm m-t-sm">
                         <div class="col-md-11">
                             <div class="input-group">
-                                名字<input id="name" name="name" type="text" placeholder="请输入名字" class="input-sm">
+                                名字<input id="name" name="name" value="${name}" type="text" placeholder="请输入名字" class="input-sm">
                                 <span><button id="search" type="button"
                                               class="btn btn-sm btn-primary"> 搜索</button></span>
                             </div>
@@ -99,6 +100,9 @@
 
         if (name.trim() != "") {
             window.location.href = "/am/query.cs?agentId=0&name=" + name;
+        } else {
+            var agentId = $("#agentId").val();
+            window.location.href = "/am/list.cs?agentId=" + agentId;
         }
     });
 </script>
