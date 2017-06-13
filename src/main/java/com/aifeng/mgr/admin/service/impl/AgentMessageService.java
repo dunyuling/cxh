@@ -52,13 +52,23 @@ public class AgentMessageService extends BaseService<AgentMessage> implements IA
     }
 
     @Transactional
-    public List<Map<String, Object>> getPagerAm(int page, int size) {
-        return agentMessageDao.getAm(page, size);
+    public List<Map<String, Object>> getPagerAm(int page, int size, String addr) {
+        return agentMessageDao.getAm(page, size, addr);
     }
 
     @Transactional
-    public long getTotal() {
-        return agentMessageDao.countAll();
+    public long getTotal(String addr) {
+        return agentMessageDao.getAmCount(addr);
+    }
+
+    @Transactional
+    public List<Map<String, Object>> queryPagerAm(int page, int size, String name, String addr) {
+        return agentMessageDao.queryAm(page, size, name, addr);
+    }
+
+    @Transactional
+    public int queryTotal(String name, String addr) {
+        return agentMessageDao.queryAmCount(name, addr);
     }
 
     @Transactional
@@ -81,7 +91,7 @@ public class AgentMessageService extends BaseService<AgentMessage> implements IA
         }
     }
 
-    @Scheduled(cron="0 */5 * * * ?")
+    @Scheduled(cron = "0 */5 * * * ?")
     @Transactional
     public void repeatSend() {
         addressService = addressService == null ? SpringUtil.getBean("addressService") : addressService;

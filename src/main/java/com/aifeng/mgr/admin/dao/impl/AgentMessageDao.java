@@ -22,13 +22,56 @@ public class AgentMessageDao extends BaseDao<AgentMessage> implements IAgentMess
         return (List<AgentMessage>) this.findByHql(sql, params);
     }
 
-    public List<Map<String, Object>> getAm(int page, int pageSize) {
-        String str = "select am.id,a.name,m.content,am.times,am.visit,am.visitDate from agent_message am " +
-                "left join agent a on am.agent_id = a.id " +
-                "left join message m on am.message_id = m.id " +
-                "order by am.visitDate desc,am.updateDate desc " +
+    public List<Map<String, Object>> getAm(int page, int pageSize, String addr) {
+        String sql = "select distinct am.id,ag.name,m.content,am.times,am.visit,am.visitDate,am.updateDate from agent_message am " +
+                " join agent ag on am.agent_id = ag.id " +
+                " left join proxy_address pa on ag.id = pa.agent_id " +
+                " join address_fee af on pa.af_id = af.id " +
+                " join address addr on af.address_id = addr.id " +
+                " join message m on am.message_id = m.id ";
+        sql += addr == null ? "" : " where addr.province in (" + addr + ") ";
+        sql += "order by am.visitDate desc,am.updateDate desc " +
                 "limit " + pageSize + " offset " + (page - 1) * pageSize + ";";
-        return this.findBySql(str);
+        return this.findBySql(sql);
+    }
+
+    public int getAmCount(String addr) {
+        String sql = "select count(distinct am.id) as count from agent_message am " +
+                " join agent ag on am.agent_id = ag.id " +
+                " left join proxy_address pa on ag.id = pa.agent_id " +
+                " join address_fee af on pa.af_id = af.id " +
+                " join address addr on af.address_id = addr.id " +
+                " join message m on am.message_id = m.id ";
+        sql += addr == null ? "" : " where addr.province in (" + addr + ") ";
+        return Integer.parseInt(this.findBySql(sql).get(0).get("count").toString());
+    }
+
+    public List<Map<String, Object>> queryAm(int page, int pageSize, String name, String addr) {
+        String sql = "select distinct am.id,ag.name,m.content,am.times,am.visit,am.visitDate,am.updateDate from agent_message am " +
+                " join agent ag on am.agent_id = ag.id " +
+                " left join proxy_address pa on ag.id = pa.agent_id " +
+                " join address_fee af on pa.af_id = af.id " +
+                " join address addr on af.address_id = addr.id " +
+                " join message m on am.message_id = m.id ";
+        sql += addr == null ? "" : " where addr.province in (" + addr + ") ";
+        sql += sql.contains("where") ? " and " : " where ";
+        sql += "name like '%" + name + "%'";
+        sql += " order by am.visitDate desc,am.updateDate desc " +
+                "limit " + pageSize + " offset " + (page - 1) * pageSize + ";";
+        return this.findBySql(sql);
+    }
+
+    public int queryAmCount(String name, String addr) {
+        String sql = "select count(distinct am.id) as count from agent_message am " +
+                " join agent ag on am.agent_id = ag.id " +
+                " left join proxy_address pa on ag.id = pa.agent_id " +
+                " join address_fee af on pa.af_id = af.id " +
+                " join address addr on af.address_id = addr.id " +
+                " join message m on am.message_id = m.id ";
+        sql += addr == null ? "" : " where addr.province in (" + addr + ") ";
+        sql += sql.contains("where") ? " and " : " where ";
+        sql += "name like '%" + name + "%'";
+        return Integer.parseInt(this.findBySql(sql).get(0).get("count").toString());
     }
 
     public List<Map<String, Object>> getAgentAm(long agentId, int page, int pageSize) {
@@ -63,7 +106,3 @@ public class AgentMessageDao extends BaseDao<AgentMessage> implements IAgentMess
         return this.findOneByHql(sql, params);
     }
 }
-
-//    select am.id,a.name,m.content,am.times,am.readed,am.readDate from agent_message am
-//        left join agent a on am.agent_id = a.id
-//        left join message m on am.message_id = m.id

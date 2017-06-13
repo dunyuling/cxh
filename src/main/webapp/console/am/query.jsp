@@ -38,7 +38,7 @@
             <input hidden id="agentId" value="${agentId}"/>
             <table id="tab_agentmessage"
                    data-toggle="table"
-                   data-url="/am/list2.cs?agentId=${agentId}"
+                   data-url="/am/query2.cs?agentId=${agentId}&name=${name}"
                    data-method="get"
                    data-click-to-select="true"
                    data-pagination="true"
@@ -96,11 +96,10 @@
     }
 
     $("#search").click(function () {
-        var agentId = $("#agentId").val();
         var name = $("#name").val();
 
         if (name.trim() != "") {
-            window.location.href = "/am/query.cs?agentId=" + agentId + "&name=" + name;
+            window.location.href = "/am/query.cs?agentId=0&name=" + name;
         }
     });
 </script>
