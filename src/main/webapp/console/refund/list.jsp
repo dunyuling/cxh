@@ -14,8 +14,6 @@
 
 <body class="gray-bg">
 <div class="wrapper wrapper-content animated fadeInRight">
-    <!--           <div class="ibox " style=""> -->
-    <!--               <div class="ibox-content"> -->
     <div class="row row-lg">
         <div class="col-sm-12">
 
@@ -49,8 +47,6 @@
             </table>
         </div>
     </div>
-    <!--               </div> -->
-    <!--           </div> -->
 </div>
 </body>
 </html>

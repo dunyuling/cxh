@@ -14,11 +14,8 @@
 
 <body class="gray-bg">
 <div class="wrapper wrapper-content animated fadeInRight">
-    <!--           <div class="ibox " style=""> -->
-    <!--               <div class="ibox-content"> -->
     <div class="row row-lg">
         <div class="col-sm-12">
-
             <cs:toolbar title="取消授权记录管理" tableId="tab_auditcancel" width="100%" height="100%" menuCode="291" hdMenu="15">
             </cs:toolbar>
             <table id="tab_auditcancel"
@@ -49,8 +46,6 @@
             </table>
         </div>
     </div>
-    <!--               </div> -->
-    <!--           </div> -->
 </div>
 </body>
 </html>

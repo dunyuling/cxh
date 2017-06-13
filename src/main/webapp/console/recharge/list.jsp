@@ -14,13 +14,12 @@
 
 <body class="gray-bg">
 <div class="wrapper wrapper-content animated fadeInRight">
-    <!--           <div class="ibox " style=""> -->
-    <!--               <div class="ibox-content"> -->
     <div class="row row-lg">
         <div class="col-sm-12">
 
             <cs:toolbar title="退费记录管理" tableId="tab_refund" width="100%" height="100%" menuCode="27" hdMenu="15">
             </cs:toolbar>
+            <input hidden id="agentId" value="${agentId}"/>
             <table id="tab_refund"
                    data-toggle="table"
                    data-url="/recharge/list2.cs?agentId=${agentId}"
@@ -46,11 +45,30 @@
                     <th data-field="createDate" data-formatter="dateFormatter">充值时间</th>
                 </tr>
                 </thead>
+                <c:if test="${agentId == 0}">
+                    <div class="row m-b-sm m-t-sm">
+                        <div class="col-md-11">
+                            <div class="input-group">
+                                名字<input id="name" name="name" type="text" placeholder="请输入名字" class="input-sm">
+                                <span><button id="search" type="button"
+                                              class="btn btn-sm btn-primary"> 搜索</button></span>
+                            </div>
+                        </div>
+                    </div>
+                </c:if>
             </table>
         </div>
     </div>
-    <!--               </div> -->
-    <!--           </div> -->
 </div>
+<script type="text/javascript">
+    $("#search").click(function () {
+        var agentId = $("#agentId").val();
+        var name = $("#name").val();
+
+        if (name.trim() != "") {
+            window.location.href = "/recharge/query.cs?agentId=" + agentId + "&name=" + name;
+        }
+    });
+</script>
 </body>
 </html>

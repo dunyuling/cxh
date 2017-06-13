@@ -16,28 +16,11 @@
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row row-lg">
         <div class="col-sm-12">
-            <c:if test="${role != null && role != '客服'}">
-                <cs:toolbar title="代理商消息管理" tableId="tab_agentmessage" width="100%" height="100%" menuCode="26"
-                            hdMenu="15">
-                    <button class="btn btn-sm btn-success" type="button" onclick="view()">
-                        <input type="hidden" name="title1" value="回访记录"/>
-                        <i class="fa fa-plus"></i>&nbsp;查看回访记录
-                    </button>
-                </cs:toolbar>
-            </c:if>
-            <c:if test="${role != null && role == '客服'}">
-                <cs:toolbar title="代理商消息管理" tableId="tab_agentmessage" width="100%" height="100%" menuCode="26"
-                            hdMenu="15">
-                    <button class="btn btn-sm btn-success" type="button" onclick="view()">
-                        <input type="hidden" name="title1" value="回访记录"/>
-                        <i class="fa fa-plus"></i>&nbsp;查看回访记录
-                    </button>
-                </cs:toolbar>
-            </c:if>
-
-            <table id="tab_agentmessage"
+            <cs:toolbar title="退费记录管理" tableId="tab_refund" width="100%" height="100%" menuCode="27" hdMenu="15">
+            </cs:toolbar>
+            <table id="tab_refund"
                    data-toggle="table"
-                   data-url="/am/query2.cs?name=${name}"
+                   data-url="/recharge/query2.cs?name=${name}"
                    data-method="get"
                    data-click-to-select="true"
                    data-pagination="true"
@@ -54,11 +37,10 @@
                 <tr>
                     <th data-checkbox="true" data-click-to-select="true"></th>
                     <th data-field="id" data-visible="false"></th>
-                    <th data-field="name">名字</th>
-                    <th data-field="content">内容</th>
-                    <th data-field="times">已发次数</th>
-                    <th data-field="visit" data-formatter="visitFormatter">是否回访</th>
-                    <th data-field="visitDate" data-formatter="dateFormatter">回访时间</th>
+                    <th data-field="ag_name">代理商</th>
+                    <th data-field="amount">金额(元)</th>
+                    <th data-field="ad_name">操作人</th>
+                    <th data-field="createDate" data-formatter="dateFormatter">充值时间</th>
                 </tr>
                 </thead>
                 <c:if test="${agentId == 0}">
@@ -76,29 +58,12 @@
         </div>
     </div>
 </div>
-<script>
-    function translateStatus(value) {
-        switch (value) {
-            case 'APPLYING':
-                return '申请中';
-            case 'AUTHORED':
-                return "已授权";
-            case 'EXPIRED':
-                return "已过期";
-            case 'REFUSED':
-                return "被拒绝";
-        }
-    }
-
-    function visitFormatter(value) {
-        return value == false ? "未回访" : "已回访";
-    }
-
+<script type="text/javascript">
     $("#search").click(function () {
         var name = $("#name").val();
 
         if (name.trim() != "") {
-            window.location.href = "/am/query.cs?agentId=0&name=" + name;
+            window.location.href = "/recharge/query.cs?agentId=0&name=" + name;
         }
     });
 </script>

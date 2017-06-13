@@ -46,13 +46,23 @@ public class RechargeService extends BaseService<Recharge> implements IRechargeS
     }
 
     @Transactional
-    public List<Map<String, Object>> getPagerRecharge(int page, int size) {
-        return rechargeDao.getRecharges(page, size);
+    public List<Map<String, Object>> getPagerRecharge(int page, int size, String addr) {
+        return rechargeDao.getRecharges(page, size, addr);
     }
 
     @Transactional
-    public long getTotal() {
-        return rechargeDao.countAll();
+    public int getTotal(String addr) {
+        return rechargeDao.queryRechargesCount(addr);
+    }
+
+    @Transactional
+    public List<Map<String, Object>> queryRecharge(int page, int size, String name, String addr) {
+        return rechargeDao.queryRecharges(page, size, name, addr);
+    }
+
+    @Transactional
+    public int queryTotal(String name, String addr) {
+        return rechargeDao.queryRechargesCount(name, addr);
     }
 
     @Transactional
