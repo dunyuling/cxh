@@ -1,6 +1,5 @@
 package com.aifeng.ws.user.ctl;
 
-import com.aifeng.mgr.admin.model.News;
 import com.aifeng.mgr.admin.service.impl.MemberService;
 import com.aifeng.mgr.admin.service.impl.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,8 +54,8 @@ public class FrontCtl {
     public String getNews(@RequestParam(value = "page", defaultValue = "1") int page, Model model) {
         try {
             int pageSize = 10;
-            List<Map<String, Object>> newses = newsService.getByPage(page, pageSize);
-            int pageCount = newsService.getTotalPage(pageSize);
+            List<Map<String, Object>> newses = newsService.getNews(page, pageSize);
+            int pageCount = newsService.getPageCount(pageSize);
             model.addAttribute("newses", newses);
             model.addAttribute("current", page);
             model.addAttribute("pageCount", pageCount);

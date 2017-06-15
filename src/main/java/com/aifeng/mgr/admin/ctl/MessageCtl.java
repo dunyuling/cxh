@@ -38,12 +38,12 @@ public class MessageCtl extends BaseCtl {
         List<Map<String, Object>> list;
         long total;
         if (agentId != 0) {
-            list = messageService.getAgentPagerMsg(agentId, page, pageSize);
-            total = messageService.getAgentTotal(agentId);
+            list = messageService.getAgentMessage(agentId, page, pageSize);
+            total = messageService.getAgentCount(agentId);
         } else {
             String addr = getAddr();
-            list = messageService.getPagerMsg(page, pageSize, addr);
-            total = messageService.getPagerMsgCount(addr);
+            list = messageService.getMessage(page, pageSize, addr);
+            total = messageService.getMessageCount(addr);
         }
         JSONObject json = new JSONObject();
         json.put("rows", list);
@@ -62,8 +62,8 @@ public class MessageCtl extends BaseCtl {
     public String query2(int page, int pageSize, String name) {
         //目前根据代理商名字查询，代理商登录则不提供查询功能
         String addr = getAddr();
-        List<Map<String, Object>> list = messageService.queryMsg(page, pageSize, name, addr);
-        int total = messageService.queryMsgCount(name, addr);
+        List<Map<String, Object>> list = messageService.queryMessage(page, pageSize, name, addr);
+        int total = messageService.queryMessageCount(name, addr);
         JSONObject json = new JSONObject();
         json.put("rows", list);
         json.put("total", total);
@@ -71,7 +71,7 @@ public class MessageCtl extends BaseCtl {
     }
 
     @RequestMapping("send")
-    public void sendMsg() {
+    public void sendMessage() {
         messageService.sendMsg("lhg0", "a");
     }
 }

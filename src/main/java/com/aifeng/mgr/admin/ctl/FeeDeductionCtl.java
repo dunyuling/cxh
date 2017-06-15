@@ -38,12 +38,12 @@ public class FeeDeductionCtl extends BaseCtl {
         List<Map<String, Object>> list;
         long total;
         if (agentId != 0) {
-            list = feeDeductionService.getAgentPagerFeeDeduction(agentId, page, pageSize);
-            total = feeDeductionService.getAgentTotal(agentId);
+            list = feeDeductionService.getAgentFeeDeduction(agentId, page, pageSize);
+            total = feeDeductionService.getAgentCount(agentId);
         } else {
             String addr = getAddr();
-            list = feeDeductionService.getPagerFeeDeduction(page, pageSize, addr);
-            total = feeDeductionService.getTotal(addr);
+            list = feeDeductionService.getFeeDeduction(page, pageSize, addr);
+            total = feeDeductionService.getCount(addr);
         }
 
         JSONObject json = new JSONObject();
@@ -64,7 +64,7 @@ public class FeeDeductionCtl extends BaseCtl {
         //目前根据代理商名字查询，代理商登录则不提供查询功能
         String addr = getAddr();
         List<Map<String, Object>> list = feeDeductionService.queryFeeDeduction(page, pageSize, name, addr);
-        int total = feeDeductionService.queryFeeDeductionCount(name, addr);
+        int total = feeDeductionService.queryCount(name, addr);
         JSONObject json = new JSONObject();
         json.put("rows", list);
         json.put("total", total);

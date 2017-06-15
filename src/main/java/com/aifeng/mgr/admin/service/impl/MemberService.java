@@ -92,7 +92,7 @@ public class MemberService extends BaseService<Member> implements IMemberService
         AddressFee addressFee = addressFeeService.getAddressFee(member.getAddress_id());
         long af_id = addressFee.getId();
         int amount = addressFee.getAmount();
-        ProxyAddress proxyAddress = proxyAddressService.getAuthoredProxyByAfId(af_id);
+        ProxyAddress proxyAddress = proxyAddressService.getAuthoredProxyAddress(af_id);
         if (proxyAddress != null) {
             long agent_id = proxyAddress.getAgent_id();
             Agent agent = agentService.findById(agent_id);
@@ -105,40 +105,35 @@ public class MemberService extends BaseService<Member> implements IMemberService
                 //基本信息
                 Message message = messageService.save(content, proxyAddress.getId());
                 //做为重发凭证
-                agentMessageService.save(member, message, agent);
+                agentMessageService.saveAgentMessage(member, message, agent);
                 messageService.sendMsg(agent, message, amount, true);
             }
         }
     }
 
     @Transactional
-    public List<Map<String, Object>> getPageMember(int page, int size, String addr) {
+    public List<Map<String, Object>> getMember(int page, int size, String addr) {
         return memberDao.getMember(page, size, addr);
     }
 
     @Transactional
-    public int getInitTotal(String addr) {
-        return memberDao.getInitCount(addr);
+    public int getCount(String addr) {
+        return memberDao.getCount(addr);
     }
 
     @Transactional
-    public List<Map<String, Object>> queryPageMember(int page, int size, String name, String mobile, String addr) {
+    public List<Map<String, Object>> queryMember(int page, int size, String name, String mobile, String addr) {
         return memberDao.queryMember(page, size, name, mobile, addr);
     }
 
     @Transactional
-    public int queryTotal(String name, String mobile, String addr) {
-        return memberDao.queryInitCount(name, mobile, addr);
+    public int queryCount(String name, String mobile, String addr) {
+        return memberDao.queryCount(name, mobile, addr);
     }
 
     @Transactional
     public Map<String, Object> getSingleMember(long id) {
         return memberDao.getSingleProxyAddress(id);
-    }
-
-    @Transactional
-    public long getTotal() {
-        return memberDao.countAll();
     }
 
     @Transactional
@@ -149,7 +144,7 @@ public class MemberService extends BaseService<Member> implements IMemberService
 
     @Transactional
     public List<Map<String, Object>> getTotalFromWx(String user_id) {
-        return memberDao.getTotal(user_id);
+        return memberDao.getTotalMember(user_id);
     }
 
     @Transactional
@@ -158,18 +153,18 @@ public class MemberService extends BaseService<Member> implements IMemberService
     }
 
     @Transactional
-    public List<Map<String, Object>> getQueryFromWx(String user_id, String date) {
-        return memberDao.getQuery(user_id, date);
+    public List<Map<String, Object>> queryFromWx(String user_id, String date) {
+        return memberDao.queryMember(user_id, date);
     }
 
     @Transactional
-    public int getQueryCountFromWx(String user_id, String dateStr) {
-        return memberDao.getQueryCount(user_id, dateStr);
+    public int queryCountFromWx(String user_id, String dateStr) {
+        return memberDao.queryCount(user_id, dateStr);
     }
 
     @Transactional
     public List<Map<String, Object>> getTodayFromWx(String user_id) {
-        return memberDao.getToday(user_id);
+        return memberDao.getTodayMember(user_id);
     }
 
     @Transactional
@@ -179,7 +174,7 @@ public class MemberService extends BaseService<Member> implements IMemberService
 
     @Transactional
     public List<Map<String, Object>> getTodayFromWx(String user_id, boolean visit) {
-        return memberDao.getToday(user_id, visit);
+        return memberDao.getTodayMember(user_id, visit);
     }
 
     @Transactional

@@ -31,20 +31,20 @@ import com.alibaba.fastjson.JSONObject;
 public class RoleCtl  extends BaseCtl{
 	
 	Logger log = Logger.getLogger(RoleCtl.class);
-	
+
+	private final IRoleService roleService;
+	private final IMenuService menuService;
+	private final IActionService actionService;
+	private final IRoleMenuService roleMenuService;
+
 	@Autowired
-	IRoleService roleService;
-	
-	@Autowired
-	IMenuService menuService;
-	
-	@Autowired
-	IActionService actionService;
-	
-	
-	@Autowired
-	IRoleMenuService roleMenuService;
-	
+	public RoleCtl(IRoleService roleService, IMenuService menuService, IActionService actionService, IRoleMenuService roleMenuService) {
+		this.roleService = roleService;
+		this.menuService = menuService;
+		this.actionService = actionService;
+		this.roleMenuService = roleMenuService;
+	}
+
 	@RequestMapping("list")
 	public String list(ModelMap mm, @RequestParam(required=false)String menuCode){
 		mm.put(MENU_CODE, menuCode);
@@ -64,7 +64,7 @@ public class RoleCtl  extends BaseCtl{
 	
 	@RequestMapping("transfer")
 	public String transfer(String id, String action, ModelMap mm){
-		Role role = null;
+		Role role;
 		if(StringUtil.isNotBlank(id)){
 			role = this.roleService.findById(Integer.valueOf(id.trim()));
 			mm.put("role", role);
@@ -72,14 +72,15 @@ public class RoleCtl  extends BaseCtl{
 		return "sys/role/" + action;
 	}
 	
+	@SuppressWarnings("UnnecessaryUnboxing")
 	@RequestMapping(value="getListMenu", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
 	@ResponseBody
 	public String getListMenu(int roleId, ModelMap mm){
 		List<Map<String, Object>> list = this.menuService.getRoleMenu(roleId);
 		List<Map<String, Object>> list2 = this.actionService.getAllAction(roleId+"");
 		
-		List<ZTree> zts = new ArrayList<ZTree>();
-		ZTree zt = null;
+		List<ZTree> zts = new ArrayList<>();
+		ZTree zt;
 		for(Map<String, Object> mo : list){
 			int menu_id = Integer.valueOf(mo.get("menu_id").toString()).intValue();
 			int pId = Integer.valueOf(mo.get("menu_pid").toString()).intValue();

@@ -44,32 +44,32 @@ public class AuditCancelService extends BaseService<AuditCancel> implements IAud
     }
 
     @Transactional
-    public List<Map<String, Object>> getPagerAuditCancel(int page, int size, String addr) {
-        return auditCancelDao.getAuditCancels(page, size, addr);
+    public List<Map<String, Object>> getAuditCancel(int page, int size, String addr) {
+        return auditCancelDao.getAuditCancel(page, size, addr);
     }
 
     @Transactional
-    public int getTotal(String addr) {
-        return auditCancelDao.getAuditCancelsCount(addr);
+    public int getCount(String addr) {
+        return auditCancelDao.getAuditCancelCount(addr);
     }
 
     @Transactional
     public List<Map<String, Object>> queryAuditCancel(int page, int size, String name, String addr) {
-        return auditCancelDao.queryAuditCancels(page, size, name, addr);
+        return auditCancelDao.queryAuditCancel(page, size, name, addr);
     }
 
     @Transactional
-    public int queryTotal(String name, String addr) {
-        return auditCancelDao.queryAuditCancelsCount(name, addr);
+    public int queryCount(String name, String addr) {
+        return auditCancelDao.queryAuditCancelCount(name, addr);
     }
 
     @Transactional
-    public List<Map<String, Object>> getAgentPagerAuditCancel(long agentId, int page, int size) {
-        return auditCancelDao.getAuditCancels(agentId, page, size);
+    public List<Map<String, Object>> getAgentAuditCancel(long agentId, int page, int size) {
+        return auditCancelDao.getAuditCancel(agentId, page, size);
     }
 
     @Transactional
-    public long getAgentTotal(long agentId) {
+    public long getAgentCount(long agentId) {
         return auditCancelDao.getAgentAuditCancelCount(agentId);
     }
 }

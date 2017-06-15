@@ -8,13 +8,10 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by pro on 17-4-30.
- */
 @Repository
 public class RefundDao extends BaseDao<Refund> implements IRefundDao {
 
-    public List<Map<String, Object>> getRefunds(int page, int pageSize, String addr) {
+    public List<Map<String, Object>> getRefund(int page, int pageSize, String addr) {
         String sql = "select distinct r.id, ag.name as ag_name, r.amount,ad.name as ad_name,r.createDate from refund r " +
                 "left join tb_mgr_admin ad on ad.id = r.admin_id " +
                 "left join agent ag on ag.id = r.agent_id " +
@@ -28,7 +25,7 @@ public class RefundDao extends BaseDao<Refund> implements IRefundDao {
         return this.findBySql(sql);
     }
 
-    public int getRefundsCount(String addr) {
+    public int getRefundCount(String addr) {
         String sql = "select count(distinct r.id) as count from refund r " +
                 "left join tb_mgr_admin ad on ad.id = r.admin_id " +
                 "left join agent ag on ag.id = r.agent_id " +
@@ -39,7 +36,7 @@ public class RefundDao extends BaseDao<Refund> implements IRefundDao {
         return Integer.parseInt(this.findBySql(sql).get(0).get("count").toString());
     }
 
-    public List<Map<String, Object>> queryRefunds(int page, int pageSize, String name, String addr) {
+    public List<Map<String, Object>> queryRefund(int page, int pageSize, String name, String addr) {
         String sql = "select distinct r.id, ag.name as ag_name, r.amount,ad.name as ad_name,r.createDate from refund r " +
                 "left join tb_mgr_admin ad on ad.id = r.admin_id " +
                 "left join agent ag on ag.id = r.agent_id " +
@@ -54,7 +51,7 @@ public class RefundDao extends BaseDao<Refund> implements IRefundDao {
         return this.findBySql(sql);
     }
 
-    public int queryRefundsCount(String name, String addr) {
+    public int queryRefundCount(String name, String addr) {
         String sql = "select count(distinct r.id) as count from refund r " +
                 "left join tb_mgr_admin ad on ad.id = r.admin_id " +
                 "left join agent ag on ag.id = r.agent_id " +
@@ -67,7 +64,7 @@ public class RefundDao extends BaseDao<Refund> implements IRefundDao {
         return Integer.parseInt(this.findBySql(sql).get(0).get("count").toString());
     }
 
-    public List<Map<String, Object>> getAgentRefunds(long agentId, int page, int pageSize) {
+    public List<Map<String, Object>> getAgentRefund(long agentId, int page, int pageSize) {
         String sql = "select ag.name as ag_name, r.amount,ad.name as ad_name,r.createDate from refund r " +
                 "left join tb_mgr_admin ad on ad.id = r.admin_id " +
                 "left join agent ag on ag.id = r.agent_id " +
@@ -77,7 +74,7 @@ public class RefundDao extends BaseDao<Refund> implements IRefundDao {
         return this.findBySql(sql);
     }
 
-    public int getAgentRefundsCount(long agentId) {
+    public int getAgentRefundCount(long agentId) {
         String sql = "select ag.name as ag_name, r.amount,ad.name as ad_name,r.createDate from refund r " +
                 "left join tb_mgr_admin ad on ad.id = r.admin_id " +
                 "left join agent ag on ag.id = r.agent_id " +

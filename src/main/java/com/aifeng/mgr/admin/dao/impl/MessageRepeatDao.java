@@ -10,12 +10,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by pro on 17-4-28.
- */
 @Repository
 public class MessageRepeatDao extends BaseDao<MessageRepeat> implements IMessageRepeatDao {
 
+    @SuppressWarnings("unchecked")
     public MessageRepeat getFirst() {
         String sql = "from MessageRepeat";
         List<MessageRepeat> messageRepeatList = (List<MessageRepeat>) this.findByHql(sql,null);

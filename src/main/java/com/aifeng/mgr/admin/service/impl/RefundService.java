@@ -46,32 +46,32 @@ public class RefundService extends BaseService<Refund> implements IRefundService
     }
 
     @Transactional
-    public List<Map<String, Object>> getPagerRefund(int page, int size, String addr) {
-        return refundDao.getRefunds(page, size, addr);
+    public List<Map<String, Object>> getRefund(int page, int size, String addr) {
+        return refundDao.getRefund(page, size, addr);
     }
 
     @Transactional
-    public long getTotal(String addr) {
-        return refundDao.getRefundsCount(addr);
+    public int getCount(String addr) {
+        return refundDao.getRefundCount(addr);
     }
 
     @Transactional
-    public List<Map<String, Object>> queryRefunds(int page, int size, String name, String addr) {
-        return refundDao.queryRefunds(page, size, name, addr);
+    public List<Map<String, Object>> queryRefund(int page, int size, String name, String addr) {
+        return refundDao.queryRefund(page, size, name, addr);
     }
 
     @Transactional
     public int queryTotal(String name, String addr) {
-        return refundDao.queryRefundsCount(name, addr);
+        return refundDao.queryRefundCount(name, addr);
     }
 
     @Transactional
-    public List<Map<String, Object>> getAgentPagerRefund(long agentId, int page, int size) {
-        return refundDao.getAgentRefunds(agentId, page, size);
+    public List<Map<String, Object>> getAgentRefund(long agentId, int page, int size) {
+        return refundDao.getAgentRefund(agentId, page, size);
     }
 
     @Transactional
-    public long getAgentTotal(long agentId) {
-        return refundDao.getAgentRefundsCount(agentId);
+    public int getAgentCount(long agentId) {
+        return refundDao.getAgentRefundCount(agentId);
     }
 }

@@ -27,12 +27,12 @@ public class ProxyAddressService extends BaseService<ProxyAddress> implements IP
 
     @Transactional
     boolean checkProxied(long af_id) {
-        return proxyAddressDao.getByAgentIdAndAfId(af_id) != null;
+        return proxyAddressDao.getByAddressFeeId(af_id) != null;
     }
 
     @Transactional
-    ProxyAddress getAuthoredProxyByAfId(long af_id) {
-        return proxyAddressDao.getByAgentIdAndAfId(af_id);
+    ProxyAddress getAuthoredProxyAddress(long af_id) {
+        return proxyAddressDao.getByAddressFeeId(af_id);
     }
 
     @Transactional
@@ -46,23 +46,23 @@ public class ProxyAddressService extends BaseService<ProxyAddress> implements IP
     }
 
     @Transactional
-    public List<Map<String, Object>> getPagerProxyAddress(int page, int size, String addr) {
+    public List<Map<String, Object>> getProxyAddress(int page, int size, String addr) {
         return proxyAddressDao.getProxyAddress(page, size, addr);
     }
 
     @Transactional
-    public int getProxyAddressCount(String addr) {
+    public int getCount(String addr) {
         return proxyAddressDao.getProxyAddressCount(addr);
     }
 
     @Transactional
-    public List<Map<String, Object>> getQueryProxyAddress(int page, int size, String name, String addr) {
-        return proxyAddressDao.getQueryProxyAddress(page, size, name, addr);
+    public List<Map<String, Object>> queryProxyAddress(int page, int size, String name, String addr) {
+        return proxyAddressDao.queryProxyAddress(page, size, name, addr);
     }
 
     @Transactional
-    public int getQueryProxyAddressCount(String name, String addr) {
-        return proxyAddressDao.getQueryProxyAddressCount(name, addr);
+    public int queryAgentCount(String name, String addr) {
+        return proxyAddressDao.queryProxyAddressCount(name, addr);
     }
 
     @Transactional
@@ -71,23 +71,23 @@ public class ProxyAddressService extends BaseService<ProxyAddress> implements IP
     }
 
     @Transactional
-    public List<Map<String, Object>> getAgentPagerProxyAddress(long agent_id, int page, int size) {
+    public List<Map<String, Object>> getAgentProxyAddress(long agent_id, int page, int size) {
         return proxyAddressDao.getAgentProxyAddress(agent_id, page, size);
     }
 
     @Transactional
-    public long getAgentCount(long agent_id) {
+    public int getAgentCount(long agent_id) {
         return proxyAddressDao.getAgentCount(agent_id);
     }
 
     @Transactional
-    public List<Map<String, Object>> getAgentQueryPagerProxyAddress(long agent_id, int page, int size, String name) {
-        return proxyAddressDao.getAgentQueryProxyAddress(agent_id, page, size, name);
+    public List<Map<String, Object>> queryAgentProxyAddress(long agent_id, int page, int size, String name) {
+        return proxyAddressDao.queryAgentProxyAddress(agent_id, page, size, name);
     }
 
     @Transactional
-    public long getAgentQueryCount(long agent_id, String name) {
-        return proxyAddressDao.getAgentQueryCount(agent_id, name);
+    public long queryAgentCount(long agent_id, String name) {
+        return proxyAddressDao.queryAgentCount(agent_id, name);
     }
 
     @Transactional
@@ -124,7 +124,7 @@ public class ProxyAddressService extends BaseService<ProxyAddress> implements IP
     }
 
     @Transactional
-    void auditCancelPa(long agent_id) {
-        this.proxyAddressDao.auditCancelPa(agent_id);
+    void auditCancelProxyAddress(long agent_id) {
+        this.proxyAddressDao.auditCancelProxyAddress(agent_id);
     }
 }

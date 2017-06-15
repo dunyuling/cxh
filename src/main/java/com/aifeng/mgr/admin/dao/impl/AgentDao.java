@@ -10,13 +10,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by pro on 17-4-27.
- */
 @Repository
 public class AgentDao extends BaseDao<Agent> implements IAgentDao {
 
-    public List<Map<String, Object>> getAgents(int page, int pageSize, String addr) {
+    public List<Map<String, Object>> getAgentByAddr(int page, int pageSize, String addr) {
         String sql = "select distinct a.id,a.name,a.userid,a.mobile,a.IDCard,a.corpName,a.licenseImg,a.expireDate,a.money,a.active from agent a ";
         sql += addr == null ? "" : " join proxy_address pa on a.id = pa.agent_id " +
                 " join address_fee af on pa.af_id = af.id " +
@@ -27,7 +24,7 @@ public class AgentDao extends BaseDao<Agent> implements IAgentDao {
         return this.findBySql(sql);
     }
 
-    public int getAgentsCount(String addr) {
+    public int getAgentCount(String addr) {
         String sql = "select count(distinct a.id) as count from agent a ";
         sql += addr == null ? "" : " join proxy_address pa on a.id = pa.agent_id " +
                 " join address_fee af on pa.af_id = af.id " +
@@ -36,7 +33,7 @@ public class AgentDao extends BaseDao<Agent> implements IAgentDao {
         return Integer.parseInt(this.findBySql(sql).get(0).get("count").toString());
     }
 
-    public List<Map<String, Object>> getAgents(int page, int pageSize, String mobile, String IDCard, String expire_days, String addr) {
+    public List<Map<String, Object>> getAgentByAddr(int page, int pageSize, String mobile, String IDCard, String expire_days, String addr) {
         String sql = "select a.id,a.name,a.userid,a.mobile,a.IDCard,a.corpName,a.licenseImg,a.expireDate,a.money,a.active from agent a ";
         sql += addr == null ? "" : " join proxy_address pa on a.id = pa.agent_id " +
                 " join address_fee af on pa.af_id = af.id " +
@@ -50,7 +47,7 @@ public class AgentDao extends BaseDao<Agent> implements IAgentDao {
         return this.findBySql(sql);
     }
 
-    public int getAgentsCount(String mobile, String IDCard, String expire_days, String addr) {
+    public int getAgentCount(String mobile, String IDCard, String expire_days, String addr) {
         String sql = "select count(distinct a.id) as count from agent a ";
         sql += addr == null ? "" : " join proxy_address pa on a.id = pa.agent_id " +
                 " join address_fee af on pa.af_id = af.id " +
@@ -91,7 +88,7 @@ public class AgentDao extends BaseDao<Agent> implements IAgentDao {
         return this.findOneByHql(sql, map);
     }
 
-    public Map<String, Object> getAgentSubmitMsgFromWx(String user_id) {
+    public Map<String, Object> getAgentSubmitMessageFromWx(String user_id) {
         String sql = "select a.id,a.IDCard,a.mobile,a.corpName,a.name,date_format(a.expireDate,'%Y-%m-%d') as expireDate,a.licenseImg,addr.province,addr.city,addr.area from agent a " +
                 "left join proxy_address pa on a.id = pa.agent_id " +
                 "left join address_fee af on pa.af_id = af.id " +

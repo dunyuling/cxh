@@ -38,12 +38,12 @@ public class AuditCancelCtl extends BaseCtl {
         List<Map<String, Object>> list;
         long total;
         if (agentId != 0) {
-            list = auditCancelService.getAgentPagerAuditCancel(agentId, page, pageSize);
-            total = auditCancelService.getAgentTotal(agentId);
+            list = auditCancelService.getAgentAuditCancel(agentId, page, pageSize);
+            total = auditCancelService.getAgentCount(agentId);
         } else {
             String addr = getAddr();
-            list = auditCancelService.getPagerAuditCancel(page, pageSize, addr);
-            total = auditCancelService.getTotal(addr);
+            list = auditCancelService.getAuditCancel(page, pageSize, addr);
+            total = auditCancelService.getCount(addr);
         }
 
         JSONObject json = new JSONObject();
@@ -64,7 +64,7 @@ public class AuditCancelCtl extends BaseCtl {
         //目前根据代理商名字查询，代理商登录则不提供查询功能
         String addr = getAddr();
         List<Map<String, Object>> list = auditCancelService.queryAuditCancel(page, pageSize, name, addr);
-        int total = auditCancelService.queryTotal(name, addr);
+        int total = auditCancelService.queryCount(name, addr);
         JSONObject json = new JSONObject();
         json.put("rows", list);
         json.put("total", total);

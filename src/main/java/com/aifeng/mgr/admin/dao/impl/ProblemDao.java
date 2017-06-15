@@ -11,7 +11,7 @@ import java.util.Map;
 @Repository
 public class ProblemDao extends BaseDao<Problem> implements IProblemDao {
 
-    public List<Map<String, Object>> getProblems(int page, int pageSize) {
+    public List<Map<String, Object>> getProblem(int page, int pageSize) {
         String sql = "select p.id, p.title, p.description, p.createDate, tma.name as cs_name, a.name as a_name,p.solve,p.solution from problem p " +
                 "left join tb_mgr_admin tma on tma.id= p.customerservice_id " +
                 "left join agent a on p.agent_id = a.id " +
@@ -20,7 +20,7 @@ public class ProblemDao extends BaseDao<Problem> implements IProblemDao {
         return this.findBySql(sql);
     }
 
-    public List<Map<String, Object>> queryProblems(int page, int pageSize, String agent_name, String cs_name) {
+    public List<Map<String, Object>> queryProblem(int page, int pageSize, String agent_name, String cs_name) {
         String sql = "select p.id, p.title, p.description, p.createDate, tma.name as cs_name, a.name as a_name,p.solve,p.solution from problem p " +
                 "left join tb_mgr_admin tma on tma.id= p.customerservice_id " +
                 "left join agent a on p.agent_id = a.id ";
@@ -42,7 +42,7 @@ public class ProblemDao extends BaseDao<Problem> implements IProblemDao {
         return Integer.parseInt(this.findBySql(sql).get(0).get("count").toString());
     }
 
-    public List<Map<String, Object>> getCsProblems(int id, int page, int pageSize) {
+    public List<Map<String, Object>> getCustomerServiceProblems(int id, int page, int pageSize) {
         String str = "select p.id, p.title,p.createDate, p.description,p.solve,p.solution, tma.name from problem p " +
                 "join tb_mgr_admin tma on p.customerService_id = tma.id " +
                 "where p.customerService_id = '" + id + "'" +
@@ -51,7 +51,7 @@ public class ProblemDao extends BaseDao<Problem> implements IProblemDao {
         return this.findBySql(str);
     }
 
-    public int getCsProblemCount(int id) {
+    public int getCustomerServiceProblemCount(int id) {
         String str = "select count(p.id) as count from problem p " +
                 "join customer_service cs on p.customerService_id = cs.id " +
                 "where p.customerService_id = '" + id + "'";

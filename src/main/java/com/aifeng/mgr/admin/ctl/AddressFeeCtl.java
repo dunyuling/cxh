@@ -49,8 +49,8 @@ public class AddressFeeCtl extends BaseCtl {
     @ResponseBody
     public String list2(int page, int pageSize) {
         String addr = getAddr();
-        List<Map<String, Object>> list = addressService.getByPage(page, pageSize, addr);
-        long total = addressService.getTotal(addr);
+        List<Map<String, Object>> list = addressService.getAddress(page, pageSize, addr);
+        int total = addressService.getCount(addr);
         JSONObject json = new JSONObject();
         json.put("rows", list);
         json.put("total", total);
@@ -69,7 +69,7 @@ public class AddressFeeCtl extends BaseCtl {
     public String query2(int page, int pageSize, String province, String city, String area) {
         String addr = getAddr();
         List<Map<String, Object>> list = addressService.getAddressFee(page, pageSize, province, city, area, addr);
-        long total = addressService.getAddressFeeCount(province, city, area, addr);
+        int total = addressService.getAddressFeeCount(province, city, area, addr);
         JSONObject json = new JSONObject();
         json.put("rows", list);
         json.put("total", total);

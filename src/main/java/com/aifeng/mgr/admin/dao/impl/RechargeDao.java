@@ -14,7 +14,7 @@ import java.util.Map;
 @Repository
 public class RechargeDao extends BaseDao<Recharge> implements IRechargeDao {
 
-    public List<Map<String, Object>> getRecharges(int page, int pageSize, String addr) {
+    public List<Map<String, Object>> getRecharge(int page, int pageSize, String addr) {
         String sql = "select distinct r.id ,ag.name as ag_name, r.amount,ad.name as ad_name, r.createDate from recharge r " +
                 " join tb_mgr_admin ad on ad.id = r.admin_id " +
                 " join agent ag on ag.id = r.agent_id " +
@@ -27,7 +27,7 @@ public class RechargeDao extends BaseDao<Recharge> implements IRechargeDao {
         return this.findBySql(sql);
     }
 
-    public int queryRechargesCount(String addr) {
+    public int queryRechargeCount(String addr) {
         String sql = "select count(distinct r.id) as count from recharge r " +
                 " join tb_mgr_admin ad on ad.id = r.admin_id " +
                 " join agent ag on ag.id = r.agent_id " +
@@ -38,7 +38,7 @@ public class RechargeDao extends BaseDao<Recharge> implements IRechargeDao {
         return Integer.parseInt(this.findBySql(sql).get(0).get("count").toString());
     }
 
-    public List<Map<String, Object>> queryRecharges(int page, int pageSize, String name, String addr) {
+    public List<Map<String, Object>> queryRecharge(int page, int pageSize, String name, String addr) {
         String sql = "select distinct r.id ,ag.name as ag_name, r.amount,ad.name as ad_name, r.createDate from recharge r " +
                 " join tb_mgr_admin ad on ad.id = r.admin_id " +
                 " join agent ag on ag.id = r.agent_id " +
@@ -53,7 +53,7 @@ public class RechargeDao extends BaseDao<Recharge> implements IRechargeDao {
         return this.findBySql(sql);
     }
 
-    public int queryRechargesCount(String name, String addr) {
+    public int queryRechargeCount(String name, String addr) {
         String sql = "select count(distinct r.id) as count from recharge r " +
                 " join tb_mgr_admin ad on ad.id = r.admin_id " +
                 " join agent ag on ag.id = r.agent_id " +
@@ -66,7 +66,7 @@ public class RechargeDao extends BaseDao<Recharge> implements IRechargeDao {
         return Integer.parseInt(this.findBySql(sql).get(0).get("count").toString());
     }
 
-    public List<Map<String, Object>> getAgentRecharges(long agentId, int page, int pageSize) {
+    public List<Map<String, Object>> getAgentRecharge(long agentId, int page, int pageSize) {
         String str = "select ag.name as ag_name, r.amount,ad.name as ad_name, r.createDate from recharge r " +
                 "left join tb_mgr_admin ad on ad.id = r.admin_id " +
                 "left join agent ag on ag.id = r.agent_id " +
@@ -76,7 +76,7 @@ public class RechargeDao extends BaseDao<Recharge> implements IRechargeDao {
         return this.findBySql(str);
     }
 
-    public int getAgentRechargesCount(long agentId) {
+    public int getAgentRechargeCount(long agentId) {
         String str = "select ag.name as ag_name, r.amount,ad.name as ad_name, r.createDate from recharge r " +
                 "left join tb_mgr_admin ad on ad.id = r.admin_id " +
                 "left join agent ag on ag.id = r.agent_id " +

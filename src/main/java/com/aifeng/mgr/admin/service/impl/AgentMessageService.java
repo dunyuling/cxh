@@ -35,7 +35,7 @@ public class AgentMessageService extends BaseService<AgentMessage> implements IA
     }
 
     @Transactional
-    public void save(Member member, Message message, Agent agent) {
+    public void saveAgentMessage(Member member, Message message, Agent agent) {
         AgentMessage agentMessage = new AgentMessage();
         agentMessage.setMember_id(member.getId());
         agentMessage.setAgent_id(agent.getId());
@@ -46,43 +46,43 @@ public class AgentMessageService extends BaseService<AgentMessage> implements IA
     }
 
     @Transactional
-    public List<AgentMessage> getAllNeedRepeat() {
+    List<AgentMessage> getAllNeedRepeat() {
         MessageRepeat messageRepeat = messageRepeatService.getOrMockFirst();
         return this.agentMessageDao.getAllNeedRepeat(messageRepeat.getTotalTimes());
     }
 
     @Transactional
-    public List<Map<String, Object>> getPagerAm(int page, int size, String addr) {
-        return agentMessageDao.getAm(page, size, addr);
+    public List<Map<String, Object>> getAgentMessage(int page, int size, String addr) {
+        return agentMessageDao.getAgentMessage(page, size, addr);
     }
 
     @Transactional
-    public long getTotal(String addr) {
-        return agentMessageDao.getAmCount(addr);
+    public int getCount(String addr) {
+        return agentMessageDao.getAgentMessageCount(addr);
     }
 
     @Transactional
-    public List<Map<String, Object>> queryPagerAm(int page, int size, String name, String addr) {
-        return agentMessageDao.queryAm(page, size, name, addr);
+    public List<Map<String, Object>> queryAgentMessage(int page, int size, String name, String addr) {
+        return agentMessageDao.queryAgentMessage(page, size, name, addr);
     }
 
     @Transactional
-    public int queryTotal(String name, String addr) {
-        return agentMessageDao.queryAmCount(name, addr);
+    public int queryCount(String name, String addr) {
+        return agentMessageDao.queryAgentMessageCount(name, addr);
     }
 
     @Transactional
-    public List<Map<String, Object>> getAgentPagerAm(long agentId, int page, int size) {
-        return agentMessageDao.getAgentAm(agentId, page, size);
+    public List<Map<String, Object>> getAgentMessage(long agentId, int page, int size) {
+        return agentMessageDao.getAgentMessage(agentId, page, size);
     }
 
     @Transactional
-    public int getAgentTotal(long agentId) {
-        return agentMessageDao.getAgentAmCount(agentId);
+    public int getCount(long agentId) {
+        return agentMessageDao.getAgentMessageCount(agentId);
     }
 
     @Transactional
-    public void visit(long member_id) {
+    public void visitAgentMessage(long member_id) {
         AgentMessage agentMessage = agentMessageDao.findByMemberId(member_id);
         if (!agentMessage.isVisit()) {
             agentMessage.setVisit(true);
@@ -93,7 +93,7 @@ public class AgentMessageService extends BaseService<AgentMessage> implements IA
 
     @Scheduled(cron = "0 */5 * * * ?")
     @Transactional
-    public void repeatSend() {
+    public void repeatSendAgentMessage() {
         addressService = addressService == null ? SpringUtil.getBean("addressService") : addressService;
         agentService = agentService == null ? SpringUtil.getBean("agentService") : agentService;
         messageService = messageService == null ? SpringUtil.getBean("messageService") : messageService;

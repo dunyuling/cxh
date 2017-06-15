@@ -126,7 +126,7 @@ public class WxCtl {
         model.addAttribute("user_id", user_id);
 
         if (path != null) {
-            List<Map<String, Object>> visitRecordList = visitRecordService.getMemberVisitRecord(id);
+            List<Map<String, Object>> visitRecordList = visitRecordService.getVisitRecord(id);
             model.addAttribute("visitRecords", visitRecordList);
         }
         return "/wx/page_details";
@@ -138,7 +138,7 @@ public class WxCtl {
         String result = "success";
         try {
             long member_id = Long.parseLong(request.getParameter("id"));
-            agentMessageService.visit(member_id);
+            agentMessageService.visitAgentMessage(member_id);
         } catch (Exception e) {
             e.printStackTrace();
             result = "failure";
@@ -168,12 +168,6 @@ public class WxCtl {
 
     @RequestMapping("add_visit_record1")
     public String addVisitRecord1() {
-        /*try {
-            visitRecordService.save(id, situation, remark, nextVisitDate);
-            model.addAttribute("id", id).addAttribute("path", path).addAttribute("userid", userid);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }*/
         System.out.println("---");
         long id = 65;
         String path = "total";
@@ -206,8 +200,8 @@ public class WxCtl {
     public String query(HttpServletRequest request, Model model) {
         String user_id = request.getParameter("userid");
         String dateStr = request.getParameter("dateStr");
-        int count = memberService.getQueryCountFromWx(user_id, dateStr);
-        List<Map<String, Object>> mapList = memberService.getQueryFromWx(user_id, dateStr);
+        int count = memberService.queryCountFromWx(user_id, dateStr);
+        List<Map<String, Object>> mapList = memberService.queryFromWx(user_id, dateStr);
         model.addAttribute("list", mapList);
         model.addAttribute("count", count);
         model.addAttribute("user_id", user_id);
@@ -251,7 +245,7 @@ public class WxCtl {
     public String getBalance(HttpServletRequest request, Model model) {
         try {
             Map<String, String> map = getCode(request, model,"getBalance");
-            Agent agent = agentService.getAgentByUserid(map.get("user_id"));
+            Agent agent = agentService.getAgent(map.get("user_id"));
             model.addAttribute("money", agent == null ? 0 : agent.getMoney());
         } catch (Exception e) {
             e.printStackTrace();
@@ -264,7 +258,7 @@ public class WxCtl {
         Map<String, String> map = getCode(request, model,"toReAdd");
         String user_id = map.get("user_id");
         if (user_id != null) {
-            Agent agent = agentService.getAgentByUserid(user_id);
+            Agent agent = agentService.getAgent(user_id);
             model.addAttribute("agent", agent);
         } else {
             model.addAttribute("agent", null);
@@ -281,7 +275,7 @@ public class WxCtl {
         try {
             String addr = request.getParameter("addr");
             String user_id = request.getParameter("user_id");
-            result = agentService.reAdd(user_id, addr);
+            result = agentService.reAddAgent(user_id, addr);
         } catch (Exception e) {
             e.printStackTrace();
         }

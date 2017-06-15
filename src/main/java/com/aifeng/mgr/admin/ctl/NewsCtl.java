@@ -42,8 +42,8 @@ public class NewsCtl extends BaseCtl {
     @RequestMapping(value = "/list2", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
     @ResponseBody
     public String list2(int page, int pageSize) {
-        List<Map<String, Object>> list = newsService.getByPage(page, pageSize);
-        long total = newsService.getTotal();
+        List<Map<String, Object>> list = newsService.getNews(page, pageSize);
+        long total = newsService.getCount();
         JSONObject json = new JSONObject();
         json.put("rows", list);
         json.put("total", total);

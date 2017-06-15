@@ -2,12 +2,11 @@ package com.aifeng.mgr.admin.service.impl;
 
 import com.aifeng.core.service.impl.BaseService;
 import com.aifeng.mgr.admin.dao.IAdminDao;
+import com.aifeng.mgr.admin.dao.IUserRoleDao;
 import com.aifeng.mgr.admin.model.Admin;
 import com.aifeng.mgr.admin.model.UserRole;
 import com.aifeng.mgr.admin.service.IUserRoleService;
 import com.aifeng.util.DateUtil;
-import com.aifeng.mgr.admin.dao.IUserRoleDao;
-import com.aifeng.ws.wx.UserResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,15 +16,17 @@ import java.util.Date;
 @Service("userRoleService")
 public class UserRoleService extends BaseService<UserRole> implements IUserRoleService {
 
-    @Autowired
-    public IAdminDao adminDao;
+    private final IAdminDao adminDao;
+    private final IUserRoleDao userRoleDao;
 
-
     @Autowired
-    public IUserRoleDao userRoleDao;
+    public UserRoleService(IAdminDao adminDao, IUserRoleDao userRoleDao) {
+        this.adminDao = adminDao;
+        this.userRoleDao = userRoleDao;
+    }
 
     @Override
-    @Transactional(readOnly = false)
+    @Transactional
     public boolean setUserRole(String roleCodes, int userId) {
         Admin user = this.adminDao.findById(userId);
         this.userRoleDao.deleteByWhere(" and user_code='" + user.getCode() + "'");  // 清除该角色权限信息

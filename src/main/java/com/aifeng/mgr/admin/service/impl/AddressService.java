@@ -45,12 +45,12 @@ public class AddressService extends BaseService<Address> implements IAddressServ
     }
 
     @Transactional
-    public List<Map<String, Object>> getByPage(int page, int size, String addr) {
+    public List<Map<String, Object>> getAddress(int page, int size, String addr) {
         return addressDao.getAddressFee(page, size, addr);
     }
 
     @Transactional
-    public long getTotal(String addr) {
+    public int getCount(String addr) {
         return addressDao.getAddressFeeCount(addr);
     }
 
@@ -83,7 +83,7 @@ public class AddressService extends BaseService<Address> implements IAddressServ
     public void delAddress(long id) {
         Address address = addressDao.findById(id);
         addressDao.delete(address);
-        addressFeeService.delByAddressId(address.getId());
+        addressFeeService.deleteAddressFee(address.getId());
     }
 
     @Transactional

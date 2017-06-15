@@ -22,8 +22,7 @@ import java.util.Map;
 @Service
 public class VisitRecordService extends BaseService<VisitRecord> implements IVisitRecordService {
 
-    private final
-    VisitRecordDao visitRecordDao;
+    private final VisitRecordDao visitRecordDao;
     private final AgentMessageService agentMessageService;
     private final MessageService messageService;
 
@@ -45,37 +44,30 @@ public class VisitRecordService extends BaseService<VisitRecord> implements IVis
         visitRecord.setMemberId(member_id);
         visitRecordDao.insert(visitRecord);
 
-        agentMessageService.visit(member_id);
+        agentMessageService.visitAgentMessage(member_id);
     }
 
     @Transactional
-    public List<Map<String, Object>> getMemberVisitRecord(long member_id) {
+    public List<Map<String, Object>> getVisitRecord(long member_id) {
         return visitRecordDao.getMessageVisitRecord(member_id);
     }
 
     @Transactional
-    public List<Map<String, Object>> getMemberVisitRecordByAmId(long am_id) {
-        return visitRecordDao.getMessageVisitRecordByAmId(am_id);
+    public List<Map<String, Object>> getVisitRecordByAgentMessageId(long am_id) {
+        return visitRecordDao.getMessageVisitRecordByAgentMessageId(am_id);
     }
-
-    @Transactional
-    public void getInt() {
-        int count = visitRecordDao.getMessageRecordCount(65);
-        System.out.println(count);
-    }
-
 
     private String ids = "";
     @Scheduled(fixedDelay = 1000 * 60 * 60 * 24)
     public void visitRemind() {
         ids = "";
-        List<Map<String, Object>> list = visitRecordDao.getNeedRemindInCurdate();
+        List<Map<String, Object>> list = visitRecordDao.getNeedRemindInCurDate();
         list.forEach(m -> {
             try {
                 long id = Long.parseLong(m.get("id").toString());
                 ids += id + ",";
                 System.out.println("id: " + m.get("id") + "\t -----------++++++++");
-                messageService.sendMsg(m.get("userid").toString(), loadMsg(m));
+                messageService.sendMsg(m.get("userid").toString(), loadMessage(m));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -88,17 +80,7 @@ public class VisitRecordService extends BaseService<VisitRecord> implements IVis
         }
     }
 
-    public void test() {
-//        String sql = "update visit_record vr set vr.remind = true where vr.id in (23,24)";
-//        Session session = sessionFactory.openSession();
-//        Transaction tx = session.beginTransaction();
-//        Query query = session.createSQLQuery(sql);
-//        query.executeUpdate();
-//        tx.commit();
-//        session.close();
-    }
-
-    private String loadMsg(Map<String, Object> map) {
+    private String loadMessage(Map<String, Object> map) {
         String type = InsuranceType.valueOf(map.get("type").toString()).getType();
         String nextDateStr = map.get("next_visit_date").toString();
         String memberCreateDate = map.get("m_create_date").toString();

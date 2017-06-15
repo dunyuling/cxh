@@ -14,7 +14,7 @@ import java.util.Map;
 @Repository
 public class FeeDeductionDao extends BaseDao<FeeDeduction> implements IFeeDeductionDao {
 
-    public List<Map<String, Object>> getFds(int page, int pageSize, String addr) {
+    public List<Map<String, Object>> getFeeDeduction(int page, int pageSize, String addr) {
         String sql = "select distinct fd.id, ag.name, m.content,fd.amount,fd.createDate from fee_deduction fd " +
                 "left join message m on m.id = fd.message_id " +
                 "left join agent ag on ag.id = fd.agent_id " +
@@ -27,7 +27,7 @@ public class FeeDeductionDao extends BaseDao<FeeDeduction> implements IFeeDeduct
         return this.findBySql(sql);
     }
 
-    public int getFdsCount(String addr) {
+    public int getFeeDeductionCount(String addr) {
         String sql = "select count(distinct fd.id) as count from fee_deduction fd " +
                 "left join message m on m.id = fd.message_id " +
                 "left join agent ag on ag.id = fd.agent_id " +
@@ -38,7 +38,7 @@ public class FeeDeductionDao extends BaseDao<FeeDeduction> implements IFeeDeduct
         return Integer.parseInt(this.findBySql(sql).get(0).get("count").toString());
     }
 
-    public List<Map<String, Object>> queryFds(int page, int pageSize, String name, String addr) {
+    public List<Map<String, Object>> queryFeeDeduction(int page, int pageSize, String name, String addr) {
         String sql = "select distinct fd.id, ag.name, m.content,fd.amount,fd.createDate from fee_deduction fd " +
                 "left join message m on m.id = fd.message_id " +
                 "left join agent ag on ag.id = fd.agent_id " +
@@ -53,7 +53,7 @@ public class FeeDeductionDao extends BaseDao<FeeDeduction> implements IFeeDeduct
         return this.findBySql(sql);
     }
 
-    public int queryFdsCount(String name, String addr) {
+    public int queryFeeDeductionCount(String name, String addr) {
         String sql = "select count(distinct fd.id) as count from fee_deduction fd " +
                 "left join message m on m.id = fd.message_id " +
                 "left join agent ag on ag.id = fd.agent_id " +
@@ -66,7 +66,7 @@ public class FeeDeductionDao extends BaseDao<FeeDeduction> implements IFeeDeduct
         return Integer.parseInt(this.findBySql(sql).get(0).get("count").toString());
     }
 
-    public List<Map<String, Object>> getAgentFds(long agentId, int page, int pageSize) {
+    public List<Map<String, Object>> getAgentFeeDeduction(long agentId, int page, int pageSize) {
         String str = "select ag.name, m.content,fd.amount from fee_deduction fd " +
                 "left join message m on m.id = fd.message_id " +
                 "left join agent ag on ag.id = fd.agent_id " +
@@ -76,7 +76,7 @@ public class FeeDeductionDao extends BaseDao<FeeDeduction> implements IFeeDeduct
         return this.findBySql(str);
     }
 
-    public int getAgentFdsCount(long agentId) {
+    public int getAgentFeeDeductionCount(long agentId) {
         String str = "select ag.name, m.content,fd.amount from fee_deduction fd " +
                 "left join message m on m.id = fd.message_id " +
                 "left join agent ag on ag.id = fd.agent_id " +

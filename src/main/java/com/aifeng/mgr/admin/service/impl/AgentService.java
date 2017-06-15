@@ -5,7 +5,6 @@ import com.aifeng.core.util.SpringUtil;
 import com.aifeng.mgr.admin.dao.impl.AgentDao;
 import com.aifeng.mgr.admin.model.AddressFee;
 import com.aifeng.mgr.admin.model.Agent;
-import com.aifeng.mgr.admin.model.ProxyAddress;
 import com.aifeng.mgr.admin.service.IAgentService;
 import com.aifeng.util.DateStyle;
 import com.aifeng.util.DateUtil;
@@ -96,7 +95,7 @@ public class AgentService extends BaseService<Agent> implements IAgentService {
     }
 
     @Transactional
-    public synchronized String reAdd(String userid, String addr) {
+    public synchronized String reAddAgent(String userid, String addr) {
         String result = "代理已成功添加，请等待运营认证";
 
         AddressFee addressFee = addressFeeService.getAddressFee(getAddressId(addr));
@@ -118,23 +117,23 @@ public class AgentService extends BaseService<Agent> implements IAgentService {
     }
 
     @Transactional
-    public List<Map<String, Object>> getPagerAgent(int page, int size, String addr) {
-        return agentDao.getAgents(page, size, addr);
+    public List<Map<String, Object>> getAgent(int page, int size, String addr) {
+        return agentDao.getAgentByAddr(page, size, addr);
     }
 
     @Transactional
-    public long getTotal(String addr) {
-        return agentDao.getAgentsCount(addr);
+    public int getCount(String addr) {
+        return agentDao.getAgentCount(addr);
     }
 
     @Transactional
-    public List<Map<String, Object>> getPagerAgent(int page, int size, String mobile, String IDCard, String expire_days, String addr) {
-        return agentDao.getAgents(page, size, mobile, IDCard, expire_days, addr);
+    public List<Map<String, Object>> getAgent(int page, int size, String mobile, String IDCard, String expire_days, String addr) {
+        return agentDao.getAgentByAddr(page, size, mobile, IDCard, expire_days, addr);
     }
 
     @Transactional
-    public long getQueryAgentCount(String mobile, String IDCard, String expire_days, String addr) {
-        return agentDao.getAgentsCount(mobile, IDCard, expire_days, addr);
+    public int queryCount(String mobile, String IDCard, String expire_days, String addr) {
+        return agentDao.getAgentCount(mobile, IDCard, expire_days, addr);
     }
 
     @Transactional
@@ -160,17 +159,17 @@ public class AgentService extends BaseService<Agent> implements IAgentService {
     }
 
     @Transactional
-    public Agent getAgentByUserid(String userid) {
+    public Agent getAgent(String userid) {
         return agentDao.getAgentByUserId(userid);
     }
 
     @Transactional
     public Map<String, Object> getAgentSubmitMsgFromWx(String user_id) {
-        return agentDao.getAgentSubmitMsgFromWx(user_id);
+        return agentDao.getAgentSubmitMessageFromWx(user_id);
     }
 
     @Transactional
-    public Agent findByMobile(String mobile) {
+    public Agent getAgentByMobile(String mobile) {
         return agentDao.getActiveAgentByMobile(mobile);
     }
 
@@ -206,7 +205,7 @@ public class AgentService extends BaseService<Agent> implements IAgentService {
         agent.setActive(false);
         update(agent);
 
-        proxyAddressService.auditCancelPa(id);
+        proxyAddressService.auditCancelProxyAddress(id);
     }
 
     @Transactional

@@ -13,7 +13,7 @@ import java.util.Map;
 @Repository
 public class ProxyAddressDao extends BaseDao<ProxyAddress> implements IProxyAddressDao {
 
-    public ProxyAddress getByAgentIdAndAfId(long af_id) {
+    public ProxyAddress getByAddressFeeId(long af_id) {
         Map<String, Object> params = new HashMap<>();
         params.put("af_id", af_id);
         params.put("proxyStatus1", ProxyStatus.AUTHORED);
@@ -44,7 +44,7 @@ public class ProxyAddressDao extends BaseDao<ProxyAddress> implements IProxyAddr
         return Integer.parseInt(this.findBySql(sql).get(0).get("count").toString());
     }
 
-    public List<Map<String, Object>> getQueryProxyAddress(int page, int pageSize, String name, String addr) {
+    public List<Map<String, Object>> queryProxyAddress(int page, int pageSize, String name, String addr) {
         String sql = "select pa.id, ag.name, ag.corpName, a.province ,a.city, a.area,pa.proxyStatus,pa.createDate,pa.updateDate from proxy_address pa " +
                 "left join address_fee af on pa.af_id = af.id " +
                 "left join address a on af.address_id = a.id " +
@@ -56,7 +56,7 @@ public class ProxyAddressDao extends BaseDao<ProxyAddress> implements IProxyAddr
         return this.findBySql(sql);
     }
 
-    public int getQueryProxyAddressCount(String name, String addr) {
+    public int queryProxyAddressCount(String name, String addr) {
         String sql = "select count(pa.id) as count from proxy_address pa " +
                 "left join address_fee af on pa.af_id = af.id " +
                 "left join address a on af.address_id = a.id " +
@@ -86,7 +86,7 @@ public class ProxyAddressDao extends BaseDao<ProxyAddress> implements IProxyAddr
         return Integer.parseInt(this.findBySql(sql).get(0).get("count").toString());
     }
 
-    public List<Map<String, Object>> getAgentQueryProxyAddress(long agent_id, int page, int pageSize, String name) {
+    public List<Map<String, Object>> queryAgentProxyAddress(long agent_id, int page, int pageSize, String name) {
         String sql = "select pa.id, ag.name,ag.corpName,  a.province ,a.city, a.area,pa.proxyStatus,pa.createDate,pa.updateDate from proxy_address pa " +
                 "left join address_fee af on pa.af_id = af.id " +
                 "left join address a on af.address_id = a.id " +
@@ -97,7 +97,7 @@ public class ProxyAddressDao extends BaseDao<ProxyAddress> implements IProxyAddr
         return this.findBySql(sql);
     }
 
-    public int getAgentQueryCount(long agent_id, String name) {
+    public int queryAgentCount(long agent_id, String name) {
         String sql = "select count(pa.id) as count from proxy_address pa " +
                 "left join address_fee af on pa.af_id = af.id " +
                 "left join address a on af.address_id = a.id " +
@@ -118,7 +118,7 @@ public class ProxyAddressDao extends BaseDao<ProxyAddress> implements IProxyAddr
         return this.findBySql(sql).get(0);
     }
 
-    public void auditCancelPa(long agent_id) {
+    public void auditCancelProxyAddress(long agent_id) {
         String sql = "update proxy_address pa set pa.proxyStatus = '" + ProxyStatus.CANCELD + "' " +
                 " where pa.agent_id = " + agent_id;
         this.sqlUpdate(sql, null);

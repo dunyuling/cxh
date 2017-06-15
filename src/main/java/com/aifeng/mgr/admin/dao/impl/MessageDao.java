@@ -8,9 +8,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by pro on 17-4-28.
- */
 @Repository
 public class MessageDao extends BaseDao<Message> implements IMessageDao {
 

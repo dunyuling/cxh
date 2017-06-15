@@ -46,32 +46,32 @@ public class RechargeService extends BaseService<Recharge> implements IRechargeS
     }
 
     @Transactional
-    public List<Map<String, Object>> getPagerRecharge(int page, int size, String addr) {
-        return rechargeDao.getRecharges(page, size, addr);
+    public List<Map<String, Object>> getRecharge(int page, int size, String addr) {
+        return rechargeDao.getRecharge(page, size, addr);
     }
 
     @Transactional
-    public int getTotal(String addr) {
-        return rechargeDao.queryRechargesCount(addr);
+    public int getCount(String addr) {
+        return rechargeDao.queryRechargeCount(addr);
     }
 
     @Transactional
     public List<Map<String, Object>> queryRecharge(int page, int size, String name, String addr) {
-        return rechargeDao.queryRecharges(page, size, name, addr);
+        return rechargeDao.queryRecharge(page, size, name, addr);
     }
 
     @Transactional
-    public int queryTotal(String name, String addr) {
-        return rechargeDao.queryRechargesCount(name, addr);
+    public int queryCount(String name, String addr) {
+        return rechargeDao.queryRechargeCount(name, addr);
     }
 
     @Transactional
-    public List<Map<String, Object>> getAgentPagerRecharge(long agentId, int page, int size) {
-        return rechargeDao.getAgentRecharges(agentId, page, size);
+    public List<Map<String, Object>> getAgentRecharge(long agentId, int page, int size) {
+        return rechargeDao.getAgentRecharge(agentId, page, size);
     }
 
     @Transactional
-    public int getAgentTotal(long agentId) {
-        return rechargeDao.getAgentRechargesCount(agentId);
+    public int getAgentCount(long agentId) {
+        return rechargeDao.getAgentRechargeCount(agentId);
     }
 }

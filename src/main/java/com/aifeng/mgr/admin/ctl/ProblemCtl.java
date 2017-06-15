@@ -18,9 +18,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by pro on 17-5-2.
- */
 @Controller
 @RequestMapping("/problem")
 public class ProblemCtl extends BaseCtl {
@@ -40,8 +37,8 @@ public class ProblemCtl extends BaseCtl {
     @RequestMapping(value = "/admin_list2", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
     @ResponseBody
     public String adminList2(int page, int pageSize) {
-        List<Map<String, Object>> list = problemService.getPagerProblems(page, pageSize);
-        long total = problemService.getTotal();
+        List<Map<String, Object>> list = problemService.getProblems(page, pageSize);
+        long total = problemService.getCount();
         JSONObject json = new JSONObject();
         json.put("rows", list);
         json.put("total", total);
@@ -58,7 +55,7 @@ public class ProblemCtl extends BaseCtl {
     @ResponseBody
     public String adminQuery2(int page, int pageSize, String agent_name, String cs_name) {
         List<Map<String, Object>> list = problemService.queryProblems(page, pageSize, agent_name, cs_name);
-        long total = problemService.queryTotal(agent_name, cs_name);
+        long total = problemService.queryCount(agent_name, cs_name);
         JSONObject json = new JSONObject();
         json.put("rows", list);
         json.put("total", total);
@@ -74,8 +71,8 @@ public class ProblemCtl extends BaseCtl {
     @ResponseBody
     public String csList2(int page, int pageSize) {
         int id = ((Admin) this.get(Constants.SESSION_USER)).getId();
-        List<Map<String, Object>> list = problemService.getCsPagerProblems(id, page, pageSize);
-        long total = problemService.getCsCount(id);
+        List<Map<String, Object>> list = problemService.getCustomerServiceProblems(id, page, pageSize);
+        long total = problemService.getCustomerServiceCount(id);
         JSONObject json = new JSONObject();
         json.put("rows", list);
         json.put("total", total);
@@ -91,7 +88,7 @@ public class ProblemCtl extends BaseCtl {
     @ResponseBody
     public String agentList2(int page, int pageSize) {
         long id = ((Agent) this.get(Constants.SESSION_USER)).getId();
-        List<Map<String, Object>> list = problemService.getAgentPagerProblems(id, page, pageSize);
+        List<Map<String, Object>> list = problemService.getAgentProblems(id, page, pageSize);
         long total = problemService.getAgentCount(id);
         JSONObject json = new JSONObject();
         json.put("rows", list);

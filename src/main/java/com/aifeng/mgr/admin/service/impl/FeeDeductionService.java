@@ -12,9 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by pro on 17-4-28.
- */
 @Service
 public class FeeDeductionService extends BaseService<FeeDeduction> implements IFeeDeductionService {
 
@@ -41,32 +38,32 @@ public class FeeDeductionService extends BaseService<FeeDeduction> implements IF
     }
 
     @Transactional
-    public List<Map<String, Object>> getPagerFeeDeduction(int page, int size, String addr) {
-        return feeDeductionDao.getFds(page, size, addr);
+    public List<Map<String, Object>> getFeeDeduction(int page, int size, String addr) {
+        return feeDeductionDao.getFeeDeduction(page, size, addr);
     }
 
     @Transactional
-    public int getTotal(String addr) {
-        return feeDeductionDao.getFdsCount(addr);
+    public int getCount(String addr) {
+        return feeDeductionDao.getFeeDeductionCount(addr);
     }
 
     @Transactional
     public List<Map<String, Object>> queryFeeDeduction(int page, int size, String name, String addr) {
-        return feeDeductionDao.queryFds(page, size, name, addr);
+        return feeDeductionDao.queryFeeDeduction(page, size, name, addr);
     }
 
     @Transactional
-    public int queryFeeDeductionCount(String name, String addr) {
-        return feeDeductionDao.queryFdsCount(name, addr);
+    public int queryCount(String name, String addr) {
+        return feeDeductionDao.queryFeeDeductionCount(name, addr);
     }
 
     @Transactional
-    public List<Map<String, Object>> getAgentPagerFeeDeduction(long agentId, int page, int size) {
-        return feeDeductionDao.getAgentFds(agentId, page, size);
+    public List<Map<String, Object>> getAgentFeeDeduction(long agentId, int page, int size) {
+        return feeDeductionDao.getAgentFeeDeduction(agentId, page, size);
     }
 
     @Transactional
-    public int getAgentTotal(long agentId) {
-        return feeDeductionDao.getAgentFdsCount(agentId);
+    public int getAgentCount(long agentId) {
+        return feeDeductionDao.getAgentFeeDeductionCount(agentId);
     }
 }

@@ -8,9 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- * Created by pro on 17-4-28.
- */
 @Service
 public class CustomerServiceService extends BaseService<CustomerService> implements ICustomerServiceService {
 

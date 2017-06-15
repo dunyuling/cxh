@@ -8,9 +8,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by pro on 17-5-11.
- */
 @Repository
 public class VisitRecordDao extends BaseDao<VisitRecord> implements IVisitRecordDao {
 
@@ -26,7 +23,7 @@ public class VisitRecordDao extends BaseDao<VisitRecord> implements IVisitRecord
         return this.findBySql(sql);
     }
 
-    public List<Map<String, Object>> getMessageVisitRecordByAmId(long am_id) {
+    public List<Map<String, Object>> getMessageVisitRecordByAgentMessageId(long am_id) {
         String sql = "select vr.id,vr.situation,vr.remark,vr.visit_date as visitDate,vr.next_visit_date as nextVisitDate ,vr.times from agent_message am " +
                 "join visit_record vr on am.member_id = vr.member_id " +
                 " where am.id = " + am_id +
@@ -40,7 +37,7 @@ public class VisitRecordDao extends BaseDao<VisitRecord> implements IVisitRecord
         return list.size();
     }
 
-    public List<Map<String, Object>> getNeedRemindInCurdate() {
+    public List<Map<String, Object>> getNeedRemindInCurDate() {
         String sql = "select vr.id,vr.member_id, vr.next_visit_date,vr.times, " +
                 " m.name,m.mobile,m.type,m.createDate as m_create_date , a.province,a.city, a.area, ag.userid from visit_record vr " +
                 "left join member m on vr.member_id = m.id " +

@@ -22,7 +22,7 @@ public class AgentMessageDao extends BaseDao<AgentMessage> implements IAgentMess
         return (List<AgentMessage>) this.findByHql(sql, params);
     }
 
-    public List<Map<String, Object>> getAm(int page, int pageSize, String addr) {
+    public List<Map<String, Object>> getAgentMessage(int page, int pageSize, String addr) {
         String sql = "select distinct am.id,ag.name,m.content,am.times,am.visit,am.visitDate,am.updateDate from agent_message am " +
                 " join agent ag on am.agent_id = ag.id " +
                 " left join proxy_address pa on ag.id = pa.agent_id " +
@@ -35,7 +35,7 @@ public class AgentMessageDao extends BaseDao<AgentMessage> implements IAgentMess
         return this.findBySql(sql);
     }
 
-    public int getAmCount(String addr) {
+    public int getAgentMessageCount(String addr) {
         String sql = "select count(distinct am.id) as count from agent_message am " +
                 " join agent ag on am.agent_id = ag.id " +
                 " left join proxy_address pa on ag.id = pa.agent_id " +
@@ -46,7 +46,7 @@ public class AgentMessageDao extends BaseDao<AgentMessage> implements IAgentMess
         return Integer.parseInt(this.findBySql(sql).get(0).get("count").toString());
     }
 
-    public List<Map<String, Object>> queryAm(int page, int pageSize, String name, String addr) {
+    public List<Map<String, Object>> queryAgentMessage(int page, int pageSize, String name, String addr) {
         String sql = "select distinct am.id,ag.name,m.content,am.times,am.visit,am.visitDate,am.updateDate from agent_message am " +
                 " join agent ag on am.agent_id = ag.id " +
                 " left join proxy_address pa on ag.id = pa.agent_id " +
@@ -61,7 +61,7 @@ public class AgentMessageDao extends BaseDao<AgentMessage> implements IAgentMess
         return this.findBySql(sql);
     }
 
-    public int queryAmCount(String name, String addr) {
+    public int queryAgentMessageCount(String name, String addr) {
         String sql = "select count(distinct am.id) as count from agent_message am " +
                 " join agent ag on am.agent_id = ag.id " +
                 " left join proxy_address pa on ag.id = pa.agent_id " +
@@ -74,7 +74,7 @@ public class AgentMessageDao extends BaseDao<AgentMessage> implements IAgentMess
         return Integer.parseInt(this.findBySql(sql).get(0).get("count").toString());
     }
 
-    public List<Map<String, Object>> getAgentAm(long agentId, int page, int pageSize) {
+    public List<Map<String, Object>> getAgentMessage(long agentId, int page, int pageSize) {
         String str = "select am.id,a.name,m.content,am.times,am.visit,am.visitDate from agent_message am " +
                 "left join agent a on am.agent_id = a.id " +
                 "left join message m on am.message_id = m.id " +
@@ -84,7 +84,7 @@ public class AgentMessageDao extends BaseDao<AgentMessage> implements IAgentMess
         return this.findBySql(str);
     }
 
-    public int getAgentAmCount(long agentId) {
+    public int getAgentMessageCount(long agentId) {
         String str = "select am.id,a.name,m.content,am.times,am.visit,am.visitDate from agent_message am " +
                 "left join agent a on am.agent_id = a.id " +
                 "left join message m on am.message_id = m.id " +

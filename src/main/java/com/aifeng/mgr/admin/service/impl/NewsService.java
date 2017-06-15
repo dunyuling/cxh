@@ -12,9 +12,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by pro on 17-4-24.
- */
 @Service
 public class NewsService extends BaseService<News> implements INewsService {
 
@@ -26,12 +23,12 @@ public class NewsService extends BaseService<News> implements INewsService {
     }
 
     @Transactional
-    public long getTotal() {
+    public int getCount() {
         return newsDao.countAll();
     }
 
     @Transactional
-    public int getTotalPage(int pageSize) {
+    public int getPageCount(int pageSize) {
         long total = newsDao.countAll();
         long mod = total % pageSize;
         long divide = total / pageSize;
@@ -39,7 +36,7 @@ public class NewsService extends BaseService<News> implements INewsService {
     }
 
     @Transactional
-    public List<Map<String, Object>> getByPage(int page, int pageSize) {
+    public List<Map<String, Object>> getNews(int page, int pageSize) {
         return newsDao.findAll(page, pageSize);
     }
 

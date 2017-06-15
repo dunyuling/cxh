@@ -10,6 +10,7 @@ import java.util.List;
 @Repository
 public class AuxiliaryInformationDao extends BaseDao<AuxiliaryInformation> implements IAuxiliaryInformationDao {
 
+    @SuppressWarnings("unchecked")
     public AuxiliaryInformation getFirst() {
         String sql = "from AuxiliaryInformation";
         List<AuxiliaryInformation> auxiliaryInformationList = (List<AuxiliaryInformation>) this.findByHql(sql,null);

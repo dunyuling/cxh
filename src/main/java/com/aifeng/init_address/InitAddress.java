@@ -41,9 +41,6 @@ public class InitAddress {
 /*        VisitRecordService visitRecordService = classPathXmlApplicationContext.getBean(VisitRecordService.class);
         visitRecordService.visitRemind();*/
 
-//        AgentMessageService agentMessageService = classPathXmlApplicationContext.getBean(AgentMessageService.class);
-//        agentMessageService.repeatSend();
-
 //        AgentService agentService = classPathXmlApplicationContext.getBean(AgentService.class);
 //        agentService.auditCancel(48);
 

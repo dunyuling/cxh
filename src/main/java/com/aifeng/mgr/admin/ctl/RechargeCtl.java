@@ -38,12 +38,12 @@ public class RechargeCtl extends BaseCtl {
         List<Map<String, Object>> list;
         int total;
         if (agentId != 0) {
-            list = rechargeService.getAgentPagerRecharge(agentId, page, pageSize);
-            total = rechargeService.getAgentTotal(agentId);
+            list = rechargeService.getAgentRecharge(agentId, page, pageSize);
+            total = rechargeService.getAgentCount(agentId);
         } else {
             String addr = getAddr();
-            list = rechargeService.getPagerRecharge(page, pageSize, addr);
-            total = rechargeService.getTotal(addr);
+            list = rechargeService.getRecharge(page, pageSize, addr);
+            total = rechargeService.getCount(addr);
         }
 
         JSONObject json = new JSONObject();
@@ -64,7 +64,7 @@ public class RechargeCtl extends BaseCtl {
         //目前根据代理商名字查询，代理商登录则不提供查询功能
         String addr = getAddr();
         List<Map<String, Object>> list = rechargeService.queryRecharge(page, pageSize, name, addr);
-        int total = rechargeService.queryTotal(name, addr);
+        int total = rechargeService.queryCount(name, addr);
         JSONObject json = new JSONObject();
         json.put("rows", list);
         json.put("total", total);

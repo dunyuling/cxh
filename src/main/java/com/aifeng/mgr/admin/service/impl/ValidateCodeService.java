@@ -11,8 +11,12 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class ValidateCodeService extends BaseService<ValidateCode> implements IValidateCodeService {
 
+    private final IValidateCodeDao validateCodeDao;
+
     @Autowired
-    private IValidateCodeDao validateCodeDao;
+    public ValidateCodeService(IValidateCodeDao validateCodeDao) {
+        this.validateCodeDao = validateCodeDao;
+    }
 
     @Transactional
     public ValidateCode get(String mobile, String code) {

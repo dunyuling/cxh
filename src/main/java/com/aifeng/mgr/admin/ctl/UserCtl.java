@@ -26,14 +26,16 @@ import com.alibaba.fastjson.JSONObject;
 public class UserCtl extends BaseCtl{
 	
 	Logger log = Logger.getLogger(UserCtl.class);
-	
+
+	private final IAdminService adminService;
+	private final IUserRoleService userRoleService;
+
 	@Autowired
-	IAdminService adminService;
-	
-	
-	@Autowired
-	IUserRoleService userRoleService;
-	
+	public UserCtl(IAdminService adminService, IUserRoleService userRoleService) {
+		this.adminService = adminService;
+		this.userRoleService = userRoleService;
+	}
+
 	@RequestMapping("list")
 	public String list(ModelMap mm, @RequestParam(required=false)String menuCode){
 		mm.put(MENU_CODE, menuCode);
@@ -42,7 +44,7 @@ public class UserCtl extends BaseCtl{
 	
 	@RequestMapping(value="list2", method = RequestMethod.GET, produces="application/json;charset=UTF-8")
 	@ResponseBody
-	public String list2(int page, int pageSize, String search){
+	public String list2(int page, int pageSize){
 		Pager pager = this.adminService.getList(new Pager(page, pageSize));
 		JSONObject json = new JSONObject();
 		json.put("rows", pager.getResults());
@@ -52,14 +54,13 @@ public class UserCtl extends BaseCtl{
 	
 	@RequestMapping("transfer")
 	public String transfer(String id, String action, ModelMap mm){
-		Admin admin = null;
+		Admin admin;
 		if(StringUtil.isNotBlank(id)){
 			admin = this.adminService.findById(Integer.valueOf(id.trim()));
 			mm.put("user", admin);
 		}
 		return "sys/user/" + action;
 	}
-	
 	
 	@RequestMapping(value="add", method = RequestMethod.POST)
 	@ResponseBody
@@ -83,12 +84,9 @@ public class UserCtl extends BaseCtl{
 	@RequestMapping("del")
 	@ResponseBody
 	public String del(int id){
-		
-//		mm.put("superMenuList", this.menuService.getSuperMenuList());
 		if(id != 0){
 			this.adminService.deleteById(id);
 		}
-		
 		return AJAX_SUCCESS;
 	}
 	
@@ -118,6 +116,4 @@ public class UserCtl extends BaseCtl{
 		return AJAX_SUCCESS;
 	}
 	
-	
-
 }

@@ -43,17 +43,6 @@ public class MessageService extends BaseService<Message> implements IMessageServ
         executorService = new ScheduledThreadPoolExecutor(10);
     }
 
-    //TODO 此处添加定时器,定时器的间隔要从数据库读取
-    @Transactional
-    public void getAllNeedRepeat() {
-        List<AgentMessage> agentMessageList = agentMessageService.getAllNeedRepeat();
-        for (AgentMessage agentMessage : agentMessageList) {
-            Message message = findById(agentMessage.getMessage_id());
-            Agent agent = agentService.findById(agentMessage.getAgent_id());
-            sendMsg(agent, message, 0, false);
-        }
-    }
-
     @Transactional
     public void sendMsg(Agent agent, Message message, int amount, boolean charge) {
         RequestBody requestBody = new RequestBody();
@@ -103,32 +92,32 @@ public class MessageService extends BaseService<Message> implements IMessageServ
     }
 
     @Transactional
-    public List<Map<String, Object>> getPagerMsg(int page, int size, String addr) {
+    public List<Map<String, Object>> getMessage(int page, int size, String addr) {
         return messageDao.getMessage(page, size, addr);
     }
 
     @Transactional
-    public long getPagerMsgCount(String addr) {
+    public long getMessageCount(String addr) {
         return messageDao.getMessageCount(addr);
     }
 
     @Transactional
-    public List<Map<String, Object>> queryMsg(int page, int size, String name, String addr) {
+    public List<Map<String, Object>> queryMessage(int page, int size, String name, String addr) {
         return messageDao.queryMessage(page, size, name, addr);
     }
 
     @Transactional
-    public int queryMsgCount(String name, String addr) {
+    public int queryMessageCount(String name, String addr) {
         return messageDao.queryMessageCount(name, addr);
     }
 
     @Transactional
-    public List<Map<String, Object>> getAgentPagerMsg(long agentId, int page, int size) {
+    public List<Map<String, Object>> getAgentMessage(long agentId, int page, int size) {
         return messageDao.getAgentMessage(agentId, page, size);
     }
 
     @Transactional
-    public long getAgentTotal(long agentId) {
+    public long getAgentCount(long agentId) {
         return messageDao.getAgentMessageCount(agentId);
     }
 }

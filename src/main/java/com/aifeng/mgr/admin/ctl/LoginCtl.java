@@ -101,12 +101,12 @@ public class LoginCtl extends BaseCtl {
 
 
     @RequestMapping("customerservice2Login")
-    public String customerservice2Login() {
+    public String customerService2Login() {
         return "customerservice_login";
     }
 
     @RequestMapping(value = "customerserviceLogin", method = RequestMethod.POST)
-    public String customerserviceLogin(String account, String pwd) {
+    public String customerServiceLogin(String account, String pwd) {
         System.out.println("customerservice login ------------------------");
         if (StringUtil.isBlank(account, pwd)) {
             log.error("登录信息错误");
@@ -129,7 +129,7 @@ public class LoginCtl extends BaseCtl {
     }
 
     @RequestMapping("customerserviceMain")
-    public String customerserviceMain(ModelMap mm) {
+    public String customerServiceMain(ModelMap mm) {
         try {
             // 初始化左侧菜单及权限信息
             Admin user = (Admin) this.get(Constants.SESSION_USER);
@@ -161,7 +161,7 @@ public class LoginCtl extends BaseCtl {
             return "agent_login";
         }
 
-        Agent agent = agentService.findByMobile(mobile);
+        Agent agent = agentService.getAgentByMobile(mobile);
         if (agent == null) {
             log.error("账户信息不存在");
             return "agent_login";
@@ -303,12 +303,13 @@ public class LoginCtl extends BaseCtl {
     }
 
     private String getRole(String action) {
-        if (action.equals("admin")) {
-            return "管理员";
-        } else if (action.equals("customerservice")) {
-            return "客服";
-        } else {
-            return "代理商";
+        switch (action) {
+            case "admin":
+                return "管理员";
+            case "customerservice":
+                return "客服";
+            default:
+                return "代理商";
         }
     }
 }

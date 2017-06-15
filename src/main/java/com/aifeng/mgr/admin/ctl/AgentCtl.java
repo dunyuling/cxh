@@ -21,9 +21,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by pro on 17-5-2.
- */
 @Controller
 @RequestMapping("/agent")
 public class AgentCtl extends BaseCtl {
@@ -53,8 +50,8 @@ public class AgentCtl extends BaseCtl {
     @ResponseBody
     public String list2(int page, int pageSize) {
         String addr = getAddr();
-        List<Map<String, Object>> list = agentService.getPagerAgent(page, pageSize, addr);
-        long total = agentService.getTotal(addr);
+        List<Map<String, Object>> list = agentService.getAgent(page, pageSize, addr);
+        int total = agentService.getCount(addr);
         JSONObject json = new JSONObject();
         json.put("rows", list);
         json.put("total", total);
@@ -72,8 +69,8 @@ public class AgentCtl extends BaseCtl {
     @ResponseBody
     public String query2(int page, int pageSize, String mobile, String IDCard, String expire_days) {
         String addr = getAddr();
-        List<Map<String, Object>> list = agentService.getPagerAgent(page, pageSize, mobile, IDCard, expire_days, addr);
-        long total = agentService.getQueryAgentCount(mobile, IDCard, expire_days, addr);
+        List<Map<String, Object>> list = agentService.getAgent(page, pageSize, mobile, IDCard, expire_days, addr);
+        int total = agentService.queryCount(mobile, IDCard, expire_days, addr);
         JSONObject json = new JSONObject();
         json.put("rows", list);
         json.put("total", total);

@@ -38,8 +38,8 @@ public class MemberCtl extends BaseCtl {
     @ResponseBody
     public String list2(int page, int pageSize) {
         String addr = getAddr();
-        List<Map<String, Object>> list = memberService.getPageMember(page, pageSize, addr);
-        long total = memberService.getInitTotal(addr);
+        List<Map<String, Object>> list = memberService.getMember(page, pageSize, addr);
+        long total = memberService.getCount(addr);
         JSONObject json = new JSONObject();
         json.put("rows", list);
         json.put("total", total);
@@ -56,8 +56,8 @@ public class MemberCtl extends BaseCtl {
     @ResponseBody
     public String query2(int page, int pageSize, String name, String mobile) {
         String addr = getAddr();
-        List<Map<String, Object>> list = memberService.queryPageMember(page, pageSize, name, mobile, addr);
-        long total = memberService.queryTotal(name, mobile, addr);
+        List<Map<String, Object>> list = memberService.queryMember(page, pageSize, name, mobile, addr);
+        long total = memberService.queryCount(name, mobile, addr);
         JSONObject json = new JSONObject();
         json.put("rows", list);
         json.put("total", total);

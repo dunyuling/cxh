@@ -44,14 +44,14 @@ public class AgentMessageCtl extends BaseCtl {
     public String list2(HttpServletRequest request, int page, int pageSize) {
         long agentId = Long.parseLong(request.getParameter("agentId"));
         List<Map<String, Object>> list;
-        long total;
+        int total;
         if (agentId != 0) {
-            list = agentMessageService.getAgentPagerAm(agentId, page, pageSize);
-            total = agentMessageService.getAgentTotal(agentId);
+            list = agentMessageService.getAgentMessage(agentId, page, pageSize);
+            total = agentMessageService.getCount(agentId);
         } else {
             String addr = getAddr();
-            list = agentMessageService.getPagerAm(page, pageSize, addr);
-            total = agentMessageService.getTotal(addr);
+            list = agentMessageService.getAgentMessage(page, pageSize, addr);
+            total = agentMessageService.getCount(addr);
         }
 
         JSONObject json = new JSONObject();
@@ -71,8 +71,8 @@ public class AgentMessageCtl extends BaseCtl {
     public String query2(int page, int pageSize, String name) {
         //目前根据代理商名字查询，代理商登录则不提供查询功能
         String addr = getAddr();
-        List<Map<String, Object>> list = agentMessageService.queryPagerAm(page, pageSize, name, addr);
-        int total = agentMessageService.queryTotal(name, addr);
+        List<Map<String, Object>> list = agentMessageService.queryAgentMessage(page, pageSize, name, addr);
+        int total = agentMessageService.queryCount(name, addr);
         JSONObject json = new JSONObject();
         json.put("rows", list);
         json.put("total", total);
@@ -88,7 +88,7 @@ public class AgentMessageCtl extends BaseCtl {
     @RequestMapping(value = "view", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
     @ResponseBody
     public String view2(long id) {
-        List<Map<String, Object>> visitRecordList = visitRecordService.getMemberVisitRecordByAmId(id);
+        List<Map<String, Object>> visitRecordList = visitRecordService.getVisitRecordByAgentMessageId(id);
         JSONObject json = new JSONObject();
         json.put("total", visitRecordList.size());
         json.put("rows", visitRecordList);

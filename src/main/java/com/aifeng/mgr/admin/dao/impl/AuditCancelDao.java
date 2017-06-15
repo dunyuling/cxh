@@ -14,7 +14,7 @@ import java.util.Map;
 @Repository
 public class AuditCancelDao extends BaseDao<AuditCancel> implements IAuditCancelDao {
 
-    public List<Map<String, Object>> getAuditCancels(int page, int pageSize, String addr) {
+    public List<Map<String, Object>> getAuditCancel(int page, int pageSize, String addr) {
         String sql = "select distinct ac.id, ag.name as ag_name, ac.amount,ad.name as ad_name,ac.createDate from audit_cancel ac " +
                 "left join tb_mgr_admin ad on ad.id = ac.admin_id " +
                 "left join agent ag on ag.id = ac.agent_id " +
@@ -27,7 +27,7 @@ public class AuditCancelDao extends BaseDao<AuditCancel> implements IAuditCancel
         return this.findBySql(sql);
     }
 
-    public int getAuditCancelsCount(String addr) {
+    public int getAuditCancelCount(String addr) {
         String sql = "select count(distinct ac.id) as count from audit_cancel ac " +
                 "left join tb_mgr_admin ad on ad.id = ac.admin_id " +
                 "left join agent ag on ag.id = ac.agent_id " +
@@ -38,7 +38,7 @@ public class AuditCancelDao extends BaseDao<AuditCancel> implements IAuditCancel
         return Integer.parseInt(this.findBySql(sql).get(0).get("count").toString());
     }
 
-    public List<Map<String, Object>> queryAuditCancels(int page, int pageSize, String name, String addr) {
+    public List<Map<String, Object>> queryAuditCancel(int page, int pageSize, String name, String addr) {
         String sql = "select distinct ac.id, ag.name as ag_name, ac.amount,ad.name as ad_name,ac.createDate from audit_cancel ac " +
                 "left join tb_mgr_admin ad on ad.id = ac.admin_id " +
                 "left join agent ag on ag.id = ac.agent_id " +
@@ -53,7 +53,7 @@ public class AuditCancelDao extends BaseDao<AuditCancel> implements IAuditCancel
         return this.findBySql(sql);
     }
 
-    public int queryAuditCancelsCount(String name, String addr) {
+    public int queryAuditCancelCount(String name, String addr) {
         String sql = "select count(distinct ac.id) as count from audit_cancel ac " +
                 "left join tb_mgr_admin ad on ad.id = ac.admin_id " +
                 "left join agent ag on ag.id = ac.agent_id " +
@@ -66,7 +66,7 @@ public class AuditCancelDao extends BaseDao<AuditCancel> implements IAuditCancel
         return Integer.parseInt(this.findBySql(sql).get(0).get("count").toString());
     }
 
-    public List<Map<String, Object>> getAuditCancels(long agentId, int page, int pageSize) {
+    public List<Map<String, Object>> getAuditCancel(long agentId, int page, int pageSize) {
         String str = "select ag.name as ag_name, ac.amount,ad.name as ad_name,ac.createDate from audit_cancel ac " +
                 "left join tb_mgr_admin ad on ad.id = ac.admin_id " +
                 "left join agent ag on ag.id = ac.agent_id " +

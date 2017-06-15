@@ -42,12 +42,12 @@ public class RefundCtl extends BaseCtl {
         List<Map<String, Object>> list = new ArrayList<>();
         long total = 0;
         if (agentId != 0) {
-            list = refundService.getAgentPagerRefund(agentId, page, pageSize);
-            total = refundService.getAgentTotal(agentId);
+            list = refundService.getAgentRefund(agentId, page, pageSize);
+            total = refundService.getAgentCount(agentId);
         } else {
             String addr = getAddr();
-            list = refundService.getPagerRefund(page, pageSize, addr);
-            total = refundService.getTotal(addr);
+            list = refundService.getRefund(page, pageSize, addr);
+            total = refundService.getCount(addr);
         }
 
         JSONObject json = new JSONObject();
@@ -67,7 +67,7 @@ public class RefundCtl extends BaseCtl {
     public String query2(int page, int pageSize, String name) {
         //目前根据代理商名字查询，代理商登录则不提供查询功能
         String addr = getAddr();
-        List<Map<String, Object>> list = refundService.queryRefunds(page, pageSize, name, addr);
+        List<Map<String, Object>> list = refundService.queryRefund(page, pageSize, name, addr);
         int total = refundService.queryTotal(name, addr);
         JSONObject json = new JSONObject();
         json.put("rows", list);

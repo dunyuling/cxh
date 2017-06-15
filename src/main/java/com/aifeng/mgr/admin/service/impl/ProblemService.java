@@ -58,39 +58,39 @@ public class ProblemService extends BaseService<Problem> implements IProblemServ
     }
 
     @Transactional
-    public List<Map<String, Object>> getPagerProblems(int page, int size) {
-        return problemDao.getProblems(page, size);
+    public List<Map<String, Object>> getProblems(int page, int size) {
+        return problemDao.getProblem(page, size);
     }
 
     @Transactional
-    public int getTotal() {
+    public int getCount() {
         return problemDao.countAll();
     }
 
 
     @Transactional
     public List<Map<String, Object>> queryProblems(int page, int size, String agent_name, String cs_name) {
-        return problemDao.queryProblems(page, size, agent_name, cs_name);
+        return problemDao.queryProblem(page, size, agent_name, cs_name);
     }
 
     @Transactional
-    public int queryTotal(String agent_name,String cs_name) {
+    public int queryCount(String agent_name, String cs_name) {
         return problemDao.queryProblemsCount(agent_name,cs_name);
     }
 
 
     @Transactional
-    public List<Map<String, Object>> getCsPagerProblems(int id, int page, int size) {
-        return problemDao.getCsProblems(id, page, size);
+    public List<Map<String, Object>> getCustomerServiceProblems(int id, int page, int size) {
+        return problemDao.getCustomerServiceProblems(id, page, size);
     }
 
     @Transactional
-    public int getCsCount(int id) {
-        return problemDao.getCsProblemCount(id);
+    public int getCustomerServiceCount(int id) {
+        return problemDao.getCustomerServiceProblemCount(id);
     }
 
     @Transactional
-    public List<Map<String, Object>> getAgentPagerProblems(long id, int page, int size) {
+    public List<Map<String, Object>> getAgentProblems(long id, int page, int size) {
         return problemDao.getAgentProblems(id, page, size);
     }
 

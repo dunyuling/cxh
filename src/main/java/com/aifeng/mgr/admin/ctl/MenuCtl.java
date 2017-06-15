@@ -47,14 +47,6 @@ public class MenuCtl extends BaseCtl {
     @RequestMapping(value = "list2", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
     @ResponseBody
     public String list2() {
-//		Pager pager = this.menuService.getMenuList(new Pager(page, pageSize));
-//		JSONObject json = new JSONObject();
-//		json.put("rows", pager.getResults());
-//		json.put("total", pager.getTotal());
-//		System.out.println(SpringRedisUtil.hasKey("menu_name"));
-//		SpringRedisUtil.set("menu_name","xxxx");
-//		System.out.println(SpringRedisUtil.get("menu_name", String.class));
-
         List<Menu> list = this.menuService.getMenuList();
 
         List<ZTree> list2 = new ArrayList<ZTree>();

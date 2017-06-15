@@ -46,11 +46,11 @@ public class ProxyAddressCtl extends BaseCtl {
         long total;
         if (object instanceof Admin) {
             String addr = getAddr();
-            list = proxyAddressService.getPagerProxyAddress(page, pageSize, addr);
-            total = proxyAddressService.getProxyAddressCount(addr);
+            list = proxyAddressService.getProxyAddress(page, pageSize, addr);
+            total = proxyAddressService.getCount(addr);
         } else {
             Agent agent = (Agent) object;
-            list = proxyAddressService.getAgentPagerProxyAddress(agent.getId(), page, pageSize);
+            list = proxyAddressService.getAgentProxyAddress(agent.getId(), page, pageSize);
             total = proxyAddressService.getAgentCount(agent.getId());
         }
         JSONObject json = new JSONObject();
@@ -74,12 +74,12 @@ public class ProxyAddressCtl extends BaseCtl {
         long total;
         if (object instanceof Admin) {
             String addr = getAddr();
-            list = proxyAddressService.getQueryProxyAddress(page, pageSize, name, addr);
-            total = proxyAddressService.getQueryProxyAddressCount(name, addr);
+            list = proxyAddressService.queryProxyAddress(page, pageSize, name, addr);
+            total = proxyAddressService.queryAgentCount(name, addr);
         } else {
             Agent agent = (Agent) object;
-            list = proxyAddressService.getAgentQueryPagerProxyAddress(agent.getId(), page, pageSize, name);
-            total = proxyAddressService.getAgentQueryCount(agent.getId(), name);
+            list = proxyAddressService.queryAgentProxyAddress(agent.getId(), page, pageSize, name);
+            total = proxyAddressService.queryAgentCount(agent.getId(), name);
         }
         JSONObject json = new JSONObject();
         json.put("rows", list);
