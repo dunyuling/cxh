@@ -112,7 +112,9 @@ $(window).bind("load resize", function () {
 });
 
 function NavToggle() {
-    $('.navbar-minimalize').trigger('click');
+    // $('.navbar-minimalize').trigger('click');
+    $("body").toggleClass("mini-navbar");
+    SmoothlyMenu();
 }
 
 function SmoothlyMenu() {

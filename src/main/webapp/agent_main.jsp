@@ -42,7 +42,7 @@
                                 </span>
                         </a>
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                            <li><a class="J_menuItem" href="javascript:;" id="edit_agent_pwd">修改密码</a></li>
+                            <li><a href="javascript:;" id="edit_agent_pwd">修改密码</a></li>
                         </ul>
                     </div>
                     <div class="logo-element">H+
