@@ -17,9 +17,12 @@ import javax.servlet.http.HttpSession;
 public class SessionInterceptor extends HandlerInterceptorAdapter {
     private String[] excludes = new String[]{"wx",
             "front",
+            "toLogin.cs",
             "login.cs",
+            "customerservice2Login.cs",
             "customerserviceLogin.cs",
             "agentLogin.cs",
+            "agent2Login.cs",
             "to_pwd_reminder.cs",
             "pwd_reminder.cs",
             "retrieval_pwd.cs"};
@@ -44,11 +47,20 @@ public class SessionInterceptor extends HandlerInterceptorAdapter {
         }
 
         Object objUser = session.getAttribute(Constants.SESSION_USER);
+//        if (objUser == null) {// 未登录，或者登录超时
+//            if (referer == null) {
+//                response.sendRedirect(url.contains("agent") ? contextPath + "/agent_login.jsp" : (url.contains("customerservice") ? contextPath + "/customerservice_login.jsp" : contextPath + "/login.jsp"));
+//            } else {
+//                response.sendRedirect(referer.contains("agent") ? contextPath + "/agent_login.jsp" : (referer.contains("customerservice") ? contextPath + "/customerservice_login.jsp" : contextPath + "/login.jsp"));
+//            }
+//            return false;
+//        }
+
         if (objUser == null) {// 未登录，或者登录超时
             if (referer == null) {
-                response.sendRedirect(url.contains("agent") ? contextPath + "/agent_login.jsp" : (url.contains("customerservice") ? contextPath + "/customerservice_login.jsp" : contextPath + "/login.jsp"));
+                response.sendRedirect(url.contains("agent") ? "/mgr/agent2Login.cs" : (url.contains("customerservice") ? "/mgr/customerservice2Login.cs" : "/mgr/toLogin.cs"));
             } else {
-                response.sendRedirect(referer.contains("agent") ? contextPath + "/agent_login.jsp" : (referer.contains("customerservice") ? contextPath + "/customerservice_login.jsp" : contextPath + "/login.jsp"));
+                response.sendRedirect(url.contains("agent") ? "/mgr/agent2Login.cs" : (url.contains("customerservice") ? "/mgr/customerservice2Login.cs" : "/mgr/toLogin.cs"));
             }
             return false;
         }

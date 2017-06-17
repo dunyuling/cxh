@@ -1,0 +1,52 @@
+﻿html { background-color:#f0f0f2}
+.page01_main { margin-top:0.3rem}
+.page01_listss {width:100%; display:-webkit-box; margin-bottom:0.02rem}
+.page01_list01 {height:2.4rem; background-color:#FFF; -webkit-box-flex:1; margin-right:0.01rem; text-align:center}
+.page01_list02 {height:2.4rem; background-color:#FFF; -webkit-box-flex:1; margin-left:0.01rem; text-align:center}
+.page01_listss a {display: inline-block; width:3rem; height:2.3rem; margin:auto; }
+.page01_list01 a span {width:0.94rem; height:0.94rem; display:block; margin:auto; margin-top:0.5rem; margin-bottom:0.1rem}
+.page01_list01 a p {display:block; width:100%; margin:auto; line-height:180%; text-align:center; font-size:0.24rem; color:#333}
+.page01_list02 a span {width:0.94rem; height:0.94rem; display:block; margin:auto; margin-top:0.5rem; margin-bottom:0.1rem}
+.page01_list02 a p {display:block; width:100%; margin:auto; line-height:180%; text-align:center; font-size:0.24rem; color:#333}
+.icon01 {background:url(../../WEB-INF/wx/img/page_icon_01.png) no-repeat center center; background-size:cover}
+.icon02 {background:url(../../WEB-INF/wx/img/page_icon_02.png) no-repeat center center; background-size:cover}
+.icon03 {background:url(../../WEB-INF/wx/img/page_icon_03.png) no-repeat center center; background-size:cover}
+.icon04 {background:url(../../WEB-INF/wx/img/page_icon_04.png) no-repeat center center; background-size:cover}
+
+.page02_main {}
+.time_input {color:#333;}
+.page02_box01 {width:100%; background-color:#FFF; padding:0.2rem 0}
+.demos {margin:0 0.2rem; border:#e4e4e4 solid 1px; position:relative; -moz-border-radius:0.1rem; -webkit-border-radius:0.1rem; border-radius:0.1rem;}
+.ss_icon {position:absolute; right:0; width:0.36rem; height:0.36rem; margin:0.12rem 0.12rem; z-index:5}
+.ss_icon img {width:100%; display:block}
+.demos>input {display:inline-block; width:92%; height:0.6rem; font-size:0.26rem; line-height:0.6rem; padding:0 0.2rem; border:none; background-color:transparent; letter-spacing:0.01rem; position:relative; z-index:10}
+.jilu_main {margin:0.2rem 0.2rem 0 0.2rem; height:0.56rem; font-size:0.24rem; color:#999; line-height:0.56rem;}
+.page02_list_main {width:100%; padding-bottom:1.2rem}
+.page02_lists {width:100%; background-color:#FFF; padding-bottom:0.2rem; margin-bottom:0.14rem; }
+.lists_p1 {height:0.8rem; padding:0 0.2rem; font-size:0.28rem; color:#333; line-height:0.8rem; border-bottom:#c1c1c1 dashed 1px; margin-bottom:0.2rem}
+.page02_lists p {display:block; font-size:0.24rem; color:#666; line-height:180%; margin:0 0.2rem}
+.page02_lists a {display:block}
+
+.zhuangtai {position:relative}
+.zhuangtai_ok {position:absolute;right:0; top:0; height:0.8rem; font-size:0.24rem; color:#4a90e2; line-height:0.8rem; padding:0 0.2rem}
+.zhuangtai_no {position:absolute;right:0; top:0; height:0.8rem; font-size:0.24rem; color:#fc4545; line-height:0.8rem; padding:0 0.2rem}
+
+.page_details_main {width:100%;}
+.page_details_main ul { background-color:#FFF; margin-bottom:10px}
+.page_details_main ul li {width:100%; min-height:0.88rem; line-height:0.88rem; border-bottom:#f1f1f3 solid 1px}
+.page_details_main ul li p { margin:0 0.2rem; color:#333; font-size:0.26rem}
+.tel_now p {color:#4a90e2}
+.page_details_button {margin:0.4rem 0.2rem}
+.page_details_button a {display:inline-block;width:100%; height:0.88rem; background-color:#4a90e2; color:#fff; text-align: center; line-height:0.88rem; font-size:0.28rem; -moz-border-radius:0.1rem; -webkit-border-radius:0.1rem; border-radius:0.1rem; letter-spacing:0.01rem}
+.page_details_button2 {margin:0.4rem 0.2rem}
+.page_details_button2 a {display:inline-block;width:100%; height:0.88rem; background-color:#e4e4e4; color:#666; text-align: center; line-height:0.88rem; font-size:0.28rem; -moz-border-radius:0.1rem; -webkit-border-radius:0.1rem; border-radius:0.1rem; letter-spacing:0.01rem}
+
+
+.su_input p {float:left; height:1rem; line-height:1rem; font-size:0.24rem; color:#333; min-width:1rem; }
+.su_input input {float:left; display:inline-block; width:70%; height:1rem; line-height:1rem; font-size:0.24rem; color:#333; border:none; outline: none; margin: 0 0 0 0.2rem; }
+
+.su_input textarea {float:left; display:inline-block; width:75%; height:2.5rem; line-height:180%; font-size:0.24rem; color:#333; border:none; outline: none; margin: 0.28rem 0 0 0.2rem;   resize:none}
+
+
+
+

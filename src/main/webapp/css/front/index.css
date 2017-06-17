@@ -1,0 +1,80 @@
+/*main*/
+.index_txt_body {width:100%; height:400px; position:absolute; left:0; top:290px; z-index:30; overflow:hidden}
+.index_txt_main {width:1200px; height:400px; margin:auto; overflow:hidden}
+.index_txt_left {float:left}
+.index_txt_left_img { padding-top:65px}
+.index_txt_left_button { padding-top:35px}
+.index_txt_left_button>a {display:block; width:128px; height:38px; border:#fff solid 1px; -moz-border-radius:4px; -webkit-border-radius:4px; border-radius:4px; text-align:center; line-height:38px; color:#fff; font-size:14px; letter-spacing:1px; -webkit-transition: all 0.2s; -moz-transition: all 0.2s; -o-transition: all 0.2s; transition: all 0.2s;}
+.index_txt_left_button>a:hover {border:#ffb000 solid 1px; color:#ffb000}
+.index_txt_right { float:right; width:280px; height:400px; background:url(../../img/front/right_bj.png) repeat left top; overflow:hidden; display:block}
+.index_txt_right_tit { width:260px; height:40px; font-size:16px; padding-left:20px; letter-spacing:1px; line-height:40px; color:#000; background-color:#fff; margin-bottom:20px}
+.index_txt_right_in {margin:0 20px; height:32px; padding-top:10px}
+.index_txt_right_in>span {display:inline-block; float:left; font-size:13px; color:#fff; line-height:32px; height:32px; width:65px; margin-right:6px; overflow:hidden}
+.index_txt_right_in>input {width:130px; height:30px;float:left; border:#696969 solid 1px; color:#fff; font-size:13px; line-height:30px;   -moz-border-radius:2px; -webkit-border-radius: 2px; border-radius:2px; padding: 0 20px 0 15px; background-color: transparent}
+.index_txt_right_in>input:focus {border:#c0c0c0 solid 1px; outline:none}
+.index_txt_right_but { margin:0 20px; height:40px; margin-top:16px}
+.index_txt_right_but>a { display:block; width:100%; height:40px; background-color:#ffb000; text-align:center; line-height:40px; color:#fff; font-size:14px; -moz-border-radius:4px; -webkit-border-radius:4px; border-radius:4px;-webkit-transition: all 0.2s; -moz-transition: all 0.2s; -o-transition: all 0.2s; transition: all 0.2s;}
+.index_txt_right_but>a:hover { background-color:#ff9c00}
+
+.index_txt_right_in1 {margin:0 20px; height:120px; padding-top:10px}
+.index_txt_right_in1>span {display:inline-block; float:left; font-size:13px; color:#fff; line-height:32px; height:32px; width:65px; margin-right:6px; overflow:hidden}
+
+.form-control-main { overflow:hidden; width:167px}
+.form-inline {float:left; overflow:hidden}
+.form-group {float:left; height:32px; margin-right:10px; margin-bottom:10px;}
+.form-group select {width:167px; height:32px; color:#fff; cursor:pointer; padding:0 30px 0 10px; font-size:13px; line-height:32px; outline:none; border:#696969 solid 1px; appearance:none; -moz-appearance:none; -webkit-appearance:none; background: url(../../img/front/personal_icon12.png) no-repeat 140px center; -moz-border-radius:4px; -webkit-border-radius:4px; border-radius:4px;}
+select::-ms-expand {display: none; }
+.form-control>option { color:#333}
+
+.trading2_main_input {float:left;height:32px; width:167px;}
+.trading2_main_input2 {width:167px; height:32px; border:#696969 solid 1px; padding: 0 20px 0 10px; outline:none; -moz-border-radius:4px;  -webkit-border-radius:4px; border-radius:4px; font-size:13px; line-height:32px; color:#fff; cursor:pointer; background-color:transparent;appearance: none; -moz-appearance: none; -webkit-appearance: none; background: url(../../img/front/personal_icon12.png) no-repeat 140px center;}
+.trading2_main_input2>option {color:#333}
+/*banner*/
+.banner_roll {width:100%; height:850px;}
+.wrap {position: relative; width:100%; margin: 0 auto; z-index:10}
+.centered-btns_nav {position: absolute; top: 50%; z-index:20; width:51px; height:81px; margin-top: -40px; line-height: 200px;  overflow: hidden; opacity:0.7; filter:alpha(opacity=70); -moz-opacity:0.7;-khtml-opacity:0.7; display:none}
+.next {right: 0; background-position: right 0;}
+.centered-btns_nav:active {opacity: 1;}
+.centered-btns_tabs {margin-top:-26px; text-align: center; font-size: 0; list-style-type: none; position:relative; z-index:10}
+.centered-btns_tabs li {display: inline-block; margin: 0 3px; *display: inline; *zoom: 1;}
+.centered-btns_tabs li a {display: inline-block; width:10px; height:10px; border-radius:100px; line-height: 20px; background-color:#fff; overflow: hidden; *display: inline; *zoom: 1;}
+.centered-btns_tabs .centered-btns_here a {width:22px; height:10px; opacity:0.8; filter:alpha(opacity=80); -moz-opacity:0.8;-khtml-opacity:0.8; background-color: #ffb000;}
+.rslides {position: relative; list-style: none; overflow: hidden; width: 100%; height:850px; padding: 0; margin: 0;z-index:1}
+.rslides li {-webkit-backface-visibility: hidden; position: absolute; display: none; width: 100%; height:700px; left: 0; top: 0;}
+.rslides li:first-child {position: relative; display: block; float: left;}
+.rslides img {display: block; height: auto; float: left; height:100%; border: 0;}
+.banner_roll_img {width:100%; height:850px;}
+
+/*车险介绍*/
+.cxjs_list {width:1200px; margin:auto; overflow:hidden}
+.cxjs_list ul {overflow:hidden}
+.cxjs_list ul li {float:left; font-size:14px; line-height:180%; color:#333; cursor:pointer; margin:4px 13px; padding:0 4px}
+.li_now { border-bottom:#ffb000 solid 2px}
+.cxjs_txt {}
+.hid {display: none}
+.tabjiehuan { width:1200px; min-height:230px; background-color:#f5f5f5; margin-top:30px}
+.cxjs_txt_main { margin:0 45px; padding:35px 0}
+.cxjs_txt_main .cxjs_txt_main_tit { font-size:22px; line-height:180%; color:#3d3d3d; padding-bottom:25px}
+.cxjs_txt_main_p { font-size:14px; line-height:180%; color:#666; padding-bottom:6px; padding-left:10px; background:url(../../img/front/cxjs_txt_main_p.png) no-repeat left 10px}
+.cxjs_txt_main_tit2 { font-size:15px; line-height:180%; color:#3d3d3d; font-weight:bold; padding-bottom:6px; padding-top:35px}
+
+/*投保流程*/
+.tblc_main {width:100%; padding:66px 0 30px 0;}
+.tblc_title {width:1200px; margin:auto; height:22px; -moz-user-select: none; -webkit-user-select:none; -ms-user-select:none; -khtml-user-select: none; user-select: none; margin-bottom:40px}
+.tblc_title p {display:block; font-size:22px; line-height:22px; color:#ffb000; padding-left:10px;  cursor: pointer; border-left:#ffb000 solid 6px;}
+.tblc_list {width:1200px; margin:auto; padding-top:20px}
+.tblc_list ul {overflow:hidden}
+.tblc_list ul li {float:left; width:180px; height:170px;}
+.tblc_list ul li i {display:block; width:68px; height:68px; margin:auto}
+.tblc_list ul li i img { width:100%}
+.tblc_list ul li p {display:block; font-size:14px; color:#333; line-height:180%; text-align:center; margin:20px 0 12px 0;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;}
+.tblc_list ul li span {display:block;  font-size:12px; color:#333; line-height:180%; text-align:center; display:-webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2;overflow: hidden; }
+
+
+
+
+
+
+
+
+
