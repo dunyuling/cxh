@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<script type="text/javascript" src="/js/wx/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="/js/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="/js/wx/mobiscroll_002.js"></script>
 <script type="text/javascript" src="/js/wx/mobiscroll_004.js"></script>
 <script type="text/javascript" src="/js/wx/mobiscroll.js"></script>

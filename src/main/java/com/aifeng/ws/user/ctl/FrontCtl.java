@@ -5,11 +5,13 @@ import com.aifeng.mgr.admin.service.impl.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.websocket.server.PathParam;
 import java.util.List;
 import java.util.Map;
 
@@ -50,8 +52,10 @@ public class FrontCtl {
         return "注册失败";
     }
 
-    @RequestMapping("get_news")
-    public String getNews(@RequestParam(value = "page", defaultValue = "1") int page, Model model) {
+    @RequestMapping("get_news/{type}")
+    public String getNews(@RequestParam(value = "page", defaultValue = "1") int page,
+                          @PathVariable(value = "type") String type,
+                          Model model) {
         try {
             int pageSize = 10;
             List<Map<String, Object>> newses = newsService.getNews(page, pageSize);
@@ -62,17 +66,19 @@ public class FrontCtl {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "/front/news";
+        return !type.equals("mobile") ? "/front/news" : "/front/mobile/news";
     }
 
-    @RequestMapping("get_news_detail")
-    public String getNewsDetail(@RequestParam(value = "id") long id, Model model) {
+    @RequestMapping("get_news_detail/{type}")
+    public String getNewsDetail(@RequestParam(value = "id") long id,
+                                @PathVariable(value = "type") String type,
+                                Model model) {
         try {
             model.addAttribute("news", newsService.getOne(id));
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "/front/news_detail";
+        return !type.equals("mobile") ? "/front/news_detail" : "/front/mobile/news_detail";
     }
 
 }

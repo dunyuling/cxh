@@ -14,7 +14,7 @@
     <link rel="stylesheet" type="text/css" href="/css/wx/mobiscroll_002.css">
     <link rel="stylesheet" type="text/css" href="/css/wx/mobiscroll.css">
     <link rel="stylesheet" type="text/css" href="/css/wx/mobiscroll_003.css">
-    <script type="text/javascript" src="/js/wx/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="/js/jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="/js/wx/mobiscroll_002.js"></script>
     <script type="text/javascript" src="/js/wx/mobiscroll_004.js"></script>
     <script type="text/javascript" src="/js/wx/mobiscroll.js"></script>

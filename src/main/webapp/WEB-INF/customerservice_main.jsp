@@ -18,7 +18,7 @@
     <script src="/js/plugins/layer/layer.min.js"></script>
     <!-- 自定义js -->
     <script src="../js/hplus.js"></script>
-    <script type="text/javascript" src="../js/contabs.js"></script>
+    <script type="text/javascript" src="/js/contabs.js"></script>
 
 </head>
 

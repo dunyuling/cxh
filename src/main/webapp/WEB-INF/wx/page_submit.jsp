@@ -159,9 +159,9 @@
 
 <input type="hidden" id="submit_enable" value="true"/>
 <div class="su_details_button"><a href="#" id="submit">提交</a></div>
-<script src="/js/wx/jquery-1.11.3.min.js"></script>
+<script src="/js/jquery-1.11.3.min.js"></script>
 <script src="/js/wx/Popt.js"></script>
-<script src="/js/wx/cityJson.js"></script>
+<script src="/js/cityJson.js"></script>
 <script src="/js/wx/citySet.js"></script>
 <script type="text/javascript">
     $("#addr").click(function (e) {

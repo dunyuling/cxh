@@ -9,8 +9,8 @@
     <title>车险汇</title>
     <link rel="stylesheet" href="/css/front/css.css">
     <link rel="stylesheet" href="/css/front/new.css">
-    <script type="text/javascript" src="/img/wx/jquery-1.8.3.min.js"></script>
-    <script type="text/javascript" src="/img/wx/jquery.paging.js"></script>
+    <script type="text/javascript" src="/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="/js/front/jquery.paging.js"></script>
 
 </head>
 <body>
@@ -27,7 +27,7 @@
                 <div class="index_logo"><a href="/pages/front/index.html"><img src="/img/front/logo_03.png"></a></div>
                 <ul>
                     <li><a href="/pages/front/index.html" class="nav_txtss">首页</a></li>
-                    <li><a href="#" class="nav_txtss now">新闻动态</a></li>
+                    <li><a href="#" class="nav_txtss now" >新闻动态</a></li>
                     <li><a href="/pages/front/about.html" class="nav_txtss">关于我们</a></li>
                 </ul>
             </div>
@@ -44,15 +44,15 @@
             <div class="new_lists">
                 <div class="new_list_img"
                      style="background:url(${news.img}) no-repeat center center; background-size:cover">
-                    <a href="/front/get_news_detail.cs?id=${news.id}"></a></div>
+                    <a href="/front/get_news_detail/pc.cs?id=${news.id}"></a></div>
                 <div class="new_list_text">
                     <div class="new_list_text_p1">
                         <fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${news.createDate}"/>
                     </div>
-                    <div class="new_list_text_p2"><a href="/front/get_news_detail.cs?id=${news.id}">${news.title}</a>
+                    <div class="new_list_text_p2"><a href="/front/get_news_detail/pc.cs?id=${news.id}">${news.title}</a>
                     </div>
                     <div class="new_list_text_p3">${news.description}</div>
-                    <div class="new_list_text_p4"><a href="/front/get_news_detail.cs?id=${news.id}">查看全文 ></a></div>
+                    <div class="new_list_text_p4"><a href="/front/get_news_detail/pc.cs?id=${news.id}">查看全文 ></a></div>
                 </div>
             </div>
         </c:forEach>

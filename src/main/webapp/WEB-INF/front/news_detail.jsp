@@ -7,8 +7,8 @@
     <title>车险汇</title>
     <link rel="stylesheet" href="/css/front/css.css">
     <link rel="stylesheet" href="/css/front/new.css">
-    <script type="text/javascript" src="/img/wx/jquery-1.8.3.min.js"></script>
-    <script type="text/javascript" src="/img/wx/jquery.paging.js"></script>
+    <script type="text/javascript" src="/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="/js/front/jquery.paging.js"></script>
 </head>
 <body>
 <div class="index_body_all">
@@ -24,7 +24,6 @@
                 <div class="index_logo"><a href="/pages/front/index.html"><img src="/img/front/logo_03.png"></a></div>
                 <ul>
                     <li><a href="/pages/front/index.html" class="nav_txtss">首页</a></li>
-                    <%--<li><a href="/cxh/front/get_news.cs" class="nav_txtss now">新闻动态</a></li>--%>
                     <li><a href="/front/get_news.cs" class="nav_txtss now">新闻动态</a></li>
                     <li><a href="/pages/front/about.html" class="nav_txtss">关于我们</a></li>
                 </ul>
@@ -38,7 +37,7 @@
         <li class="breadcrumb_my"><a href="/pages/front/index.html">首页</a></li>
         <li class="breadcrumb_my"></li>
         <%--<li class="breadcrumb_my"><a href="/cxh/front/get_news.cs">新闻动态</a></li>--%>
-        <li class="breadcrumb_my"><a href="/front/get_news.cs">新闻动态</a></li>
+        <li class="breadcrumb_my"><a href="/front/get_news/pc.cs">新闻动态</a></li>
         <li class="breadcrumb_my"></li>
         <li>详情</li>
     </ul>
@@ -51,7 +50,6 @@
             <fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${news.createDate}"/>
         </div>
     </div>
-    <%-- <p><img src="${news.img}"/></p> --%>
     <p>${news.description}</p>
     <p>${news.content}</p>
 </div>
