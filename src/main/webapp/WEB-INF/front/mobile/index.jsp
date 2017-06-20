@@ -67,7 +67,7 @@
                                                                    placeholder="省/市/县（区）"></li>
                 <li class="su_input"><p>手机号</p><input name="mobile" id="mobile" type="text" placeholder="国际手机号码请加区号"></li>
                 <li class="su_input">
-                    <p>车险类型</p>
+                    <p style="width:20%">车险类型</p>
                     <div class="trading2_main_input">
                         <select id="insurance" name="insurance" class="trading2_main_input2">
                             <option value="0">交强险</option>

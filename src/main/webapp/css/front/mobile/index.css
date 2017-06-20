@@ -25,7 +25,7 @@
 .submit_main { margin:0 0.26rem; padding-top:0.2rem}
 .su_input {height:0.88rem; background-color:#fff; overflow:hidden; border-bottom:#ebebeb solid 1px; padding:0 0.2rem;}
 .su_input p {float:left; height:0.88rem; line-height:0.88rem; font-size:0.26rem; color:#333; margin-right:0.2rem }
-.su_input input {float:left; display:inline-block; width:70%; height:0.88rem; line-height:0.88rem; font-size:0.24rem; color:#333; border:none; outline: none; margin: 0 0 0 0.2rem; }
+.su_input input {float:left; display:block; width:75%; height:0.48rem; line-height:0.48rem; font-size:0.24rem; color:#333; border:none; outline: none; padding: 0.2rem 0 0.2rem 0.2rem; }
 .su_input textarea {float:left; display:inline-block; width:75%; height:2.5rem; line-height:180%; font-size:0.24rem; color:#333; border:none; outline: none; margin: 0.28rem 0 0 0.2rem;   resize:none}
 .su_details_button {margin: 0.4rem 0.2rem;}
 .su_details_button a {display: inline-block; width:100%; height:0.88rem; background-color:#4a90e2; color:#fff; text-align:center; line-height: 0.88rem; font-size:0.28rem; -moz-border-radius:0.1rem; -webkit-border-radius:0.1rem; border-radius:0.1rem; letter-spacing:0.01rem;}
@@ -41,8 +41,8 @@
 ._citys1 a:hover { color: #fff; background-color: #56b4f8; }
 .AreaS { background-color: #56b4f8 !important; color: #fff !important; }
 
-.trading2_main_input {float:left; height:0.88rem; width:4.6rem; line-height:0.88rem; margin-left:0.2rem}
-.trading2_main_input2 {width:4.6rem; height:0.88rem; border:#fff solid 1px; outline:none;  font-size:0.26rem; line-height:0.88rem; color:#333; cursor:pointer; background-color:transparent;appearance: none; -moz-appearance: none; -webkit-appearance: none; background: url(/img/front/mobile/personal_icon12.png) no-repeat right center; display: block;}
+.trading2_main_input {float:left; height:0.88rem; width:72%; line-height:0.88rem;}
+.trading2_main_input2 {width:100%; height:0.88rem; border:none; outline:none;  font-size:0.24rem; line-height:0.88rem; color:#333; cursor:pointer; background-color:transparent;appearance: none; -moz-appearance: none; -webkit-appearance: none; background: url(/img/front/mobile/personal_icon12.png) no-repeat right center; display: block;}
 .trading2_main_input2>option {color:#333}
 
 .xunjia_main { padding-bottom:0.26rem}
