@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html>
 <head>
@@ -16,12 +17,12 @@
 <div>
     <!--nav-->
     <div class="page_header">
-        <div class="logo_main"><a href="/pages/front/mobile/index.html"></a></div>
+        <div class="logo_main"><a href="/front/index/mobile.cs"></a></div>
         <div class="nav_main">
             <ul>
-                <li><a href="/pages/front/mobile/index.html" class="nav_bj">首页</a></li>
+                <li><a href="/front/index/mobile.cs" class="nav_bj">首页</a></li>
                 <li><a href="/front/get_news/mobile.cs" class="">新闻动态</a></li>
-                <li><a href="/pages/front/mobile/about.html" class="">关于我们</a></li>
+                <li><a href="/front/about/mobile.cs" class="">关于我们</a></li>
             </ul>
         </div>
     </div>
@@ -61,12 +62,12 @@
         <div class="title_main">车险询价</div>
         <div class="submit_main">
             <ul>
-                <li class="su_input"><p>姓名</p><input name="" type="text" placeholder=""></li>
-                <li class="su_input content-block"><p>地区</p><input name="" id="city" readonly type="text"
+                <li class="su_input"><p>姓名</p><input id="name" name="name" type="text" required></li>
+                <li class="su_input content-block"><p>地区</p><input name="addr" id="addr" readonly type="text"
                                                                    placeholder="省/市/县（区）"></li>
-                <li class="su_input"><p>手机号</p><input name="" type="text" placeholder="国际手机号码请加区号"></li>
+                <li class="su_input"><p>手机号</p><input name="mobile" id="mobile" type="text" placeholder="国际手机号码请加区号"></li>
                 <li class="su_input">
-                    <p>手机号</p>
+                    <p>车险类型</p>
                     <div class="trading2_main_input">
                         <select id="insurance" name="insurance" class="trading2_main_input2">
                             <option value="0">交强险</option>
@@ -83,14 +84,14 @@
                     </div>
                 </li>
             </ul>
-            <div class="xunjia_main_button"><a href="#">提交订单</a></div>
+            <div class="xunjia_main_button"><a id="submit">提交订单</a></div>
         </div>
         <script src="/js/jquery-1.11.3.min.js"></script>
         <script src="/js/front/mobile/Popt.js"></script>
         <script src="/js/cityJson.js"></script>
-        <script src="/js/front/mobile/citySet.js"></script>
+        <script src="/js/citySet.js"></script>
         <script type="text/javascript">
-            $("#city").click(function (e) {
+            $("#addr").click(function (e) {
                 SelCity(this, e);
             });
         </script>
@@ -283,7 +284,6 @@
                 };
                 var accordion = new Accordion($('#accordion'), false);
 
-
                 $("#submit").click(function () {
                     var addr = $("#addr").val();
                     var arr = addr.split("-");
@@ -292,7 +292,12 @@
                         return;
                     }
 
-                    var name = $("#name").val();
+                    var name = $("#name").val().trim();
+                    if(name == "") {
+                        alert("名字必须填写");
+                        return;
+                    }
+
                     var mobile = $("#mobile").val();
                     var insurance = $("#insurance option:selected").val();
 

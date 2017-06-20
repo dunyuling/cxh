@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
@@ -21,12 +22,12 @@
 				<div class="index_nav_box1_icon2"><p class="nav_icon"><img src="/img/front/icon_03.png"></p><p>周一至周五  09:00-18:00</p></div>
 			</div>
 			<div class="index_nav_box2">
-				<div class="index_logo"><a href="/pages/front/index.html"><img src="/img/front/logo_03.png"></a></div>
+				<div class="index_logo"><a href="/front/index/pc.cs">
+					<img src="/img/front/logo_03.png"></a></div>
 				<ul>
-					<li><a href="/pages/front/index.html" class="nav_txtss now">首页</a></li>
-					<!--<li><a href="/cxh/front/get_news.cs" class="nav_txtss">新闻动态</a></li>-->
+					<li><a href="/front/index/pc.cs" class="nav_txtss now">首页</a></li>
 					<li><a href="/front/get_news/pc.cs" class="nav_txtss">新闻动态</a></li>
-					<li><a href="/pages/front/about.html" class="nav_txtss">关于我们</a></li>
+					<li><a href="/front/about/pc.cs" class="nav_txtss">关于我们</a></li>
 				</ul>
 			</div>
 		</div>
@@ -57,7 +58,7 @@
 						</div>
 					</form>
 				</div>
-				<div class="index_txt_right_in"><span>姓名</span><input id="name" type="text"></div>
+				<div class="index_txt_right_in"><span>姓名</span><input id="name" type="text" required></div>
 				<div class="index_txt_right_in"><span>手机号码</span><input id="mobile"></div>
 				<div class="index_txt_right_in">
 					<span>车险类型</span>
@@ -100,9 +101,14 @@
                 var province = $("#province option:selected").text();
                 var city = $("#city option:selected").text();
                 var area = $("#area option:selected").text();
-                var name = $("#name").val();
+                var name = $("#name").val().trim();
                 var mobile = $("#mobile").val();
                 var insurance = $("#insurance option:selected").val();
+
+                if(name == "") {
+					alert("名字必须填写");
+					return;
+				}
 
                 if(province == '—— 省 ——') {
                     alert("请选择正确的省份");

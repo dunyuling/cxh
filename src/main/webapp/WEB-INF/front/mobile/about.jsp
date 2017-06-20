@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html>
 <head>
@@ -16,12 +17,12 @@
 <div>
 	<!--nav-->
 	<div class="page_header">
-		<div class="logo_main"><a href="/pages/front/mobile/index.html"></a></div>
+		<div class="logo_main"><a href="/front/index/mobile.cs"></a></div>
 		<div class="nav_main">
 			<ul>
-				<li><a href="/pages/front/mobile/index.html" class="">首页</a></li>
+				<li><a href="/front/index/mobile.cs" class="">首页</a></li>
 				<li><a href="/front/get_news/mobile.cs" class="">新闻动态</a></li>
-				<li><a href="/pages/front/mobile/about.html" class="nav_bj">关于我们</a></li>
+				<li><a href="/front/about/mobile.cs" class="nav_bj">关于我们</a></li>
 			</ul>
 		</div>
   </div>
