@@ -5,9 +5,9 @@
 <head>
     <script type="text/javascript">
         //检测平台
-        var p = navigator.platform;
-        var iphone = p.indexOf("iPhone") != -1;
-        var android = p.indexOf("arm") != -1 || p.indexOf("aarch") != -1;
+        var ua = navigator.userAgent;
+        var iphone = ua.indexOf("iPhone") != -1;
+        var android = ua.indexOf("Android") != -1;
 //        alert("p: iphone: " + iphone + " \t android: " + android + " \t " + p);
 
         if (android || iphone) {
