@@ -16,7 +16,7 @@
 </head>
 <body>
 <div class="page_header">
-    <div class="sub1"><a href="/wx/manage.cs?userid=${user_id}"><i><img src="img/header_icon.png"></i>
+    <div class="sub1"><a href="/wx/manage.cs?userid=${user_id}"><i><img src="/img/wx/header_icon.png"></i>
         <p>返回</p></a></div>
     <div class="sub2">今日未回访</div>
     <div class="sub3"></div>

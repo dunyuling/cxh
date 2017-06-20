@@ -17,7 +17,7 @@
 <div class="page_header">
     <div class="sub1">
         <c:if test="${not empty path}">
-            <a href="/wx/${path}.cs?userid=${user_id}"><i><img src="img/header_icon.png"></i>
+            <a href="/wx/${path}.cs?userid=${user_id}"><i><img src="/img/wx/header_icon.png"></i>
                 <p>返回</p></a>
         </c:if>
     </div>

@@ -24,7 +24,7 @@
 </head>
 <body>
 <div class="page_header">
-    <div class="sub1"><a href="/wx/manage.cs?userid=${user_id}"><i><img src="img/header_icon.png"></i>
+    <div class="sub1"><a href="/wx/manage.cs?userid=${user_id}"><i><img src="/img/wx/header_icon.png"></i>
         <p>返回</p></a></div>
     <div class="sub2">全部咨询记录</div>
     <div class="sub3"></div>
@@ -32,7 +32,7 @@
 <div class="page02_main">
     <div class="page02_box01">
         <div class="demos">
-            <div class="ss_icon"><img src="img/page01_icon.png"></div>
+            <div class="ss_icon"><img src="/img/wx/page01_icon.png"></div>
             <input value="" class="time_input" readonly name="appDate" id="appDate" type="text" placeholder="选择日期">
         </div>
         <script type="text/javascript">

@@ -15,7 +15,7 @@
 </head>
 <body>
 <div class="page_header">
-    <div class="sub1"><a href="#1"><i><img src="img/header_icon.png"></i>
+    <div class="sub1"><a href="#1"><i><img src="/img/wx/header_icon.png"></i>
         <p>返回</p></a></div>
     <div class="sub2">添加代理地区</div>
     <div class="sub3"></div>
