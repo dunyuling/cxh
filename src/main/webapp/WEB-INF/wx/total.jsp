@@ -20,7 +20,7 @@
     <script type="text/javascript" src="/js/wx/mobiscroll.js"></script>
     <script type="text/javascript" src="/js/wx/mobiscroll_003.js"></script>
     <script type="text/javascript" src="/js/wx/mobiscroll_005.js"></script>
-    <script type="text/javascript" src="../common/translateType.js"></script>
+    <script type="text/javascript" src="../../js/common/translateType.js"></script>
 </head>
 <body>
 <div class="page_header">

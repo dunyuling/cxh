@@ -64,7 +64,7 @@
 
     <input type="hidden" value="${id}" id="id"/>
 
-    <script type="text/javascript" src="../common/translateType.js"></script>
+    <script type="text/javascript" src="../../js/common/translateType.js"></script>
     <script type="text/javascript">
         $("#to_visit").click(function () {
             var id = $("#id").val();

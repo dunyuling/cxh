@@ -12,7 +12,7 @@
     <script src="/js/plugins/bootstrap-table/bootstrap-table.js"></script>
     <script src="/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
     <script src="/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
-    <script src="/common/translateType.js"></script>
+    <script src="/js/common/translateType.js"></script>
 </head>
 
 <body class="gray-bg">
