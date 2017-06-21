@@ -8,10 +8,10 @@
 .page01_list01 a p {display:block; width:100%; margin:auto; line-height:180%; text-align:center; font-size:0.24rem; color:#333}
 .page01_list02 a span {width:0.94rem; height:0.94rem; display:block; margin:auto; margin-top:0.5rem; margin-bottom:0.1rem}
 .page01_list02 a p {display:block; width:100%; margin:auto; line-height:180%; text-align:center; font-size:0.24rem; color:#333}
-.icon01 {background:url(../../WEB-INF/wx/img/page_icon_01.png) no-repeat center center; background-size:cover}
-.icon02 {background:url(../../WEB-INF/wx/img/page_icon_02.png) no-repeat center center; background-size:cover}
-.icon03 {background:url(../../WEB-INF/wx/img/page_icon_03.png) no-repeat center center; background-size:cover}
-.icon04 {background:url(../../WEB-INF/wx/img/page_icon_04.png) no-repeat center center; background-size:cover}
+.icon01 {background:url(/img/wx/page_icon_01.png) no-repeat center center; background-size:cover}
+.icon02 {background:url(/img/wx/page_icon_02.png) no-repeat center center; background-size:cover}
+.icon03 {background:url(/img/wx/page_icon_03.png) no-repeat center center; background-size:cover}
+.icon04 {background:url(/img/wx/page_icon_04.png) no-repeat center center; background-size:cover}
 
 .page02_main {}
 .time_input {color:#333;}
