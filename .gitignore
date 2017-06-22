@@ -17,3 +17,4 @@ hs_err_pid*
 /logs
 resources/system.properties
 src/main/resources/system.properties
+.svn

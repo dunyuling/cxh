@@ -1,0 +1,5 @@
+1.消息发送与事务管理的处理　VisitRecordService::visitRemind
+2.部署时 server.xml Host appBase="",否则spring定时器被启动两次
+3.微信端菜单配置要通过重定向的方式
+　
+
